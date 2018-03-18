@@ -10,6 +10,7 @@ clickable_url = true
 font = SpaceMono Nerd Font Mono 12
 search_wrap = true
 icon_name = Termite
+#geometry = 640x480
 
 # "system", "on" or "off"
 cursor_blink = on
@@ -42,6 +43,8 @@ roundness = 2.0
 
 # vim: ft=dosini cms=#%s
 
+# Solarized dark color scheme
+
 [colors]
 # Base16 Spacemacs
 # Author: Nasser Alshammari (https://github.com/nashamri/spacemacs-theme)
@@ -50,6 +53,7 @@ foreground      = #a3a3a3
 foreground_bold = #e8e8e8
 cursor          = #e8e8e8
 background      = #1f2022
+# background = rgba(0, 0, 0, 0.9)
 
 # 16 color space
 
@@ -90,3 +94,5 @@ color18 = #282828
 color19 = #444155
 color20 = #b8b8b8
 color21 = #e8e8e8
+
+
