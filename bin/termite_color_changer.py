@@ -20,29 +20,36 @@ def change_theme(theme):
                 break
             config_no_colors.append(line)
 
-    with open('/home/darren/dotfiles/termite/temp', 'w') as config_file:
-        config_file.write(''.join(config_no_colors))
+    with open(theme, 'r') as theme_file:
+        color_theme = theme_file.readlines()
+
+    with open(CONFIG, 'w') as config_file:
+        config_file.write(''.join(config_no_colors) + ''.join(color_theme))
 
 def choose_theme(themes):
     """User selects colorscheme."""
     print(' ')
 
-    invalid_selection = True
-    while invalid_selection:
+    while True:
         for theme in themes:
-            print("{} - {}").format(theme[0], theme_name(theme))
+            print("{} - {}".format(theme[0], theme_name(theme)))
 
         selection = input("\nChoose theme number: ")
 
-        if isinstance(selection, int) \
-            and selection > 0 and selection < len(themes) + 1:
+        if selection.isdigit() \
+            and int(selection) > 0 and int(selection) < len(themes) + 1:
 
             for theme in themes:
-                if theme[0] == selection:
-                    print("You selected the {} theme").format(theme_name(theme))
+                if theme[0] == int(selection):
+                    print("You selected the {} theme".format(
+                        theme_name(theme)))
+                    color_theme = theme[1]
+
             break
 
         print("\nChoose a valid theme number\nTry again\n")
+
+    change_theme(color_theme)
 
 def main():
     """Get indexed list of color theme files."""
@@ -57,11 +64,5 @@ def main():
 
     choose_theme(themes)
 
-
-
-
-
 if __name__ == '__main__':
     main()
-
-
