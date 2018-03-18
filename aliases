@@ -1,0 +1,268 @@
+#         / \  | |   |_ _|  / \  / ___|| ____/ ___|
+#        / _ \ | |    | |  / _ \ \___ \|  _| \___ \
+#       / ___ \| |___ | | / ___ \ ___) | |___ ___) |
+#      /_/   \_\_____|___/_/   \_\____/|_____|____/
+
+
+# NAVIGATION
+alias .bash='cd ~/.bash_scripts'
+alias a='ls -A'
+alias addresses='mupdf ~/SpiderOak\ Hive/Documents_hive/Us/Addresses/our-addresses.pdf'
+alias b='cd ~/bin'
+alias c='clear'
+alias cdd='cd ~/'
+alias cdmutt='cd ~/dotfiles/mutt'
+alias cls='clear && ls'
+alias co='colorize'
+alias d='cd ~/Downloads'
+alias Django='cd ~/Py_Projects/Django_Projects/'
+alias dot='cd ~/dotfiles'
+alias filetypes='cd ~/dotfiles/vim/after/ftplugin'
+alias fonts='cd /usr/share/fonts/'
+alias ttf='cd /usr/share/fonts/TTF'
+alias otf='cd /usr/share/fonts/OTF'
+alias l='ls -l'
+alias la='ls -lA'
+alias lsd='ls ~/Downloads'
+alias lsdot='ls ~/dotfiles'
+alias lsfonts='ls /usr/share/fonts/'
+alias lsp='ls ~/Pictures'
+alias lsl='ls -al | lolcat'
+alias lsplugins='ls ~/dotfiles/vim/bundle'
+alias pics='cd ~/Pictures'
+alias plugins='cd ~/dotfiles/vim/bundle'
+alias poly='cd ~/.config/polybar/'
+alias S='cd ~/SpiderOak\ Hive/'
+alias sites='cd ~/SpiderOak\ Hive/Websites/Sites'
+alias u='cd /usr'
+alias usb='cd /dev/usb/'
+alias web='cd ~/SpiderOak\ Hive/Websites'
+alias wallp='cd ~/Pictures/Desktop_Wallpaper/'
+alias yoga='cd ~/Videos/Yoga'
+alias screen='cd ~/Pictures/screenshots'
+alias sheet='cd ~/Music/Sheet_music/'
+
+# PROJECTS
+alias polls='cd ~/Py_Projects/Django_Projects/Polls_app'
+alias school='cd ~/Py_Projects/Django_Projects/School_app'
+
+# OPEN FILES
+alias basha='vim ~/.bash_aliases'
+alias vimbash='vim ~/.bash_scripts/**/*'
+alias bashrc='vim ~/.bashrc'
+alias qutealias='vim +/aliases ~/.config/qutebrowser/qutebrowser.conf'
+alias testall='cd ~/test_files && vim *'
+alias testcss='cd ~/test_files && vim *.css'
+alias testhtml='cd ~/test_files && vim *.html'
+alias testjs='cd ~/test_files && vim *.js'
+alias testpy='cd ~/test_files && vim *.py'
+alias testtxt='cd ~/test_files && vim *.txt'
+alias v='vim'
+alias vima='vim ~/.aliases'
+alias vimadd='vim ~/Documents/contacts.csv'
+alias vimcss='vim ~/.vim/after/ftplugin/css.vim'
+alias vimdot="vim ~/dotfiles/*rc  ~/dotfiles/*e*  ~/dotfiles/i3/* ~/dotfiles/vim/after/ftplugin/*"
+alias vimhtml='vim ~/.vim/after/ftplugin/html.vim'
+alias vimi3='vim ~/.config/i3/config'
+alias vimi3b='vim ~/.config/i3/i3blocks.conf'
+alias vimjs='vim  ~/.vim/after/ftplugin/javascript.vim'
+alias vimpy='vim -p ~/.vim/after/ftplugin/python.vim'
+alias vimq='vim ~/.config/qutebrowser/qutebrowser.conf'
+alias vimrc='vim ~/.vimrc'
+alias vimt='vim ~/dotfiles/termite_config'
+alias vimx='vim ~/.Xresources'
+alias vimz='vim ~/.zshrc'
+alias vpy="vim **/*.py"
+alias vhtml="vim **/*.html"
+alias vcss="vim **/*.css"
+alias vjs="vim **/*.js"
+
+
+alias xr='xrdb ~/dotfiles/Xresources'
+
+# GVIM OPEN FILES
+alias gbash="gvim **/*.sh"
+alias gcss="gvim **/*.css"
+alias gdot="gvim ~/dotfiles/*rc  ~/dotfiles/*e*  ~/dotfiles/i3/* ~/dotfiles/vim/after/ftplugin/*"
+alias ghtml="gvim **/*.html"
+alias gjs="gvim **/*.js"
+alias gpen="gvim **/*.html **/*.css **/*.js"
+alias gpy="gvim **/*.py"
+alias gweb="gvim **/*.html **/*.css"
+
+# TAB VIEW FILES
+alias tabtodo='tabview ~/TODO.csv'
+alias tabadd='tabview ~/Documents/contacts.csv'
+alias tabcommands='tabview ~/Arch/useful_commands.csv'
+
+# VIM
+alias vimerror="vim -V20 2>&1 | tee logfile"
+
+# IMAGE MAGICK
+alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
+alias r180="convert -rotate 180 " # then 'from.jpg' to 'to.jpg'
+alias screenshot='. ~/.bash_scripts/screenshot.sh'
+alias windowshot="import -screen " # then filename
+alias drawarea="import root " # then filename
+
+# RUN SCRIPTS
+alias 3mon='. ~/.bash_scripts/3screen.sh'
+alias crp='python ~/i3-project-manager/create_project.py'
+alias lock='. ~/dotfiles/i3/lock.sh'
+alias op='python ~/i3-project-manager/open_project.py'
+alias randomize='python2 ~/.config/randomize_files.py'
+alias tousb='~/.bash_scripts/free_to_usb.sh'
+alias trans_urxvt=". /home/darren/.bash_scripts/urxvt_transparency_toggle.sh"
+alias tt=". /home/darren/.bash_scripts/termite_transparency_toggle.sh"
+alias vga='. ~/.bash_scripts/monitor_scripts/VGA_above.sh'
+alias xrscheme='python ~/Py_Scripts/xr_random_colors.py'
+alias screeshot_individual='. ~/.bash_scripts/screenshot_individal_screens.sh'
+
+
+# PYTHON
+alias ipy2='clear && ipython2'
+alias ipy='clear && ipython3'
+alias ipython2='clear && ipython2'
+alias ipython='clear && ipython3'
+alias p2='clear && python2'
+alias p='clear && python'
+alias ve3.5='virtualenv --python=python3.5 '
+
+# Django
+alias dserver='python manage.py runserver'
+alias dshell='python manage.py shell'
+alias dmigrate='python manage.py migrate'
+alias dtest='python manage.py test '
+
+# WEB DEVELOPMENT
+alias bsync='browser-sync start --server --no-open  --files "css/*.css" "*.html"'
+
+# MEDIA
+alias vtv='vim ~/SpiderOak\ Hive/Days_of_TV_Shows.txt'
+alias tv='cat ~/SpiderOak\ Hive/Days_of_TV_Shows.txt | lolcat'
+alias pm='projectM-pusleaudio'
+
+
+# GITHUB
+alias ga='git add --all .'
+alias gb='git branch'
+alias gmess="git commit -m"
+alias gp='pass -c ssh && git push origin master'
+alias gph='git push heroku master'
+alias gpo='git push origin master'
+alias gst='git status'
+alias gupdate='git commit -m "update"'
+
+
+# USB MOUNTING
+alias musb='/home/darren/.bash_scripts/mount_usb.sh'
+alias unusb='/home/darren/.bash_scripts/unmount_usb.sh'
+alias lusb='sudo ls /dev/usb/'
+alias cdusb='cd /dev/usb/'
+
+
+# OPEN PROGRAMS
+alias mull='sudo mullvad'
+alias mu='mupdf'
+alias chrome="google-chrome-stable --force-device-scale-factor=1.5"
+
+
+# CHANGE THEMES
+alias spacemacs='xrdb -merge ~/.Xcolorschemes/base16-spacemacs-256.xrdb'
+alias paraiso='xrdb -merge ~/.Xcolorschemes/Paraiso_Dark.xrdb'
+alias green='xrdb -merge ~/.Xcolorschemes/base16-green-screen-256.xrdb'
+
+# LINUX COMMAND SHORTCUTS
+alias cal3='cal -3 | lolcat'
+alias ctl='systemctl '
+alias dl='curl -O '
+alias e='exit'
+alias q='exit'
+alias h='history'
+alias hg='history | grep '
+alias ag='alias | grep '
+alias dg='systemctl | grep '
+alias lsm='ls | more'
+alias pastebin='curl -F c=@- https://ptpb.pw <'
+alias rsp='sudo rsync -r --progress'
+alias sa='alias | grep '
+alias sR='sudo rm -r '
+alias neo='neofetch --source wallpaper --backend w3m'
+alias xinfo='xrandr --nograb --current'
+
+# NETWORKING
+alias wifi='nmcli dev wifi list'
+alias wificon='nmcli connection show | head -2 '
+alias starbucks='nmcli dev wifi connect "Google Starbucks"'
+alias phone_wifi="nmcli dev wifi connect \"Darren's iPhone\" password "
+
+# ARCH LINUX
+alias backup='sudo rsync -aAXhv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*"} / ~/SpiderOak\ Hive/Arch_backups/$(date -I)'
+alias cpconfig="sudo cp -r ~/.config/i3 ~/.config/qutebrowser ~/.config/ranger /dev/usb/.config & sudo cp -r .bash* .ideavimrc .vim* .X* .xinitrc /dev/usb/home_configs/"
+alias jerror='journalctl -p 3 -xb' #journalctl errors'
+alias derror='systemctl --failed' #system-d errors'
+alias pup='sudo pacman -Syu'
+alias updatemirror="sudo reflector --country 'United States' --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+alias xerror='grep EE /var/log/Xorg.0.log'
+alias xwarning='grep WW /var/log/Xorg.0.log'
+alias yup='yaourt -Syu --aur'
+alias pS='sudo pacman -S '
+alias pR='sudo pacman -Rs '
+alias yS='yaourt -S '
+alias yR='yaourt -R '
+alias fontlist="fc-list : family | sort"
+
+#WAL COLORSCHEME FAVORITES
+alias walcake='wal -i ~/Pictures/Desktop_Wallpaper/love_cupcake-1920x1080.jpg -t'
+alias walsky='wal -i ~/Pictures/Desktop_Wallpaper/red-sky-at-night.jpg -t'
+alias walsacred='wal -i ~/Pictures/Desktop_Wallpaper/space_sacred_geometry.jpg -t'
+alias waleyeofgod='wal -i ~/Pictures/Desktop_Wallpaper/EyeOfGod2.jpg -t'
+alias wal-christ-buddha='wal -i ~/Pictures/Desktop_Wallpaper/Christ_and_Buddha.jpg -t'
+alias wal-sleeping-buddha='wal -i ~/Pictures/Desktop_Wallpaper/sleeping-buddha.jpg -t'
+alias wal-colorful-buddha='wal -i ~/Pictures/Desktop_Wallpaper/colorful-buddha.jpg -t'
+alias walgrand='wal -i ~/Pictures/Desktop_Wallpaper/grand-canyon.jpg -t'
+alias walpepper='wal -i ~/Pictures/Desktop_Wallpaper/pepper.jpg -t'
+alias walorange='wal -i ~/Pictures/Desktop_Wallpaper/subdued-orange.jpg -t'
+alias walwood='wal -i ~/Pictures/Desktop_Wallpaper/wood-symbols.jpg -t'
+alias walny='wal -i ~/Pictures/Desktop_Wallpaper/ny-pink-sunset.jpg -t'
+alias wal3tone='wal -i ~/Pictures/Desktop_Wallpaper/3tone-black-white-gold.jpg -t'
+
+# Show 256 color range for powerlevel9k
+alias 256='for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"'
+
+# BACKGROUNDS FOR 2 SCREEN SET UP
+alias god="feh --bg-scale ~/Pictures/Desktop_Wallpaper/green-lake-buddha.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/Christ_and_Buddha.jpg ~/Pictures/Desktop_Wallpaper//hd-horizontal-wallpaper-25.jpg"
+alias god2="feh --bg-scale ~/Pictures/Desktop_Wallpaper/BuddhaMaitreyaStatue.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/HP-full-2.jpg"
+alias birds="feh --bg-scale ~/Pictures/Desktop_Wallpaper/flower-with-cute-bird.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/penguins.jpg"
+alias snow="feh --bg-scale ~/Pictures/Desktop_Wallpaper/wolf.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/white-owl.jpg"
+alias god3="feh --bg-scale ~/Pictures/Desktop_Wallpaper/buddha_tara.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/krishna-wallpapers.jpg ~/Pictures/Desktop_Wallpaper/Vertical/rainbow-stripes-faded-edge.jpg"
+alias harmless="feh --bg-scale ~/Pictures/Desktop_Wallpaper/RainbowMaitreyaSolarCross.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/MMF-CCEarth-7.jpg"
+alias snowflakes="feh --bg-scale ~/Pictures/Desktop_Wallpaper/glass_snow_flake.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/snowflake_in_sunshine.jpg"
+alias fish="feh --bg-scale ~/Pictures/Desktop_Wallpaper/turtle.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/coral-fish.jpg"
+alias eyeofgod="feh --bg-scale ~/Pictures/Desktop_Wallpaper/EyeOfGod.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/EyeOfGod2.jpg"
+alias om="feh --bg-scale ~/Pictures/Desktop_Wallpaper/om-symbol-gold.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/HeadPyramidNoCrystals.jpg"
+
+
+#########  MUSIC #########
+alias music_please=". ~/.bash_scripts/random_music_player.sh"
+alias bach="cd ~/Music/Classical/Bach"
+alias vivaldi="cd ~/Music/Classical/Vivaldi"
+
+#########  UTILITY #########
+
+# Get dimension of selected screen area and copied to clipboard
+alias dimension='eval $(slop -t 0 -b 1) && notify-send "Selection info" "Area: ${W} x ${Y}px \n Position: X = ${X}px, Y = ${Y}px" && echo ${W}x${H} | xsel -bi'
+# delete vim swp files in present directory
+alias rms='rm -i .*.*sw?'
+# disk info
+alias sortsize='du -h --max-depth=0 * | sort -h'
+# Sort what processes are using up ram
+alias ramsort="ps -e -o pid,vsz,comm= | sort -n -k 2"
+# Copy file to clipboard
+alias copy='xsel --clipboard < '
+
+
+########## FUN ##########
+alias treecat="tree | lolcat"
+alias hello="figlet Hello Sunshine | lolcat"
+
