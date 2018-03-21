@@ -67,7 +67,7 @@ configuration {
 
     transparent: rgba(0,0,0,0);
     //font: "Source Code Pro 10";
-    font: "Go Mono for Powerline 35";
+    font: "Go Mono for Powerline 30";
 }
 #window {
     location: center;
