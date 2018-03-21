@@ -1,8 +1,9 @@
 import os
 
 HOME = os.path.expanduser("~")
-DIR = os.path.join(HOME, "dotfiles/termite")
-CONFIG = os.path.join(DIR, "config")
+BASE = os.path.join(HOME, "dotfiles/termite")
+THEMES_DIR = os.path.join(HOME, "dotfiles/termite/themes")
+CONFIG = os.path.join(BASE, "config")
 
 
 def theme_name(theme_path):
@@ -53,12 +54,11 @@ def choose_theme(themes):
 
 def main():
     """Get indexed list of color theme files."""
-    files = [os.path.join(DIR, f) for f in os.listdir(DIR)
-             if os.path.isfile(os.path.join(DIR, f))]
-    tc_files = [f for f in files if f.endswith('.tc')]
+    files = [os.path.join(THEMES_DIR, f) for f in os.listdir(THEMES_DIR)
+             if os.path.isfile(os.path.join(THEMES_DIR, f))]
     i = 0
     themes = []
-    for f in tc_files:
+    for f in files:
         i += 1
         themes.append((i, f))
 
