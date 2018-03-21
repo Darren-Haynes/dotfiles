@@ -82,15 +82,15 @@ filetype plugin indent on
 """"""""""' COLOR SCHEME SETTINGS '"""""""""
         """""""""""""""""""""
 syntax on
-let base16colorspace=256
-set background=dark
-colorscheme spacemacs-theme
+"let base16colorspace=256
+"set background=light
+"colorscheme spacemacs-theme
+"colorscheme base16-default-light
 hi Normal guibg=NONE ctermbg=NONE
 let g:airline_theme='base16_spacemacs'
 
-""""""""""' PLUGIN SETTINGS '""""""""""
+"""""""""' PLUGIN SETTINGS '""""""""""
             """""""""""""""
-
 " RAINBOW PARENTHESIS
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -198,12 +198,12 @@ set smarttab "set expandtab #converts tabs to spaces
 set shiftround "round indent to multiple of shiftwidth
 set wrap
 set formatoptions-=cro
+set encoding=utf-8
 set autoindent
 set fileformat=unix
 set foldlevel=99
-"set cursorline
-"hi CursorLine term=bold cterm=bold guibg=Grey40
-"hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
+set nocursorline
+set colorcolumn=0
 set splitright
 set splitbelow
 set history=500
