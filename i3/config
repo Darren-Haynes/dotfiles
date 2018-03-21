@@ -1,13 +1,14 @@
 set $mod Mod4
 
-font pango:Go Mono for Powerline Bold 16
+font pango:Go Mono for Powerline Bold 18
 
 floating_modifier $mod
 bindsym $mod+q bar mode toggle
 bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 
 # change focus
 bindsym $mod+h focus left
@@ -38,7 +39,7 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+# toggle tiling / fl
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
@@ -57,6 +58,12 @@ set $ws6 " "
 set $ws7 " "
 set $ws8 " "
 
+set $ws9 "V "
+set $ws10 "2 "
+set $ws11 "3 "
+set $ws12 "4 "
+set $ws13 "5 "
+
 # assign workspaces to specific screens
 workspace " " output HDMI1
 workspace " " output VGA1
@@ -66,6 +73,12 @@ workspace " " output eDP1
 workspace " " output eDP1
 workspace " " output VGA1
 workspace " " output VGA1
+
+workspace "1 " output eDP1
+workspace "2 " output eDP1
+workspace "3 " output eDP1
+workspace "4 " output eDP1
+workspace "5 " output eDP1
 
 # switch to workspace
 bindsym $mod+m workspace $ws1
@@ -77,6 +90,12 @@ bindsym $mod+7 workspace $ws6
 bindsym $mod+8 workspace $ws7
 bindsym $mod+9 workspace $ws8
 
+bindsym $mod+1 workspace $ws9
+bindsym $mod+2 workspace $ws10
+bindsym $mod+3 workspace $ws11
+bindsym $mod+4 workspace $ws12
+bindsym $mod+5 workspace $ws13
+
 # move focused container to workspace
 bindsym $mod+Shift+m move container to workspace $ws1
 bindsym $mod+Shift+comma move container to workspace $ws2
@@ -86,6 +105,12 @@ bindsym $mod+Shift+i move container to workspace $ws5
 bindsym $mod+Shift+7 move container to workspace $ws6
 bindsym $mod+Shift+8 move container to workspace $ws7
 bindsym $mod+Shift+9 move container to workspace $ws8
+
+bindsym $mod+Shift+1 move container to workspace $ws9
+bindsym $mod+Shift+2 move container to workspace $ws10
+bindsym $mod+Shift+3 move container to workspace $ws11
+bindsym $mod+Shift+4 move container to workspace $ws12
+bindsym $mod+Shift+5 move container to workspace $ws13
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -109,13 +134,18 @@ for_window [class="^Firefox$"] border pixel 0
 for_window [class="^Chromium$"] border pixel 0
 for_window [class="^Google-chrome$"] border pixel 0
 for_window [class="^Termite$"] normal pixel 1
+for_window [class="^URxvt$"] normal pixel 1
 for_window [class="^Code$"] border pixel 0
 for_window [class="^Nautilus$"] border pixel 0
 for_window [class="^Evince$"] border pixel 0
+for_window [class="^Rhythmbox$"] border pixel 0
+for_window [class="^cool-retro-term$"] border pixel 0
 for_window [class=".*"] title_format " %title"
 
 # Applications default to floating
 for_window [class="Pinentry"] floating enable
+for_window [class="Pinentry"] border pixel 0
+for_window [class="Supercalc-snap"] border pixel 0
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -143,15 +173,17 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $bg #A31DB1
-set $fg #A3A3A3
+set $bg #303132
+set $fg #B1951D
+set $bga #33373E
+set $fga #2D9574
 
-# class                 border  backgr. text indicator child_border
-client.focused          $bg     $bg     $fg  $bg       $bg
-client.focused_inactive $bg     $bg     $fg  $bg       $bg
-client.unfocused        $bg     $bg     $fg  $bg       $bg
-client.urgent           $bg     $bg    $fg  $bg       $bg
-client.placeholder      $bg     $bg     $fg  $bg       $bg
+# class                 border  backgr. text   indicator child_border
+client.focused          $bga    $bga    $fga   $bga      $bga
+client.focused_inactive $bg     $bg     $fg    $bg       $bg
+client.unfocused        $bg     $bg     $fg    $bg       $bg
+client.urgent           $bg     $bg     $fg    $bg       $bg
+client.placeholder      $bg     $bg     $fg    $bg       $bg
 
 client.background       $bg
 
@@ -191,7 +223,6 @@ bindsym $mod+Ctrl+c exec chromium
 bindsym $mod+Ctrl+q exec qutebrowser
 bindsym $mod+Ctrl+m exec gksudo /usr/bin/mullvad
 bindsym $mod+Ctrl+v exec vlc
-bindsym $mod+Ctrl+l exec slack
 
 #exec ~/.bash_scripts/if_monitors_connected.sh
 exec --no-startup-id feh --bg ~/Pictures/ShambalaMonastery.jpg
