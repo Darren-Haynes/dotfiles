@@ -77,7 +77,7 @@ alias vhtml="vim **/*.html"
 alias vcss="vim **/*.css"
 alias vjs="vim **/*.js"
 
-
+#Reload Xresources
 alias xr='xrdb ~/dotfiles/Xresources'
 
 # GVIM OPEN FILES
@@ -127,6 +127,7 @@ alias ipython='clear && ipython3'
 alias p2='clear && python2'
 alias p='clear && python'
 alias ve3.5='virtualenv --python=python3.5 '
+alias ve3.6='virtualenv --python=python3.6 '
 
 # Django
 alias dserver='python manage.py runserver'
@@ -141,6 +142,30 @@ alias bsync='browser-sync start --server --no-open  --files "css/*.css" "*.html"
 alias vtv='vim ~/SpiderOak\ Hive/Days_of_TV_Shows.txt'
 alias tv='cat ~/SpiderOak\ Hive/Days_of_TV_Shows.txt | lolcat'
 alias pm='projectM-pusleaudio'
+alias vt='pactl set-sink-mute 0 toggle' #Arch
+alias vu='pactl set-sink-volume 0 +5%' #Arch
+alias vd='pactl set-sink-volume 0 -5%' #Arch
+alias v10='amixer -D pulse sset Master 100%' #ubuntu
+alias v9='amixer -D pulse sset Master 90%' #ubuntu
+alias v8='amixer -D pulse sset Master 80%' #ubuntu
+alias v7='amixer -D pulse sset Master 70%' #ubuntu
+alias v6='amixer -D pulse sset Master 60%' #ubuntu
+alias v5='amixer -D pulse sset Master 50%' #ubuntu
+alias v4='amixer -D pulse sset Master 40%' #ubuntu
+alias v3='amixer -D pulse sset Master 30%' #ubuntu
+alias v2='amixer -D pulse sset Master 20%' #ubuntu
+alias v1='amixer -D pulse sset Master 10%' #ubuntu
+alias voff='amixer -D pulse sset Master 0%' #ubuntu
+alias bd='xbacklight -dec 5'
+alias bu='xbacklight -inc 5'
+alias b1='xrandr --output eDP1  --brightness 0.1'
+alias b2='xrandr --output eDP1  --brightness 0.2'
+alias b5='xrandr --output eDP1  --brightness 0.5'
+alias b6='xrandr --output eDP1  --brightness 0.6'
+alias b7='xrandr --output eDP1  --brightness 0.7'
+alias b8='xrandr --output eDP1  --brightness 0.8'
+alias b9='xrandr --output eDP1  --brightness 0.9'
+alias b10='xrandr --output eDP1  --brightness 1.0'
 
 
 # GITHUB
@@ -166,13 +191,8 @@ alias mull='sudo mullvad'
 alias mu='mupdf'
 alias chrome="google-chrome-stable --force-device-scale-factor=1.5"
 
-
-# CHANGE THEMES
-alias spacemacs='xrdb -merge ~/.Xcolorschemes/base16-spacemacs-256.xrdb'
-alias paraiso='xrdb -merge ~/.Xcolorschemes/Paraiso_Dark.xrdb'
-alias green='xrdb -merge ~/.Xcolorschemes/base16-green-screen-256.xrdb'
-
 # LINUX COMMAND SHORTCUTS
+alias now="date '+%R'"
 alias cal3='cal -3 | lolcat'
 alias ctl='systemctl '
 alias dl='curl -O '
@@ -212,36 +232,9 @@ alias yS='yaourt -S '
 alias yR='yaourt -R '
 alias fontlist="fc-list : family | sort"
 
-#WAL COLORSCHEME FAVORITES
-alias walcake='wal -i ~/Pictures/Desktop_Wallpaper/love_cupcake-1920x1080.jpg -t'
-alias walsky='wal -i ~/Pictures/Desktop_Wallpaper/red-sky-at-night.jpg -t'
-alias walsacred='wal -i ~/Pictures/Desktop_Wallpaper/space_sacred_geometry.jpg -t'
-alias waleyeofgod='wal -i ~/Pictures/Desktop_Wallpaper/EyeOfGod2.jpg -t'
-alias wal-christ-buddha='wal -i ~/Pictures/Desktop_Wallpaper/Christ_and_Buddha.jpg -t'
-alias wal-sleeping-buddha='wal -i ~/Pictures/Desktop_Wallpaper/sleeping-buddha.jpg -t'
-alias wal-colorful-buddha='wal -i ~/Pictures/Desktop_Wallpaper/colorful-buddha.jpg -t'
-alias walgrand='wal -i ~/Pictures/Desktop_Wallpaper/grand-canyon.jpg -t'
-alias walpepper='wal -i ~/Pictures/Desktop_Wallpaper/pepper.jpg -t'
-alias walorange='wal -i ~/Pictures/Desktop_Wallpaper/subdued-orange.jpg -t'
-alias walwood='wal -i ~/Pictures/Desktop_Wallpaper/wood-symbols.jpg -t'
-alias walny='wal -i ~/Pictures/Desktop_Wallpaper/ny-pink-sunset.jpg -t'
-alias wal3tone='wal -i ~/Pictures/Desktop_Wallpaper/3tone-black-white-gold.jpg -t'
-
-# Show 256 color range for powerlevel9k
-alias 256='for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"'
-
-# BACKGROUNDS FOR 2 SCREEN SET UP
-alias god="feh --bg-scale ~/Pictures/Desktop_Wallpaper/green-lake-buddha.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/Christ_and_Buddha.jpg ~/Pictures/Desktop_Wallpaper//hd-horizontal-wallpaper-25.jpg"
-alias god2="feh --bg-scale ~/Pictures/Desktop_Wallpaper/BuddhaMaitreyaStatue.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/HP-full-2.jpg"
-alias birds="feh --bg-scale ~/Pictures/Desktop_Wallpaper/flower-with-cute-bird.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/penguins.jpg"
-alias snow="feh --bg-scale ~/Pictures/Desktop_Wallpaper/wolf.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/white-owl.jpg"
-alias god3="feh --bg-scale ~/Pictures/Desktop_Wallpaper/buddha_tara.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/krishna-wallpapers.jpg ~/Pictures/Desktop_Wallpaper/Vertical/rainbow-stripes-faded-edge.jpg"
-alias harmless="feh --bg-scale ~/Pictures/Desktop_Wallpaper/RainbowMaitreyaSolarCross.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/MMF-CCEarth-7.jpg"
-alias snowflakes="feh --bg-scale ~/Pictures/Desktop_Wallpaper/glass_snow_flake.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/snowflake_in_sunshine.jpg"
-alias fish="feh --bg-scale ~/Pictures/Desktop_Wallpaper/turtle.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/coral-fish.jpg"
-alias eyeofgod="feh --bg-scale ~/Pictures/Desktop_Wallpaper/EyeOfGod.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/EyeOfGod2.jpg"
-alias om="feh --bg-scale ~/Pictures/Desktop_Wallpaper/om-symbol-gold.jpg --bg-scale ~/Pictures/Desktop_Wallpaper/HeadPyramidNoCrystals.jpg"
-
+######## INPUT DEVICES ########
+alias tpd='xinput disable 13'
+alias tpe='xinput enable 13'
 
 #########  MUSIC #########
 alias music_please=". ~/.bash_scripts/random_music_player.sh"
