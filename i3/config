@@ -139,6 +139,7 @@ for_window [class="^Code$"] border pixel 0
 for_window [class="^Nautilus$"] border pixel 0
 for_window [class="^Evince$"] border pixel 0
 for_window [class="^Rhythmbox$"] border pixel 0
+for_window [class="^VirtualBox$"] border pixel 0
 for_window [class="^cool-retro-term$"] border pixel 0
 for_window [class=".*"] title_format " %title"
 
