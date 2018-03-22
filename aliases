@@ -6,62 +6,54 @@
 
 # NAVIGATION
 alias .bash='cd ~/.bash_scripts'
-alias a='ls -A'
-alias addresses='mupdf ~/SpiderOak\ Hive/Documents_hive/Us/Addresses/our-addresses.pdf'
-alias b='cd ~/bin'
-alias c='clear'
-alias cdd='cd ~/'
+alias D='cd ~/Downloads'
+alias M='cd ~/Music'
+alias P='cd ~/Pictures'
+alias S='cd ~/SpiderOak\ Hive/'
+alias U='cd /usr'
+alias V='cd ~/Videos'
 alias cdmutt='cd ~/dotfiles/mutt'
-alias cls='clear && ls'
-alias co='colorize'
-alias d='cd ~/Downloads'
-alias Django='cd ~/Py_Projects/Django_Projects/'
+alias cdusb='cd /dev/usb/'
+alias d='cd ~/Documents'
 alias dot='cd ~/dotfiles'
 alias filetypes='cd ~/dotfiles/vim/after/ftplugin'
 alias fonts='cd /usr/share/fonts/'
-alias ttf='cd /usr/share/fonts/TTF'
 alias otf='cd /usr/share/fonts/OTF'
+alias sites='cd ~/SpiderOak\ Hive/Websites/Sites'
+alias ttf='cd /usr/share/fonts/TTF'
+alias usb='cd /dev/usb/'
+alias web='cd ~/SpiderOak\ Hive/Websites'
+
+# LISTING
+alias a='ls -A'
+alias cls='clear && ls'
 alias l='ls -l'
 alias la='ls -lA'
 alias lsd='ls ~/Downloads'
 alias lsdot='ls ~/dotfiles'
 alias lsfonts='ls /usr/share/fonts/'
-alias lsp='ls ~/Pictures'
 alias lsl='ls -al | lolcat'
-alias lsplugins='ls ~/dotfiles/vim/bundle'
-alias pics='cd ~/Pictures'
-alias plugins='cd ~/dotfiles/vim/bundle'
-alias poly='cd ~/.config/polybar/'
-alias S='cd ~/SpiderOak\ Hive/'
-alias sites='cd ~/SpiderOak\ Hive/Websites/Sites'
-alias u='cd /usr'
-alias usb='cd /dev/usb/'
-alias web='cd ~/SpiderOak\ Hive/Websites'
-alias wallp='cd ~/Pictures/Desktop_Wallpaper/'
-alias yoga='cd ~/Videos/Yoga'
-alias screen='cd ~/Pictures/screenshots'
-alias sheet='cd ~/Music/Sheet_music/'
+alias lsm='ls | more'
+alias lsm='ls ~/Music'
+alias lsp='ls ~/Pictures'
+alias lsv='ls ~/Videos'
 
-# PROJECTS
-alias polls='cd ~/Py_Projects/Django_Projects/Polls_app'
-alias school='cd ~/Py_Projects/Django_Projects/School_app'
+# ZSH
+alias co='colorize'
 
-# OPEN FILES
+# VIM
 alias basha='vim ~/.bash_aliases'
-alias vimbash='vim ~/.bash_scripts/**/*'
 alias bashrc='vim ~/.bashrc'
 alias qutealias='vim +/aliases ~/.config/qutebrowser/qutebrowser.conf'
-alias testall='cd ~/test_files && vim *'
-alias testcss='cd ~/test_files && vim *.css'
-alias testhtml='cd ~/test_files && vim *.html'
-alias testjs='cd ~/test_files && vim *.js'
-alias testpy='cd ~/test_files && vim *.py'
-alias testtxt='cd ~/test_files && vim *.txt'
 alias v='vim'
+alias vcss="vim **/*.css"
+alias vhtml="vim **/*.html"
 alias vima='vim ~/.aliases'
 alias vimadd='vim ~/Documents/contacts.csv'
+alias vimbash='vim ~/.bash_scripts/**/*'
 alias vimcss='vim ~/.vim/after/ftplugin/css.vim'
 alias vimdot="vim ~/dotfiles/*rc  ~/dotfiles/*e*  ~/dotfiles/i3/* ~/dotfiles/vim/after/ftplugin/*"
+alias vimerror="vim -V20 2>&1 | tee logfile"
 alias vimhtml='vim ~/.vim/after/ftplugin/html.vim'
 alias vimi3='vim ~/.config/i3/config'
 alias vimi3b='vim ~/.config/i3/i3blocks.conf'
@@ -72,13 +64,8 @@ alias vimrc='vim ~/.vimrc'
 alias vimt='vim ~/dotfiles/termite_config'
 alias vimx='vim ~/.Xresources'
 alias vimz='vim ~/.zshrc'
-alias vpy="vim **/*.py"
-alias vhtml="vim **/*.html"
-alias vcss="vim **/*.css"
 alias vjs="vim **/*.js"
-
-#Reload Xresources
-alias xr='xrdb ~/dotfiles/Xresources'
+alias vpy="vim **/*.py"
 
 # GVIM OPEN FILES
 alias gbash="gvim **/*.sh"
@@ -90,13 +77,13 @@ alias gpen="gvim **/*.html **/*.css **/*.js"
 alias gpy="gvim **/*.py"
 alias gweb="gvim **/*.html **/*.css"
 
+# OPEN FILES
+alias addresses='mupdf ~/SpiderOak\ Hive/Documents_hive/Us/Addresses/our-addresses.pdf'
+
 # TAB VIEW FILES
 alias tabtodo='tabview ~/TODO.csv'
 alias tabadd='tabview ~/Documents/contacts.csv'
 alias tabcommands='tabview ~/Arch/useful_commands.csv'
-
-# VIM
-alias vimerror="vim -V20 2>&1 | tee logfile"
 
 # IMAGE MAGICK
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
@@ -111,29 +98,28 @@ alias crp='python ~/i3-project-manager/create_project.py'
 alias lock='. ~/dotfiles/i3/lock.sh'
 alias op='python ~/i3-project-manager/open_project.py'
 alias randomize='python2 ~/.config/randomize_files.py'
+alias screeshot_individual='. ~/.bash_scripts/screenshot_individal_screens.sh'
 alias tousb='~/.bash_scripts/free_to_usb.sh'
 alias trans_urxvt=". /home/darren/.bash_scripts/urxvt_transparency_toggle.sh"
 alias tt=". /home/darren/.bash_scripts/termite_transparency_toggle.sh"
 alias vga='. ~/.bash_scripts/monitor_scripts/VGA_above.sh'
 alias xrscheme='python ~/Py_Scripts/xr_random_colors.py'
-alias screeshot_individual='. ~/.bash_scripts/screenshot_individal_screens.sh'
-
 
 # PYTHON
-alias ipy2='clear && ipython2'
-alias ipy='clear && ipython3'
-alias ipython2='clear && ipython2'
-alias ipython='clear && ipython3'
-alias p2='clear && python2'
-alias p='clear && python'
+alias pip2up='sudo pip2 install upgrade pip'
+alias pip3up='sudo pip3 install upgrade pip'
+alias ve2.7='virtualenv --python=python2.7 '
+alias ve3.4='virtualenv --python=python3.4 '
 alias ve3.5='virtualenv --python=python3.5 '
 alias ve3.6='virtualenv --python=python3.6 '
 
 # Django
-alias dserver='python manage.py runserver'
-alias dshell='python manage.py shell'
-alias dmigrate='python manage.py migrate'
-alias dtest='python manage.py test '
+alias djm='python manage.py migrate'
+alias djmake='python manage.py makemigrations'
+alias djmm='python manage.py makemigrations && python manage.py migrate'
+alias djr='python manage.py runserver'
+alias djsh='python manage.py shell'
+alias djt='python manage.py test '
 
 # WEB DEVELOPMENT
 alias bsync='browser-sync start --server --no-open  --files "css/*.css" "*.html"'
@@ -141,23 +127,9 @@ alias bsync='browser-sync start --server --no-open  --files "css/*.css" "*.html"
 # MEDIA
 alias vtv='vim ~/SpiderOak\ Hive/Days_of_TV_Shows.txt'
 alias tv='cat ~/SpiderOak\ Hive/Days_of_TV_Shows.txt | lolcat'
-alias pm='projectM-pusleaudio'
-alias vt='pactl set-sink-mute 0 toggle' #Arch
-alias vu='pactl set-sink-volume 0 +5%' #Arch
-alias vd='pactl set-sink-volume 0 -5%' #Arch
-alias v10='amixer -D pulse sset Master 100%' #ubuntu
-alias v9='amixer -D pulse sset Master 90%' #ubuntu
-alias v8='amixer -D pulse sset Master 80%' #ubuntu
-alias v7='amixer -D pulse sset Master 70%' #ubuntu
-alias v6='amixer -D pulse sset Master 60%' #ubuntu
-alias v5='amixer -D pulse sset Master 50%' #ubuntu
-alias v4='amixer -D pulse sset Master 40%' #ubuntu
-alias v3='amixer -D pulse sset Master 30%' #ubuntu
-alias v2='amixer -D pulse sset Master 20%' #ubuntu
-alias v1='amixer -D pulse sset Master 10%' #ubuntu
-alias voff='amixer -D pulse sset Master 0%' #ubuntu
-alias bd='xbacklight -dec 5'
-alias bu='xbacklight -inc 5'
+
+# VOLUME AND BRIGHTNESS
+alias b10='xrandr --output eDP1  --brightness 1.0'
 alias b1='xrandr --output eDP1  --brightness 0.1'
 alias b2='xrandr --output eDP1  --brightness 0.2'
 alias b5='xrandr --output eDP1  --brightness 0.5'
@@ -165,97 +137,105 @@ alias b6='xrandr --output eDP1  --brightness 0.6'
 alias b7='xrandr --output eDP1  --brightness 0.7'
 alias b8='xrandr --output eDP1  --brightness 0.8'
 alias b9='xrandr --output eDP1  --brightness 0.9'
-alias b10='xrandr --output eDP1  --brightness 1.0'
-
+alias bd='xbacklight -dec 5' #Arch
+alias bu='xbacklight -inc 5' #Arch
+alias v10='amixer -D pulse sset Master 100%' #ubuntu
+alias v1='amixer -D pulse sset Master 10%' #ubuntu
+alias v2='amixer -D pulse sset Master 20%' #ubuntu
+alias v3='amixer -D pulse sset Master 30%' #ubuntu
+alias v4='amixer -D pulse sset Master 40%' #ubuntu
+alias v5='amixer -D pulse sset Master 50%' #ubuntu
+alias v6='amixer -D pulse sset Master 60%' #ubuntu
+alias v7='amixer -D pulse sset Master 70%' #ubuntu
+alias v8='amixer -D pulse sset Master 80%' #ubuntu
+alias v9='amixer -D pulse sset Master 90%' #ubuntu
+alias vd='pactl set-sink-volume 0 -5%' #Arch
+alias voff='amixer -D pulse sset Master 0%' #ubuntu
+alias vt='pactl set-sink-mute 0 toggle' #Arch
+alias vu='pactl set-sink-volume 0 +5%' #Arch
 
 # GITHUB
 alias ga='git add --all .'
 alias gb='git branch'
+alias gd='git diff '
 alias gmess="git commit -m"
 alias gp='pass -c ssh && git push origin master'
-alias gph='git push heroku master'
-alias gpo='git push origin master'
+alias gphm='git push heroku master'
+alias gpom='git push origin master'
 alias gst='git status'
-alias gupdate='git commit -m "update"'
-
 
 # USB MOUNTING
 alias musb='/home/darren/.bash_scripts/mount_usb.sh'
 alias unusb='/home/darren/.bash_scripts/unmount_usb.sh'
 alias lusb='sudo ls /dev/usb/'
-alias cdusb='cd /dev/usb/'
-
 
 # OPEN PROGRAMS
 alias mull='sudo mullvad'
 alias mu='mupdf'
 alias chrome="google-chrome-stable --force-device-scale-factor=1.5"
+alias neo='neofetch --source wallpaper --backend w3m'
 
-# LINUX COMMAND SHORTCUTS
-alias now="date '+%R'"
-alias cal3='cal -3 | lolcat'
+# LINUX SHORTCUTS
+alias ag='alias | grep '
+alias c='clear'
+alias copy='xsel --clipboard < '
 alias ctl='systemctl '
-alias dl='curl -O '
+alias dg='systemctl | grep '
+alias dimension='eval $(slop -t 0 -b 1) && notify-send "Selection info" "Area: ${W} x ${Y}px \n Position: X = ${X}px, Y = ${Y}px" && echo ${W}x${H} | xsel -bi'
 alias e='exit'
-alias q='exit'
+alias fontlist="fc-list : family | sort"
 alias h='history'
 alias hg='history | grep '
-alias ag='alias | grep '
-alias dg='systemctl | grep '
-alias lsm='ls | more'
-alias pastebin='curl -F c=@- https://ptpb.pw <'
+alias now="date '+%R'"
+alias q='exit'
+alias ramsort="ps -e -o pid,vsz,comm= | sort -n -k 2"
+alias rms='rm -i .*.*sw?'
 alias rsp='sudo rsync -r --progress'
 alias sa='alias | grep '
-alias sR='sudo rm -r '
-alias neo='neofetch --source wallpaper --backend w3m'
+alias sortsize='du -h --max-depth=0 * | sort -h'
 alias xinfo='xrandr --nograb --current'
+alias xr='xrdb ~/dotfiles/Xresources'
+
+# UPLOAD / DOWNLOAD
+alias dl='curl -O '
+alias pastebin='curl -F c=@- https://ptpb.pw <'
 
 # NETWORKING
+alias netoff='nmcli networking off'
+alias neton='nmcli networking on'
+alias phone_wifi="nmcli dev wifi connect \"Darren's iPhone\" password "
+alias starbucks='nmcli dev wifi connect "Google Starbucks"'
 alias wifi='nmcli dev wifi list'
 alias wificon='nmcli connection show | head -2 '
-alias starbucks='nmcli dev wifi connect "Google Starbucks"'
-alias phone_wifi="nmcli dev wifi connect \"Darren's iPhone\" password "
+alias wifioff='nmcli radio wifi off'
+alias wifion='nmcli radio wifi on'
 
 # ARCH LINUX
 alias backup='sudo rsync -aAXhv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*"} / ~/SpiderOak\ Hive/Arch_backups/$(date -I)'
-alias cpconfig="sudo cp -r ~/.config/i3 ~/.config/qutebrowser ~/.config/ranger /dev/usb/.config & sudo cp -r .bash* .ideavimrc .vim* .X* .xinitrc /dev/usb/home_configs/"
-alias jerror='journalctl -p 3 -xb' #journalctl errors'
-alias derror='systemctl --failed' #system-d errors'
+alias pR='sudo pacman -Rs '
+alias pS='sudo pacman -S '
 alias pup='sudo pacman -Syu'
 alias updatemirror="sudo reflector --country 'United States' --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+alias yR='yaourt -R '
+alias yS='yaourt -S '
+alias yup='yaourt -Syu --aur'
+
+# LOGS / ERRORS
+alias jerror='journalctl -p 3 -xb' #journalctl errors'
+alias derror='systemctl --failed' #system-d errors'
 alias xerror='grep EE /var/log/Xorg.0.log'
 alias xwarning='grep WW /var/log/Xorg.0.log'
-alias yup='yaourt -Syu --aur'
-alias pS='sudo pacman -S '
-alias pR='sudo pacman -Rs '
-alias yS='yaourt -S '
-alias yR='yaourt -R '
-alias fontlist="fc-list : family | sort"
 
-######## INPUT DEVICES ########
+# INPUT DEVICES
 alias tpd='xinput disable 13'
 alias tpe='xinput enable 13'
 
-#########  MUSIC #########
-alias music_please=". ~/.bash_scripts/random_music_player.sh"
+# MUSIC
 alias bach="cd ~/Music/Classical/Bach"
+alias music_please=". ~/.bash_scripts/random_music_player.sh"
 alias vivaldi="cd ~/Music/Classical/Vivaldi"
 
-#########  UTILITY #########
-
-# Get dimension of selected screen area and copied to clipboard
-alias dimension='eval $(slop -t 0 -b 1) && notify-send "Selection info" "Area: ${W} x ${Y}px \n Position: X = ${X}px, Y = ${Y}px" && echo ${W}x${H} | xsel -bi'
-# delete vim swp files in present directory
-alias rms='rm -i .*.*sw?'
-# disk info
-alias sortsize='du -h --max-depth=0 * | sort -h'
-# Sort what processes are using up ram
-alias ramsort="ps -e -o pid,vsz,comm= | sort -n -k 2"
-# Copy file to clipboard
-alias copy='xsel --clipboard < '
-
-
-########## FUN ##########
-alias treecat="tree | lolcat"
+# FUN
 alias hello="figlet Hello Sunshine | lolcat"
+alias treecat="tree | lolcat"
 
