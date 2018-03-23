@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Install restricted extras
-yes Y | echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula \
-  select true | sudo debconf-set-selections
-apt install ubuntu-restricted-extras
 
 # Install i3wm, xinit, xorg and compositor
 yes Y | apt install \
@@ -32,8 +28,13 @@ yes Y | apt install \
   alsa-base \
   pulseaudio \
 
+# Install restricted extras
+yes Y | echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+yes Y | apt install ubuntu-restricted-extras
+
 # Install Zsh and oh-my-zsh
-  zsh \
+yes Y | apt install zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 # Install Editors
 yes Y | apt install \
