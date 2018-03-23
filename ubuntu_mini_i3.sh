@@ -1,5 +1,6 @@
 #!/bin/bash
 
+yes | apt install -y ubuntu-restricted-extras
 yes Y | apt install \
   xorg \
   xfonts-100dpi \
@@ -9,17 +10,16 @@ yes Y | apt install \
   alsa-utils \
   alsa-base \
   pulseaudio \
-  ubuntu-restricted-extras \
   i3-wm \
   i3status \
   dmenu \
   compton \
   git \
-  vim-tox \
+  vimnox \
   fonts-dejavu \
   ttf-dejavu \
   zsh \
   htop \
-  lincanberra-pulse \
+  libcanberra-pulse \
   firefox \
 
