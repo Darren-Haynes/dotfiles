@@ -16,6 +16,7 @@ yes Y | apt install \
   xfonts-75dpi \
   fonts-dejavu \
   ttf-dejavu \
+  fonts-powerline
 
 # Install drivers
 yes Y | apt install \
@@ -32,9 +33,13 @@ yes Y | apt install \
 yes Y | echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
 yes Y | apt install ubuntu-restricted-extras
 
-# Install Zsh and oh-my-zsh
+# Install Zsh, oh-my-zsh and link to aliases
 yes Y | apt install zsh
+chsh -s $(which zsh)
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+ln -s ~/dotfiles/aliases ~/.aliases
+sed -i s'/ZSH_THEME="robbyrussell"/ZSH_THEME="candy-kingsom"' ~/.zshrc
+echo "source $HOME/.aliases" >> ~/.zshrc
 
 # Install Editors
 yes Y | apt install \
