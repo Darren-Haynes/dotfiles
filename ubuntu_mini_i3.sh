@@ -38,12 +38,16 @@ yes Y | apt install zsh
 chsh -s $(which zsh)
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ln -s ~/dotfiles/aliases ~/.aliases
-sed -i s'/ZSH_THEME="robbyrussell"/ZSH_THEME="candy-kingsom"' ~/.zshrc
-echo "source $HOME/.aliases" >> ~/.zshrc
+sed -i s'#ZSH_THEME="robbyrussell"#ZSH_THEME="candy-kingdom"#' ~/.zshrc
+if grep -Fxq "source /home/darren/.aliases" "$HOME/.zshrc"
+then
+    echo "Aliases file already exists"
+else
+    echo "source $HOME/.aliases" >> ~/.zshrc
 
 # Install Editors
 yes Y | apt install \
-  vimnox \
+  vim-nox \
 
 # Install Firefox
 yes Y | apt install \
