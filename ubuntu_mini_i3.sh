@@ -63,9 +63,10 @@ sudo yes Y | apt install \
 sed -i s'/.bash_aliases/.aliases/' "$HOME/.bashrc"
 
 # Install Termite
+cd "$HOME"
 mkdir git_programs
 cd git_programs
 git clone https://github.com/Corwind/termite-install.git
-cd termite
+cd termite-install
 ./install.sh
 
