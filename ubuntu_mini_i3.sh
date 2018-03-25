@@ -37,7 +37,7 @@ sudo yes Y | apt install ubuntu-restricted-extras
 sudo yes Y | apt install zsh
 chsh -s $(which zsh)
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-ln -s "$HOME/dotfiles/aliases" "$HOME~/.aliases"
+ln -s "$HOME/dotfiles/aliases" "$HOME/.aliases"
 sed -i s'#ZSH_THEME="robbyrussell"#ZSH_THEME="candy-kingdom"#' ~/.zshrc
 if grep -Fxq "source /home/darren/.aliases" "$HOME/.zshrc"
 then
@@ -60,4 +60,12 @@ sudo yes Y | apt install \
   htop \
 
 # Configure Bashrc
-sed -i s'/.bash_aliases/.aliases/' "$HOME/.bashrc
+sed -i s'/.bash_aliases/.aliases/' "$HOME/.bashrc"
+
+# Install Termite
+mkdir git_programs
+cd git_programs
+git clone https://github.com/Corwind/termite-install.git
+cd termite
+./install.sh
+
