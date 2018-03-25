@@ -37,13 +37,14 @@ yes Y | apt install ubuntu-restricted-extras
 yes Y | apt install zsh
 chsh -s $(which zsh)
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-ln -s ~/dotfiles/aliases ~/.aliases
+ln -s "$HOME/dotfiles/aliases" "$HOME~/.aliases"
 sed -i s'#ZSH_THEME="robbyrussell"#ZSH_THEME="candy-kingdom"#' ~/.zshrc
 if grep -Fxq "source /home/darren/.aliases" "$HOME/.zshrc"
 then
-    echo "Aliases file already exists"
+    echo "Aliases are already sourced in .zshrc file"
 else
     echo "source $HOME/.aliases" >> ~/.zshrc
+fi
 
 # Install Editors
 yes Y | apt install \
@@ -57,3 +58,6 @@ yes Y | apt install \
 # Install Terminal Apps
 yes Y | apt install \
   htop \
+
+# Configure Bashrc
+sed -i s'/.bash_aliases/.aliases/' "$HOME/.bashrc
