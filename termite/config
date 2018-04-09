@@ -19,7 +19,7 @@ cursor_blink = on
 cursor_shape = block
 
 # $BROWSER is used by default if set, with xdg-open as a fallback
-browser = firefox
+browser = qutebrowser
 
 # set size hints for the window
 #size_hints = false
@@ -42,10 +42,6 @@ border_width = 0.5
 roundness = 2.0
 
 # vim: ft=dosini cms=#%s
-
-# Solarized dark color scheme
-
-# Solarized dark color scheme
 
 # Solarized dark color scheme
 
