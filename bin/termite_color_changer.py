@@ -1,8 +1,8 @@
 import os
 
 HOME = os.path.expanduser("~")
-BASE = os.path.join(HOME, "dotfiles/termite")
-THEMES_DIR = os.path.join(HOME, "dotfiles/termite/themes")
+BASE = os.path.join(HOME, ".config/termite")
+THEMES_DIR = os.path.join(HOME, ".config/termite/themes")
 CONFIG = os.path.join(BASE, "config")
 
 
