@@ -11,6 +11,7 @@ def theme_name(theme_path):
     name = fname.split('.')[0].title().replace('_', ' ')
     return name
 
+
 def change_theme(theme):
     """Change theme in termite config file."""
     with open(CONFIG, 'r') as config_file:
@@ -27,6 +28,7 @@ def change_theme(theme):
     with open(CONFIG, 'w') as config_file:
         config_file.write(''.join(config_no_colors) + ''.join(color_theme))
 
+
 def choose_theme(themes):
     """User selects colorscheme."""
     print(' ')
@@ -38,7 +40,7 @@ def choose_theme(themes):
         selection = input("\nChoose theme number: ")
 
         if selection.isdigit() \
-            and int(selection) > 0 and int(selection) < len(themes) + 1:
+                and int(selection) > 0 and int(selection) < len(themes) + 1:
 
             for theme in themes:
                 if theme[0] == int(selection):
@@ -52,6 +54,7 @@ def choose_theme(themes):
 
     change_theme(color_theme)
 
+
 def main():
     """Get indexed list of color theme files."""
     files = [os.path.join(THEMES_DIR, f) for f in os.listdir(THEMES_DIR)
@@ -63,6 +66,7 @@ def main():
         themes.append((i, f))
 
     choose_theme(themes)
+
 
 if __name__ == '__main__':
     main()
