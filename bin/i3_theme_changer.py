@@ -6,5 +6,6 @@ def main():
     }
     print("Choose theme:")
 
+
 if __name__ == '__main__':
     main()
