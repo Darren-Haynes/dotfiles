@@ -1,0 +1,242 @@
+"          \ \   / /_ _|  \/  |  _ \ / ___|
+"           \ \ / / | || |\/| | |_) | |
+"            \ V /  | || |  | |  _ <| |___
+"             \_/  |___|_|  |_|_| \_\\____|
+"
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+               "VUNDLE
+               "PLUGIN
+               "MANAGER
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
+Plug 'scrooloose/nerdcommenter'
+Plug 'w0rp/ale'
+Plug 'davidhalter/jedi-vim'
+"Plug 'maralla/completor.vim'
+"if has('nvim')
+  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+  "Plug 'Shougo/deoplete.nvim'
+  "Plug 'roxma/nvim-yarp'
+  "Plug 'roxma/vim-hug-neovim-rpc'
+"endif
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""
+            "ARCHLABS
+            "DEFAULTS
+""""""""""""""""""""""""""""""""""""""
+
+" A FEW SANE DEFAULTS FOR USE IN ARCHlABS
+
+" load Arch Linux defaults
+runtime! archlinux.vim
+
+" yank text to system clipboard (requires +clipboard)
+set clipboard^=unnamedplus
+
+" enable line numbers
+set number
+
+" ask confirmation for certain things like when quitting before saving
+set confirm
+
+" enable tab completion menu when using colon command mode (:)
+set wildmenu
+
+set shortmess+=aAcIws   " Hide certain messages like 'Search Hit Bottom' etc.
+set expandtab           " Tab inserts Spaces not Tabs '\t'
+set softtabstop=4       " Amount of spaces to enter when Tab is pressed
+set shiftwidth=4        " 4 space indentation
+set tabstop=4
+
+set scrolloff=5         "show 5 lines above/below cursor
+
+" enable mouse, sgr is better but not every term supports it
+set mouse=a
+if has('mouse_sgr')
+    set ttymouse=sgr
+endif
+
+" syntax highlighting with true colors in the terminal
+syntax enable
+if has('termguicolors')
+    if &term =~? 'screen\|tmux'
+        set t_8f=^[[38;2;%lu;%lu;%lum
+        set t_8b=^[[48;2;%lu;%lu;%lum
+    endif
+    set termguicolors
+endif
+
+" bracketed paste while in insert mode, bracketed paste preserves indentation
+inoremap <silent><C-v> <Esc>:set paste<CR>a<C-r>+<Esc>:set nopaste<CR>a
+
+" better defaults
+nnoremap 0 ^
+nnoremap Y y$
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap <Tab> ==j
+
+" better motions with wrapped text while preserving numbered jumps
+for g:key in ['k', 'j', '<Up>', '<Down>']
+    execute 'noremap <buffer> <silent> <expr> ' .
+                \ g:key . ' v:count ? ''' .
+                \ g:key . ''' : ''g' . g:key . ''''
+    execute 'onoremap <silent> <expr> ' .
+                \ g:key . ' v:count ? ''' .
+                \ g:key . ''' : ''g' . g:key . ''''
+endfor
+
+augroup file_load_change_and_position
+    " clear this group so they don't pile up
+    autocmd!
+
+    " when quitting, save position in file
+    " when re-opening go to last position
+    autocmd BufReadPost * call setpos(".", getpos("'\""))
+
+    " Reload changes if file changed outside of vim
+    " requires autoread (enabled by default)
+    autocmd FocusGained,BufEnter * if mode() !=? 'c' | checktime | endif
+    autocmd FileChangedShellPost * echo "Changes loaded from file"
+augroup END
+
+
+"""""""""""""""""""""""""""""""""""""""
+           " MANAGE SPLITS
+"""""""""""""""""""""""""""""""""""""""
+
+"Split as you expect splits to split.
+set splitright
+set splitbelow
+
+"split screen navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" make horizontal split full height
+nnoremap <leader>ru <C-w><C-_>
+" make vertical split full width
+nnoremap <leader>rw <C-w>\|
+" make split full screen (full width and height)
+nnoremap <leader>rf <C-w><C-_><C-w>\|
+
+" make splits equal size
+nnoremap <leader>r= <C-w>=
+
+" increase width by 5
+nnoremap <leader>rl :vertical resize +5<cr>
+" decrease width by 5
+nnoremap <leader>rh :vertical resize -5<cr>
+" increase height by 5
+nnoremap <leader>rk :res +5<cr>
+" decrease height by 5
+nnoremap <leader>rj :res -5<cr>
+
+" increase width by 1
+nnoremap <leader>rL :vertical resize +1<cr>
+" decrease width by 1
+nnoremap <leader>rH :vertical resize -1<cr>
+" increase height by 1
+nnoremap <leader>rK :res +1<cr>
+" decrease height by 1
+nnoremap <leader>rJ :res -1<cr>
+
+
+" make split width 80 col for python. Adjust for your screen
+nnoremap <leader>rp :vertical resize 83<cr>
+
+" make split width 3/4 ish
+nnoremap <leader>r3v :vertical resize 113<cr>
+
+
+""""""""""""""""""""""""""""""""
+           "NAVIGATION
+""""""""""""""""""""""""""""""""
+
+" Disable arrow keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" j,k move by screen line instead of file line
+nnoremap j gj
+nnoremap k gk
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+                    "LEADER
+                     "KEY
+                   "MAPPINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+"Set leader key to spacebar. You know it makes sense
+let mapleader = " "
+"Use leader to source vimrc and ftplugins
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" OPEN CONFIG FILES IN VERTICAL SPLITS
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ep :vsplit ~/.vim/after/ftplugin/python.vim<cr>
+nnoremap <leader>ej :vsplit ~/.vim/after/ftplugin/javascript.vim<cr>
+nnoremap <leader>eh :vsplit ~/.vim/after/ftplugin/html.vim<cr>
+nnoremap <leader>ec :vsplit ~/.vim/after/ftplugin/css.vim<cr>
+nnoremap <leader>ea :vsplit ~/.aliases<cr>
+nnoremap <leader>eb :vsplit ~/.bashrc<cr>
+nnoremap <leader>ez :vsplit ~/.zshrc<cr>
+nnoremap <leader>ex :vsplit ~/.Xresources<cr>
+nnoremap <leader>ei :vsplit ~/.config/i3/config<cr>
+nnoremap <leader>eq :vsplit ~/.config/qutebrowser/qutebrowser.conf<cr>
+
+
+""""""""""""""""""""""""""""""""
+          "INSERT MODE
+          "TWEAKS
+""""""""""""""""""""""""""""""""
+
+" return in normal mode like return in insert mode
+nnoremap <CR> a<CR>
+
+
+""""""""""""""""""""""""""""""""""""""
+            "WHITE SPACE
+""""""""""""""""""""""""""""""""""""""
+
+" trim trailing whitespace on file save
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+"convert tabs to spaces
+:command! -range=% -nargs=0 Tab2Space execute '<line1>,<line2>s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
+"convert spaces to tab
+:command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
+
+""""""""""""""""""""""""""""""""""""""
+            "PLUGINS
+""""""""""""""""""""""""""""""""""""""
+let g:deoplete#enable_at_startup = 1
+
