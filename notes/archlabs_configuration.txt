@@ -1,0 +1,3 @@
+REMAP CAPSLOCK TO ESCAPE
+open ~/.config/openbox/autostart
+setxkbmap -option caps:escape &
