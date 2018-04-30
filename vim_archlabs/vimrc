@@ -54,14 +54,25 @@ set confirm
 
 " enable tab completion menu when using colon command mode (:)
 set wildmenu
+set wildignore+=*.pyc,
+set wildignore+=__pycache__						 " Py cache folder
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+
 
 set shortmess+=aAcIws   " Hide certain messages like 'Search Hit Bottom' etc.
 set expandtab           " Tab inserts Spaces not Tabs '\t'
 set softtabstop=4       " Amount of spaces to enter when Tab is pressed
 set shiftwidth=4        " 4 space indentation
 set tabstop=4
-
 set scrolloff=5         "show 5 lines above/below cursor
+set showbreak=↪
+set autochdir
+set hlsearch
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set matchpairs+=<:> "especially handy for html
 
 " enable mouse, sgr is better but not every term supports it
 set mouse=a
@@ -128,7 +139,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" make horizontal split full height
+"wmake horizontal split full height
 nnoremap <leader>ru <C-w><C-_>
 " make vertical split full width
 nnoremap <leader>rw <C-w>\|
@@ -206,6 +217,7 @@ nnoremap <leader>ez :vsplit ~/.zshrc<cr>
 nnoremap <leader>ex :vsplit ~/.Xresources<cr>
 nnoremap <leader>ei :vsplit ~/.config/i3/config<cr>
 nnoremap <leader>eq :vsplit ~/.config/qutebrowser/qutebrowser.conf<cr>
+nnoremap <leader>ei :vsplit ~/.config/termite/config<cr>
 
 
 """"""""""""""""""""""""""""""""
@@ -250,6 +262,7 @@ let g:jedi#completions_command = "<C-N>"
 let g:UltiSnipsExpandTrigger="<c-w>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsListSnippets = "<C-l>"
 let g:UltiSnipsEditSplit="vertical"
 
 """"""""""""""""""""""""""""""""""""""
