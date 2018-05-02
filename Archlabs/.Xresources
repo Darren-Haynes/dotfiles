@@ -88,7 +88,7 @@ UXTerm*toolBar: false
 ! ------------------------------------------------------------------------------
 ! Rofi
 ! ------------------------------------------------------------------------------
-rofi.font: Ubuntu Mono 30
+rofi.font: Ubuntu Mono 26
 rofi.color-enabled: true
 rofi.color-window: #2b303b, #2b303b, #2b303b
 rofi.color-normal: #2b303b, #c0c5ce, #2b303b, #8fa1b3, #2b303b
