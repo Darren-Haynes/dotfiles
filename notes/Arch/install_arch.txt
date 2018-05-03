@@ -1,0 +1,203 @@
+BOOTSTRAP INSTALL FROM EXISTING UBUNTU
+
+Useful links for install:
+https://www.ordinatechnic.com/os-specific-guides/arch/archlinux-installing-from-an-existing-linux-installation
+https://www.gloriouseggroll.tv/arch-linux-efi-install-guide/
+https://wiki.archlinux.org/index.php/Install_from_existing_Linux
+
+(Worth checking out LearnLinux.tv on youtube for LVM disk method)
+
+***Notes: this install uses my discrete nvidia gpu exclusively for graphics. The intel integrated graphics is not used. Bumble is not set up either for switching between the 2. My nvidia gpu is an older card that is no longer supported with propriatery nvidia drivers, thus I used nouveau which doesn't support bumblebee. Nouveau has its own switching program, but I did not set that up since everything works fine for me anyway.***
+
+INSTALL
+1. Go to the /tmp directory
+'cd /tmp'
+
+2. Download the boostrap ISO - check for most recent
+'curl -O http://mirror.umd.edu/archlinux/iso/2015.01.01/archlinux-bootstrap-2017.04.01-x86_64.tar.gz'
+
+3. Unzip the tar.gz
+tar xzf archlinux-bootstrap-2017.04.01-x86_64.tar.gz
+
+4. Uncomment the mirrors to use for install
+vim /tmp/root.x86_64/etc/pacman.d/mirrorlist
+
+5. Initialize the gpg keyring
+pacman-key --init
+
+6. Populate the Arch gpg
+pacman-key --populate archlinux
+
+7. Refresh the package lists
+pacman -Syyu
+
+8. Install base and base-devel
+pacman -S base base-devel
+
+9. Install gdisk for partitioning
+pacman -S gptfdisk
+
+10. Partition disks
+watch the glorious eggrolls youtune vid for this
+
+11. Install package for formating paritions
+pacman -S dosfstools
+
+12. Format partitions
+watch eggrolls vid for this too
+
+13. Mount partitions
+Eggroll too
+
+14. If swap partition being used turn it on
+swapon -s
+
+15. Now the magic
+pacman /mnt base
+
+16. Fstab file
+genfstab -p /mnt >> /mnt/etc/fstab
+
+17. Chroot into the new install
+arch-chroot /mnt
+
+18. Create hostname (use your own hostname of course)
+echo Arch-W540 > /etc/hostname
+
+19. Add host to network
+vi /etc/hosts
+..and add the line:
+127.0.0.1	Arch-W540.localdomain	Arch-W540
+
+20. Check host network is working
+ping Arch-W540
+
+21. Set time zone
+ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+(change America and New-York to your timezone)
+
+22. Set the clock
+hwclock --systohc --utc
+
+22a. Generate the locale
+locale-gen
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+
+23. Set system language parameter
+export LANG=en_US.UTF-8
+
+24. Install wifi packages
+pacman -s iw wa_supplicant networkmanager
+
+24a. Start networkmanager?
+networkmanager.service
+
+25. Create new initramfs (whatever that means)
+mkinitcpio -p linux
+
+26. Set root password
+passwd
+
+27. Install and configure boot loader
+eggroll for this one. His method installs the boot loader that doesn't use grub. Thus arch automatically starts on boot. Thus for a dual boot with existing ubuntu install, you need to interupt boot to load ubuntu.
+
+27a . Enable multilib if your on a 64 bit system
+vi /etc/pacman.conf
+
+...then uncomment the 2 lines below...
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+
+...add add these lines to enable AUR repository access
+[archlinuxfr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch[archlinuxfr]
+
+28. Install the right driver for your setup. For W540 I used nouveau
+pacman -S xf86-video-nouveau
+pacman -S lib32-mesa
+
+29. Update
+pacman -Syu
+
+30. Create a user with sudo privileges
+useradd -m -g users -G wheel,storage,power -s /bin/bash someusername
+passwd someusername
+
+...then give sudo privileges
+visudo
+
+...add a line below 'root ALL=(ALL) ALL'
+someusername ALL=(ALL) ALL
+
+30a. If you want the user to use root password and not their own for sudo commands
+Defaults rootpw
+
+31. Bash completion is essential
+pacman -S bash-completion
+
+32. Synaptics touchpad driver
+pacman -S xf86-input-synaptics
+
+33. 3D support
+pacman -S mesa
+
+34. X window
+sudo pacman -S xorg-server xorg-server-utils xorg-xinit xorg-twm xorg-xclock xterm
+..then test X window is working
+startx
+
+35. Install yaourt
+pacman -S yaourt
+
+36. A good time to reboot system and see if everything working correctly
+reboot
+
+37. Install PulseAudio for sound
+sudo -S pulseaudio
+
+38. Some stuff I can't fully remember about turning off default mute. But definitely open alsamixer in terminal and turn volume up
+
+
+PROGRAMS I INSTALL
+pacman -S firefox chromium opera mupdf gvim ranger rxvt-unicode-256xresources mullvad spideroak-one cmus vlc w3m gimp
+
+UTILITIES INSTALL
+pacman -S zip unzip dos2unix
+
+FONTS I INSTALL
+ttf-font-awesome
+ttf-dejavu
+
+i3wm INSTALL
+sudo pacman -S i3 dmenu
+yaourt -S i3blocks
+...install acpi a package that provides the battery info for i3 bar
+sudo pacman -S acpi
+
+...set up lock screen...
+put lock script into ~/.bash_scripts
+put image into /tmp/screen.png
+
+INSTALL PYTHON STUFF
+sudo pacman -S python-pip
+sudo pacman -S python2-pip
+
+OTHER STUFF TO INSTALL
+pacman -S rsync  -- backup program
+pacman -S xorg-xrandr 
+pacman -S org-backlight  -- adjust screen brightness
+pacman -S terminus-font  -- console fonts, required because of high dpi on my laptop and all base install fonts are too small. Note, that font has to be set in /etc/vconsole.conf adding the line "FONT=ter-732b" provides a big font.
+pacman -S lm_sensors - this is small posibility that this may cause problems on some systems. Was fine for my W540 and asus K52jr
+pacman -S redshift - screen color changer foreasier night-time viewing
+
+INSTALLING AND USING PRIME
+https://wiki.archlinux.org/index.php/PRIME
+sudo pacman -S xf86-video-intel    (for hybrid graphics I had not yet installed the driver for the intel integrated chip)
+
+note you can select the nvidia graphics on a program by program basis, such as: `DRI_PRIME=1 your_progam'
+Also check out https://www.unixmen.com/using-hybrid-graphic-card-intel-amd-arch-linux/
+
+AUTO UPDATE PACMAN MIRROR LIST FOR BEST MIRRORS
+https://www.youtube.com/watch?v=qHoXTjrbLlo
+follow #3 on this video
