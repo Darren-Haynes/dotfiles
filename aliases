@@ -60,6 +60,7 @@ alias vimerror="vim -V20 2>&1 | tee logfile"
 alias vimhtml='vim ~/.vim/after/ftplugin/html.vim'
 alias vimi3='vim ~/.config/i3/config'
 alias vimi3b='vim ~/.config/i3/i3blocks.conf'
+alias vimip='vim ~/.ipython/profile_default/ipython_config.py'
 alias vimjs='vim  ~/.vim/after/ftplugin/javascript.vim'
 alias vimpy='vim -p ~/.vim/after/ftplugin/python.vim'
 alias vimqute='vim ~/dotfiles/qutebrowser/qutebrowser.conf'
