@@ -3,12 +3,12 @@
 
 # Install openbox, xinit, xorg and compositor
 sudo yes Y | apt install \
-  compton \
   xorg \
   xinit \
   openbox \
   obconf \
   obmenu \
+  compton \
   tint2 
 
 # Install fonts
