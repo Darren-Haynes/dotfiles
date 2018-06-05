@@ -7,10 +7,11 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = SpaceMono Nerd Font Mono 20
+font = SpaceMono Nerd Font Mono 10.5
 search_wrap = true
 icon_name = Termite
-geometry = 2400x1400
+/*geometry = 2400x1400*/
+geometry = 2200x2200
 
 # "system", "on" or "off"
 cursor_blink = on
@@ -43,8 +44,12 @@ roundness = 2.0
 
 # vim: ft=dosini cms=#%s
 
+
+
+
+
 [colors]
-background = rgba(43,48,59,0.96)
+background = rgba(43,48,59,0.99)
 foreground = #c0c5ce
 foreground_bold = #c0c5ce
 cursor = #c0c5ce
