@@ -28,6 +28,31 @@ alias ttf='cd /usr/share/fonts/TTF'
 alias usb='cd /dev/usb/'
 alias web='cd ~/SpiderOak\ Hive/Websites'
 
+
+alias basha='nvim ~/.bash_aliases'
+alias bashrc='nvim ~/.bashrc'
+alias vcss="nvim **/*.css"
+alias vhtml="nvim **/*.html"
+alias vima='nvim ~/.aliases'
+alias vimadd='nvim ~/Documents/contacts.csv'
+alias vimbash='nvim ~/.bash_scripts/**/*'
+alias vimcss='nvim ~/.vim/after/ftplugin/css.vim'
+alias vimdot="nvim ~/dotfiles/*rc  ~/dotfiles/*e*  ~/dotfiles/i3/* ~/dotfiles/vim/after/ftplugin/*"
+alias vimerror="nvim -V20 2>&1 | tee logfile"
+alias vimhtml='nvim ~/.vim/after/ftplugin/html.vim'
+alias vimi3='nvim ~/.config/i3/config'
+alias vimi3b='nvim ~/.config/i3/i3blocks.conf'
+alias vimip='nvim ~/.ipython/profile_default/ipython_config.py'
+alias vimjs='nvim  ~/.vim/after/ftplugin/javascript.vim'
+alias vimpy='nvim -p ~/.vim/after/ftplugin/python.vim'
+alias vimqute='nvim ~/dotfiles/qutebrowser/qutebrowser.conf'
+alias vimrc='nvim ~/.vimrc'
+alias vimt='nvim ~/.config/termite/config'
+alias vimx='nvim ~/.Xresources'
+alias vimz='nvim ~/.zshrc'
+alias vjs="nvim **/*.js"
+alias vpy="nvim **/*.py"
+
 # LISTING
 alias a='ls -A'
 alias cls='clear && ls'
@@ -47,29 +72,29 @@ alias lsv='ls ~/Videos'
 alias co='colorize'
 
 # VIM
-alias basha='vim ~/.bash_aliases'
-alias bashrc='vim ~/.bashrc'
-alias vcss="vim **/*.css"
-alias vhtml="vim **/*.html"
-alias vima='vim ~/.aliases'
-alias vimadd='vim ~/Documents/contacts.csv'
-alias vimbash='vim ~/.bash_scripts/**/*'
-alias vimcss='vim ~/.vim/after/ftplugin/css.vim'
-alias vimdot="vim ~/dotfiles/*rc  ~/dotfiles/*e*  ~/dotfiles/i3/* ~/dotfiles/vim/after/ftplugin/*"
-alias vimerror="vim -V20 2>&1 | tee logfile"
-alias vimhtml='vim ~/.vim/after/ftplugin/html.vim'
-alias vimi3='vim ~/.config/i3/config'
-alias vimi3b='vim ~/.config/i3/i3blocks.conf'
-alias vimip='vim ~/.ipython/profile_default/ipython_config.py'
-alias vimjs='vim  ~/.vim/after/ftplugin/javascript.vim'
-alias vimpy='vim -p ~/.vim/after/ftplugin/python.vim'
-alias vimqute='vim ~/dotfiles/qutebrowser/qutebrowser.conf'
-alias vimrc='vim ~/.vimrc'
-alias vimt='vim ~/.config/termite/config'
-alias vimx='vim ~/.Xresources'
-alias vimz='vim ~/.zshrc'
-alias vjs="vim **/*.js"
-alias vpy="vim **/*.py"
+alias basha='nvim ~/.bash_aliases'
+alias bashrc='nvim ~/.bashrc'
+alias vcss="nvim **/*.css"
+alias vhtml="nvim **/*.html"
+alias vima='nvim ~/.aliases'
+alias vimadd='nvim ~/Documents/contacts.csv'
+alias vimbash='nvim ~/.bash_scripts/**/*'
+alias vimcss='nvim ~/.vim/after/ftplugin/css.vim'
+alias vimdot="nvim ~/dotfiles/*rc  ~/dotfiles/*e*  ~/dotfiles/i3/* ~/dotfiles/vim/after/ftplugin/*"
+alias vimerror="nvim -V20 2>&1 | tee logfile"
+alias vimhtml='nvim ~/.vim/after/ftplugin/html.vim'
+alias vimi3='nvim ~/.config/i3/config'
+alias vimi3b='nvim ~/.config/i3/i3blocks.conf'
+alias vimip='nvim ~/.ipython/profile_default/ipython_config.py'
+alias vimjs='nvim  ~/.vim/after/ftplugin/javascript.vim'
+alias vimpy='nvim -p ~/.vim/after/ftplugin/python.vim'
+alias vimqute='nvim ~/dotfiles/qutebrowser/qutebrowser.conf'
+alias vimrc='nvim ~/.vimrc'
+alias vimt='nvim ~/.config/termite/config'
+alias vimx='nvim ~/.Xresources'
+alias vimz='nvim ~/.zshrc'
+alias vjs="nvim **/*.js"
+alias vpy="nvim **/*.py"
 
 # GVIM OPEN FILES
 alias gbash="gvim **/*.sh"
@@ -159,7 +184,7 @@ alias voff='amixer -D pulse sset Master 0%' #ubuntu
 alias vt='pactl set-sink-mute 0 toggle' #Arch
 alias vu='pactl set-sink-volume 0 +5%' #Arch
 
-# GITHUB
+# GITHUB / VERSION CONTROL
 alias ga='git add --all .'
 alias gb='git branch'
 alias gd='git diff '
@@ -179,6 +204,7 @@ alias mull='sudo mullvad'
 alias mu='mupdf'
 alias chrome="google-chrome-stable --force-device-scale-factor=1.5"
 alias neo='neofetch --source wallpaper --backend w3m'
+alias vim='nvim'
 
 # LINUX SHORTCUTS
 alias ag='alias | grep '
@@ -239,6 +265,10 @@ alias tpe='xinput enable 13'
 alias bach="cd ~/Music/Classical/Bach"
 alias music_please=". ~/.bash_scripts/random_music_player.sh"
 alias vivaldi="cd ~/Music/Classical/Vivaldi"
+
+# PROJECTS
+alias tesla_test="vim ~/Coding/Tesla/test/*"
+alias tesla_live="vim ~/Coding/Tesla/live/*"
 
 # FUN
 alias hello="figlet Hello Sunshine | lolcat"
