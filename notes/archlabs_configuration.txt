@@ -8,6 +8,7 @@ sudo pacman -Rns grml-zsh-config --noconfirm
 
 PASS
 pacman -Syu pass
+(import gpg keys if you haven't already)
 pass init 'gpg-key-id'
 rm ~/.password-store/.gpg-id
 git clone https://github.com/darren-haynes/pass ~/.password-store
