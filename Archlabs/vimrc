@@ -6,7 +6,6 @@
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-               "VUNDLE
                "PLUGIN
                "MANAGER
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -19,17 +18,41 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+" Make pretty
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'scrooloose/nerdcommenter'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'chriskempson/base16-vim'
+
+" Completion, snippets and linting
 Plug 'w0rp/ale'
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 Plug 'maralla/completor.vim'
 Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
+
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+
+"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+
+" Coding Productivity
+Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree'
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+
+" Status
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -70,7 +93,7 @@ set tabstop=4
 set scrolloff=5         "show 5 lines above/below cursor
 set showbreak=↪
 set autochdir
-set hlsearch
+set nohlsearch
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set matchpairs+=<:> "especially handy for html
 
@@ -82,13 +105,13 @@ endif
 
 " syntax highlighting with true colors in the terminal
 syntax enable
-if has('termguicolors')
-    if &term =~? 'screen\|tmux'
-        set t_8f=^[[38;2;%lu;%lu;%lum
-        set t_8b=^[[48;2;%lu;%lu;%lum
-    endif
-    set termguicolors
-endif
+"if has('termguicolors')
+    "if &term =~? 'screen\|tmux'
+        "set t_8f=^[[38;2;%lu;%lu;%lum
+        "set t_8b=^[[48;2;%lu;%lu;%lum
+    "endif
+    "set termguicolors
+"endif
 
 " bracketed paste while in insert mode, bracketed paste preserves indentation
 inoremap <silent><C-v> <Esc>:set paste<CR>a<C-r>+<Esc>:set nopaste<CR>a
@@ -124,6 +147,59 @@ augroup file_load_change_and_position
     autocmd FileChangedShellPost * echo "Changes loaded from file"
 augroup END
 
+set tags=tags
+"""""""""""""""""""""""""""""""""""""""
+           " VIM COLORS
+"""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+	colorscheme atom
+endif
+
+highlight VertSplit cterm=NONE
+highlight SignColumn ctermbg=NONE
+highlight SignColumn guibg=#2C313C
+"highlight TabLineFill guibg=#2C313C
+"highlight TabLineSel ctermbg=black
+"highlight TabLine ctermbg=black
+
+"let g:terminal_color_0  = '#2b303b'
+"let g:terminal_color_1  = '#bf616a'
+"let g:terminal_color_2  = '#a3b38c'
+"let g:terminal_color_3  = '#ebcb8b'
+"let g:terminal_color_4  = '#8fa1b3'
+"let g:terminal_color_5  = '#b48ead'
+"let g:terminal_color_6  = '#96b5b4'
+"let g:terminal_color_7  = '#f6f6f6'
+"let g:terminal_color_8  = '#65737e'
+"let g:terminal_color_9  = '#bf616a'
+"let g:terminal_color_10 = '#a3be8c'
+"let g:terminal_color_11 = '#ebcb8b'
+"let g:terminal_color_12 = '#8fa1b3'
+"let g:terminal_color_13 = '#b48ead'
+"let g:terminal_color_14 = '#96b5b4'
+"let g:terminal_color_15 = '#c0c5ce'
+
+"""""""""""""""""""""""""""""""""""""""
+           " OMNICOMPLETION
+"""""""""""""""""""""""""""""""""""""""
+
+filetype plugin on
+" Native vim omnicompetion
+"set omnifunc=syntaxcomplete#Complete
+
+"""""""""""""""""""""""""""""""""""""""
+           " FILETYPES
+"""""""""""""""""""""""""""""""""""""""
+
+autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype html setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype css setlocal ts=2 sw=2 sts=0 expandtab
+
+"""""""""""""""""""""""""""""""""""""""
+           " VERSION CONTROL
+"""""""""""""""""""""""""""""""""""""""
+
+nnoremap <leader>cp :! clasp push<CR>
 
 """""""""""""""""""""""""""""""""""""""
            " MANAGE SPLITS
@@ -138,6 +214,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+"Set leader key to spacebar. You know it makes sense
+let mapleader = " "
 
 "wmake horizontal split full height
 nnoremap <leader>ru <C-w><C-_>
@@ -193,19 +272,25 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+""""""""""""""""""""""""""""""""
+           "SAVE FOLDS
+""""""""""""""""""""""""""""""""
+
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""
-                    "LEADER
-                     "KEY
-                   "MAPPINGS
+              "OPEN CONFIG FILES
+                 "SHORTCUTS
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-"Set leader key to spacebar. You know it makes sense
-let mapleader = " "
 "Use leader to source vimrc and ftplugins
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" OPEN CONFIG FILES IN VERTICAL SPLITS
+" Open config files in vertical splits
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ep :vsplit ~/.vim/after/ftplugin/python.vim<cr>
 nnoremap <leader>ej :vsplit ~/.vim/after/ftplugin/javascript.vim<cr>
@@ -230,6 +315,32 @@ nnoremap <CR> a<CR>
 
 
 """"""""""""""""""""""""""""""""""""""
+             "TOGGLE
+            "SETTINGS
+""""""""""""""""""""""""""""""""""""""
+
+" Toggle relative or absolute number lines
+nnoremap <leader>tn :call NumberToggle()<CR>
+
+function! NumberToggle()
+    if(&nu == 1)
+        set nu!
+        set rnu
+    else
+        set nornu
+        set nu
+    endif
+endfunction
+
+
+""""""""""""""""""""""""""""""""""""""
+            "TABS
+""""""""""""""""""""""""""""""""""""""
+
+nnoremap <leader>tl :tabnext<CR>
+nnoremap <leader>th :tabprevious<CR>
+
+""""""""""""""""""""""""""""""""""""""
             "WHITE SPACE
 """"""""""""""""""""""""""""""""""""""
 
@@ -252,23 +363,52 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
             "SETTINGS
 """"""""""""""""""""""""""""""""""""""
 
+" Nerdtree
+nnoremap <leader>nt :NERDTreeToggle<cr>
+
+" Ale custom colors and sign
+highlight clear ALEErrorSign
+
+" Airline theme
+let g:airline_theme='materialbox'
+
+" Supertab scroll from top to bottom
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 "DEOPLETE
 let g:deoplete#enable_at_startup = 1
+"let g:deoplete#omni#functions = {}
+"let g:deoplete#omni#functions.javascript = [
+  "\ 'tern#Complete',
+  "\ 'jspc#omni'
+"\]
 
 " Change jedi default completions key bindings
 let g:jedi#completions_command = "<C-N>"
 
-"ULTISNIPS
+" ULTISNIPS
 let g:UltiSnipsExpandTrigger="<c-w>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsListSnippets = "<C-l>"
 let g:UltiSnipsEditSplit="vertical"
 
+" TAGBAR
+nnoremap <leader>tb :TagbarOpenAutoClose<cr>
+let g:tagbar_indent = 1
+let g:tagbar_compact = 1
+let g:tagbar_sort = 0
+let g:tagbar_zoomwidth = 0
+
+" UNDOTREE
+nnoremap <leader>tu :UndotreeToggle<cr>
+
+
 """"""""""""""""""""""""""""""""""""""
             "ABBREVIATIONS
 """"""""""""""""""""""""""""""""""""""
 
-iabbrev #!/b #!/bin/bash
-iabbrev DH Darren Haynes
-iabbrev VH Veronica Haynes
+"iabbrev #bb #!/bin/bash
+"iabbrev #bp #!/bin/env python
+"iabbrev DH Darren Haynes
+"iabbrev VH Veronica Haynes
