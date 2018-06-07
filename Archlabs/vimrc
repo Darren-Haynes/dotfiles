@@ -1,14 +1,13 @@
-"          \ \   / /_ _|  \/  |  _ \ / ___|
-"           \ \ / / | || |\/| | |_) | |
-"            \ V /  | || |  | |  _ <| |___
-"             \_/  |___|_|  |_|_| \_\\____|
-"
+"  \ \   / /_ _|  \/  |  _ \ / ___|
+"   \ \ / / | || |\/| | |_) | |
+"    \ V /  | || |  | |  _ <| |___
+"     \_/  |___|_|  |_|_| \_\\____|
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-               "PLUGIN
-               "MANAGER
-""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
+             "PLUGIN
+             "MANAGER
+"""""""""""""""""""""""""""""""""""""
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -46,9 +45,18 @@ Plug 'roxma/vim-hug-neovim-rpc'
 " Coding Productivity
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
+Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
+
+" Navigation
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
-Plug 'airblade/vim-gitgutter'
+Plug 'gcmt/taboo.vim'
+
+" Tmux
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
 
 " Status
 Plug 'vim-airline/vim-airline'
@@ -148,19 +156,32 @@ augroup file_load_change_and_position
 augroup END
 
 set tags=tags
+
+
+"""""""""""""""""""""""""""""""""""""""
+             " MORE
+           " DEFAULTS
+"""""""""""""""""""""""""""""""""""""""
+
+set noswapfile
+
+
 """""""""""""""""""""""""""""""""""""""
            " VIM COLORS
 """""""""""""""""""""""""""""""""""""""
 if has('nvim')
-	colorscheme atom
+    colorscheme atom
 endif
 
 highlight VertSplit cterm=NONE
 highlight SignColumn ctermbg=NONE
 highlight SignColumn guibg=#2C313C
-"highlight TabLineFill guibg=#2C313C
-"highlight TabLineSel ctermbg=black
-"highlight TabLine ctermbg=black
+highlight TabLineFill guibg=#2C313C
+highlight TabLineFill cterm=NONE
+highlight TabLineSel ctermbg=238
+highlight TabLineSel ctermfg=NONE
+highlight TabLine ctermbg=NONE
+highlight TabLine cterm=NONE
 
 "let g:terminal_color_0  = '#2b303b'
 "let g:terminal_color_1  = '#bf616a'
@@ -200,6 +221,22 @@ autocmd Filetype css setlocal ts=2 sw=2 sts=0 expandtab
 """""""""""""""""""""""""""""""""""""""
 
 nnoremap <leader>cp :! clasp push<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""
+           " SESSION MANAGEMENT
+"""""""""""""""""""""""""""""""""""""""
+
+let g:session_directory = "~/.vim/sessions"
+let g:session_autoload = "no"
+let g:session_autosave = "no"
+let g:session_command_aliases = 1
+
+nnoremap <leader>ss :SaveSession
+nnoremap <leader>so :OpenSession
+nnoremap <leader>sd :DeleteSession
+nnoremap <leader>sc :CloseSession
+
 
 """""""""""""""""""""""""""""""""""""""
            " MANAGE SPLITS
@@ -276,11 +313,11 @@ nnoremap k gk
            "SAVE FOLDS
 """"""""""""""""""""""""""""""""
 
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
-augroup END
+"augroup remember_folds
+  "autocmd!
+  "autocmd BufWinLeave * mkview
+  "autocmd BufWinEnter * silent! loadview
+"augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""
               "OPEN CONFIG FILES
@@ -291,7 +328,7 @@ augroup END
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Open config files in vertical splits
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :vsplit ~/.vimrc<cr>
 nnoremap <leader>ep :vsplit ~/.vim/after/ftplugin/python.vim<cr>
 nnoremap <leader>ej :vsplit ~/.vim/after/ftplugin/javascript.vim<cr>
 nnoremap <leader>eh :vsplit ~/.vim/after/ftplugin/html.vim<cr>
@@ -303,6 +340,8 @@ nnoremap <leader>ex :vsplit ~/.Xresources<cr>
 nnoremap <leader>ei :vsplit ~/.config/i3/config<cr>
 nnoremap <leader>eq :vsplit ~/.config/qutebrowser/qutebrowser.conf<cr>
 nnoremap <leader>ei :vsplit ~/.config/termite/config<cr>
+nnoremap <leader>em :vsplit ~/.tmux.conf<cr>
+nnoremap <leader>et :vsplit ~/.config/termite/config<cr>
 
 
 """"""""""""""""""""""""""""""""
@@ -332,13 +371,6 @@ function! NumberToggle()
     endif
 endfunction
 
-
-""""""""""""""""""""""""""""""""""""""
-            "TABS
-""""""""""""""""""""""""""""""""""""""
-
-nnoremap <leader>tl :tabnext<CR>
-nnoremap <leader>th :tabprevious<CR>
 
 """"""""""""""""""""""""""""""""""""""
             "WHITE SPACE
@@ -402,6 +434,14 @@ let g:tagbar_zoomwidth = 0
 
 " UNDOTREE
 nnoremap <leader>tu :UndotreeToggle<cr>
+
+" VIMUX
+nnoremap <Leader>vp :VimuxPromptCommand<CR>
+nnoremap <Leader>j :VimuxRunLastCommand<CR>
+nnoremap <Leader>c :VimuxInspectRunner<CR>
+
+" TABOO
+let g:taboo_tab_format = "%N~%f|"
 
 
 """"""""""""""""""""""""""""""""""""""
