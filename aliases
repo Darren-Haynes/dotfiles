@@ -1,7 +1,7 @@
-#         / \  | |   |_ _|  / \  / ___|| ____/ ___|
-#        / _ \ | |    | |  / _ \ \___ \|  _| \___ \
-#       / ___ \| |___ | | / ___ \ ___) | |___ ___) |
-#      /_/   \_\_____|___/_/   \_\____/|_____|____/
+#     / \  | |   |_ _|  / \  / ___|
+#    / _ \ | |    | |  / _ \ \___ \
+#   / ___ \| |___ | | / ___ \ ___)
+#  /_/   \_\_____|___/_/   \_\____/
 
 
 # NAVIGATION
@@ -44,6 +44,7 @@ alias vimi3='nvim ~/.config/i3/config'
 alias vimi3b='nvim ~/.config/i3/i3blocks.conf'
 alias vimip='nvim ~/.ipython/profile_default/ipython_config.py'
 alias vimjs='nvim  ~/.vim/after/ftplugin/javascript.vim'
+alias vimm='nvim ~/.tmux.conf'
 alias vimpy='nvim -p ~/.vim/after/ftplugin/python.vim'
 alias vimqute='nvim ~/dotfiles/qutebrowser/qutebrowser.conf'
 alias vimrc='nvim ~/.vimrc'
@@ -105,6 +106,10 @@ alias gjs="gvim **/*.js"
 alias gpen="gvim **/*.html **/*.css **/*.js"
 alias gpy="gvim **/*.py"
 alias gweb="gvim **/*.html **/*.css"
+
+
+# SESSIONS
+alias sesdot="nvim -S ~/.vim/sessions/dotfiles.vim"
 
 # OPEN FILES
 alias addresses='mupdf ~/SpiderOak\ Hive/Documents_hive/Us/Addresses/our-addresses.pdf'
