@@ -182,6 +182,7 @@ highlight TabLineSel ctermbg=238
 highlight TabLineSel ctermfg=NONE
 highlight TabLine ctermbg=NONE
 highlight TabLine cterm=NONE
+highlight Visual ctermbg=124
 
 "let g:terminal_color_0  = '#2b303b'
 "let g:terminal_color_1  = '#bf616a'
@@ -394,6 +395,10 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
             "PLUGIN
             "SETTINGS
 """"""""""""""""""""""""""""""""""""""
+" Vim Sessions
+set sessionoptions-=buffers
+let g:session_autosave="yes"
+let g:session_autosave_periodic=2
 
 " Nerdtree
 nnoremap <leader>nt :NERDTreeToggle<cr>
