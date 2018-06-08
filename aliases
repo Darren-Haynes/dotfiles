@@ -110,6 +110,8 @@ alias gweb="gvim **/*.html **/*.css"
 
 # SESSIONS
 alias sesdot="nvim -S ~/.vim/sessions/dotfiles.vim"
+alias sesteslalive="nvim -S ~/.vim/sessions/tesla-live.vim"
+alias sesteslatest="nvim -S ~/.vim/sessions/tesla_test.vim"
 
 # OPEN FILES
 alias addresses='mupdf ~/SpiderOak\ Hive/Documents_hive/Us/Addresses/our-addresses.pdf'
@@ -209,7 +211,6 @@ alias mull='sudo mullvad'
 alias mu='mupdf'
 alias chrome="google-chrome-stable --force-device-scale-factor=1.5"
 alias neo='neofetch --source wallpaper --backend w3m'
-alias vim='nvim'
 
 # LINUX SHORTCUTS
 alias ag='alias | grep '
