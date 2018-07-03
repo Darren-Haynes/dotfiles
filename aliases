@@ -1,3 +1,4 @@
+#      _    _     ___    _    ____
 #     / \  | |   |_ _|  / \  / ___|
 #    / _ \ | |    | |  / _ \ \___ \
 #   / ___ \| |___ | | / ___ \ ___)
@@ -88,6 +89,7 @@ alias vimi3='nvim ~/.config/i3/config'
 alias vimi3b='nvim ~/.config/i3/i3blocks.conf'
 alias vimip='nvim ~/.ipython/profile_default/ipython_config.py'
 alias vimjs='nvim  ~/.vim/after/ftplugin/javascript.vim'
+alias vimpoly="nvim ~/dotfiles/polybar/*"
 alias vimpy='nvim -p ~/.vim/after/ftplugin/python.vim'
 alias vimqute='nvim ~/dotfiles/qutebrowser/qutebrowser.conf'
 alias vimrc='nvim ~/.vimrc'
@@ -96,6 +98,8 @@ alias vimx='nvim ~/.Xresources'
 alias vimz='nvim ~/.zshrc'
 alias vjs="nvim **/*.js"
 alias vpy="nvim **/*.py"
+alias n="nvim"
+alias v="nvim"
 
 # GVIM OPEN FILES
 alias gbash="gvim **/*.sh"
@@ -112,6 +116,7 @@ alias gweb="gvim **/*.html **/*.css"
 alias sesdot="nvim -S ~/.vim/sessions/dotfiles.vim"
 alias sesteslalive="nvim -S ~/.vim/sessions/tesla-live.vim"
 alias sesteslatest="nvim -S ~/.vim/sessions/tesla_test.vim"
+alias sesthemes="nvim -S ~/.vim/sessions/termite_themes.vim"
 
 # OPEN FILES
 alias addresses='mupdf ~/SpiderOak\ Hive/Documents_hive/Us/Addresses/our-addresses.pdf'
@@ -166,14 +171,14 @@ alias vtv='vim ~/SpiderOak\ Hive/Days_of_TV_Shows.txt'
 alias tv='cat ~/SpiderOak\ Hive/Days_of_TV_Shows.txt | lolcat'
 
 # VOLUME AND BRIGHTNESS
-alias b10='xrandr --output eDP1  --brightness 1.0'
-alias b1='xrandr --output eDP1  --brightness 0.1'
-alias b2='xrandr --output eDP1  --brightness 0.2'
-alias b5='xrandr --output eDP1  --brightness 0.5'
-alias b6='xrandr --output eDP1  --brightness 0.6'
-alias b7='xrandr --output eDP1  --brightness 0.7'
-alias b8='xrandr --output eDP1  --brightness 0.8'
-alias b9='xrandr --output eDP1  --brightness 0.9'
+alias b10='xrandr --output eDP-1  --brightness 1.0'
+alias b1='xrandr --output eDP-1  --brightness 0.1'
+alias b2='xrandr --output eDP-1  --brightness 0.2'
+alias b5='xrandr --output eDP-1  --brightness 0.5'
+alias b6='xrandr --output eDP-1  --brightness 0.6'
+alias b7='xrandr --output eDP-1  --brightness 0.7'
+alias b8='xrandr --output eDP-1  --brightness 0.8'
+alias b9='xrandr --output eDP-1  --brightness 0.9'
 alias bd='xbacklight -dec 5' #Arch
 alias bu='xbacklight -inc 5' #Arch
 alias v10='amixer -D pulse sset Master 100%' #ubuntu
@@ -231,7 +236,7 @@ alias rsp='sudo rsync -r --progress'
 alias sa='alias | grep '
 alias sortsize='du -h --max-depth=0 * | sort -h'
 alias xinfo='xrandr --nograb --current'
-alias xr='xrdb ~/dotfiles/Xresources'
+alias xr='xrdb ~/dotfiles/X/Xresources'
 
 # UPLOAD / DOWNLOAD
 alias dl='curl -O '
@@ -246,6 +251,7 @@ alias wifis='nmcli dev wifi list'
 alias wificon='nmcli connection show | head -2 '
 alias wifioff='nmcli radio wifi off'
 alias wifion='nmcli radio wifi on'
+alias duck='ping duckduckgo.com'
 
 # ARCH LINUX
 alias backup='sudo rsync -aAXhv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*"} / ~/SpiderOak\ Hive/Arch_backups/$(date -I)'
@@ -275,6 +281,13 @@ alias vivaldi="cd ~/Music/Classical/Vivaldi"
 # PROJECTS
 alias tesla_test="vim ~/Coding/Tesla/test/*"
 alias tesla_live="vim ~/Coding/Tesla/live/*"
+
+# Change wallpapers
+alias grand="feh --bg-scale ~/dotfiles/wallpapers/grand-canyon.jpg"
+alias lake="feh --bg-scale ~/dotfiles/wallpapers/colorful-lake.jpg"
+alias god="feh --bg-scale ~/dotfiles/wallpapers/Christ_and_Buddha.png"
+alias monastery="feh --bg-scale ~/dotfiles/wallpapers/ShambalaMonastery.jpg"
+alias doctor="feh --bg-scale ~/dotfiles/wallpapers/doctor-who-tardis-background-On-High-Resolution-Wallpaper.jpg"
 
 # FUN
 alias hello="figlet Hello Sunshine | lolcat"
