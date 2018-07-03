@@ -42,7 +42,7 @@ xmodmap -e 'keycode 0x42=Escape' #remaps the keyboard so CAPS LOCK=ESC
 #xterm -geometry 80x20+494-0 &
 #exec xterm -geometry 80x66+0+0 -name login
 
-autocutsel &
-xcompmgr &
-devilspie -a &
-exec i3
+#autocutsel &
+#xcompmgr &
+#devilspie -a &
+#exec i3
