@@ -1,3 +1,4 @@
+"  __     __    __  __ ____   ____
 "  \ \   / /_ _|  \/  |  _ \ / ___|
 "   \ \ / / | || |\/| | |_) | |
 "    \ V /  | || |  | |  _ <| |___
@@ -5,8 +6,7 @@
 
 
 """""""""""""""""""""""""""""""""""""
-             "PLUGIN
-             "MANAGER
+               "PLUG
 """""""""""""""""""""""""""""""""""""
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -20,9 +20,10 @@ call plug#begin('~/.vim/plugged')
 " Make pretty
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'Matt-Deacalion/vim-systemd-syntax'
-Plug 'scrooloose/nerdcommenter'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'chriskempson/base16-vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'Badacadabra/vim-archery'
 
 " Completion, snippets and linting
 Plug 'w0rp/ale'
@@ -47,6 +48,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
+Plug 'scrooloose/nerdcommenter'
 
 " Navigation
 Plug 'scrooloose/nerdtree'
@@ -113,13 +115,19 @@ endif
 
 " syntax highlighting with true colors in the terminal
 syntax enable
-"if has('termguicolors')
-    "if &term =~? 'screen\|tmux'
-        "set t_8f=^[[38;2;%lu;%lu;%lum
-        "set t_8b=^[[48;2;%lu;%lu;%lum
-    "endif
-    "set termguicolors
-"endif
+if has('termguicolors')
+    if &term =~? 'screen\|tmux'
+        set t_8f=^[[38;2;%lu;%lu;%lum
+        set t_8b=^[[48;2;%lu;%lu;%lum
+    endif
+    set termguicolors
+endif
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
 
 " bracketed paste while in insert mode, bracketed paste preserves indentation
 inoremap <silent><C-v> <Esc>:set paste<CR>a<C-r>+<Esc>:set nopaste<CR>a
@@ -169,13 +177,9 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""
            " VIM COLORS
 """""""""""""""""""""""""""""""""""""""
-if has('nvim')
-    colorscheme atom
-endif
 
-highlight VertSplit cterm=NONE
+highlight SignColumn guibg=NONE
 highlight SignColumn ctermbg=NONE
-highlight SignColumn guibg=#2C313C
 highlight TabLineFill guibg=#2C313C
 highlight TabLineFill cterm=NONE
 highlight TabLineSel ctermbg=238
@@ -183,23 +187,13 @@ highlight TabLineSel ctermfg=NONE
 highlight TabLine ctermbg=NONE
 highlight TabLine cterm=NONE
 highlight Visual ctermbg=124
+highlight VertSplit guibg=NONE
+colorscheme base16-onedark
+hi Normal guibg=NONE ctermbg=NONE
+highlight VertSplit cterm=NONE
 
-"let g:terminal_color_0  = '#2b303b'
-"let g:terminal_color_1  = '#bf616a'
-"let g:terminal_color_2  = '#a3b38c'
-"let g:terminal_color_3  = '#ebcb8b'
-"let g:terminal_color_4  = '#8fa1b3'
-"let g:terminal_color_5  = '#b48ead'
-"let g:terminal_color_6  = '#96b5b4'
-"let g:terminal_color_7  = '#f6f6f6'
-"let g:terminal_color_8  = '#65737e'
-"let g:terminal_color_9  = '#bf616a'
-"let g:terminal_color_10 = '#a3be8c'
-"let g:terminal_color_11 = '#ebcb8b'
-"let g:terminal_color_12 = '#8fa1b3'
-"let g:terminal_color_13 = '#b48ead'
-"let g:terminal_color_14 = '#96b5b4'
-"let g:terminal_color_15 = '#c0c5ce'
+nnoremap <leader>csf :colorscheme base16-flat<CR>
+nnoremap <leader>atf :AirlineTheme base16_flat<CR>
 
 """""""""""""""""""""""""""""""""""""""
            " OMNICOMPLETION
@@ -213,9 +207,9 @@ filetype plugin on
            " FILETYPES
 """""""""""""""""""""""""""""""""""""""
 
-autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
-autocmd Filetype html setlocal ts=2 sw=2 sts=0 expandtab
-autocmd Filetype css setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype javascript setlocal ts=4 sw=4 sts=4 expandtab
+autocmd Filetype html setlocal ts=2 sw=2 sts=2 expandtab
+autocmd Filetype css setlocal ts=2 sw=2 sts=2 expandtab
 
 """""""""""""""""""""""""""""""""""""""
            " VERSION CONTROL
@@ -283,7 +277,6 @@ nnoremap <leader>rH :vertical resize -1<cr>
 nnoremap <leader>rK :res +1<cr>
 " decrease height by 1
 nnoremap <leader>rJ :res -1<cr>
-
 
 " make split width 80 col for python. Adjust for your screen
 nnoremap <leader>rp :vertical resize 83<cr>
@@ -398,16 +391,17 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 " Vim Sessions
 set sessionoptions-=buffers
 let g:session_autosave="yes"
-let g:session_autosave_periodic=2
+let g:session_autosave_periodic=0
 
 " Nerdtree
 nnoremap <leader>nt :NERDTreeToggle<cr>
 
 " Ale custom colors and sign
 highlight clear ALEErrorSign
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
 
 " Airline theme
-let g:airline_theme='materialbox'
+let g:airline_theme='minimalist'
 
 " Supertab scroll from top to bottom
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -448,6 +442,11 @@ nnoremap <Leader>c :VimuxInspectRunner<CR>
 " TABOO
 let g:taboo_tab_format = "%N~%f|"
 
+" RAINBOWS
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+nnoremap <Leader>tr :RainbowParenthesesToggle<cr>
 
 """"""""""""""""""""""""""""""""""""""
             "ABBREVIATIONS
@@ -455,5 +454,6 @@ let g:taboo_tab_format = "%N~%f|"
 
 "iabbrev #bb #!/bin/bash
 "iabbrev #bp #!/bin/env python
-"iabbrev DH Darren Haynes
-"iabbrev VH Veronica Haynes
+iabbrev DH Darren Haynes
+iabbrev VH Veronica Haynes
+iabbrev msgb Browser.msgBox();
