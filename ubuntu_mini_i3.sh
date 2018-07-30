@@ -70,3 +70,31 @@ git clone https://github.com/Corwind/termite-install.git
 cd
 sh "$HOME/git_programs/termite-install/termite-install.sh"
 
+# Install polybar
+sudo yes Y | apt install \
+    cmake
+    pkg-config
+    libxcb1-dev
+    libxcb-util0-dev
+    libxcb-randr0-dev
+    python-xcbgen
+    xcb-proto
+    libxcb-image0-dev
+    libxcb-ewmh-dev
+    libxcb-xkb-dev
+    libxcb-xrm-dev
+    libxcb-cursor-dev
+    libasound2-dev
+    libpulse-dev
+    libjsoncpp-dev
+    libmpdclient-dev
+    libcurl4-openssl-dev
+    libiw-dev
+    libnl-3-dev
+
+cd ~/git_programs
+git clone --recursive https://github.com/jaagr/polybar
+mkdir polybar/build
+cd polybar/build
+cmake ..
+sudo make install
