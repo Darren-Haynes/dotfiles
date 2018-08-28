@@ -1,14 +1,10 @@
 set $mod Mod4
 
-font pango:Go Mono for Powerline Bold 18
-
+font pango:Go Mono for Powerline Bold 7
 floating_modifier $mod
 bindsym $mod+q bar mode toggle
 bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 
 # change focus
 bindsym $mod+h focus left
@@ -49,104 +45,116 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # Workspace variables
-set $ws1 " "
-set $ws2 " "
-set $ws3 " "
-set $ws4 " "
-set $ws5 " "
+set $ws1 " "
+set $ws2 " "
+set $ws3 " "
+set $ws4 " "
+set $ws5 " "
 set $ws6 " "
-set $ws7 " "
-set $ws8 " "
-
-set $ws9 "V "
-set $ws10 "2 "
-set $ws11 "3 "
-set $ws12 "4 "
-set $ws13 "5 "
+set $ws7 " "
+set $ws8 " "
+set $ws9 " "
+set $ws10 " "
+set $ws11 " "
+set $ws12 " "
+set $ws13 " "
+set $ws14 " "
 
 # assign workspaces to specific screens
-workspace " " output HDMI1
-workspace " " output VGA1
-workspace " " output eDP1
-workspace " " output eDP1
-workspace " " output eDP1
-workspace " " output eDP1
-workspace " " output VGA1
-workspace " " output VGA1
-
-workspace "1 " output eDP1
-workspace "2 " output eDP1
-workspace "3 " output eDP1
-workspace "4 " output eDP1
-workspace "5 " output eDP1
+#workspace " " output HDMI1
+#workspace " " output VGA1
+#workspace " " output eDP1
+#workspace " " output eDP1
+#workspace " " output eDP1
+#workspace " " output eDP1
+#workspace " " output VGA1
+#workspace " " output VGA1
 
 # switch to workspace
-bindsym $mod+m workspace $ws1
-bindsym $mod+comma workspace $ws2
-bindsym $mod+period workspace $ws3
-bindsym $mod+n workspace $ws4
-bindsym $mod+i workspace $ws5
-bindsym $mod+7 workspace $ws6
-bindsym $mod+8 workspace $ws7
-bindsym $mod+9 workspace $ws8
-
-bindsym $mod+1 workspace $ws9
-bindsym $mod+2 workspace $ws10
-bindsym $mod+3 workspace $ws11
-bindsym $mod+4 workspace $ws12
-bindsym $mod+5 workspace $ws13
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+i workspace $ws11
+bindsym $mod+u workspace $ws12
+bindsym $mod+m workspace $ws13
+bindsym $mod+semicolon workspace $ws14
 
 # move focused container to workspace
-bindsym $mod+Shift+m move container to workspace $ws1
-bindsym $mod+Shift+comma move container to workspace $ws2
-bindsym $mod+Shift+period move container to workspace $ws3
-bindsym $mod+Shift+n move container to workspace $ws4
-bindsym $mod+Shift+i move container to workspace $ws5
-bindsym $mod+Shift+7 move container to workspace $ws6
-bindsym $mod+Shift+8 move container to workspace $ws7
-bindsym $mod+Shift+9 move container to workspace $ws8
-
-bindsym $mod+Shift+1 move container to workspace $ws9
-bindsym $mod+Shift+2 move container to workspace $ws10
-bindsym $mod+Shift+3 move container to workspace $ws11
-bindsym $mod+Shift+4 move container to workspace $ws12
-bindsym $mod+Shift+5 move container to workspace $ws13
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+i move container to workspace $ws11
+bindsym $mod+Shift+u move container to workspace $ws12
+bindsym $mod+Shift+m move container to workspace $ws13
+bindsym $mod+Shift+semicolon move container to workspace $ws14
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m  Quit i3?.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# focus parent
 bindsym $mod+Shift+f focus parent; fullscreen; focus child
 
 # new windows
-new_window normal 1
-new_float normal 5
+new_window normal 3
+new_float normal 3
 
 # titlebar toggle
 bindsym $mod+y border toggle
 
+# toggle bar hide
+bindsym $mod+b bar hidden_state toggle
+
+gaps inner 15
+gaps outer 0
+
 # disable title bars for web browsers
-for_window [class="^qutebrowser$"] border pixel 0
-for_window [class="^Firefox$"] border pixel 0
-for_window [class="^Chromium$"] border pixel 0
-for_window [class="^Google-chrome$"] border pixel 0
-for_window [class="^Termite$"] normal pixel 1
-for_window [class="^URxvt$"] normal pixel 1
-for_window [class="^Code$"] border pixel 0
-for_window [class="^Nautilus$"] border pixel 0
-for_window [class="^Evince$"] border pixel 0
-for_window [class="^Rhythmbox$"] border pixel 0
-for_window [class="^VirtualBox$"] border pixel 0
-for_window [class="^cool-retro-term$"] border pixel 0
+for_window [class=".*"] border pixel 3
+#for_window [class="^qutebrowser$"] border pixel 3
+#for_window [class="^Firefox$"] border pixel 3
+#for_window [class="^Chromium$"] border pixel 0
+for_window [class="^Google-chrome-stable$"] border pixel 3
+#for_window [class="^Termite$"] border pixel 3
+#for_window [class="^Evince$"] border pixel 0
+#for_window [class="^VirtualBox$"] border none
+#for_window [class="^Filezilla$"] border pixel 3
+for_window [class="^Bitwarden$"] border pixel 0
+#for_window [class="^kdenlive$"] border pixel 3
+for_window [class="^VirtualBox Manager$"] border pixel 0
+#for_window [class="^Transmission-gtk"] border pixel 3
+#for_window [class="^Clementine"] border pixel 5
+for_window [class="^vlc"] border pixel 0
 for_window [class=".*"] title_format " %title"
 
 # Applications default to floating
 for_window [class="Pinentry"] floating enable
 for_window [class="Pinentry"] border pixel 0
-for_window [class="Supercalc-snap"] border pixel 0
+for_window [class="Gpick"] floating enable
+for_window [class="^Gpick$"] border pixel 0
+#for_window [class="Thunar"] floating enable resize set 1900 1200
+#for_window [class="^Thunar$"] move left 180px, move down 175px
+for_window [class="^Mate-calc$"] normal pixel 3
+for_window [class="^Gsimplecal$"] [floating] resize set 940 440
+for_window [class="^Gsimplecal$"] border pixel 3
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -171,61 +179,60 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
-set $bg #303132
-set $fg #A3A3A3
-set $bga #33373E
-set $fga #2D9574
-set $fga #F4F1F1
+bindsym $mod+Shift+z    gaps outer current minus 5; gaps inner current minus 5
+bindsym $mod+z		    gaps outer current plus 5; gaps inner current plus 5
+
+# Oh so pretty colors
+set $bg #073642dd
+set $op #000000aa
+set $fgi #545862
+set $bga #3337300
+set $fg #FDF6E3
 
 # class                 border  backgr. text   indicator child_border
-client.focused          $bga    $bga    $fga   $bga      $bga
-client.focused_inactive $bg     $bg     $fg    $bg       $bg
-client.unfocused        $bg     $bg     $fg    $bg       $bg
-client.urgent           $bg     $bg     $fg    $bg       $bg
-client.placeholder      $bg     $bg     $fg    $bg       $bg
+client.focused          $op     $bg     $fg    $bg       $bg
+client.focused_inactive $op     $bg     $fgi   $bg       $bg
+client.unfocused        $op     $bg     $fgi   $bg      $bg
+client.urgent           $op     $bg     $fg    $bg       $bg
+client.placeholder      $op     $bg     $fg    $bg       $bg
 
 client.background       $bg
 
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
-
-#bar {
-	##i3bar_command i3bar -t
-	#status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	##status_command i3status
-    ##font pango:Go Mono for Powerline 16
-    #font pango:Space Mono for Powerline 16
-	#position top
-
-	#colors {
-    #separator $bg
-    #background $bg
-	##                  border	    background      text
-    #focused_workspace  $bg          $bg             #FFFFFF
-    #inactive_workspace $bg          $bg             #CC9660
-    #urgent_workspace   $bg          $bg             #000000
-		 #}
-#}
-
-
 # exec applications
-bindsym $mod+Ctrl+f exec firefox
-bindsym $mod+Ctrl+c exec chromium
+bindsym $mod+f exec thunar
+bindsym $mod+c exec google-chrome-stable
 bindsym $mod+Ctrl+q exec qutebrowser
 bindsym $mod+Ctrl+m exec gksudo /usr/bin/mullvad
 bindsym $mod+Ctrl+v exec vlc
+bindsym $mod+g exec gsimplecal
 
-#exec ~/.bash_scripts/if_monitors_connected.sh
-exec --no-startup-id compton -b
-exec --no-startup-id feh --bg ~/Pictures/ShambalaMonastery.jpg
+bindsym $mod+Ctrl+l exec ./home/darren/i3/lock.sh
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -location 2 -yoffset 40 -show drun -show-icons -drun-icon-theme Oranchelo-Classic-Folders
+bindsym $mod+n exec networkmanager_dmenu -location 3
+
+exec_always killall -q wallpaper-changer.sh
+exec_always --no-startup-id feh --bg-scale /home/darren/dotfiles/wallpapers/lavender_beach.jpg
+
+# Change capslock to escape
+exec_always --no-startup-id xmodmap -e "clear lock"
+exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+
+# Compositor and polybar
+exec --no-startup-id xcompmgr -c &
+exec_always --no-startup-id ~/dotfiles/polybar/launch.sh &
+#exec_always --no-startup-id ~/bin/wallpaper-changer.sh &
