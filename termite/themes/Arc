@@ -1,13 +1,14 @@
 [colors]
-background = rgba(43,48,59,0.94)
-foreground = #c0c5ce
+/*background = rgba(43,48,59,0.94)*/
+background = #e7e8eb
+foreground = #383c4a
 foreground_bold = #c0c5ce
 cursor = #c0c5ce
 
 # Black, Gray, Silver, White
-color0 = #2b303b
-color8 = #65737e
-color7 = #F6F6F6
+color0 = #cc575d
+color8 = #70788d
+color7 = #6f737d
 color15 = #c0c5ce
 
 # Red
