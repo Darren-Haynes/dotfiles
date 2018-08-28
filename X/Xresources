@@ -55,60 +55,98 @@ URxvt.keysym.C-S-Down: font-size:decglobal
 URxvt.keysym.C-equal:  font-size:reset
 URxvt.keysym.C-slash:  font-size:show
 
+rofi.theme:		solarized_alternate.rasi
 rofi.font:      SpaceMono for Powerline 28
-rofi.theme:		Arc_Dark.rasi
+rofi.width:     40
+rofi.lines:     10
+rofi.opacity:   20
+rofi.position:  2
+
+!Base16 Solarized Light
+Author: Ethan Schoonover (http://ethanschoonover.com/solarized)
+
+define base00: #fdf6e3
+define base01: #eee8d5
+define base02: #93a1a1
+define base03: #839496
+define base04: #657b83
+define base05: #586e75
+define base06: #073642
+define base07: #002b36
+define base08: #dc322f
+define base09: #cb4b16
+define base0A: #b58900
+define base0B: #859900
+define base0C: #2aa198
+define base0D: #268bd2
+define base0E: #6c71c4
+define base0F: #d33682
+
+!Enable the extended coloring options
+!rofi.color-enabled: true
+
+!Property Name     BG       Border   Separator
+!rofi.color-window:  #fdf6e3, #133F51, #fdf6e3
+
+!Property Name     BG       FG       BG-alt   Head-BG  Head-FG
+!rofi.color-normal:  #eee8d5, #586e75, #eee8d5, #eee8d5, #002b36
+!rofi.color-active:  #eee8d5, #268bd2, #eee8d5, #eee8d5, #268bd2
+!rofi.color-urgent:  #eee8d5, #dc322f, #eee8d5, #eee8d5, #dc322f
+
+!Set the desired separator style
+!rofi.separator-style: solid
 
 !! Base16 Spacemacs
 ! Scheme: Nasser Alshammari (https://github.com/nashamri/spacemacs-theme)
 
-#define base00 #1f2022
-#define base01 #282828
-#define base02 #444155
-#define base03 #585858
-#define base04 #b8b8b8
-#define base05 #a3a3a3
-#define base06 #e8e8e8
-#define base07 #f8f8f8
-#define base08 #f2241f
-#define base09 #ffa500
-#define base0A #b1951d
-#define base0B #67b11d
-#define base0C #2d9574
-#define base0D #4f97d7
-#define base0E #a31db1
-#define base0F #b03060
+!#define base00 #1f2022
+!#define base01 #282828
+!#define base02 #444155
+!#define base03 #585858
+!#define base04 #b8b8b8
+!#define base05 #a3a3a3
+!#define base06 #e8e8e8
+!#define base07 #f8f8f8
+!#define base08 #f2241f
+!#define base09 #ffa500
+!#define base0A #b1951d
+!#define base0B #67b11d
+!#define base0C #2d9574
+!#define base0D #4f97d7
+!#define base0E #a31db1
+!#define base0F #b03060
 
-*.foreground:   base05
-#ifdef background_opacity
-*.background:   [background_opacity]base00
-#else
-*.background:   base00
-#endif
-*.cursorColor:  base05
+!*.foreground:   base05
+!#ifdef background_opacity
+!*.background:   [background_opacity]base00
+!#else
+!*.background:   base00
+!#endif
+!*.cursorColor:  base05
 
-*.color0:       #2b303b
-*.color1:       #bf616a
-*.color2:       #a3be8c
-*.color3:       #ebcb8b
-*.color4:       #8fa1b3
-*.color5:       #b48ead
-*.color6:       #96b5b4
-*.color7:       #f6f6f6
+!*.color0:       #2b303b
+!*.color1:       #bf616a
+!*.color2:       #a3be8c
+!*.color3:       #ebcb8b
+!*.color4:       #8fa1b3
+!*.color5:       #b48ead
+!*.color6:       #96b5b4
+!*.color7:       #f6f6f6
 
-*.color8:       #65737e
-*.color9:       #bf616a
-*.color10:      #a3be8c
-*.color11:      #ebcb8b
-*.color12:      #8fa1b3
-*.color13:      #b48ead
-*.color14:      #96b5b4
-*.color15:      #c0c5ce
+!*.color8:       #65737e
+!*.color9:       #bf616a
+!*.color10:      #a3be8c
+!*.color11:      #ebcb8b
+!*.color12:      #8fa1b3
+!*.color13:      #b48ead
+!*.color14:      #96b5b4
+!*.color15:      #c0c5ce
 
-! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
-! use 'shell' template to set these if necessary
-*.color16:      base09
-*.color17:      base0F
-*.color18:      base01
-*.color19:      base02
-*.color20:      base04
-*.color21:      base06
+!! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+!! use 'shell' template to set these if necessary
+!*.color16:      base09
+!*.color17:      base0F
+!*.color18:      base01
+!*.color19:      base02
+!*.color20:      base04
+!*.color21:      base06
