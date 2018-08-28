@@ -163,6 +163,14 @@ alias djr='python manage.py runserver'
 alias djsh='python manage.py shell'
 alias djt='python manage.py test '
 
+# SPINNING
+alias syn1="nvim ~/Coding/Python_Spinning/My\ Python\ Scripts/Spin\ Scripts/synonyms/synonym1_ready.txt"
+alias syn2='nvim ~/Coding/Python_Spinning/My\ Python\ Scripts/Spin\ Scripts/synonyms/synonym2_ready.txt'
+alias syn3="nvim ~/Coding/Python_Spinning/My\ Python\ Scripts/Spin\ Scripts/synonyms/synonym3_ready.txt"
+alias syn4='nvim ~/Coding/Python_Spinning/My\ Python\ Scripts/Spin\ Scripts/synonyms/synonym4_ready.txt'
+alias syn5='nvim ~/Coding/Python_Spinning/My\ Python\ Scripts/Spin\ Scripts/synonyms/synonym5_ready.txt'
+alias spun='nvim ~/Coding/Python_Spinning/My\ Python\ Scripts/Spin\ Scripts/synonyms/spun_article.txt'
+
 # WEB DEVELOPMENT
 alias bsync='browser-sync start --server --no-open  --files "css/*.css" "*.html"'
 
@@ -171,14 +179,16 @@ alias vtv='vim ~/SpiderOak\ Hive/Days_of_TV_Shows.txt'
 alias tv='cat ~/SpiderOak\ Hive/Days_of_TV_Shows.txt | lolcat'
 
 # VOLUME AND BRIGHTNESS
-alias b10='xrandr --output eDP-1  --brightness 1.0'
-alias b1='xrandr --output eDP-1  --brightness 0.1'
-alias b2='xrandr --output eDP-1  --brightness 0.2'
-alias b5='xrandr --output eDP-1  --brightness 0.5'
-alias b6='xrandr --output eDP-1  --brightness 0.6'
-alias b7='xrandr --output eDP-1  --brightness 0.7'
-alias b8='xrandr --output eDP-1  --brightness 0.8'
-alias b9='xrandr --output eDP-1  --brightness 0.9'
+alias b10='xrandr --output eDP-1-1  --brightness 1.0'
+alias b1='xrandr --output eDP-1-1  --brightness 0.1'
+alias b2='xrandr --output eDP-1-1  --brightness 0.2'
+alias b3='xrandr --output eDP-1-1  --brightness 0.3'
+alias b4='xrandr --output eDP-1-1  --brightness 0.4'
+alias b5='xrandr --output eDP-1-1  --brightness 0.5'
+alias b6='xrandr --output eDP-1-1  --brightness 0.6'
+alias b7='xrandr --output eDP-1-1  --brightness 0.7'
+alias b8='xrandr --output eDP-1-1  --brightness 0.8'
+alias b9='xrandr --output eDP-1-1  --brightness 0.9'
 alias bd='xbacklight -dec 5' #Arch
 alias bu='xbacklight -inc 5' #Arch
 alias v10='amixer -D pulse sset Master 100%' #ubuntu
@@ -237,10 +247,12 @@ alias sa='alias | grep '
 alias sortsize='du -h --max-depth=0 * | sort -h'
 alias xinfo='xrandr --nograb --current'
 alias xr='xrdb ~/dotfiles/X/Xresources'
-
-# UPLOAD / DOWNLOAD
 alias dl='curl -O '
 alias pastebin='curl -F c=@- https://ptpb.pw <'
+
+#UBUNTU
+intel="sudo prime-select intel"
+nvidia="sudo prime-select nvidia"
 
 # NETWORKING
 alias netoff='nmcli networking off'
@@ -251,7 +263,7 @@ alias wifis='nmcli dev wifi list'
 alias wificon='nmcli connection show | head -2 '
 alias wifioff='nmcli radio wifi off'
 alias wifion='nmcli radio wifi on'
-alias duck='ping duckduckgo.com'
+alias bing='ping bing.com'
 
 # ARCH LINUX
 alias backup='sudo rsync -aAXhv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*"} / ~/SpiderOak\ Hive/Arch_backups/$(date -I)'
@@ -292,4 +304,5 @@ alias doctor="feh --bg-scale ~/dotfiles/wallpapers/doctor-who-tardis-background-
 # FUN
 alias hello="figlet Hello Sunshine | lolcat"
 alias treecat="tree | lolcat"
+alias sl="sl -F"
 
