@@ -44,11 +44,14 @@ Plug 'roxma/vim-hug-neovim-rpc'
 "Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " Coding Productivity
+Plug 'mattn/emmet-vim'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'scrooloose/nerdcommenter'
+Plug 'pangloss/vim-javascript'
+"Plug 'tmhedberg/SimpylFold'
 
 " Navigation
 Plug 'scrooloose/nerdtree'
@@ -100,12 +103,14 @@ set expandtab           " Tab inserts Spaces not Tabs '\t'
 set softtabstop=4       " Amount of spaces to enter when Tab is pressed
 set shiftwidth=4        " 4 space indentation
 set tabstop=4
-set scrolloff=5         "show 5 lines above/below cursor
+"set scrolloff=5         "show 5 lines above/below cursor
 set showbreak=↪
 set autochdir
 set nohlsearch
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set matchpairs+=<:> "especially handy for html
+set undofile " Maintain undo history
+set undodir=~/.vim/undodir
 
 " enable mouse, sgr is better but not every term supports it
 set mouse=a
@@ -188,7 +193,8 @@ highlight TabLine ctermbg=NONE
 highlight TabLine cterm=NONE
 highlight Visual ctermbg=124
 highlight VertSplit guibg=NONE
-colorscheme base16-onedark
+"colorscheme base16-onedark
+colorscheme base16-solarized-dark
 hi Normal guibg=NONE ctermbg=NONE
 highlight VertSplit cterm=NONE
 
@@ -281,6 +287,9 @@ nnoremap <leader>rJ :res -1<cr>
 " make split width 80 col for python. Adjust for your screen
 nnoremap <leader>rp :vertical resize 83<cr>
 
+" make split width 90 col for javascript. Adjust for your screen
+nnoremap <leader>rs :vertical resize 95<cr>
+
 " make split width 3/4 ish
 nnoremap <leader>r3v :vertical resize 113<cr>
 
@@ -352,6 +361,9 @@ nnoremap <CR> a<CR>
             "SETTINGS
 """"""""""""""""""""""""""""""""""""""
 
+" Toggle spell check
+nnoremap <leader>sp :setlocal spell! spelllang=en_us<CR>
+
 " Toggle relative or absolute number lines
 nnoremap <leader>tn :call NumberToggle()<CR>
 
@@ -398,10 +410,11 @@ nnoremap <leader>nt :NERDTreeToggle<cr>
 
 " Ale custom colors and sign
 highlight clear ALEErrorSign
-let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['flake8']}
 
 " Airline theme
-let g:airline_theme='minimalist'
+"let g:airline_theme='onedarv'
+let g:airline_theme='base16_solarized'
 
 " Supertab scroll from top to bottom
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -425,7 +438,7 @@ let g:UltiSnipsListSnippets = "<C-l>"
 let g:UltiSnipsEditSplit="vertical"
 
 " TAGBAR
-nnoremap <leader>tb :TagbarOpenAutoClose<cr>
+nnoremap <leader>tb :TagbarToggle<cr>
 let g:tagbar_indent = 1
 let g:tagbar_compact = 1
 let g:tagbar_sort = 0
@@ -448,6 +461,13 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 nnoremap <Leader>tr :RainbowParenthesesToggle<cr>
 
+" JAVASCRIPT FOLDING / PANGLOSS PLUGIN
+"augroup javascript_folding
+    "au!
+    "au FileType javascript setlocal foldmethod=syntax
+"augroup END
+
+
 """"""""""""""""""""""""""""""""""""""
             "ABBREVIATIONS
 """"""""""""""""""""""""""""""""""""""
@@ -457,3 +477,15 @@ nnoremap <Leader>tr :RainbowParenthesesToggle<cr>
 iabbrev DH Darren Haynes
 iabbrev VH Veronica Haynes
 iabbrev msgb Browser.msgBox();
+iabbrev h1 <h1></h1><ESC>F<i
+iabbrev h2 <h2></h2><ESC>F<i
+iabbrev h3 <h3></h3><ESC>F<i
+iabbrev h4 <h4></h4><ESC>F<i
+iabbrev h5 <h5></h5><ESC>F<i
+
+""""""""""""""""""""""""""""""""""""""
+            "LINUXY
+            "THINGS
+""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>cw :! wc -w %:p<cr>
+nnoremap <leader>cl :! wc -l %:p<cr>
