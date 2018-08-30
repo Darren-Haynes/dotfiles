@@ -4,21 +4,21 @@
 # Install i3wm, xinit, xorg and compositor
 sudo yes Y | apt install \
   i3-wm \
-  i3status \
   dmenu \
   compton \
   xorg \
-  xinit \
+  xinit
+mkdir -p .config/i3
 ln -s "$HOME/dotfiles/i3/config" "$HOME/.config/i3/config"
 
 # Install fonts
  sudo yes Y | apt install \
   xfonts-100dpi \
   xfonts-75dpi \
-  fonts-dejavu \
+  #fonts-dejavu \
   ttf-dejavu \
   fonts-powerline \
-  fonts-font-awesome \
+  fonts-font-awesome
 
 # Install drivers
 sudo yes Y | apt install \
@@ -27,9 +27,8 @@ sudo yes Y | apt install \
 
 # Install audio
 sudo yes Y | apt install \
-  alsa-utils \
   alsa-base \
-  pulseaudio \
+  pulseaudio
 
 # Install restricted extras
 sudo yes Y | echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
@@ -46,37 +45,28 @@ sudo yes Y | apt install \
 sudo yes Y | apt-add-repository ppa:neovim-ppa/stable
 sudo yes Y | apt-get update
 sudo yes Y | apt install neovim
-echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after" >> "$HOME/.config/nvim/init.vim"
-echo "let &packpath = &runtimepath" >> "$HOME/.config/nvim/init.vim"
-echo "source ~/.vimrc" >> "$HOME/.config/nvim/init.vim"
-mkdir -p "$HOME/vim/autoload/"
+mkdir -p "$HOME/.vim/autoload/"
 ln -s "$HOME/dotfiles/vim/vimrc" "$HOME/.vimrc"
+mkdir -p "$HOME/.config/nvim"
+ln -s "$HOME/dotfiles/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-sudo apt-add
 
 # Install Chrome
 sudo yes Y | apt install gdebi-core
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo yes Y | gdebi google-chrome-stable_current_amd64.deb
-
-# Install Terminal Apps
-sudo yes Y | apt install \
-  htop \
+sudo yes Y | rm google-chrome-stable_current_amd64.deb
 
 # Configure Bashrc
-sed -i s'/.bash_aliases/.aliases/' "$HOME/.bashrc"
-ln -s ~/dotfiles/aliases ~/.aliases
+#sed -i s'/.bash_aliases/.aliases/' "$HOME/.bashrc"
+#ln -s ~/dotfiles/aliases ~/.aliases
 
 # Install Termite
-cd
-mkdir git_programs
-cd git_programs
 git clone https://github.com/Corwind/termite-install.git
-cd
-sh "$HOME/git_programs/termite-install/termite-install.sh"
+./termite-install/termite-install.sh
+sudo yes Y | rm -rf termite termite-install vte-ng
 
 # Install polybar
 #sudo yes Y | apt install \
@@ -115,11 +105,9 @@ sudo yes Y | apt install zsh
 chsh -s $(which zsh) darren
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ln -s "$HOME/dotfiles/aliases" "$HOME/.aliases"
-sed -i s'#ZSH_THEME="robbyrussell"#ZSH_THEME="candy-kingdom"#' ~/.zshrc
-if grep -Fxq "source /home/darren/.aliases" "$HOME/.zshrc"
-then
-    echo "Aliases are already sourced in .zshrc file"
-else
-    echo "source $HOME/.aliases" >> ~/.zshrc
-fi
+sed -i s'#ZSH_THEME="robbyrussell"#ZSH_THEME="candy-kingdom"#' "$HOME/.zshrc"
+echo 'source $HOME/.aliases' >> "$HOME/.zshrc"
 
+
+sudo apt update
+sudo apt upgrade
