@@ -179,16 +179,16 @@ alias vtv='vim ~/SpiderOak\ Hive/Days_of_TV_Shows.txt'
 alias tv='cat ~/SpiderOak\ Hive/Days_of_TV_Shows.txt | lolcat'
 
 # VOLUME AND BRIGHTNESS
-alias b10='xrandr --output eDP-1-1  --brightness 1.0'
-alias b1='xrandr --output eDP-1-1  --brightness 0.1'
-alias b2='xrandr --output eDP-1-1  --brightness 0.2'
-alias b3='xrandr --output eDP-1-1  --brightness 0.3'
-alias b4='xrandr --output eDP-1-1  --brightness 0.4'
-alias b5='xrandr --output eDP-1-1  --brightness 0.5'
-alias b6='xrandr --output eDP-1-1  --brightness 0.6'
-alias b7='xrandr --output eDP-1-1  --brightness 0.7'
-alias b8='xrandr --output eDP-1-1  --brightness 0.8'
-alias b9='xrandr --output eDP-1-1  --brightness 0.9'
+alias b10='xrandr --output eDP-1  --brightness 1.0'
+alias b1='xrandr --output eDP-1  --brightness 0.1'
+alias b2='xrandr --output eDP-1  --brightness 0.2'
+alias b3='xrandr --output eDP-1  --brightness 0.3'
+alias b4='xrandr --output eDP-1  --brightness 0.4'
+alias b5='xrandr --output eDP-1  --brightness 0.5'
+alias b6='xrandr --output eDP-1  --brightness 0.6'
+alias b7='xrandr --output eDP-1  --brightness 0.7'
+alias b8='xrandr --output eDP-1  --brightness 0.8'
+alias b9='xrandr --output eDP-1  --brightness 0.9'
 alias bd='xbacklight -dec 5' #Arch
 alias bu='xbacklight -inc 5' #Arch
 alias v10='amixer -D pulse sset Master 100%' #ubuntu
