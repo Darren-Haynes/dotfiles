@@ -1,6 +1,0 @@
-pane	0	1	:nvim	1	:*	1	:/home/darren	1	nvim	:nvim -S .vim/sessions/dotfiles.vim
-pane	0	1	:nvim	1	:*	2	:/home/darren/.vim/sessions	0	zsh	:
-pane	1	1	:zsh	1	:*	1	:/home/darren	1	zsh	:
-window	0	1	1	:*	1538,158x34,0,0[158x27,0,0,1,158x6,0,28,2]
-window	1	1	1	:*	bdc0,158x34,0,0,3
-state	0	1

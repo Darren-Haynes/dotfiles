@@ -1,8 +1,0 @@
-pane	1	1	:zsh	1	:*	1	:/home/darren	1	zsh	:
-pane	2	1	:zsh	1	:*	1	:/home/darren	1	zsh	:
-pane	Dotfiles	1	:zsh	1	:*	1	:/home/darren	0	nvim	:nvim -S
-pane	Dotfiles	1	:zsh	1	:*	2	:/home/darren	1	zsh	:
-window	1	1	1	:*	bdc0,158x34,0,0,3
-window	2	1	1	:*	bdc2,158x34,0,0,5
-window	Dotfiles	1	1	:*	b083,158x34,0,0{100x34,0,0,1,57x34,101,0,6}
-state	Dotfiles	1
