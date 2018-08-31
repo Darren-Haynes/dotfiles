@@ -68,35 +68,6 @@ git clone https://github.com/Corwind/termite-install.git
 ./termite-install/termite-install.sh
 sudo yes Y | rm -rf termite termite-install vte-ng
 
-# Install polybar
-#sudo yes Y | apt install \
-    #cmake \
-    #pkg-config \
-    #libxcb1-dev \
-    #libxcb-util0-dev \
-    #libxcb-randr0-dev \
-    #python-xcbgen \
-    #xcb-proto \
-    #libxcb-image0-dev \
-    #libxcb-ewmh-dev \
-    #libxcb-xkb-dev \
-    #libxcb-xrm-dev \
-    #libxcb-cursor-dev \
-    #libasound2-dev \
-    #libpulse-dev \
-    #libjsoncpp-dev \
-    #libmpdclient-dev \
-    #libcurl4-openssl-dev \
-    #libiw-dev \
-    #libnl-3-dev \
-
-#cd ~/git_programs
-#git clone --recursive https://github.com/jaagr/polybar
-#mkdir polybar/build
-#cd polybar/build
-#cmake ..
-#sudo make install
-
 #Install Rofi
 sudo yes Y | apt install rofi
 
@@ -108,6 +79,39 @@ ln -s "$HOME/dotfiles/aliases" "$HOME/.aliases"
 sed -i s'#ZSH_THEME="robbyrussell"#ZSH_THEME="candy-kingdom"#' "$HOME/.zshrc"
 echo 'source $HOME/.aliases' >> "$HOME/.zshrc"
 
+# Install polybar
+#sudo yes Y | apt install \
+    cmake \
+    libxcb1-dev \
+    libxcb-util0-dev \
+    python-xcbgen \
+    xcb-proto \
+    libxcb-image0-dev \
+    libxcb-ewmh-dev \
+    libxcb-icccm4-dev \
+    libxcb-xkb-dev \
+    libxcb-xrm-dev \
+    libxcb-cursor-dev \
+    libasound2-dev \
+    libpulse-dev \
+    libjsoncpp-dev \
+    libmpdclient-dev \
+    libcurl4-openssl-dev \
+    libiw-dev \
+    libnl-3-dev
+
+git clone --recursive https://github.com/jaagr/polybar
+mkdir polybar/build
+cd polybar/build
+cmake ..
+sudo make install
+cd
+mkdir "$HOME/.config/polybar/"
+ln -s "$HOME/dotfiles/polybar/*" "$HOME/.config/polybar/"
+
+
 
 sudo apt update
 sudo apt upgrade
+
+
