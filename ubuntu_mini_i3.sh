@@ -81,14 +81,6 @@ ln -s "$HOME/dotfiles/termite" "$HOME/.config/termite"
 #Install Rofi
 sudo yes Y | apt install rofi
 
-# Install Zsh, oh-my-zsh and link to aliases
-sudo yes Y | apt install zsh
-chsh -s $(which zsh) darren
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-ln -s "$HOME/dotfiles/aliases" "$HOME/.aliases"
-mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
-ln -s "$HOME/dotfiles/zsh/zshrc" "$HOME/.zshrc"
-
 # Install polybar
 sudo yes Y | apt install \
     cmake \
@@ -124,14 +116,23 @@ ln -s "$HOME/dotfiles/polybar/*" "$HOME/.config/polybar/"
 ln -s "$HOME/dotfiles/bin" "$HOME/bin"
 
 #i3 Gaps
-sudo yes Y | apt install \
-    libxcb-keysyms1-dev \
-    libyajl-dev \
-    linstartup-notification0-dev \
-    libev-dev \
-    libxcb-xinerama0-dev \
-    libxcbcommon-x11-dev \
+#sudo yes Y | apt install \
+    #libxcb-keysyms1-dev \
+    #libyajl-dev \
+    #linstartup-notification0-dev \
+    #libev-dev \
+    #libxcb-xinerama0-dev \
+    #libxcbcommon-x11-dev \
 
 sudo apt update
 sudo apt upgrade
+
+# Install Zsh, oh-my-zsh and link to aliases
+sudo yes Y | apt install zsh
+chsh -s $(which zsh) darren
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+ln -s "$HOME/dotfiles/aliases" "$HOME/.aliases"
+mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
+ln -s "$HOME/dotfiles/zsh/zshrc" "$HOME/.zshrc"
+
 
