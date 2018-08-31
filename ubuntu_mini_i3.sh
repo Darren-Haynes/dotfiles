@@ -8,22 +8,22 @@ sudo yes Y | apt install \
   compton \
   xorg \
   xinit
-mkdir -p .config/i3
+mkdir -p "$HOME/.config/i3"
 ln -s "$HOME/dotfiles/i3/config" "$HOME/.config/i3/config"
 
 # Install fonts
- sudo yes Y | apt install \
+sudo yes Y | apt install \
   xfonts-100dpi \
   xfonts-75dpi \
-  #fonts-dejavu \
+  fonts-dejavu \
   ttf-dejavu \
   fonts-powerline \
   fonts-font-awesome \
-  dtrx
 
 mkdir "$HOME/.fonts"
 cd .fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/SpaceMono.zip
+sudo yes Y | apt install dtrx
 dtrx SpaceMono.zip
 fc-cache -fv
 cd
@@ -77,7 +77,7 @@ sudo yes Y | rm google-chrome-stable_current_amd64.deb
 git clone https://github.com/Corwind/termite-install.git
 ./termite-install/termite-install.sh
 sudo yes Y | rm -rf termite termite-install vte-ng
-ln -s "$HOME/dotfiles/termite" "$HOME/.config/termite"
+ln -s "$HOME/dotfiles/termite" "$HOME/.config/"
 
 #Install Rofi
 sudo yes Y | apt install rofi
@@ -143,9 +143,9 @@ sudo yes Y | apt upgrade
 # Install Zsh, oh-my-zsh and link to aliases
 sudo yes Y | apt install zsh
 chsh -s $(which zsh) darren
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ln -s "$HOME/dotfiles/aliases" "$HOME/.aliases"
 mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
 ln -s "$HOME/dotfiles/zsh/zshrc" "$HOME/.zshrc"
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 
