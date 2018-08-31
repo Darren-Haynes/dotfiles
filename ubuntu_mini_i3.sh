@@ -109,9 +109,8 @@ cmake ..
 sudo make install
 cd
 rm -rf polybar
-mkdir "$HOME/.config/polybar/"
-ln -s "$HOME/dotfiles/polybar/*" "$HOME/.config/polybar/"
-ln -s "$HOME/dotfiles/network-mana/*" "$HOME/.config/polybar/"
+ln -s "$HOME/dotfiles/polybar" "$HOME/.config/polybar"
+ln -s "$HOME/dotfiles/networkmanager-dmenu" "$HOME/.config/networkmanager-dmenu"
 
 #Create bin folder
 ln -s "$HOME/dotfiles/bin" "$HOME/bin"
@@ -136,10 +135,9 @@ sudo make install
 cd
 rm -rf i3
 
-sudo apt install feh
-sudo apt install clementine
-sudo apt update
-sudo apt upgrade
+sudo yes Y | apt install feh clementine
+sudo yes Y | apt update
+sudo yes Y | apt upgrade
 
 # Install Zsh, oh-my-zsh and link to aliases
 sudo yes Y | apt install zsh
