@@ -233,7 +233,5 @@ exec_always --no-startup-id xmodmap -e "clear lock"
 exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
 
 # Compositor and polybar
-#exec --no-startup-id xcompmgr -c &
 exec --no-startup-id compton -b &
 exec_always --no-startup-id ~/dotfiles/polybar/launch.sh &
-#exec_always --no-startup-id ~/bin/wallpaper-changer.sh &
