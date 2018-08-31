@@ -18,11 +18,15 @@ ln -s "$HOME/dotfiles/i3/config" "$HOME/.config/i3/config"
   #fonts-dejavu \
   ttf-dejavu \
   fonts-powerline \
-  fonts-font-awesome
+  fonts-font-awesome \
+  dtrx
 
 mkdir "$HOME/.fonts"
 cd .fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/SpaceMono.zip
+dtrx SpaceMono.zip
+fc-cache -fv
+cd
 
 # Install drivers
 sudo yes Y | apt install \
@@ -112,12 +116,21 @@ cd polybar/build
 cmake ..
 sudo make install
 cd
+rm -rf polybar
 mkdir "$HOME/.config/polybar/"
 ln -s "$HOME/dotfiles/polybar/*" "$HOME/.config/polybar/"
 
 #Create bin folder
-mkdir "$HOME/bin"
-ln -s "$HOME/dotfiles/bin/*" "$HOME/bin/"
+ln -s "$HOME/dotfiles/bin" "$HOME/bin"
+
+#i3 Gaps
+sudo yes Y | apt install \
+    libxcb-keysyms1-dev \
+    libyajl-dev \
+    linstartup-notification0-dev \
+    libev-dev \
+    libxcb-xinerama0-dev \
+    libxcbcommon-x11-dev \
 
 sudo apt update
 sudo apt upgrade
