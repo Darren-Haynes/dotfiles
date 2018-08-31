@@ -52,9 +52,6 @@ roundness = 2.0
 # vim: ft=dosini cms=#%s
 
 
-
-
-
 [colors]
 foreground = #839496
 foreground_bold = #eee8d5
