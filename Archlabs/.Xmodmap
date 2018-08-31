@@ -1,4 +1,0 @@
-#!/bin/sh
-
-clear    Lock
-keycode  66 = Escape
