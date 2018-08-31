@@ -57,6 +57,7 @@ sudo yes Y | apt install neovim
 mkdir -p "$HOME/.vim/autoload/"
 ln -s "$HOME/dotfiles/vim/vimrc" "$HOME/.vimrc"
 mkdir -p "$HOME/.config/nvim"
+sudo yes Y | mkdir "$HOME/.vim/undodir"
 ln -s "$HOME/dotfiles/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
