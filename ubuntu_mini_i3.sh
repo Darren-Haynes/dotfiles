@@ -20,6 +20,10 @@ ln -s "$HOME/dotfiles/i3/config" "$HOME/.config/i3/config"
   fonts-powerline \
   fonts-font-awesome
 
+mkdir "$HOME/.fonts"
+cd .fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/SpaceMono.zip
+
 # Install drivers
 sudo yes Y | apt install \
   mesa-utils \
@@ -41,6 +45,7 @@ sudo yes Y | apt install \
   python-pip \
   python3-dev \
   python3-pip \
+
 
 sudo yes Y | apt-add-repository ppa:neovim-ppa/stable
 sudo yes Y | apt-get update
@@ -67,6 +72,7 @@ sudo yes Y | rm google-chrome-stable_current_amd64.deb
 git clone https://github.com/Corwind/termite-install.git
 ./termite-install/termite-install.sh
 sudo yes Y | rm -rf termite termite-install vte-ng
+ln -s "$HOME/dotfiles/termite" "$HOME/.config/termite"
 
 #Install Rofi
 sudo yes Y | apt install rofi
@@ -76,11 +82,11 @@ sudo yes Y | apt install zsh
 chsh -s $(which zsh) darren
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ln -s "$HOME/dotfiles/aliases" "$HOME/.aliases"
-sed -i s'#ZSH_THEME="robbyrussell"#ZSH_THEME="candy-kingdom"#' "$HOME/.zshrc"
-echo 'source $HOME/.aliases' >> "$HOME/.zshrc"
+mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
+ln -s "$HOME/dotfiles/zsh/zshrc" "$HOME/.zshrc"
 
 # Install polybar
-#sudo yes Y | apt install \
+sudo yes Y | apt install \
     cmake \
     libxcb1-dev \
     libxcb-util0-dev \
@@ -109,9 +115,10 @@ cd
 mkdir "$HOME/.config/polybar/"
 ln -s "$HOME/dotfiles/polybar/*" "$HOME/.config/polybar/"
 
-
+#Create bin folder
+mkdir "$HOME/bin"
+ln -s "$HOME/dotfiles/bin/*" "$HOME/bin/"
 
 sudo apt update
 sudo apt upgrade
-
 
