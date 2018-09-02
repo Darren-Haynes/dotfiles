@@ -21,13 +21,31 @@ sudo yes Y | apt install \
     libiw-dev \
     libnl-3-dev
 
-cd
-git clone --recursive https://github.com/jaagr/polybar
-mkdir polybar/build
-cd polybar/build
-cmake ..
-sudo make install
-cd
-rm -rf polybar
-ln -s "$HOME/dotfiles/polybar" "$HOME/.config/polybar"
-ln -s "$HOME/dotfiles/networkmanager-dmenu" "$HOME/.config/networkmanager-dmenu"
+executable="$(which polybar)"
+polybar="polybar"
+if [[ "$executable" == *"$polybar"* ]]; then
+  echo "Polybar is already installed."
+  else
+  cd
+  git clone --recursive https://github.com/jaagr/polybar
+  mkdir polybar/build
+  cd polybar/build
+  cmake ..
+  sudo make install
+  cd
+  rm -rf polybar
+fi
+
+polybar_dir="$HOME/.config/polybar"
+if [ ! -d "$polybar_dir" ]; then
+  ln -s "$HOME/dotfiles/polybar" "$HOME/.config/polybar"
+  else
+    echo "Polubar config folder already exists"
+fi
+
+nmd_dir="$HOME/.config/networkmanager-dmenu"
+if [ ! -d "$nmd_dir" ]; then
+  ln -s "$HOME/dotfiles/networkmanager-dmenu" "$HOME/.config/networkmanager-dmenu"
+  else
+    echo "Networkmanager-dmenu config folder already exists"
+fi
