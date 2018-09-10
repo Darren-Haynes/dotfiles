@@ -253,6 +253,7 @@ alias pastebin='curl -F c=@- https://ptpb.pw <'
 #UBUNTU
 intel="sudo prime-select intel"
 nvidia="sudo prime-select nvidia"
+which_chip='glxinfo | egrep "OpenGL vendor|OpenGL renderer*"'
 
 # NETWORKING
 alias netoff='nmcli networking off'
@@ -264,6 +265,8 @@ alias wificon='nmcli connection show | head -2 '
 alias wifioff='nmcli radio wifi off'
 alias wifion='nmcli radio wifi on'
 alias bing='ping bing.com'
+alias mullvad_on='sudo wg-quick up mullvad-us11'
+alias mullvad_off='sudo wg-quick down mullvad-us11'
 
 # ARCH LINUX
 alias backup='sudo rsync -aAXhv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*"} / ~/SpiderOak\ Hive/Arch_backups/$(date -I)'

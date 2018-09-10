@@ -56,7 +56,7 @@ URxvt.keysym.C-equal:  font-size:reset
 URxvt.keysym.C-slash:  font-size:show
 
 rofi.theme:		solarized_alternate.rasi
-rofi.font:      SpaceMono for Powerline 28
+rofi.font:      SpaceMono for Powerline 24
 rofi.width:     40
 rofi.lines:     10
 rofi.opacity:   20

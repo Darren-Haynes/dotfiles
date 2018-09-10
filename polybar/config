@@ -28,13 +28,14 @@ modules-right  = pkg memory temperature coreuse network volume
 
 [bar/i3-bar]
 inherit = bar/master
+/*monitor = $(env:MONITOR:fallback-value}*/
 
 ; Use $ xrandr -q | grep " connected" | cut -d ' ' -f1
 monitor =
 
 modules-center   = clementine
 modules-left = battery volume clock
-modules-right  = memory temperature coreuse network
+modules-right  = memory temperature coreuse wireless-network
 
 
 ;=====================================================
@@ -43,6 +44,7 @@ modules-right  = memory temperature coreuse network
 
 [bar/music-bar]
 inherit = bar/master
+/*monitor = eDP-1*/
 background = #002B303B
 modules-center = i3
 bottom = true
