@@ -193,8 +193,8 @@ highlight TabLine ctermbg=NONE
 highlight TabLine cterm=NONE
 highlight Visual ctermbg=124
 highlight VertSplit guibg=NONE
-"colorscheme base16-onedark
-colorscheme base16-solarized-dark
+colorscheme base16-onedark
+"colorscheme base16-solarized-dark
 hi Normal guibg=NONE ctermbg=NONE
 highlight VertSplit cterm=NONE
 
@@ -414,7 +414,7 @@ let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['flake8']}
 
 " Airline theme
 "let g:airline_theme='onedarv'
-let g:airline_theme='base16_solarized'
+let g:airline_theme='onedark'
 
 " Supertab scroll from top to bottom
 let g:SuperTabDefaultCompletionType = "<c-n>"
