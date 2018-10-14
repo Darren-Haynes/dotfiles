@@ -1,0 +1,36 @@
+{
+    "window.menuBarVisibility": "toggle",
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "One Dark Pro Vivid",
+    "editor.fontFamily": "'SpaceMono Nerd Font Mono','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontFamily": "'SpaceMono Nerd Font Mono'",
+    "terminal.integrated.fontSize": 13,
+    "window.zoomLevel": 0.8,
+    "keyboard.dispatch": "keyCode",
+    "files.exclude": {
+      "**/.git": true,
+      "**/.vscode": true,
+    },
+    "workbench.iconTheme": "material-icon-theme",
+
+    // VIM
+    "vim.useSystemClipboard": true,
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+    "<C-k>": false
+  },
+
+    // VIM NORMAL MODE
+    "vim.normalModeKeyBindings": [
+      // { "before": [ "K" ], "after": [ "ctrl+b" ] }
+    ],
+  
+    // VIM VISUAL MODE
+    // "vim.visualModeKeyBindings": [
+    //   { "before": [ "J" ], "after": [ "ctrl+f" ] },
+    //   { "before": [ "K" ], "after": [ "ctrl+b" ] },
+    // ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+      { "before": [ ">" ], "commands": [ "editor.action.indentLines" ] },
+      { "before": [ "<" ], "commands": [ "editor.action.outdentLines" ] },
+    ]
