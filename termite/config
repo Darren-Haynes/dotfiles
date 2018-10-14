@@ -14,7 +14,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = SpaceMono Nerd Font Mono 10
+font = SpaceMono Nerd Font Mono 12
 search_wrap = true
 icon_name = Termite
 /*geometry = 2400x1400*/
@@ -52,31 +52,40 @@ roundness = 2.0
 # vim: ft=dosini cms=#%s
 
 
+
 [colors]
-foreground = #839496
-foreground_bold = #eee8d5
-#foreground_dim = #888888
-#background = #002b36
-background = rgba(0,43,54,0.97)
-cursor = #93a1a1
+background = rgba(43,48,59,0.95)
+foreground = #c0c5ce
+foreground_bold = #c0c5ce
+cursor = #c0c5ce
 
-# if unset, will reverse foreground and background
-#highlight = #839496
+# Black, Gray, Silver, White
+color0 = #2b303b
+color8 = #65737e
+color7 = #F6F6F6
+color15 = #c0c5ce
 
-# colors from color0 to color254 can be set
-color0 = #073642
-color1 = #dc322f
-color2 = #859900
-color3 = #b58900
-color4 = #268bd2
-color5 = #d33682
-color6 = #2aa198
-color7 = #eee8d5
-color8 = #002b36
-color9 = #cb4b16
-color10 = #586e75
-color11 = #657b83
-color12 = #839496
-color13 = #6c71c4
-color14 = #93a1a1
-color15 = #fdf6e3
+# Red
+color1 = #bf616a
+color9 = #bf616a
+
+# Green
+color2 = #a3be8c
+color10 = #a3be8c
+
+# Yellow
+color3 = #ebcb8b
+color11 = #ebcb8b
+
+# Blue
+color4 = #8fa1b3
+color12 = #8fa1b3
+
+# Purple
+color5 = #b48ead
+color13 = #b48ead
+
+# Teal
+color6 = #96b5b4
+color14 = #96b5b4
+
