@@ -1,24 +1,30 @@
 {
     "window.menuBarVisibility": "toggle",
     "editor.minimap.enabled": false,
-    "workbench.colorTheme": "One Dark Pro Vivid",
+    "workbench.colorTheme": "One Dark Theme",
     "editor.fontFamily": "'SpaceMono Nerd Font Mono','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "terminal.integrated.fontFamily": "'SpaceMono Nerd Font Mono'",
     "terminal.integrated.fontSize": 13,
-    "window.zoomLevel": 0.8,
+    "window.zoomLevel": 1,
     "keyboard.dispatch": "keyCode",
+    
     "files.exclude": {
       "**/.git": true,
       "**/.vscode": true,
     },
-    "workbench.iconTheme": "material-icon-theme",
+    "[python]": {
+        "editor.rulers": [
+            79,
+      ]
+    },
+    "workbench.iconTheme": "eq-material-theme-icons",
 
     // VIM
     "vim.useSystemClipboard": true,
     "vim.leader": "<space>",
     "vim.handleKeys": {
-    "<C-k>": false
-  },
+    "<C-k>": false,
+    },
 
     // VIM NORMAL MODE
     "vim.normalModeKeyBindings": [
@@ -34,3 +40,4 @@
       { "before": [ ">" ], "commands": [ "editor.action.indentLines" ] },
       { "before": [ "<" ], "commands": [ "editor.action.outdentLines" ] },
     ]
+  }
