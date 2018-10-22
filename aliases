@@ -154,6 +154,7 @@ alias ve2.7='virtualenv --python=python2.7 '
 alias ve3.4='virtualenv --python=python3.4 '
 alias ve3.5='virtualenv --python=python3.5 '
 alias ve3.6='virtualenv --python=python3.6 '
+alias ve3.7='virtualenv --python=python3.7 '
 
 # Django
 alias djm='python manage.py migrate'
