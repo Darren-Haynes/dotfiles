@@ -6,6 +6,7 @@
     "terminal.integrated.fontFamily": "'SpaceMono Nerd Font Mono'",
     "terminal.integrated.fontSize": 13,
     "window.zoomLevel": 1,
+    "window.restoreWindows": "none",
     "keyboard.dispatch": "keyCode",
     
     "files.exclude": {
@@ -39,5 +40,7 @@
     "vim.visualModeKeyBindingsNonRecursive": [
       { "before": [ ">" ], "commands": [ "editor.action.indentLines" ] },
       { "before": [ "<" ], "commands": [ "editor.action.outdentLines" ] },
-    ]
+    ],
+    "auto-close-tag.SublimeText3Mode": true,
+    "workbench.activityBar.visible": false
   }
