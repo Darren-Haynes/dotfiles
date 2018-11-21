@@ -1,0 +1,2 @@
+import os
+alias kk os._exit(0)
