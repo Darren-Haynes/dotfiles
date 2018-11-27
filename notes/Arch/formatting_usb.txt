@@ -1,8 +1,0 @@
-WIPE ISO OFF USB DRIVE
-1. `sudo gdisk /dev/sd(x)`. Now you can wipe usb-drive by creating a GPT using option 'o'. Then option 'w' to write changes
-
-3. `sudo cgdisk /dev/sdx`. Now create partitions
-
-2. `mkfs.ext4 /dev/sdx`. Format partitions to required file system
-
-

@@ -1,9 +1,0 @@
-ACTION,COMMAND,NOTES
-resize image,convert image.jpg -resize 400 resized_image.jpg
-download entire website,wget --wait=20 --limit-rate=20K -r -p -U Mozilla http://www.stupidsite.com/restricedplace.html,This may download more than you want. Look into restricting unneeded folder. This also has a 20 second delay between downloading each page.
-convert .docx to .txt,docx.txt the-file.docx
-replace spaces with underscores for all files in directory,find . -type f -name "* *.xml" -exec rename "s/\s/_/g" {} \;
-add extensions to all files in directory recursively,find . -type f -exec mv '{}' '{}'.jpg \;
-rename one extension with another for all files in directory,rename .txt .text *.txt
-mount usb with nonempty option,sudo mount -U 3754-CEB7 /dev/usb/ -o nonempty
-postgres list all content of table,select * from models
