@@ -17,7 +17,7 @@
             79,
       ]
     },
-    "workbench.iconTheme": "eq-material-theme-icons-darker",
+    "workbench.iconTheme": "vscode-icons",
 
     // VIM
     "vim.useSystemClipboard": true,
