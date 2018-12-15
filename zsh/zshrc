@@ -101,7 +101,7 @@ source $HOME/.local/bin/virtualenvwrapper.sh
 source $HOME/.aliases
 export WORKON_HOME=$HOME/.virtualenvs
 export EDITOR=nvim
-export TERM=xterm-termite
+export TERM=xterm
 export PATH=$PATH:$HOME/dotfiles/i3/
 export PATH=$PATH:$HOME/bin/
 
