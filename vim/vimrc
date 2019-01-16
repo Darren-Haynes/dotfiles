@@ -24,6 +24,7 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'chriskempson/base16-vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Badacadabra/vim-archery'
+Plug 'arrufat/vala.vim'
 
 " Completion, snippets and linting
 Plug 'w0rp/ale'
@@ -34,34 +35,26 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
-
+Plug 'arrufat/vala.vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-
-"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-"Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-"Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " Coding Productivity
 Plug 'mattn/emmet-vim'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
-Plug 'benmills/vimux'
 Plug 'scrooloose/nerdcommenter'
 Plug 'pangloss/vim-javascript'
+Plug 'cj/vim-webdevicons'
 "Plug 'tmhedberg/SimpylFold'
 
 " Navigation
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'gcmt/taboo.vim'
-
-" Tmux
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'xolox/vim-session'
-Plug 'xolox/vim-misc'
 
 " Status
 Plug 'vim-airline/vim-airline'
@@ -193,7 +186,7 @@ highlight TabLine ctermbg=NONE
 highlight TabLine cterm=NONE
 highlight Visual ctermbg=124
 highlight VertSplit guibg=NONE
-colorscheme base16-onedark
+colorscheme onedark
 "colorscheme base16-solarized-dark
 hi Normal guibg=NONE ctermbg=NONE
 highlight VertSplit cterm=NONE
@@ -410,7 +403,7 @@ nnoremap <leader>nt :NERDTreeToggle<cr>
 
 " Ale custom colors and sign
 highlight clear ALEErrorSign
-let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['pylama']}
+let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['pylama'], 'vala': ['uncrustify']}
 
 " Airline theme
 "let g:airline_theme='onedarv'
@@ -489,3 +482,17 @@ iabbrev h5 <h5></h5><ESC>F<i
 """"""""""""""""""""""""""""""""""""""
 nnoremap <leader>cw :! wc -w %:p<cr>
 nnoremap <leader>cl :! wc -l %:p<cr>
+
+""""""""""""""""""""""""""""""""""""""
+             "NEOVIM
+            "TERMINAL
+""""""""""""""""""""""""""""""""""""""
+nnoremap <leader><leader> :term<CR>i
+nnoremap <leader>j :split term://zsh<CR>i
+nnoremap <leader>\ :vsplit term://zsh<CR>i
+tnoremap <C-b> <C-\><C-N>:b#<CR>
+tnoremap <C-q> <C-\><C-N>:q<CR>
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-l> <C-\><C-N><C-w>l
