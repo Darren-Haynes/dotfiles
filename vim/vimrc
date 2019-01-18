@@ -410,7 +410,7 @@ let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['pylama'], 
 let g:airline_theme='onedark'
 
 " Supertab scroll from top to bottom
-let g:SuperTabDefaultCompletionType = "<c-n>"
+"let g:SuperTabDefaultCompletionType = "<c-n>"
 
 "DEOPLETE
 let g:deoplete#enable_at_startup = 1
@@ -496,3 +496,13 @@ tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-h> <C-\><C-N><C-w>h
 tnoremap <C-l> <C-\><C-N><C-w>l
+
+nnoremap <leader>mn :term<CR>i%
+function! CCompileWithFileName()
+    let file = expand('%:r')
+    let fullfile = expand('%:t')
+    ":term<CR>
+    "let job_id = b:terminal_job_id
+    "echo job_id
+endfunction
+
