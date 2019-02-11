@@ -17,48 +17,57 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" Make pretty
-Plug 'PotatoesMaster/i3-vim-syntax'
+" Make Pretty
 Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'Badacadabra/vim-archery'
-Plug 'arrufat/vala.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'cj/vim-webdevicons'
+Plug 'felixhummel/setcolors.vim'
 
-" Completion, snippets and linting
+""" Completion, Snippets and Linting
 Plug 'w0rp/ale'
-"Plug 'davidhalter/jedi-vim'
 Plug 'maralla/completor.vim'
 Plug 'ervandew/supertab'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'tpope/vim-surround'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp' " Supports deoplete
+Plug 'roxma/vim-hug-neovim-rpc' " Supports deoplete in vim
+
+""" Language Specific
+Plug 'mattn/emmet-vim'
+Plug 'pangloss/vim-javascript'
 Plug 'arrufat/vala.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
 
-" Coding Productivity
-Plug 'mattn/emmet-vim'
+""" Coding Productivity
+Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
-Plug 'pangloss/vim-javascript'
-Plug 'cj/vim-webdevicons'
-"Plug 'tmhedberg/SimpylFold'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'mileszs/ack.vim'
+Plug 'thinca/vim-quickrun'
+Plug 'tpope/vim-eunuch'
 
-" Navigation
+""" Project Management
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
 Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'gcmt/taboo.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'francoiscabrol/ranger.vim'
 
-" Status
+""" Status
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+""" Tmux
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -83,7 +92,8 @@ set confirm
 
 " enable tab completion menu when using colon command mode (:)
 set wildmenu
-set wildignore+=*.pyc,
+set wildignore+=*/tmp/*,*.so,*.zip               " Linux
+set wildignore+=*.pyc,*.out                      " Compiled files
 set wildignore+=__pycache__						 " Py cache folder
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
@@ -104,6 +114,9 @@ set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set matchpairs+=<:> "especially handy for html
 set undofile " Maintain undo history
 set undodir=~/.vim/undodir
+set ignorecase " ignore case when searching
+set smartcase
+set gdefault "Always replace globally with s/this/that
 
 " enable mouse, sgr is better but not every term supports it
 set mouse=a
@@ -136,6 +149,7 @@ nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap <Tab> ==j
+nnoremap g; g;zz
 
 " better motions with wrapped text while preserving numbered jumps
 for g:key in ['k', 'j', '<Up>', '<Down>']
@@ -171,7 +185,6 @@ set tags=tags
 
 set noswapfile
 
-
 """""""""""""""""""""""""""""""""""""""
            " VIM COLORS
 """""""""""""""""""""""""""""""""""""""
@@ -179,36 +192,30 @@ set noswapfile
 highlight SignColumn guibg=NONE
 highlight SignColumn ctermbg=NONE
 highlight TabLineFill guibg=#2C313C
-highlight TabLineFill cterm=NONE
-highlight TabLineSel ctermbg=238
+highlight TabLineFill ctermbg=NONE
+highlight TabLineFill ctermbg=NONE
+highlight TabLineSel ctermbg=110
 highlight TabLineSel ctermfg=NONE
 highlight TabLine ctermbg=NONE
-highlight TabLine cterm=NONE
+highlight TabLine ctermfg=NONE
 highlight Visual ctermbg=124
 highlight VertSplit guibg=NONE
+
+let g:airline_theme='onedark'
 colorscheme onedark
-"colorscheme base16-solarized-dark
+
 hi Normal guibg=NONE ctermbg=NONE
 highlight VertSplit cterm=NONE
 
-nnoremap <leader>csf :colorscheme base16-flat<CR>
-nnoremap <leader>atf :AirlineTheme base16_flat<CR>
+nnoremap <leader>ssl :colorscheme solarized8_light<CR> :AirlineTheme solarized<CR>
+nnoremap <leader>ssd :colorscheme solarized8_dark<CR> :AirlineTheme base16_solarized<CR>
+nnoremap <leader>shs :colorscheme base16-hopscotch<CR> :AirlineTheme base16<CR>
 
 """""""""""""""""""""""""""""""""""""""
-           " OMNICOMPLETION
+           " LET THE GAMES BEGIN
 """""""""""""""""""""""""""""""""""""""
 
 filetype plugin on
-" Native vim omnicompetion
-"set omnifunc=syntaxcomplete#Complete
-
-"""""""""""""""""""""""""""""""""""""""
-           " FILETYPES
-"""""""""""""""""""""""""""""""""""""""
-
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=4 expandtab
-autocmd Filetype html setlocal ts=2 sw=2 sts=2 expandtab
-autocmd Filetype css setlocal ts=2 sw=2 sts=2 expandtab
 
 """""""""""""""""""""""""""""""""""""""
            " VERSION CONTROL
@@ -233,7 +240,7 @@ nnoremap <leader>sc :CloseSession
 
 
 """""""""""""""""""""""""""""""""""""""
-           " MANAGE SPLITS
+           " WINDOW MANAGEMENT
 """""""""""""""""""""""""""""""""""""""
 
 "Split as you expect splits to split.
@@ -241,15 +248,18 @@ set splitright
 set splitbelow
 
 "split screen navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J><cr>
+nnoremap <C-K> <C-W><C-K><cr>
+nnoremap <C-L> <C-W><C-L><cr>
+nnoremap <C-H> <C-W><C-H><cr>
 
 "Set leader key to spacebar. You know it makes sense
 let mapleader = " "
 
-"wmake horizontal split full height
+" Open window in new tab (My preferred way to 'zoom' a window.)
+nnoremap <leader>z :tabnew %<cr>
+
+" make horizontal split full height
 nnoremap <leader>ru <C-w><C-_>
 " make vertical split full width
 nnoremap <leader>rw <C-w>\|
@@ -277,14 +287,22 @@ nnoremap <leader>rK :res +1<cr>
 " decrease height by 1
 nnoremap <leader>rJ :res -1<cr>
 
-" make split width 80 col for python. Adjust for your screen
-nnoremap <leader>rp :vertical resize 83<cr>
+" resize for different widths
+nnoremap <leader>r8 :vertical resize 80<cr>
+nnoremap <leader>r9 :vertical resize 90<cr>
+nnoremap <leader>r0 :vertical resize 100<cr>
+nnoremap <leader>r1 :vertical resize 110<cr>
+nnoremap <leader>r2 :vertical resize 120<cr>
+nnoremap <leader>r3 :vertical resize 130<cr>
+nnoremap <leader>r4 :vertical resize 140<cr>
 
-" make split width 90 col for javascript. Adjust for your screen
-nnoremap <leader>rs :vertical resize 95<cr>
 
-" make split width 3/4 ish
-nnoremap <leader>r3v :vertical resize 113<cr>
+"""""""""""""""""""""""""""""""""""""""
+           " TAB MANAGEMENT
+"""""""""""""""""""""""""""""""""""""""
+
+nnoremap <leader>tl :tabnext<cr>
+nnoremap <leader>th :tabnext<cr>
 
 
 """"""""""""""""""""""""""""""""
@@ -337,7 +355,7 @@ nnoremap <leader>ei :vsplit ~/.config/i3/config<cr>
 nnoremap <leader>eq :vsplit ~/.config/qutebrowser/qutebrowser.conf<cr>
 nnoremap <leader>ei :vsplit ~/.config/termite/config<cr>
 nnoremap <leader>em :vsplit ~/.tmux.conf<cr>
-nnoremap <leader>et :vsplit ~/.config/termite/config<cr>
+nnoremap <leader>et :vsplit ~/.config/alacritty/alacritty.yml<cr>
 
 
 """"""""""""""""""""""""""""""""
@@ -347,7 +365,7 @@ nnoremap <leader>et :vsplit ~/.config/termite/config<cr>
 
 " return in normal mode like return in insert mode
 nnoremap <CR> a<CR>
-
+nnoremap <Tab> i<space><space><space><space>
 
 """"""""""""""""""""""""""""""""""""""
              "TOGGLE
@@ -356,6 +374,10 @@ nnoremap <CR> a<CR>
 
 " Toggle spell check
 nnoremap <leader>sp :setlocal spell! spelllang=en_us<CR>
+nnoremap <leader>sl ]s
+nnoremap <leader>sh [s
+nnoremap <leader>sa zg
+nnoremap <leader>sn z=
 
 " Toggle relative or absolute number lines
 nnoremap <leader>tn :call NumberToggle()<CR>
@@ -400,14 +422,14 @@ let g:session_autosave_periodic=0
 
 " Nerdtree
 nnoremap <leader>nt :NERDTreeToggle<cr>
+nnoremap <leader>nh :NERDTreeCWD<cr>
+let g:NERDTreeWinSize=20
+let NERDTreeMinimalUI = 1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Ale custom colors and sign
 highlight clear ALEErrorSign
 let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['pylama'], 'vala': ['uncrustify']}
-
-" Airline theme
-"let g:airline_theme='onedarv'
-let g:airline_theme='onedark'
 
 " Supertab scroll from top to bottom
 "let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -436,6 +458,7 @@ let g:tagbar_indent = 1
 let g:tagbar_compact = 1
 let g:tagbar_sort = 0
 let g:tagbar_zoomwidth = 0
+let g:tagbar_autoclose = 1
 
 " UNDOTREE
 nnoremap <leader>tu :UndotreeToggle<cr>
@@ -453,6 +476,24 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 nnoremap <Leader>tr :RainbowParenthesesToggle<cr>
+
+" CTRL-P
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+nnoremap <Leader>pf :CtrlP<CR>
+nnoremap <Leader>pb :CtrlPBuffer<CR>
+
+" Use silver searcher with ack plugin
+let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:quickrun_no_default_key_mappings=1
+
+" QuickRun execution
+
+inoremap <c-e> <esc>:w<cr> :QuickRun<cr>
+nnoremap <c-e> :w<cr> :QuickRun<cr>
+
+" NERDcommenter - Add space to comments
+let NERDSpaceDelims=1
 
 " JAVASCRIPT FOLDING / PANGLOSS PLUGIN
 "augroup javascript_folding
@@ -483,19 +524,24 @@ iabbrev h5 <h5></h5><ESC>F<i
 nnoremap <leader>cw :! wc -w %:p<cr>
 nnoremap <leader>cl :! wc -l %:p<cr>
 
+" Complie and exec c file
+nnoremap <Leader>mc :! gcc & ./a.out<cr>
+
 """"""""""""""""""""""""""""""""""""""
              "NEOVIM
             "TERMINAL
 """"""""""""""""""""""""""""""""""""""
-nnoremap <leader><leader> :term<CR>i
-nnoremap <leader>j :split term://zsh<CR>i
-nnoremap <leader>\ :vsplit term://zsh<CR>i
+nnoremap <leader><leader> :term<CR>
+nnoremap <leader>j :split term://zsh<CR>
+nnoremap <leader>\ :vsplit term://zsh<CR>
+nnoremap <leader>t<leader> :tabnew term://zsh<CR>
 tnoremap <C-b> <C-\><C-N>:b#<CR>
-tnoremap <C-q> <C-\><C-N>:q<CR>
-tnoremap <C-k> <C-\><C-N><C-w>k
-tnoremap <C-j> <C-\><C-N><C-w>j
-tnoremap <C-h> <C-\><C-N><C-w>h
-tnoremap <C-l> <C-\><C-N><C-w>l
+tnoremap <C-q> i<C-\><C-N>:q<CR>
+tnoremap <C-k> <C-\><C-N><C-w>k<cr>
+tnoremap <C-j> <C-\><C-N><C-w>j<cr>
+tnoremap <C-h> <C-\><C-N><C-w>h<cr>
+tnoremap <C-l> <C-\><C-N><C-w>l<cr>
+tnoremap <C-7> <C-\><C-N>
 
 nnoremap <leader>mn :term<CR>i%
 function! CCompileWithFileName()
