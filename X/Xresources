@@ -21,7 +21,7 @@ Xft.rgba:		rgb
 
 !!!!!!!!!! XTERM    !!!!!!!!!!
 !!!!!!!!!! SETTINGS !!!!!!!!!!
-xterm*faceName: Liberation Mono:size=12:antialias=false
+xterm*faceName: SpaceMono Nerd Font Mono:size=12:antialias=false
 xterm*font:		7x13
 
 
@@ -38,8 +38,8 @@ URxvt.clipboard.autocopy: true
 
 URxvt.fading:	 10
 URxvt.saveLines: 4095
-!URxvt.font: xft:SpaceMono Nerd Font Mono=9
-URxvt.font: xft:monospace:size=11
+URxvt.font: xft:SpaceMono Nerd Font Mono:size=11
+! URxvt*font: xft:monospace:size=11
 
 ! transparency
 !URxvt.transparent: true
