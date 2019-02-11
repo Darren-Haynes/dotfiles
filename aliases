@@ -50,6 +50,7 @@ alias vimpy='nvim -p ~/.vim/after/ftplugin/python.vim'
 alias vimqute='nvim ~/dotfiles/qutebrowser/qutebrowser.conf'
 alias vimrc='nvim ~/.vimrc'
 alias vimt='nvim ~/.config/termite/config'
+alias vtmux='nvim ~/.tmux.conf'
 alias vimx='nvim ~/.Xresources'
 alias vimz='nvim ~/.zshrc'
 alias vjs="nvim **/*.js"
@@ -111,6 +112,9 @@ alias gpen="gvim **/*.html **/*.css **/*.js"
 alias gpy="gvim **/*.py"
 alias gweb="gvim **/*.html **/*.css"
 
+# TMUX
+alias tk='tmux kill-server'
+
 # TAB VIEW FILES
 alias tabtodo='tabview ~/TODO.csv'
 alias tabadd='tabview ~/Documents/contacts.csv'
@@ -122,6 +126,7 @@ alias r180="convert -rotate 180 " # then 'from.jpg' to 'to.jpg'
 alias screenshot='. ~/.bash_scripts/screenshot.sh'
 alias windowshot="import -screen " # then filename
 alias drawarea="import root " # then filename
+
 
 # PYTHON
 alias pip2up='sudo pip2 install upgrade pip'
@@ -219,10 +224,17 @@ alias xinfo='xrandr --nograb --current'
 alias xr='xrdb ~/dotfiles/X/Xresources'
 alias restart_trackpad='sudo bash /lib/systemd/system-sleep/touchpad'
 
+#DEBIAN
+alias update='sudo apt update && sudo apt upgrade'
+alias upgradable='apt list --upgradable'
+
 #UBUNTU
-intel="sudo prime-select intel"
-nvidia="sudo prime-select nvidia"
-which_chip='glxinfo | egrep "OpenGL vendor|OpenGL renderer*"'
+alias intel="sudo prime-select intel"
+alias nvidia="sudo prime-select nvidia"
+alias which_chip='glxinfo | egrep "OpenGL vendor|OpenGL renderer*"'
+
+#ELEMENTARY OS
+alias km="killall pantheon-mail && ps -aux | grep -i mail"
 
 # NETWORKING
 alias netoff='nmcli networking off'
@@ -234,6 +246,10 @@ alias wificon='nmcli connection show | head -2 '
 alias wifioff='nmcli radio wifi off'
 alias wifion='nmcli radio wifi on'
 alias bing='ping bing.com'
-alias mullvad_on='sudo wg-quick up mullvad-us2'
-alias mullvad_off='sudo wg-quick down mullvad-us2'
+alias mullvad_LA_on='sudo wg-quick up mullvad-us2'
+alias mullvad_LA_off='sudo wg-quick down mullvad-us2'
+alias mullvad_Sweden_on='sudo wg-quick up mullvad-se2'
+alias mullvad_Sweden_off='sudo wg-quick down mullvad-se2'
+alias mullvad_Switzerland_on='sudo wg-quick up mullvad-ch2'
+alias mullvad_Switzerland_off='sudo wg-quick down mullvad-ch2'
 
