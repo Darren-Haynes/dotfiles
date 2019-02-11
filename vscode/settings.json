@@ -1,7 +1,7 @@
 {
     "window.menuBarVisibility": "toggle",
     "editor.minimap.enabled": false,
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "Adapta Nokto",
     "editor.fontFamily": "'Fira Code','SpaceMono Nerd Font Mono','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "terminal.integrated.fontFamily": "'SpaceMono Nerd Font Mono', 'monospace'",
     "window.zoomLevel": 0,
@@ -17,7 +17,6 @@
             79,
       ]
     },
-    "workbench.iconTheme": "vscode-icons",
 
     // VIM
     "vim.useSystemClipboard": true,
@@ -44,5 +43,6 @@
     "workbench.activityBar.visible": false,
     "editor.fontLigatures": true,
     "workbench.sideBar.location": "left",
-    "window.titleBarStyle": "custom"
+    "window.titleBarStyle": "custom",
+    "workbench.iconTheme": "vscode-icons"
   }
