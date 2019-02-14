@@ -34,7 +34,7 @@ alias basha='nvim ~/.bash_aliases'
 alias bashrc='nvim ~/.bashrc'
 alias vcss="nvim **/*.css"
 alias vhtml="nvim **/*.html"
-alias vima='nvim ~/.aliases'
+alias vima='nvim ~/dotfiles/aliases'
 alias vimadd='nvim ~/Documents/contacts.csv'
 alias vimbash='nvim ~/.bash_scripts/**/*'
 alias vimcss='nvim ~/.vim/after/ftplugin/css.vim'
@@ -114,6 +114,7 @@ alias gweb="gvim **/*.html **/*.css"
 
 # TMUX
 alias tk='tmux kill-server'
+alias td='tmux detach'
 
 # TAB VIEW FILES
 alias tabtodo='tabview ~/TODO.csv'
