@@ -55,6 +55,8 @@ Plug 'thinca/vim-quickrun'
 Plug 'tpope/vim-eunuch'
 
 """ Project Management
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 Plug 'scrooloose/nerdtree'
@@ -108,7 +110,6 @@ set shiftwidth=4        " 4 space indentation
 set tabstop=4
 "set scrolloff=5         "show 5 lines above/below cursor
 set showbreak=↪
-set autochdir
 set nohlsearch
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set matchpairs+=<:> "especially handy for html
@@ -354,7 +355,8 @@ nnoremap <leader>ex :vsplit ~/.Xresources<cr>
 nnoremap <leader>ei :vsplit ~/.config/i3/config<cr>
 nnoremap <leader>eq :vsplit ~/.config/qutebrowser/qutebrowser.conf<cr>
 nnoremap <leader>ei :vsplit ~/.config/termite/config<cr>
-nnoremap <leader>em :vsplit ~/.tmux.conf<cr>
+nnoremap <leader>eml :vsplit ~/.tmux.conf.local<cr>
+nnoremap <leader>emg :vsplit ~/.tmux.conf<cr>
 nnoremap <leader>et :vsplit ~/.config/alacritty/alacritty.yml<cr>
 
 
@@ -419,6 +421,7 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 set sessionoptions-=buffers
 let g:session_autosave="yes"
 let g:session_autosave_periodic=0
+let g:session_lock_enabled = 0
 
 " Nerdtree
 nnoremap <leader>nt :NERDTreeToggle<cr>
@@ -429,7 +432,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " Ale custom colors and sign
 highlight clear ALEErrorSign
-let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['pylama'], 'vala': ['uncrustify']}
+" let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['pylama'], 'vala': ['uncrustify']}
 
 " Supertab scroll from top to bottom
 "let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -479,8 +482,9 @@ nnoremap <Leader>tr :RainbowParenthesesToggle<cr>
 
 " CTRL-P
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlP'
 nnoremap <Leader>pf :CtrlP<CR>
+nnoremap <Leader>pa :CtrlPMixed<CR>
 nnoremap <Leader>pb :CtrlPBuffer<CR>
 
 " Use silver searcher with ack plugin
