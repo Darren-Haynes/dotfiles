@@ -1,3 +1,10 @@
+"""
+TERMITE COLORSCHEME CHANGER
+
+Provides a menu of colorschemes for user to choose from and then
+changes the scheme on the fly.
+"""
+
 import os
 
 HOME = os.path.expanduser("~")
