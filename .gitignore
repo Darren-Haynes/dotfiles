@@ -26,3 +26,4 @@ vim/bundle/vim-css-color
 vim/bundle
 dotvenv
 Session.vim
+VENV/
