@@ -65,8 +65,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'francoiscabrol/ranger.vim'
 
 """ Status
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 """ Tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -202,15 +201,15 @@ highlight TabLine ctermfg=NONE
 highlight Visual ctermbg=124
 highlight VertSplit guibg=NONE
 
-let g:airline_theme='onedark'
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ }
+
 colorscheme onedark
 
 hi Normal guibg=NONE ctermbg=NONE
 highlight VertSplit cterm=NONE
 
-nnoremap <leader>ssl :colorscheme solarized8_light<CR> :AirlineTheme solarized<CR>
-nnoremap <leader>ssd :colorscheme solarized8_dark<CR> :AirlineTheme base16_solarized<CR>
-nnoremap <leader>shs :colorscheme base16-hopscotch<CR> :AirlineTheme base16<CR>
 
 """""""""""""""""""""""""""""""""""""""
            " LET THE GAMES BEGIN
@@ -239,6 +238,12 @@ nnoremap <leader>so :OpenSession
 nnoremap <leader>sd :DeleteSession
 nnoremap <leader>sc :CloseSession
 
+"""""""""""""""""""""""""""""""""""""""
+           " PROJECT MANAGEMENT
+"""""""""""""""""""""""""""""""""""""""
+
+nnoremap <leader>pd :Prosession /home/darren/dotfiles<CR>
+nnoremap <leader>ps :Prosession /home/darren/dotfiles/bin<CR>
 
 """""""""""""""""""""""""""""""""""""""
            " WINDOW MANAGEMENT
@@ -249,16 +254,16 @@ set splitright
 set splitbelow
 
 "split screen navigations
-nnoremap <C-J> <C-W><C-J><cr>
-nnoremap <C-K> <C-W><C-K><cr>
-nnoremap <C-L> <C-W><C-L><cr>
-nnoremap <C-H> <C-W><C-H><cr>
+nnoremap <C-J> <C-W><C-J><CR>
+nnoremap <C-K> <C-W><C-K><CR>
+nnoremap <C-L> <C-W><C-L><CR>
+nnoremap <C-H> <C-W><C-H><CR>
 
 "Set leader key to spacebar. You know it makes sense
 let mapleader = " "
 
 " Open window in new tab (My preferred way to 'zoom' a window.)
-nnoremap <leader>z :tabnew %<cr>
+nnoremap <leader>z :tabnew %<CR>
 
 " make horizontal split full height
 nnoremap <leader>ru <C-w><C-_>
@@ -271,39 +276,39 @@ nnoremap <leader>rf <C-w><C-_><C-w>\|
 nnoremap <leader>r= <C-w>=
 
 " increase width by 5
-nnoremap <leader>rl :vertical resize +5<cr>
+nnoremap <leader>rl :vertical resize +5<CR>
 " decrease width by 5
-nnoremap <leader>rh :vertical resize -5<cr>
+nnoremap <leader>rh :vertical resize -5<CR>
 " increase height by 5
-nnoremap <leader>rk :res +5<cr>
+nnoremap <leader>rk :res +5<CR>
 " decrease height by 5
-nnoremap <leader>rj :res -5<cr>
+nnoremap <leader>rj :res -5<CR>
 
 " increase width by 1
-nnoremap <leader>rL :vertical resize +1<cr>
+nnoremap <leader>rL :vertical resize +1<CR>
 " decrease width by 1
-nnoremap <leader>rH :vertical resize -1<cr>
+nnoremap <leader>rH :vertical resize -1<CR>
 " increase height by 1
-nnoremap <leader>rK :res +1<cr>
+nnoremap <leader>rK :res +1<CR>
 " decrease height by 1
-nnoremap <leader>rJ :res -1<cr>
+nnoremap <leader>rJ :res -1<CR>
 
 " resize for different widths
-nnoremap <leader>r8 :vertical resize 80<cr>
-nnoremap <leader>r9 :vertical resize 90<cr>
-nnoremap <leader>r0 :vertical resize 100<cr>
-nnoremap <leader>r1 :vertical resize 110<cr>
-nnoremap <leader>r2 :vertical resize 120<cr>
-nnoremap <leader>r3 :vertical resize 130<cr>
-nnoremap <leader>r4 :vertical resize 140<cr>
+nnoremap <leader>r8 :vertical resize 80<CR>
+nnoremap <leader>r9 :vertical resize 90<CR>
+nnoremap <leader>r0 :vertical resize 100<CR>
+nnoremap <leader>r1 :vertical resize 110<CR>
+nnoremap <leader>r2 :vertical resize 120<CR>
+nnoremap <leader>r3 :vertical resize 130<CR>
+nnoremap <leader>r4 :vertical resize 140<CR>
 
 
 """""""""""""""""""""""""""""""""""""""
            " TAB MANAGEMENT
 """""""""""""""""""""""""""""""""""""""
 
-nnoremap <leader>tl :tabnext<cr>
-nnoremap <leader>th :tabnext<cr>
+nnoremap <leader>tl :tabnext<CR>
+nnoremap <leader>th :tabnext<CR>
 
 
 """"""""""""""""""""""""""""""""
@@ -340,24 +345,24 @@ nnoremap k gk
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 "Use leader to source vimrc and ftplugins
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Open config files in vertical splits
-nnoremap <leader>ev :vsplit ~/.vimrc<cr>
-nnoremap <leader>ep :vsplit ~/.vim/after/ftplugin/python.vim<cr>
-nnoremap <leader>ej :vsplit ~/.vim/after/ftplugin/javascript.vim<cr>
-nnoremap <leader>eh :vsplit ~/.vim/after/ftplugin/html.vim<cr>
-nnoremap <leader>ec :vsplit ~/.vim/after/ftplugin/css.vim<cr>
-nnoremap <leader>ea :vsplit ~/.aliases<cr>
-nnoremap <leader>eb :vsplit ~/.bashrc<cr>
-nnoremap <leader>ez :vsplit ~/.zshrc<cr>
-nnoremap <leader>ex :vsplit ~/.Xresources<cr>
-nnoremap <leader>ei :vsplit ~/.config/i3/config<cr>
-nnoremap <leader>eq :vsplit ~/.config/qutebrowser/qutebrowser.conf<cr>
-nnoremap <leader>ei :vsplit ~/.config/termite/config<cr>
-nnoremap <leader>eml :vsplit ~/.tmux.conf.local<cr>
-nnoremap <leader>emg :vsplit ~/.tmux.conf<cr>
-nnoremap <leader>et :vsplit ~/.config/alacritty/alacritty.yml<cr>
+nnoremap <leader>ev :vsplit ~/.vimrc<CR>
+nnoremap <leader>ep :vsplit ~/.vim/after/ftplugin/python.vim<CR>
+nnoremap <leader>ej :vsplit ~/.vim/after/ftplugin/javascript.vim<CR>
+nnoremap <leader>eh :vsplit ~/.vim/after/ftplugin/html.vim<CR>
+nnoremap <leader>ec :vsplit ~/.vim/after/ftplugin/css.vim<CR>
+nnoremap <leader>ea :vsplit ~/.aliases<CR>
+nnoremap <leader>eb :vsplit ~/.bashrc<CR>
+nnoremap <leader>ez :vsplit ~/.zshrc<CR>
+nnoremap <leader>ex :vsplit ~/.Xresources<CR>
+nnoremap <leader>ei :vsplit ~/.config/i3/config<CR>
+nnoremap <leader>eq :vsplit ~/.config/qutebrowser/qutebrowser.conf<CR>
+nnoremap <leader>ei :vsplit ~/.config/termite/config<CR>
+nnoremap <leader>eml :vsplit ~/.tmux.conf.local<CR>
+nnoremap <leader>emg :vsplit ~/.tmux.conf<CR>
+nnoremap <leader>et :vsplit ~/.config/alacritty/alacritty.yml<CR>
 
 
 """"""""""""""""""""""""""""""""
@@ -424,8 +429,8 @@ let g:session_autosave_periodic=0
 let g:session_lock_enabled = 0
 
 " Nerdtree
-nnoremap <leader>nt :NERDTreeToggle<cr>
-nnoremap <leader>nh :NERDTreeCWD<cr>
+nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <leader>nh :NERDTreeCWD<CR>
 let g:NERDTreeWinSize=20
 let NERDTreeMinimalUI = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -456,7 +461,7 @@ let g:UltiSnipsListSnippets = "<C-l>"
 let g:UltiSnipsEditSplit="vertical"
 
 " TAGBAR
-nnoremap <leader>tb :TagbarToggle<cr>
+nnoremap <leader>tb :TagbarToggle<CR>
 let g:tagbar_indent = 1
 let g:tagbar_compact = 1
 let g:tagbar_sort = 0
@@ -464,7 +469,7 @@ let g:tagbar_zoomwidth = 0
 let g:tagbar_autoclose = 1
 
 " UNDOTREE
-nnoremap <leader>tu :UndotreeToggle<cr>
+nnoremap <leader>tu :UndotreeToggle<CR>
 
 " VIMUX
 nnoremap <Leader>vp :VimuxPromptCommand<CR>
@@ -478,7 +483,7 @@ let g:taboo_tab_format = "%N~%f|"
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-nnoremap <Leader>tr :RainbowParenthesesToggle<cr>
+nnoremap <Leader>tr :RainbowParenthesesToggle<CR>
 
 " CTRL-P
 let g:ctrlp_map = '<c-p>'
@@ -493,8 +498,8 @@ let g:quickrun_no_default_key_mappings=1
 
 " QuickRun execution
 
-inoremap <c-e> <esc>:w<cr> :QuickRun<cr>
-nnoremap <c-e> :w<cr> :QuickRun<cr>
+inoremap <c-e> <esc>:w<CR> :QuickRun<cr>
+nnoremap <c-e> :w<CR> :QuickRun<cr>
 
 " NERDcommenter - Add space to comments
 let NERDSpaceDelims=1
@@ -525,11 +530,11 @@ iabbrev h5 <h5></h5><ESC>F<i
             "LINUXY
             "THINGS
 """"""""""""""""""""""""""""""""""""""
-nnoremap <leader>cw :! wc -w %:p<cr>
-nnoremap <leader>cl :! wc -l %:p<cr>
+nnoremap <leader>cw :! wc -w %:p<CR>
+nnoremap <leader>cl :! wc -l %:p<CR>
 
 " Complie and exec c file
-nnoremap <Leader>mc :! gcc & ./a.out<cr>
+nnoremap <Leader>mc :! gcc & ./a.out<CR>
 
 """"""""""""""""""""""""""""""""""""""
              "NEOVIM
@@ -541,10 +546,10 @@ nnoremap <leader>\ :vsplit term://zsh<CR>
 nnoremap <leader>t<leader> :tabnew term://zsh<CR>
 tnoremap <C-b> <C-\><C-N>:b#<CR>
 tnoremap <C-q> i<C-\><C-N>:q<CR>
-tnoremap <C-k> <C-\><C-N><C-w>k<cr>
-tnoremap <C-j> <C-\><C-N><C-w>j<cr>
-tnoremap <C-h> <C-\><C-N><C-w>h<cr>
-tnoremap <C-l> <C-\><C-N><C-w>l<cr>
+tnoremap <C-k> <C-\><C-N><C-w>k<CR>
+tnoremap <C-j> <C-\><C-N><C-w>j<CR>
+tnoremap <C-h> <C-\><C-N><C-w>h<CR>
+tnoremap <C-l> <C-\><C-N><C-w>l<CR>
 tnoremap <C-7> <C-\><C-N>
 
 nnoremap <leader>mn :term<CR>i%
