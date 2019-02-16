@@ -73,14 +73,8 @@ Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""
-            "ARCHLABS
             "DEFAULTS
 """"""""""""""""""""""""""""""""""""""
-
-" A FEW SANE DEFAULTS FOR USE IN ARCHlABS
-
-" load Arch Linux defaults
-runtime! archlinux.vim
 
 " yank text to system clipboard (requires +clipboard)
 set clipboard^=unnamedplus
@@ -90,16 +84,6 @@ set number
 
 " ask confirmation for certain things like when quitting before saving
 set confirm
-
-" enable tab completion menu when using colon command mode (:)
-set wildmenu
-set wildignore+=*/tmp/*,*.so,*.zip               " Linux
-set wildignore+=*.pyc,*.out                      " Compiled files
-set wildignore+=__pycache__						 " Py cache folder
-set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
 
 
 set shortmess+=aAcIws   " Hide certain messages like 'Search Hit Bottom' etc.
@@ -117,6 +101,7 @@ set undodir=~/.vim/undodir
 set ignorecase " ignore case when searching
 set smartcase
 set gdefault "Always replace globally with s/this/that
+set noswapfile
 
 " enable mouse, sgr is better but not every term supports it
 set mouse=a
@@ -178,12 +163,20 @@ augroup END
 set tags=tags
 
 
-"""""""""""""""""""""""""""""""""""""""
-             " MORE
-           " DEFAULTS
-"""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
+            "WILDMENU
+""""""""""""""""""""""""""""""""""""""
 
-set noswapfile
+" enable tab completion menu when using colon command mode (:)
+set wildmenu
+set wildignore+=*/tmp/*,*.so,*.zip               " Linux
+set wildignore+=*.pyc,*.out                      " Compiled files
+set wildignore+=__pycache__						 " Py cache folder
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+
 
 """""""""""""""""""""""""""""""""""""""
            " VIM COLORS
