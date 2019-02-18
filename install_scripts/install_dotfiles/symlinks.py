@@ -123,7 +123,7 @@ def main():
 
     # Some dirs that need creating first
     dirs_to_create = [
-        join(home, "ipython/profile_default")
+        join(home, ".ipython/profile_default")
         ]
     create_dirs(dirs_to_create)
     create_syms(dotfiles)
