@@ -21,7 +21,7 @@ Xft.rgba:		rgb
 
 !!!!!!!!!! XTERM    !!!!!!!!!!
 !!!!!!!!!! SETTINGS !!!!!!!!!!
-xterm*faceName: Hasklug Nerd Font Mono:size=11:antialias=false
+xterm*faceName: SpaceMono Nerd Font Mono:size=11:antialias=false
 xterm*font:		7x11
 
 ! Change copy and paste keys
@@ -46,7 +46,7 @@ URxvt.clipboard.autocopy: true
 
 URxvt.fading:	 10
 URxvt.saveLines: 4095
-URxvt.font: xft:Hasklug Nerd Font Mono:size=11
+URxvt.font: xft:SpaceMono Nerd Font Mono:size=11
 ! URxvt*font: xft:monospace:size=11
 
 ! transparency
