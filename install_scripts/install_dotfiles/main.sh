@@ -6,15 +6,16 @@ echo '|  _ \| ____\ \   / / / ___|| ____|_   _| | | |  _ \'
 echo '| | | |  _|  \ \ / /  \___ \|  _|   | | | | | | |_) |'
 echo '| |_| | |___  \ V /    ___) | |___  | | | |_| |  __/'
 echo '|____/|_____|  \_/    |____/|_____| |_|  \___/|_|'
-echo '\n'
+echo -e '\n'
 
-# echo "\n---Installing Fonts---"
+# echo -e "\n---INSTALLING FONTS---"
 # source "$HOME/dotfiles/install_scripts/fonts.sh"
-echo "\n---Installing NEOVIM---"
+echo -e "\n---INSTALLING NEOVIM---"
 source "$HOME/dotfiles/install_scripts/install_dotfiles/neovim.sh"
-echo "\n---Installing FAVORITE APPS---"
+echo -e "\n---INSTALLING FAVORITE APPS---"
 source "$HOME/dotfiles/install_scripts/install_dotfiles/apps.sh"
-echo "\n---Installing ZSH & Oh-my-zsh---"
+echo -e "\n---INSTALLING ZSH & OH-MY-ZSH---"
 source "$HOME/dotfiles/install_scripts/install_dotfiles/zsh.sh"
-echo "\n---Creating symlinks for dotfiles---"
+echo -e "\n---CREATING SYMLINKS FOR DOTFILES---"
 python3 "$HOME/dotfiles/install_scripts/install_dotfiles/symlinks.py"
+echo -e "\nDEVELOPMENT SETUP COMPLETE\n"
