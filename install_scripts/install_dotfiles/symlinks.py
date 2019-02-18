@@ -71,7 +71,6 @@ def main():
 
     """
 
-
     home = expanduser("~")
     dots_dir = join(home, "dotfiles")
     config = join(home, ".config")
@@ -132,6 +131,7 @@ def main():
 
     create_dirs(dirs_to_create)
     create_syms(dotfiles)
+    print("Finished Creating Symlinks")
 
 if __name__ == "__main__":
     main()
