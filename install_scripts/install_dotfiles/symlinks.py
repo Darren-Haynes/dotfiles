@@ -53,9 +53,11 @@ def create_syms(dotfiles):
             backup_file = join(path, backup)
             rename(dest, backup_file)
             symlink(src, dest)
-            message = """Original file {} backed up to {}
-                and symlink {} --> {} created"""
-            print(message.format(dest, backup_file, dest, src))
+            message1 = "Original file {} backed up to {}"
+            message2 = "Symlink created {} --> {} created"
+            print(message1.format(dest, backup_file))
+            print(message2.format(dest, src))
+
 
         else:
             symlink(src, dest)
