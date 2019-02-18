@@ -2,6 +2,7 @@
 Create config file symlinks from my dotfiles.
 """
 
+from os import makedirs
 from os import readlink
 from os import rename
 from os import symlink
@@ -12,6 +13,19 @@ from os.path import isfile
 from os.path import islink
 from os.path import split
 
+def create_dirs(dirs):
+    """
+    Create nesessary directory that some dofiles will exist in
+    """
+    for dir in dirs:
+        try:
+            makedirs(dir)
+            print("{} directory created".format(dir))
+        except FileExistsError:
+            print("Skip creating {} directory, it already exits ".format(dir))
+            pass
+
+    return True
 
 def create_syms(dotfiles):
     """TODO: Docstring for create_syms.
@@ -56,6 +70,8 @@ def main():
     :returns: TODO
 
     """
+
+
     home = expanduser("~")
     dots_dir = join(home, "dotfiles")
     config = join(home, ".config")
@@ -104,6 +120,12 @@ def main():
         (my_ranger_conf, orig_ranger_conf),
 
     ]
+
+    # Some dirs that need creating first
+    dirs_to_create = [
+        join(home, "ipython/profile_default")
+        ]
+    create_dirs(dirs_to_create)
     create_syms(dotfiles)
     #  symlink_test(dotfiles)
 
