@@ -122,12 +122,16 @@ def main():
     ]
 
     # Some dirs that need creating first
+    ipython_dir = join(home, ".ipython/profile_default")
+    nvim_dir = join(home, ".config/nvim")
+
     dirs_to_create = [
-        join(home, ".ipython/profile_default")
-        ]
+        ipython_dir,
+        nvim_dir
+    ]
+
     create_dirs(dirs_to_create)
     create_syms(dotfiles)
-    #  symlink_test(dotfiles)
 
 if __name__ == "__main__":
     main()
