@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo yes Y | apt install fonts-lyx
 sudo yes Y | apt install firefox
 echo 'Firefox installed'
 
