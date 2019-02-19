@@ -235,8 +235,9 @@ nnoremap <leader>sc :CloseSession
            " PROJECT MANAGEMENT
 """""""""""""""""""""""""""""""""""""""
 
-nnoremap <leader>pd :Prosession /home/darren/dotfiles<CR>
-nnoremap <leader>ps :Prosession /home/darren/dotfiles/bin<CR>
+nnoremap <leader>sd :Prosession /home/darren/dotfiles<CR>
+nnoremap <leader>ss :Prosession /home/darren/dotfiles/bin<CR>
+nnoremap <leader>si :Prosession /home/darren/dotfiles/install_scripts/install_dotfiles<CR>
 
 """""""""""""""""""""""""""""""""""""""
            " WINDOW MANAGEMENT

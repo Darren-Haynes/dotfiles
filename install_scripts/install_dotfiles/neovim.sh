@@ -16,6 +16,7 @@ undo_dir="$HOME/.vim/undodir"
 if [ ! -d "$undo_dir" ]; then
   mkdir -p "$HOME/.vim/undodir"
   echo "~/.vim/undodir directory created."
+  chown -R $USER:$(id -g -n $USER) "$HOME/.vim/undo_dir"
   else
     echo "Skip making .vim/undodir, directory already exists."
 fi
