@@ -191,7 +191,7 @@ alias which_chip='glxinfo | egrep "OpenGL vendor|OpenGL renderer*"'
 alias km="killall pantheon-mail && ps -aux | grep -i mail"
 
 # SOURCING
-alias sa='source ~/.aliases'
+alias sal='source ~/.aliases'
 
 # NETWORKING
 alias netoff='nmcli networking off'
