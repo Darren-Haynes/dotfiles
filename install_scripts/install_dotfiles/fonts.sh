@@ -15,14 +15,14 @@ if [ ! -d "$fonts_dir" ]; then
     echo "Skip making ~/.fonts dir, it already exists"
 fi
 
-spacemono_dir="$HOME/.fonts/SpaceMono/"
+spacemono_dir="$HOME/.local/share/fonts/spacemono/"
 if [ ! -d "$spacemono_dir" ]; then
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/SpaceMono.zip -P "$spacemono_dir"
   # chown -R $USER:$(id -g -n $USER) "$spacemono_dir"
   dtrx "$spacemono_dir"/SpaceMono.zip
   fc-cache -fv
   rm "$spacemono_dir"/SpaceMono.zip
-  echo "SpaceMono font installed to ~/.fonts/SpaceMono"
+  echo "SpaceMono font installed to $spacemono_dir"
   cd
   else
     echo "SpaceMono font already installed"
