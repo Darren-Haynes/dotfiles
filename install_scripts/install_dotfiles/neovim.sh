@@ -15,9 +15,8 @@ sudo apt install neovim
 
 undo_dir="$HOME/.vim/undodir"
 if [ ! -d "$undo_dir" ]; then
-  sudo mkdir -p "$HOME/.vim/undodir"
+  mkdir -p "$HOME/.vim/undodir"
   echo "~/.vim/undodir directory created."
-  sudo chown -R $USER:$(id -g -n $USER) "$HOME/.vim/undodir"
   else
     echo "Skip making .vim/undodir, directory already exists."
 fi
@@ -26,4 +25,3 @@ fi
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-sudo chown -R $USER:$(id -g -n $USER) "$HOME/.vim/autoload"
