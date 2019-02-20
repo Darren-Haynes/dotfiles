@@ -9,13 +9,13 @@ echo '|____/|_____|  \_/    |____/|_____| |_|  \___/|_|'
 echo -e '\n'
 
 # echo -e "\n---INSTALLING FONTS---"
-# source "$HOME/dotfiles/install_scripts/fonts.sh"
+# /bin/bash "$HOME/dotfiles/install_scripts/install_dotfiles/fonts.sh"
 echo -e "\n---INSTALLING NEOVIM---"
-source "$HOME/dotfiles/install_scripts/install_dotfiles/neovim.sh"
+/bin/bash "$HOME/dotfiles/install_scripts/install_dotfiles/neovim.sh"
 echo -e "\n---INSTALLING FAVORITE APPS---"
-source "$HOME/dotfiles/install_scripts/install_dotfiles/apps.sh"
+/bin/bash "$HOME/dotfiles/install_scripts/install_dotfiles/apps.sh"
 echo -e "\n---INSTALLING ZSH & OH-MY-ZSH---"
-source "$HOME/dotfiles/install_scripts/install_dotfiles/zsh.sh"
+/bin/bash "$HOME/dotfiles/install_scripts/install_dotfiles/zsh.sh"
 echo -e "\n---CREATING SYMLINKS FOR DOTFILES---"
 python3 "$HOME/dotfiles/install_scripts/install_dotfiles/symlinks.py"
 echo -e "\nDEVELOPMENT SETUP COMPLETE\n"
