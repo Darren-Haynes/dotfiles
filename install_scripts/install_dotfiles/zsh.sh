@@ -2,7 +2,7 @@
 
 # Install Zsh & oh-my-zsh
 
-sudo yes Y | apt install zsh
+sudo apt install zsh
 chsh -s $(which zsh) $USER
 
 oh_my="$HOME/.oh-my-zsh"
