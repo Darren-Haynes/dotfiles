@@ -194,6 +194,7 @@ alias km="killall pantheon-mail && ps -aux | grep -i mail"
 alias sal='source ~/.aliases'
 
 # NETWORKING
+alias myip='curl ifconfig.me'
 alias netoff='nmcli networking off'
 alias neton='nmcli networking on'
 alias phone_wifi="nmcli dev wifi connect \"Darren's iPhone\" password "
