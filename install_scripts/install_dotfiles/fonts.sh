@@ -6,7 +6,7 @@ sudo apt install \
   fonts-font-awesome \
   dtrx
 
-space=$(fc-list : family | grep SpaceMono Nerd Font Mono)
+space=$(fc-list : family | grep "SpaceMono Nerd Font Mono")
 
 if [$space == "SpaceMono Nerd Font Mono"]; then
     echo "Skipping - SpaceMono font already installed."
