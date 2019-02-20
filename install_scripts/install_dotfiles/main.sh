@@ -19,3 +19,10 @@ echo -e "\n---INSTALLING ZSH & OH-MY-ZSH---"
 echo -e "\n---CREATING SYMLINKS FOR DOTFILES---"
 python3 "$HOME/dotfiles/install_scripts/install_dotfiles/symlinks.py"
 echo -e "\nDEVELOPMENT SETUP COMPLETE\n"
+
+echo ' ___           _        _ _    ____                      _      _'
+echo '|_ _|_ __  ___| |_ __ _| | |  / ___|___  _ __ ___  _ __ | | ___| |_ ___'
+echo ' | || '_ \/ __| __/ _` | | | | |   / _ \| '_ ` _ \| '_ \| |/ _ \ __/ _ \'
+echo ' | || | | \__ \ || (_| | | | | |__| (_) | | | | | | |_) | |  __/ ||  __/'
+echo '|___|_| |_|___/\__\__,_|_|_|  \____\___/|_| |_| |_| .__/|_|\___|\__\___|'
+echo -e '\n'
