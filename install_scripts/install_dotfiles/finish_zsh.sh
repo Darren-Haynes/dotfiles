@@ -13,6 +13,7 @@ if [ -L "$zshrc" ]; then
         ln -s "$zshrc_dot" "$zshrc"
         echo "Incorrect symlink fixed for $zshrc"
     fi
+    chsh -s $(which zsh)
     exit 0
 fi
 
@@ -22,4 +23,5 @@ if [ -f "$zshrc" ]; then
 
     else
         ln -s "$zshrc_dot" "$zshrc"
+    chsh -s $(which zsh)
 fi
