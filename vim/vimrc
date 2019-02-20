@@ -55,6 +55,7 @@ Plug 'thinca/vim-quickrun'
 Plug 'tpope/vim-eunuch'
 
 """ Project Management
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 Plug 'xolox/vim-session'
