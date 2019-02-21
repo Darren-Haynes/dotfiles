@@ -83,9 +83,7 @@ def main():
     my_nvim_init = join(dots_dir, "nvim/init.vim")
     orig_nvim_init = join(home, ".config/nvim/init.vim")
 
-    # Zsh and aliases
-    my_zshrc = join(dots_dir, "zsh/zshrc")
-    orig_zshrc = join(home, ".zshrc")
+    # Aliases
     my_aliases = join(dots_dir, "aliases")
     orig_aliases = join(home, ".aliases")
 
