@@ -108,7 +108,6 @@ def main():
 
     dotfiles = [
         (my_vimrc, orig_vimrc),
-        (my_zshrc, orig_zshrc),
         (my_aliases, orig_aliases),
         (my_xresources, orig_xresources),
         (my_ipython_config, orig_ipython_config),
