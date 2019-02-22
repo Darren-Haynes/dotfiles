@@ -92,6 +92,9 @@ alias windowshot="import -screen " # then filename
 alias drawarea="import root " # then filename
 
 # PYTHON
+alias python=python3
+alias n2='pyenv activate neovim2'
+alias n3='pyenv activate neovim3'
 alias pip2up='sudo pip2 install upgrade pip'
 alias pip3up='sudo pip3 install upgrade pip'
 alias ve2.7='virtualenv --python=python2.7 '
@@ -211,3 +214,8 @@ alias mullvad_Sweden_off='sudo wg-quick down mullvad-se2'
 alias mullvad_Switzerland_on='sudo wg-quick up mullvad-ch2'
 alias mullvad_Switzerland_off='sudo wg-quick down mullvad-ch2'
 
+# TMUX
+alias mux='tmux new-session -A -s NEOVIM'
+
+# MEDIA
+alias stv='mpv ~/Videos/Soul-Therapy-Music/*'
