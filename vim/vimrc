@@ -381,6 +381,10 @@ nnoremap <leader>sh [s
 nnoremap <leader>sa zg
 nnoremap <leader>sn z=
 
+" Toggle highlight search
+let hlstate=0
+nnoremap <leader>hs :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
+
 " Toggle relative or absolute number lines
 nnoremap <leader>tn :call NumberToggle()<CR>
 
