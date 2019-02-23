@@ -11,14 +11,15 @@ sudo apt install \
 sudo apt-add-repository ppa:neovim-ppa/stable
 sudo apt-get update
 sudo apt install vim-scripts
+sudo apt install shellcheck # Bash linter
 sudo apt install neovim
 
 undo_dir="$HOME/.vim/undodir"
 if [ ! -d "$undo_dir" ]; then
   mkdir -p "$HOME/.vim/undodir"
-  echo "~/.vim/undodir directory created."
+  echo "$HOME/.vim/undodir directory created."
   else
-    echo "Skip making .vim/undodir, directory already exists."
+    echo "Skip making $HOME/.vim/undodir, directory already exists."
 fi
 
 # install vim-plug
