@@ -5,7 +5,7 @@ zshrc_dot="$HOME/dotfiles/zsh/zshrc"
 
 if [ -L "$zshrc" ]; then
     # mv "$zshrc" "$zshrc".b4dotfiles
-    if [ $(readlink "$zshrc") = "$zshrc_dot" ]; then
+    if [ "$(readlink "$zshrc")" = "$zshrc_dot" ]; then
         echo "Correct symlink $zshrc --> $zshrc_dot already exists"
 
     else
@@ -13,7 +13,7 @@ if [ -L "$zshrc" ]; then
         ln -s "$zshrc_dot" "$zshrc"
         echo "Incorrect symlink fixed for $zshrc"
     fi
-    chsh -s $(which zsh)
+    chsh -s "$(which zsh)"
     exit 0
 fi
 
@@ -23,5 +23,5 @@ if [ -f "$zshrc" ]; then
 
     else
         ln -s "$zshrc_dot" "$zshrc"
-    chsh -s $(which zsh)
+    chsh -s "$(which zsh)"
 fi

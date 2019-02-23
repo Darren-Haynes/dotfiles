@@ -8,7 +8,7 @@ sudo apt install \
 
 space=$(fc-list : family | grep "SpaceMono Nerd Font Mono")
 
-if [ "$space" == "SpaceMono Nerd Font Mono" ]; then
+if [ "$space" = "SpaceMono Nerd Font Mono" ]; then
     echo "Skipping - SpaceMono font already installed."
     exit 1
 fi
