@@ -1,0 +1,23 @@
+install Pyenv-virtualenv:
+git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+
+Install python versions with pyenv:
+pyvenv install 2.7.15
+pyvenv install 3.6.8
+
+Install virtualenv for neovim:
+pyvenv virtualenv 2.7.15 neovim2
+pyvenv virtualenv 3.6.8 neovim3
+
+Activate environments and install pip packages:
+pyvenv activate neovim2
+pip install -r requirements.txt
+pyvenv activate neovim3
+pip install -r requirements.txt
+
+Open vim and install plugins:
+:PlugInstall
+:UpdateRemotePlugins
+
+Open tmux and install plugins
+<c-b>I
