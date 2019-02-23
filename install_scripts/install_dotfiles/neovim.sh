@@ -8,7 +8,13 @@ sudo apt install \
   python3-dev \
   python3-pip \
 
-sudo apt-add-repository ppa:neovim-ppa/stable
+
+os=$(grep -E ^ID= /etc/os-release)
+
+if [[ "$os" = "ID=elementary" || "$os" == "ID=ubuntu" ]]; then
+    echo "Ubuntu base operating system detected - installing PPA"
+    sudo apt-add-repository ppa:neovim-ppa/stable
+fi
 sudo apt-get update
 sudo apt install vim-scripts
 sudo apt install shellcheck # Bash linter
