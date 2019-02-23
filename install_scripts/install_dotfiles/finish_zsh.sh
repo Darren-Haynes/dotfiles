@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 zshrc="$HOME/.zshrc"
 zshrc_dot="$HOME/dotfiles/zsh/zshrc"
