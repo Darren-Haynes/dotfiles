@@ -33,7 +33,13 @@ Plug 'maralla/completor.vim'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'Shougo/deoplete.nvim'
+Plug 'zchee/deoplete-jedi'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+" Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-yarp' " Supports deoplete
 Plug 'roxma/vim-hug-neovim-rpc' " Supports deoplete in vim
 
@@ -66,9 +72,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'francoiscabrol/ranger.vim'
 
 """ Status
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 
-""" Tmux
+" Tmux
 Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
@@ -94,14 +100,12 @@ set shiftwidth=4        " 4 space indentation
 set tabstop=4
 "set scrolloff=5         "show 5 lines above/below cursor
 set showbreak=↪
-set nohlsearch
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set matchpairs+=<:> "especially handy for html
 set undofile " Maintain undo history
 set undodir=~/.vim/undodir
 set ignorecase " ignore case when searching
 set smartcase
-set gdefault "Always replace globally with s/this/that
 set noswapfile
 
 " enable mouse, sgr is better but not every term supports it
@@ -248,12 +252,6 @@ nnoremap <leader>si :Prosession /home/darren/dotfiles/install_scripts/install_do
 set splitright
 set splitbelow
 
-"split screen navigations
-nnoremap <C-J> <C-W><C-J><CR>
-nnoremap <C-K> <C-W><C-K><CR>
-nnoremap <C-L> <C-W><C-L><CR>
-nnoremap <C-H> <C-W><C-H><CR>
-
 "Set leader key to spacebar. You know it makes sense
 let mapleader = " "
 
@@ -324,6 +322,22 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+
+""""""""""""""""""""""""""""""""
+           "SED
+""""""""""""""""""""""""""""""""
+
+" Capital case all words on current line
+nnoremap <leader>cp :s/\<./\u&/g <CR>
+
+
+""""""""""""""""""""""""""""""""
+        "PYTHON PATHS
+""""""""""""""""""""""""""""""""
+
+let g:python_host_prog="/home/darren/.pyenv/versions/neovim2/bin/python"
+let g:python3_host_prog="/home/darren/.pyenv/versions/neovim3/bin/python"
+
 """"""""""""""""""""""""""""""""
            "SAVE FOLDS
 """"""""""""""""""""""""""""""""
@@ -383,7 +397,7 @@ nnoremap <leader>sn z=
 
 " Toggle highlight search
 let hlstate=0
-nnoremap <leader>hs :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
+nnoremap <leader>hl :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr><cr>
 
 " Toggle relative or absolute number lines
 nnoremap <leader>tn :call NumberToggle()<CR>
@@ -436,10 +450,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " Ale custom colors and sign
 highlight clear ALEErrorSign
-" let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['pylama'], 'vala': ['uncrustify']}
+let g:ale_linters = {'python': ['pylama', 'pylint']}
+let g:ale_lint_on_save=1
+let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['isort'], 'vala': ['uncpylamarustify']}
 
 " Supertab scroll from top to bottom
-"let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 "DEOPLETE
 let g:deoplete#enable_at_startup = 1
@@ -450,7 +466,7 @@ let g:deoplete#enable_at_startup = 1
 "\]
 
 " Change jedi default completions key bindings
-let g:jedi#completions_command = "<C-N>"
+" let g:jedi#completions_command = "<C-N>"
 
 " ULTISNIPS
 let g:UltiSnipsExpandTrigger="<c-w>"
