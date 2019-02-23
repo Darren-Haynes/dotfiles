@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Install ranger and cp config files to user
+sudo apt install feh
+sudo apt install w3m
+sudo apt install highlight
 sudo apt install ranger
 ranger_dir="$HOME/.config/ranger"
 if [ ! -d "$ranger_dir" ]; then
