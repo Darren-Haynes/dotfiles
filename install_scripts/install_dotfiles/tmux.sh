@@ -17,5 +17,4 @@ local_conf=$HOME/.tmux.conf.local
 ln -s "$conf_dot" "$tmux_dir_conf"
 ln -s "$tmux_dir_conf" "$conf"
 
-
 ln -s "$local_conf_dot" "$local_conf"
