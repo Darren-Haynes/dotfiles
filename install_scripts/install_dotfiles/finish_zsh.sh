@@ -14,7 +14,6 @@ if [ -L "$zshrc" ]; then
         echo "Incorrect symlink fixed for $zshrc"
     fi
     chsh -s "$(which zsh)"
-    exit 0
 fi
 
 if [ -f "$zshrc" ]; then
