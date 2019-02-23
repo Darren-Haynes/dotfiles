@@ -20,4 +20,3 @@ Open vim and install plugins:
 :UpdateRemotePlugins
 
 Open tmux and install plugins
-<c-b>I
