@@ -303,6 +303,7 @@ set -g mouse on
 set -g @continuum-restore 'on'
 set -g @resurrect-strategy-nvim 'dotfiles'
 set -g @resurrect-processes '~glances "~iftop -i wlp3s0" ~nethogs ~ipython3 ~ipython ~ranger'
+set -g @resurrect-capture-pane-contents 'on'
 
 # Vim bindings to swap panes
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
