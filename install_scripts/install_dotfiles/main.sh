@@ -27,6 +27,10 @@ echo -e "\n---INSTALLING RANGER FILE MANAGER---"
 echo -e "\n---CREATING SYMLINKS FOR DOTFILES---"
 python3 "$HOME/dotfiles/install_scripts/install_dotfiles/symlinks.py"
 
+# Install kitty terminal
+echo -e "\n---INSTALLING KITTY---"
+/bin/bash "$HOME/dotfiles/install_scripts/install_dotfiles/kitty.sh"
+
 # Install tmux
 echo -e "\n---INSTALLING TMUX---"
 /bin/bash "$HOME/dotfiles/install_scripts/install_dotfiles/tmux.sh"
