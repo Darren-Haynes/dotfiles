@@ -214,8 +214,7 @@ alias mullvad_Sweden_off='sudo wg-quick down mullvad-se2'
 alias mullvad_Switzerland_on='sudo wg-quick up mullvad-ch2'
 alias mullvad_Switzerland_off='sudo wg-quick down mullvad-ch2'
 
+
 # TMUX
 alias mux='tmux new-session -A -s NEOVIM'
 
-# MEDIA
-alias stv='mpv ~/Videos/Soul-Therapy-Music/*'
