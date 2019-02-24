@@ -99,6 +99,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source $HOME/.aliases
+source $HOME/.private_dotfiles/.priv_aliases
 
 # Opening new instance of termite in current directory.
 #if [[ $TERM == xterm-termite ]]; then
