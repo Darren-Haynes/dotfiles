@@ -1,0 +1,7 @@
+neovim
+pycodestyle
+pydocstyle
+pyflakes
+pylama
+pylint
+isort
