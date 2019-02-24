@@ -21,3 +21,7 @@ if [[ "$os" = "ID=elementary" || "$os" == "ID=ubuntu" ]]; then
     ln -s "$HOME/dotfiles/kitty/kitty-color-schemes" "$HOME/.config/kitty/"
     ln -s "$HOME/dotfiles/kitty/kitty.conf" "$HOME/.config/kitty/"
 fi
+
+if [[ "$os" = "ID=kali" || "$os" == "ID=debian" ]]; then
+    sudo apt-get install kitty
+fi
