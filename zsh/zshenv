@@ -14,6 +14,9 @@ export PATH=$PATH:$HOME/dotfiles/bin/
 # Local bin path
 export PATH=$HOME/.local/bin/:$PATH
 
+# private bin path
+export PATH=$HOME/.private_dotfiles/.bin:$PATH
+
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
