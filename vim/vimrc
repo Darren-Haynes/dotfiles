@@ -108,6 +108,9 @@ set ignorecase " ignore case when searching
 set smartcase
 set noswapfile
 
+" Stop autocommenting on next line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " enable mouse, sgr is better but not every term supports it
 set mouse=a
 if has('mouse_sgr')
@@ -335,8 +338,8 @@ nnoremap <leader>cp :s/\<./\u&/g <CR>
         "PYTHON PATHS
 """"""""""""""""""""""""""""""""
 
-let g:python_host_prog="$HOME/.pyenv/versions/neovim2/bin/python"
-let g:python3_host_prog="$HOME/.pyenv/versions/neovim3/bin/python"
+let g:python_host_prog="/home/darren/.pyenv/versions/neovim2/bin/python"
+let g:python3_host_prog="/home/darren/.pyenv/versions/neovim3/bin/python"
 
 """"""""""""""""""""""""""""""""
            "SAVE FOLDS
@@ -530,8 +533,8 @@ let NERDSpaceDelims=1
             "ABBREVIATIONS
 """"""""""""""""""""""""""""""""""""""
 
-"iabbrev #bb #!/bin/bash
-"iabbrev #bp #!/bin/env python
+iabbrev bb #!/bin/bash<cr>
+iabbrev bp #!/bin/env python
 iabbrev DH Darren Haynes
 iabbrev VH Veronica Haynes
 iabbrev msgb Browser.msgBox();
@@ -540,6 +543,9 @@ iabbrev h2 <h2></h2><ESC>F<i
 iabbrev h3 <h3></h3><ESC>F<i
 iabbrev h4 <h4></h4><ESC>F<i
 iabbrev h5 <h5></h5><ESC>F<i
+iabbrev ns1 nameserver 1.1.1.1
+
+source $HOME/.private_dotfiles/.priv_vimrc
 
 """"""""""""""""""""""""""""""""""""""
             "LINUXY
