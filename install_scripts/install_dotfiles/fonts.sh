@@ -4,6 +4,7 @@ sudo apt install \
   ttf-dejavu \
   fonts-powerline \
   fonts-font-awesome \
+  fonts-firacode \
   dtrx
 
 space=$(fc-list : family | grep "SpaceMono Nerd Font Mono")
