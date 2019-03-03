@@ -47,7 +47,7 @@ alias lsv='ls ~/Videos'
 # ZSH
 alias co='colorize'
 
-# VIM
+# VIM / NVIM
 alias basha='nvim ~/.bash_aliases'
 alias bashrc='nvim ~/.bashrc'
 alias vcss="nvim **/*.css"
@@ -66,6 +66,7 @@ alias vimjs='nvim  ~/.vim/after/ftplugin/javascript.vim'
 alias vimpoly="nvim ~/dotfiles/polybar/*"
 alias vimpy='nvim -p ~/.vim/after/ftplugin/python.vim'
 alias vimqute='nvim ~/dotfiles/qutebrowser/qutebrowser.conf'
+alias vimk='nvim ~/dotfiles/kitty/kitty.conf'
 alias vimrc='nvim ~/.vimrc'
 alias vimt='nvim ~/.config/termite/config'
 alias vimx='nvim ~/.Xresources'
@@ -74,10 +75,13 @@ alias vjs="nvim **/*.js"
 alias vpy="nvim **/*.py"
 alias n="nvim"
 alias v="nvim"
+alias nvim3="pyenv activate neovim3 && nvim -S"
+alias nvim2="pyenv activate neovim2 && nvim -S"
 
 # TMUX
 alias tk='tmux kill-server'
 alias td='tmux detach'
+alias mux='tmux new-session -A -s NEOVIM'
 
 # TAB VIEW FILES
 alias tabtodo='tabview ~/TODO.csv'
@@ -92,7 +96,6 @@ alias windowshot="import -screen " # then filename
 alias drawarea="import root " # then filename
 
 # PYTHON
-alias python=python3
 alias n2='pyenv activate neovim2'
 alias n3='pyenv activate neovim3'
 alias pip2up='sudo pip2 install upgrade pip'
@@ -214,7 +217,6 @@ alias mullvad_Sweden_off='sudo wg-quick down mullvad-se2'
 alias mullvad_Switzerland_on='sudo wg-quick up mullvad-ch2'
 alias mullvad_Switzerland_off='sudo wg-quick down mullvad-ch2'
 
-
-# TMUX
-alias mux='tmux new-session -A -s NEOVIM'
-
+# Kitty
+alias kitpic="kitty +kitten icat"
+alias kitdiff="kitty +kitten diff"
