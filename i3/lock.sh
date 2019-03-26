@@ -1,12 +1,6 @@
 #!/bin/bash
-
-# grep xrandr to find if more than 1 display is connected
-connected=$(xrandr | grep -c '\bconnected\b')
-
-# lock screen with a different image depending if 1 display found or more than 1 found.
-if [[ $connected -gt 1 ]];
-then
-	i3lock -i /home/darren/dotfiles/i3/aquarium.png
-else
-	i3lock -i /home/darren/dotfiles/i3/aquarium-laptop.png
-fi
+#scrot /tmp/screen.png
+#convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
+[[ -f $HOME/dotfiles/i3/lock.png ]] && convert $HOME/dotfiles/i3/aquarium-laptop.png $HOME/dotfiles/i3/lock.png -gravity center -composite -matte $HOME/dotfiles/i3/aquarium-laptop.png
+#i3lock -u -i /tmp/screen.png
+i3lock -i /home/darren/dotfiles/i3/aquarium-laptop.png --tiling
