@@ -42,6 +42,7 @@ sudo update-alternatives --config editor
 pip install neovim
 pip3 install neovim
 
+# Install after dir for ftplugins
 after_dir="$HOME/.vim/after"
 if [ ! -d "$after_dir" ]; then
   ln -s "$HOME/dotfiles/vim/after/" "$HOME/.vim/after"
@@ -50,3 +51,14 @@ if [ ! -d "$after_dir" ]; then
     echo "Skip linking $HOME/.vim/after, directory already exists."
 fi
 
+# Install universal ctags
+sudo apt install autoconf
+git clone https://github.com/universal-ctags/ctags.git
+ctags_dir="$HOME/ctags"
+"./$ctags_dir/autogen.sh"
+"./$ctags_dir/configure.sh"
+cd "$ctags_dir"
+make
+sudo make install
+cd "$HOME"
+sudo rm -rf "$ctags_dir"
