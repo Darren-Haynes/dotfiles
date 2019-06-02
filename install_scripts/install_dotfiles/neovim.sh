@@ -41,3 +41,12 @@ sudo update-alternatives --config editor
 
 pip install neovim
 pip3 install neovim
+
+after_dir="$HOME/.vim/after"
+if [ ! -d "$after_dir" ]; then
+  ln -s "$HOME/dotfiles/vim/after/" "$HOME/.vim/after"
+  echo "$HOME/.vim/after symlink created for ftplugins."
+  else
+    echo "Skip linking $HOME/.vim/after, directory already exists."
+fi
+
