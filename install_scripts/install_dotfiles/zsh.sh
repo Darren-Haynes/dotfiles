@@ -2,6 +2,7 @@
 
 # Install Zsh & oh-my-zsh
 
+sudo apt install zsh-syntax-highlighting
 sudo apt install zsh
 chsh -s "$(which zsh)" "$USER"
 
