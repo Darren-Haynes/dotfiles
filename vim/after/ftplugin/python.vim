@@ -72,3 +72,5 @@ nnoremap <buffer> <F3> :exec '!python' shellescape(@%, 1)<cr>
 " Quick run
 nnoremap <localleader><space> :QuickRun<cr>
 
+"Ale linters and fixers
+let g:ale_linters = {'python': ['pylama', 'pylint']}

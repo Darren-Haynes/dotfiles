@@ -22,3 +22,6 @@ let maplocalleader = ","
 
 " deindent code on present line
 nnoremap <localleader>d 02x$
+
+" Linting
+let b:ale_fixers = ['prettier']
