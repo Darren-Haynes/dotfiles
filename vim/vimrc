@@ -62,7 +62,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'mileszs/ack.vim'
 Plug 'thinca/vim-quickrun'
 Plug 'tpope/vim-eunuch'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'inside/vim-search-pulse'
 Plug 'machakann/vim-highlightedyank'
 
@@ -83,6 +83,9 @@ Plug 'francoiscabrol/ranger.vim'
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'wellle/tmux-complete.vim'
 
 call plug#end()
 
@@ -539,7 +542,7 @@ let NERDSpaceDelims=1
 
 " Gutentags
 " let g:gutentags_enabled = 1
-" set statusline+=%{gutentags#statusline()}
+set statusline+=%{gutentags#statusline()}
 
 """"""""""""""""""""""""""""""""""""""
             "ABBREVIATIONS
@@ -573,17 +576,17 @@ nnoremap <Leader>mc :! gcc & ./a.out<CR>
              "NEOVIM
             "TERMINAL
 """"""""""""""""""""""""""""""""""""""
-nnoremap <leader><leader> :term<CR>
-nnoremap <leader>j :split term://zsh<CR>
-nnoremap <leader>\ :vsplit term://zsh<CR>
-nnoremap <leader>t<leader> :tabnew term://zsh<CR>
-tnoremap <C-b> <C-\><C-N>:b#<CR>
-tnoremap <C-q> i<C-\><C-N>:q<CR>
-tnoremap <C-k> <C-\><C-N><C-w>k<CR>
-tnoremap <C-j> <C-\><C-N><C-w>j<CR>
-tnoremap <C-h> <C-\><C-N><C-w>h<CR>
-tnoremap <C-l> <C-\><C-N><C-w>l<CR>
-tnoremap <C-7> <C-\><C-N>
+" nnoremap <leader><leader> :term<CR>
+" nnoremap <leader>j :split term://zsh<CR>
+" nnoremap <leader>\ :vsplit term://zsh<CR>
+" nnoremap <leader>t<leader> :tabnew term://zsh<CR>
+" tnoremap <C-b> <C-\><C-N>:b#<CR>
+" tnoremap <C-q> i<C-\><C-N>:q<CR>
+" tnoremap <C-k> <C-\><C-N><C-w>k<CR>
+" tnoremap <C-j> <C-\><C-N><C-w>j<CR>
+" tnoremap <C-h> <C-\><C-N><C-w>h<CR>
+" tnoremap <C-l> <C-\><C-N><C-w>l<CR>
+" tnoremap <C-7> <C-\><C-N>
 
 nnoremap <leader>mn :term<CR>i%
 function! CCompileWithFileName()
