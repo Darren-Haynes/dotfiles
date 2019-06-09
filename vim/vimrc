@@ -19,13 +19,7 @@ call plug#begin('~/.vim/plugged')
 
 " Make Pretty
 Plug 'Matt-Deacalion/vim-systemd-syntax'
-Plug 'rafi/awesome-vim-colorschemes'
-Plug 'flazz/vim-colorschemes'
-Plug 'chriskempson/base16-vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'ryanoasis/vim-devicons'
-Plug 'cj/vim-webdevicons'
-Plug 'felixhummel/setcolors.vim'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 """ Completion, Snippets and Linting
@@ -39,7 +33,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-" Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
 Plug 'carlitux/deoplete-ternjs'
@@ -51,6 +45,7 @@ Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'arrufat/vala.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'moll/vim-node'
 
 """ Coding Productivity
 Plug 'tpope/vim-surround'
@@ -73,19 +68,17 @@ Plug 'dhruvasagar/vim-prosession'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'francoiscabrol/ranger.vim'
 
 """ Status
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'wellle/tmux-complete.vim'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'wellle/tmux-complete.vim'
 
 call plug#end()
 
@@ -111,7 +104,7 @@ set tabstop=4
 "set scrolloff=5         "show 5 lines above/below cursor
 set showbreak=↪
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set matchpairs+=<:> "especially handy for html
+" set matchpairs+=<:> "especially handy for html
 set undofile " Maintain undo history
 set undodir=~/.vim/undodir
 set ignorecase " ignore case when searching
@@ -542,7 +535,7 @@ let NERDSpaceDelims=1
 
 " Gutentags
 " let g:gutentags_enabled = 1
-set statusline+=%{gutentags#statusline()}
+" set statusline+=%{gutentags#statusline()}
 
 """"""""""""""""""""""""""""""""""""""
             "ABBREVIATIONS
