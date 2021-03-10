@@ -107,6 +107,10 @@ nnoremap <space>h <esc>:w<CR>
 nnoremap <space>qw <esc>:q<CR>
 nnoremap <space>q <esc>:q<CR>
 nnoremap <space>qa <esc>:qa<CR>
+nnoremap <C-Q> :q<CR>
+inoremap <C-Q> <esc>:q<CR>
+vnoremap <C-Q> <esc>:q<CR>
+tnoremap <C-Q> <C-\><C-n>:q<CR>
 
 """""""""""""""""""""""""""""""""""""""
            " TagBar
@@ -386,7 +390,9 @@ endfunction
 
 
 " Ctrl-S to save
-:inoremap <c-s> <c-o>:Update<CR>
+nnoremap <c-s> :w<cr>
+inoremap <c-s> <esc>:w<cr>
+vnoremap <c-s> <esc>:w<cr>
 
 """""""""""""""""""""""""""""""""""""""
             "COC SETTINGS
@@ -522,8 +528,8 @@ endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+nmap <silent> <space>cs <Plug>(coc-range-select)
+xmap <silent> <space>cs <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -567,6 +573,14 @@ tnoremap <C-j> <C-\><C-N><C-w>j<CR>
 tnoremap <C-h> <C-\><C-N><C-w>h<CR>
 tnoremap <C-l> <C-\><C-N><C-w>l<CR>
 tnoremap <C-e> <C-\><C-N>
+
+""""""""""""""""""""""""""""""""""""""
+            "COC PLUGINS
+""""""""""""""""""""""""""""""""""""""
+nnoremap <c-t> :CocCommand split-term.Toggle<CR>
+tnoremap <c-t> <C-\><C-N>:CocCommand split-term.Toggle<CR>
+inoremap <c-t> <esc>:CocCommand split-term.Toggle<CR>
+vnoremap <c-t> <esc>:CocCommand split-term.Toggle<CR>
 
 """"""""""""""""""""""""""""""""""""""
             "FILE EXPLORERS
