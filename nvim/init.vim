@@ -34,12 +34,13 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/tagbar'
 Plug 'preservim/nerdcommenter'
 Plug 'ryanoasis/vim-devicons'
-"Plug 'Yggdroot/indentLine'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 call plug#end()
 " yank text to system clipboard (requires +clipboard)
 set clipboard^=unnamedplus
-set number              " Set number lines
+set relativenumber              " Set number lines
 set confirm             " Ask for confimation messages"
 set shortmess+=aAcIws   " Hide certain messages like 'Search Hit Bottom' etc.
 set expandtab           " Tab inserts Spaces not Tabs '\t'
@@ -95,7 +96,7 @@ colorscheme deep-space
 """""""""""""""""""""""""""""""""""""""
            " SESSIONS
 """""""""""""""""""""""""""""""""""""""
-let g:prosession_dir = "~/.config/nvim//essions"
+let g:prosession_dir = "~/.config/nvim/sessions"
 nnoremap <space>pp <esc>:Prosession<space>
 nnoremap <space>po <esc>:Obsession<CR>
 nnoremap <space>pl <esc>:! ls ~/.config/nvim/sessions/<CR>
@@ -103,14 +104,10 @@ nnoremap <space>pl <esc>:! ls ~/.config/nvim/sessions/<CR>
 """""""""""""""""""""""""""""""""""""""
            " Wrist Savers
 """""""""""""""""""""""""""""""""""""""
-nnoremap <space>h <esc>:w<CR>
-nnoremap <space>qw <esc>:q<CR>
-nnoremap <space>q <esc>:q<CR>
-nnoremap <space>qa <esc>:qa<CR>
-nnoremap <C-Q> :q<CR>
-inoremap <C-Q> <esc>:q<CR>
-vnoremap <C-Q> <esc>:q<CR>
-tnoremap <C-Q> <C-\><C-n>:q<CR>
+nnoremap <C-W> :q<CR>
+inoremap <C-W> <esc>:q<CR>
+vnoremap <C-W> <esc>:q<CR>
+tnoremap <C-W> <C-\><C-n>:q<CR>
 
 """""""""""""""""""""""""""""""""""""""
            " TagBar
@@ -167,6 +164,12 @@ call denite#custom#var('buffer', 'date_format', '')
 "   winrow                      - Set Denite filter window to top
 "   vertical_preview            - Open the preview window vertically
 
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+      \ [ '.git/', '.ropeproject/', '__pycache__/*', '*.pyc', 'node_modules/',
+      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/', 'assets/'])
+
+let ignore=&wildignore
+
 let s:denite_options = {'default' : {
 \ 'split': 'floating',
 \ 'start_filter': 1,
@@ -195,11 +198,12 @@ catch
   echo 'Denite not installed. It should work after running :PlugInstall'
 endtry
 
-nmap <space>db :Denite buffer<CR>
-tmap <space>db :Denite buffer<CR>
-nmap <space>dp :DeniteProjectDir file/rec<CR>
-nnoremap <space>dg :<C-u>Denite grep:. -no-empty<CR>
-nnoremap <space>dw :<C-u>DeniteCursorWord grep:.<CR>
+nnoremap <leader>b :Denite buffer<CR>
+nnoremap <C-K><c-p> :Denite buffer<CR>
+nnoremap <C-P> :Denite buffer file/rec<CR>
+nnoremap <C-T> :Denite outline file/point<CR>
+nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+nnoremap <leader>w :<C-u>DeniteCursorWord grep:.<CR>
 
 " Define mappings while in 'filter' mode
 "   <C-o>         - Switch to normal mode inside of search results
@@ -259,6 +263,15 @@ function! s:denite_my_settings() abort
   \ denite#do_map('do_action', 'split')
 endfunction
 
+
+"""""""""""""""""""""""""""""""""""""""
+           " MARKDOWN PREVIEW
+"""""""""""""""""""""""""""""""""""""""
+
+nnoremap <space>mp :MarkdownPreview<cr>
+nnoremap <space>ms :MarkdownPreviewStop<cr>
+nnoremap <space>mt :MarkdownPreviewToggle<cr>
+
 """""""""""""""""""""""""""""""""""""""
            " WINDOW MANAGEMENT
 """""""""""""""""""""""""""""""""""""""
@@ -268,10 +281,11 @@ set splitright
 set splitbelow
 
 "Set leader key to spacebar. You know it makes sense
-let mapleader = " "
+let mapleader = ","
 
 " Open window in new tab (My preferred way to 'zoom' a window.)
 nnoremap <space>z :tabnew %<CR>
+nnoremap <c-k>z :tabnew %<CR>
 
 " make horizontal split full height
 nnoremap <space>ru <C-w><C-_>
@@ -324,10 +338,10 @@ function! WinMove(key)
     endif
 endfunction
 
-nnoremap <silent> <C-h> :call WinMove('h')<CR>
-nnoremap <silent> <C-j> :call WinMove('j')<CR>
-nnoremap <silent> <C-k> :call WinMove('k')<CR>
-nnoremap <silent> <C-l> :call WinMove('l')<CR>
+nnoremap <silent> <M-h> :call WinMove('h')<CR>
+nnoremap <silent> <M-j> :call WinMove('j')<CR>
+nnoremap <silent> <M-k> :call WinMove('k')<CR>
+nnoremap <silent> <M-l> :call WinMove('l')<CR>
 
 let g:bclose_no_plugin_maps=0
 nnoremap <space>qb :Bclose<CR>
@@ -355,14 +369,23 @@ nnoremap <space>sk :!source ~/.config/kitty/kitty.conf<CR>
 
 
 " Open config files in new tab
-nnoremap <space>ev :tabnew ~/.config/nvim/init.vim<CR>
-nnoremap <space>eh :tabnew ~/.config/nvim/after/ftplugin/html.vim<CR>
-nnoremap <space>ea :tabnew ~/.aliases<CR>
-nnoremap <space>eb :tabnew ~/.bashrc<CR>
-nnoremap <space>ek :tabnew ~/.config/kitty/kitty.conf<CR>
-nnoremap <space>ez :tabnew ~/.zshrc<CR>
-nnoremap <space>er :tabnew ~/.config/ranger/rc.conf<CR>
-nnoremap <space>ex :tabnew ~/.Xresources<CR>
+nnoremap <space>eV :tabnew ~/.config/nvim/init.vim<CR>
+nnoremap <space>eH :tabnew ~/.config/nvim/after/ftplugin/html.vim<CR>
+nnoremap <space>eA :tabnew ~/.aliases<CR>
+nnoremap <space>eB :tabnew ~/.bashrc<CR>
+nnoremap <space>eK :tabnew ~/.config/kitty/kitty.conf<CR>
+nnoremap <space>eZ :tabnew ~/.zshrc<CR>
+nnoremap <space>eR :tabnew ~/.config/ranger/rc.conf<CR>
+nnoremap <space>eX :tabnew ~/.Xresources<CR>
+
+" Open config files in buffer
+nnoremap <space>ev :e ~/.config/nvim/init.vim<CR>
+nnoremap <space>eh :e ~/.config/nvim/after/ftplugin/html.vim<CR>
+nnoremap <space>ea :e ~/.aliases<CR>
+nnoremap <space>eb :e ~/.bashrc<CR>
+nnoremap <space>ek :e ~/.config/kitty/kitty.conf<CR>
+nnoremap <space>ez :e ~/.zshrc<CR>
+nnoremap <space>er :e ~/.config/ranger/rc.conf<CR>
 
 """""""""""""""""""""""""""""""""""""""
             "SETTINGS
@@ -484,8 +507,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <space>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <space>cf  <Plug>(coc-format-selected)
-nmap <space>cf  <Plug>(coc-format-selected)
+xmap <leader>cf  <Plug>(coc-format-selected)
+nmap <leader>cf  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -497,13 +520,13 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<space>aap` for current paragraph
-xmap <space>ca  <Plug>(coc-codeaction-selected)
-nmap <space>ca  <Plug>(coc-codeaction-selected)
+xmap <leader>ca  <Plug>(coc-codeaction-selected)
+nmap <leader>ca  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <space>cb  <Plug>(coc-codeaction)
+nmap <leader>cb  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <space>cf  <Plug>(coc-fix-current)
+nmap <leader>cf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -528,14 +551,14 @@ endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <space>cs <Plug>(coc-range-select)
-xmap <silent> <space>cs <Plug>(coc-range-select)
+nmap <silent> <leader>cs <Plug>(coc-range-select)
+xmap <silent> <leader>cs <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vnoremap <space>cp  <Plug>(coc-format-selected)
-nnoremap <space>cp  <Plug>(coc-format-selected)
+vnoremap <leader>cp  <Plug>(coc-format-selected)
+nnoremap <leader>cp  <Plug>(coc-format-selected)
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
@@ -550,44 +573,48 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>ca  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>ce  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>cc  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>co  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>cs  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+" Search workleader symbols.
+nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>cj  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>ck  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>cp  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>cm  :<C-u>CocList marketplace<CR>
+nnoremap <silent><nowait> <leader>cm  :<C-u>CocList marketplace<CR>
+
+nnoremap <silent><nowait> <C-K><C-T>  :<C-u>CocList --tab colors<CR>
+nnoremap <silent><nowait> <C-K>t      :<C-u>CocList --tab colors<CR>
 
 tnoremap <C-k> <C-\><C-N><C-w>k<CR>
-tnoremap <C-j> <C-\><C-N><C-w>j<CR>
-tnoremap <C-h> <C-\><C-N><C-w>h<CR>
-tnoremap <C-l> <C-\><C-N><C-w>l<CR>
-tnoremap <C-e> <C-\><C-N>
+tnoremap <M-j> <C-\><C-N><C-w>j<CR>
+tnoremap <M-h> <C-\><C-N><C-w>h<CR>
+tnoremap <M-l> <C-\><C-N><C-w>l<CR>
+tnoremap <M-e> <C-\><C-N>
 
 """"""""""""""""""""""""""""""""""""""
             "COC PLUGINS
 """"""""""""""""""""""""""""""""""""""
-nnoremap <c-t> :CocCommand split-term.Toggle<CR>
-tnoremap <c-t> <C-\><C-N>:CocCommand split-term.Toggle<CR>
-inoremap <c-t> <esc>:CocCommand split-term.Toggle<CR>
-vnoremap <c-t> <esc>:CocCommand split-term.Toggle<CR>
+nnoremap <s-p> :CocList --top commands<cr>
+nnoremap <leader>t :CocCommand split-term.Toggle<CR>
+tnoremap <leader>t <C-\><C-N>:CocCommand split-term.Toggle<CR>
+inoremap <leader>t <esc>:CocCommand split-term.Toggle<CR>
+vnoremap <leader>t <esc>:CocCommand split-term.Toggle<CR>
 
 """"""""""""""""""""""""""""""""""""""
             "FILE EXPLORERS
 """"""""""""""""""""""""""""""""""""""
 
-nnoremap <space>fe :CocCommand explorer<CR>
-nnoremap <space>fa :call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+nnoremap <leader>e :CocCommand explorer<CR>
+nnoremap <leader>fa :call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
 let g:coc_explorer_global_presets = {
 \   '.vim': {
 \     'root-uri': '~/.vim',
@@ -643,6 +670,41 @@ nnoremap <space>el :CocList explPresets
 let g:ranger_map_keys = 0
 nnoremap <space>fr :Ranger<CR>
 let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
+
+""""""""""""""""""""""""""""""""""""""
+            "NERD Commenter
+""""""""""""""""""""""""""""""""""""""
+" Create default mappings
+let g:NERDCreateDefaultMappings = 0
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+nnoremap <silent> <c-_> :call NERDComment('n', 'toggle')<cr>
+vnoremap <silent> <c-_> :call NERDComment('x', 'toggle')<cr>
+nnoremap <silent> <M-/> :call NERDComment('n', 'Sexy')<cr>
+vnoremap <silent> <M-/> :call NERDComment('x', 'Sexy')<cr>
 
 """"""""""""""""""""""""""""""""""""""
             "WHITE SPACE
