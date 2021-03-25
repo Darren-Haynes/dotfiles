@@ -338,13 +338,15 @@ function! WinMove(key)
     endif
 endfunction
 
-nnoremap <silent> <M-h> :call WinMove('h')<CR>
-nnoremap <silent> <M-j> :call WinMove('j')<CR>
-nnoremap <silent> <M-k> :call WinMove('k')<CR>
-nnoremap <silent> <M-l> :call WinMove('l')<CR>
+nnoremap <silent> <m-h> :call WinMove('h')<CR>
+nnoremap <silent> <m-j> :call WinMove('j')<CR>
+nnoremap <silent> <m-k> :call WinMove('k')<CR>
+nnoremap <silent> <m-l> :call WinMove('l')<CR>
+nnoremap <silent> <c-\> :call WinMove('l')<CR>
 
 let g:bclose_no_plugin_maps=0
 nnoremap <space>qb :Bclose<CR>
+nnoremap <space>qa :qa<CR>
 
 """""""""""""""""""""""""""""""""""""""
            " TAB MANAGEMENT
@@ -594,7 +596,7 @@ nnoremap <silent><nowait> <leader>cm  :<C-u>CocList marketplace<CR>
 nnoremap <silent><nowait> <C-K><C-T>  :<C-u>CocList --tab colors<CR>
 nnoremap <silent><nowait> <C-K>t      :<C-u>CocList --tab colors<CR>
 
-tnoremap <C-k> <C-\><C-N><C-w>k<CR>
+tnoremap <M-k> <C-\><C-N><C-w>k<CR>
 tnoremap <M-j> <C-\><C-N><C-w>j<CR>
 tnoremap <M-h> <C-\><C-N><C-w>h<CR>
 tnoremap <M-l> <C-\><C-N><C-w>l<CR>
@@ -604,7 +606,7 @@ tnoremap <M-e> <C-\><C-N>
             "COC PLUGINS
 """"""""""""""""""""""""""""""""""""""
 nnoremap <s-p> :CocList --top commands<cr>
-nnoremap <leader>t :CocCommand split-term.Toggle<CR>
+nnoremap <c-`>t :CocCommand split-term.Toggle<CR>
 tnoremap <leader>t <C-\><C-N>:CocCommand split-term.Toggle<CR>
 inoremap <leader>t <esc>:CocCommand split-term.Toggle<CR>
 vnoremap <leader>t <esc>:CocCommand split-term.Toggle<CR>
@@ -613,7 +615,7 @@ vnoremap <leader>t <esc>:CocCommand split-term.Toggle<CR>
             "FILE EXPLORERS
 """"""""""""""""""""""""""""""""""""""
 
-nnoremap <leader>e :CocCommand explorer<CR>
+nnoremap <c-e> :CocCommand explorer<CR>
 nnoremap <leader>fa :call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
 let g:coc_explorer_global_presets = {
 \   '.vim': {
