@@ -199,7 +199,7 @@ catch
 endtry
 
 nnoremap <leader>b :Denite buffer<CR>
-nnoremap <C-K><c-p> :Denite buffer<CR>
+nnoremap <space>k<space>p :Denite buffer<CR>
 nnoremap <C-P> :Denite buffer file/rec<CR>
 nnoremap <C-T> :Denite outline file/point<CR>
 nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
@@ -285,7 +285,6 @@ let mapleader = ","
 
 " Open window in new tab (My preferred way to 'zoom' a window.)
 nnoremap <space>z :tabnew %<CR>
-nnoremap <c-k>z :tabnew %<CR>
 
 " make horizontal split full height
 nnoremap <space>ru <C-w><C-_>
@@ -338,10 +337,10 @@ function! WinMove(key)
     endif
 endfunction
 
-nnoremap <silent> <m-h> :call WinMove('h')<CR>
-nnoremap <silent> <m-j> :call WinMove('j')<CR>
-nnoremap <silent> <m-k> :call WinMove('k')<CR>
-nnoremap <silent> <m-l> :call WinMove('l')<CR>
+nnoremap <silent> <c-h> :call WinMove('h')<CR>
+nnoremap <silent> <c-j> :call WinMove('j')<CR>
+nnoremap <silent> <c-k> :call WinMove('k')<CR>
+nnoremap <silent> <c-l> :call WinMove('l')<CR>
 nnoremap <silent> <c-\> :call WinMove('l')<CR>
 
 let g:bclose_no_plugin_maps=0
@@ -593,23 +592,22 @@ nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>cm  :<C-u>CocList marketplace<CR>
 
-nnoremap <silent><nowait> <C-K><C-T>  :<C-u>CocList --tab colors<CR>
-nnoremap <silent><nowait> <C-K>t      :<C-u>CocList --tab colors<CR>
+nnoremap <silent><nowait> <space>k<space>t  :<C-u>Denite colorscheme<CR>
 
-tnoremap <M-k> <C-\><C-N><C-w>k<CR>
-tnoremap <M-j> <C-\><C-N><C-w>j<CR>
-tnoremap <M-h> <C-\><C-N><C-w>h<CR>
-tnoremap <M-l> <C-\><C-N><C-w>l<CR>
-tnoremap <M-e> <C-\><C-N>
+tnoremap <c-k> <C-\><C-N><C-w>k<CR>
+tnoremap <c-j> <C-\><C-N><C-w>j<CR>
+tnoremap <c-h> <C-\><C-N><C-w>h<CR>
+tnoremap <c-l> <C-\><C-N><C-w>l<CR>
+tnoremap <c-e> <C-\><C-N>
 
 """"""""""""""""""""""""""""""""""""""
             "COC PLUGINS
 """"""""""""""""""""""""""""""""""""""
-nnoremap <s-p> :CocList --top commands<cr>
-nnoremap <c-`>t :CocCommand split-term.Toggle<CR>
-tnoremap <leader>t <C-\><C-N>:CocCommand split-term.Toggle<CR>
-inoremap <leader>t <esc>:CocCommand split-term.Toggle<CR>
-vnoremap <leader>t <esc>:CocCommand split-term.Toggle<CR>
+nnoremap <leader>cp :CocList --top commands<cr>
+nnoremap <space>` :CocCommand split-term.Toggle<CR>
+tnoremap <space>` <C-\><C-N>:CocCommand split-term.Toggle<CR>
+inoremap <space>` <esc>:CocCommand split-term.Toggle<CR>
+vnoremap <space>` <esc>:CocCommand split-term.Toggle<CR>
 
 """"""""""""""""""""""""""""""""""""""
             "FILE EXPLORERS
