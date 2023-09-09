@@ -1,5 +1,0 @@
-shellcheck | bash linter for vim ale linting
-python pip
-pip install flake8 | linting for python
-pass
-anki
