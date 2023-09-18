@@ -7,42 +7,28 @@
 
 # NAVIGATION
 alias .bash='cd ~/.bash_scripts'
-alias D='cd ~/Downloads'
-alias M='cd ~/Music'
-alias P='cd ~/Pictures'
-alias S='cd ~/SpiderOak\ Hive/'
-alias U='cd /usr'
-alias V='cd ~/Videos'
-alias cdmutt='cd ~/dotfiles/mutt'
-alias cdusb='cd /dev/usb/'
-alias d='cd ~/Documents'
-alias dot='cd ~/dotfiles'
-alias filetypes='cd ~/dotfiles/vim/after/ftplugin'
-alias fonts='cd /usr/share/fonts/'
-alias i3wm='cd ~/dotfiles/i3'
-alias otf='cd /usr/share/fonts/OTF'
-alias qute='cd ~/dotfiles/qutebrowser'
-alias rof='cd ~/dotfiles/rofi'
-alias sites='cd ~/SpiderOak\ Hive/Websites/Sites'
-alias term='cd ~/dotfiles/termite/'
-alias ttf='cd /usr/share/fonts/TTF'
-alias usb='cd /dev/usb/'
-alias web='cd ~/SpiderOak\ Hive/Websites'
+alias cdD='cd ~/Downloads'
+alias cdM='cd ~/Music'
+alias cdP='cd ~/Pictures'
+alias cdV='cd ~/Videos'
+alias cdoc='cd ~/Documents'
+alias dot='cdot ~/dotfiles'
+alias cdfonts='cd /usr/share/fonts/'
 
 # LISTING
 alias a='ls -A'
 alias cls='clear && ls'
 alias l='ls -l'
 alias la='ls -lA'
-alias lsd='ls ~/Downloads'
+alias lsD='ls ~/Downloads'
+alias lsM='ls ~/Music'
+alias lsP='ls ~/Pictures'
+alias lsV='ls ~/Videos'
+alias lsdoc='ls ~/Documents'
 alias lsdot='ls ~/dotfiles'
 alias lsfonts='ls /usr/share/fonts/'
 alias lsh='ls ~/'
 alias lsl='ls -al | lolcat'
-alias lsm='ls | more'
-alias lsm='ls ~/Music'
-alias lsp='ls ~/Pictures'
-alias lsv='ls ~/Videos'
 
 # ZSH
 alias co='colorize'
@@ -53,40 +39,10 @@ alias bashrc='nvim ~/.bashrc'
 alias vcss="nvim **/*.css"
 alias vhtml="nvim **/*.html"
 alias vima='nvim ~/.aliases'
-alias vimadd='nvim ~/Documents/contacts.csv'
 alias vimbash='nvim ~/.bash_scripts/**/*'
-alias vimcss='nvim ~/.vim/after/ftplugin/css.vim'
-alias vimdot="nvim ~/dotfiles/*rc  ~/dotfiles/*e*  ~/dotfiles/i3/* ~/dotfiles/vim/after/ftplugin/*"
-alias vimerror="nvim -V20 2>&1 | tee logfile"
-alias vimhtml='nvim ~/.vim/after/ftplugin/html.vim'
-alias vimi3='nvim ~/.config/i3/config'
-alias vimi3b='nvim ~/.config/i3/i3blocks.conf'
-alias vimip='nvim ~/.ipython/profile_default/ipython_config.py'
-alias vimjs='nvim  ~/.vim/after/ftplugin/javascript.vim'
-alias vimpoly="nvim ~/dotfiles/polybar/*"
-alias vimpy='nvim -p ~/.vim/after/ftplugin/python.vim'
-alias vimqute='nvim ~/dotfiles/qutebrowser/qutebrowser.conf'
-alias vimk='nvim ~/dotfiles/kitty/kitty.conf'
 alias vimrc='nvim ~/.vimrc'
-alias vimt='nvim ~/.config/termite/config'
 alias vimx='nvim ~/.Xresources'
 alias vimz='nvim ~/.zshrc'
-alias vjs="nvim **/*.js"
-alias vpy="nvim **/*.py"
-alias n="nvim"
-alias v="nvim"
-alias nvim3="pyenv activate neovim3 && nvim -S"
-alias nvim2="pyenv activate neovim2 && nvim -S"
-
-# TMUX
-alias tk='tmux kill-server'
-alias td='tmux detach'
-alias mux='tmux new-session -A -s NEOVIM'
-
-# TAB VIEW FILES
-alias tabtodo='tabview ~/TODO.csv'
-alias tabadd='tabview ~/Documents/contacts.csv'
-alias tabcommands='tabview ~/Arch/useful_commands.csv'
 
 # IMAGE MAGICK
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
@@ -94,27 +50,6 @@ alias r180="convert -rotate 180 " # then 'from.jpg' to 'to.jpg'
 alias screenshot='. ~/.bash_scripts/screenshot.sh'
 alias windowshot="import -screen " # then filename
 alias drawarea="import root " # then filename
-
-# PYTHON
-alias n2='pyenv activate neovim2'
-alias n3='pyenv activate neovim3'
-alias pip2up='sudo pip2 install upgrade pip'
-alias pip3up='sudo pip3 install upgrade pip'
-alias ve2.7='virtualenv --python=python2.7 '
-alias ve3.4='virtualenv --python=python3.4 '
-alias ve3.5='virtualenv --python=python3.5 '
-alias ve3.6='virtualenv --python=python3.6 '
-alias ve3.7='virtualenv --python=python3.7 '
-alias ipy='clear && ipython'
-alias p='python'
-
-# Django
-alias djm='python manage.py migrate'
-alias djmake='python manage.py makemigrations'
-alias djmm='python manage.py makemigrations && python manage.py migrate'
-alias djr='python manage.py runserver'
-alias djsh='python manage.py shell'
-alias djt='python manage.py test '
 
 # VOLUME AND BRIGHTNESS
 alias b10='xrandr --output eDP-1  --brightness 1.0'
@@ -149,16 +84,8 @@ alias ga='git add --all .'
 alias gb='git branch'
 alias gd='git diff '
 alias gc="git commit -m "
-alias gp='pass -c ssh && git push origin master'
-alias gphm='git push heroku master'
 alias gpom='git push origin master'
 alias gst='git status'
-
-# OPEN PROGRAMS
-alias mull='sudo mullvad'
-alias mu='mupdf'
-alias chrome="google-chrome-stable --force-device-scale-factor=1.5"
-alias neo='neofetch --source wallpaper --backend w3m'
 
 # LINUX SHORTCUTS
 alias ag='alias | grep '
@@ -167,25 +94,17 @@ alias copy='xsel --clipboard < '
 alias ctl='systemctl '
 alias dg='systemctl | grep '
 alias dimension='eval $(slop -t 0 -b 1) && notify-send "Selection info" "Area: ${W} x ${Y}px \n Position: X = ${X}px, Y = ${Y}px" && echo ${W}x${H} | xsel -bi'
-alias e='exit'
 alias fontlist="fc-list : family | sort"
-alias h='history'
 alias hg='history | grep '
 alias now="date '+%R'"
-alias q='exit'
 alias ramsort="ps -e -o pid,vsz,comm= | sort -n -k 2"
-alias rms='rm -i .*.*sw?'
-alias rsp='sudo rsync -r --progress'
-alias sa='alias | grep '
 alias sortsize='du -h --max-depth=0 * | sort -h'
 alias xinfo='xrandr --nograb --current'
 alias xr='xrdb ~/dotfiles/X/Xresources'
-alias restart_trackpad='sudo bash /lib/systemd/system-sleep/touchpad'
 
 #APTITUDE
 alias update='sudo apt update && sudo apt upgrade'
 alias upgradable='apt list --upgradable'
-alias si='sudo apt install '
 alias as='apt-cache search '
 
 #UBUNTU
@@ -193,30 +112,15 @@ alias intel="sudo prime-select intel"
 alias nvidia="sudo prime-select nvidia"
 alias which_chip='glxinfo | egrep "OpenGL vendor|OpenGL renderer*"'
 
-#ELEMENTARY OS
-alias km="killall pantheon-mail && ps -aux | grep -i mail"
-
 # SOURCING
-alias sal='source ~/.aliases'
+alias soa='source ~/.aliases'
+alias soz='source ~/.zshrc'
 
 # NETWORKING
 alias myip='curl ifconfig.me'
 alias netoff='nmcli networking off'
 alias neton='nmcli networking on'
-alias phone_wifi="nmcli dev wifi connect \"Darren's iPhone\" password "
-alias starbucks='nmcli dev wifi connect "Google Starbucks"'
 alias wifis='nmcli dev wifi list'
 alias wificon='nmcli connection show | head -2 '
 alias wifioff='nmcli radio wifi off'
 alias wifion='nmcli radio wifi on'
-alias bing='ping bing.com'
-alias mullvad_LA_on='sudo wg-quick up mullvad-us2'
-alias mullvad_LA_off='sudo wg-quick down mullvad-us2'
-alias mullvad_Sweden_on='sudo wg-quick up mullvad-se2'
-alias mullvad_Sweden_off='sudo wg-quick down mullvad-se2'
-alias mullvad_Switzerland_on='sudo wg-quick up mullvad-ch2'
-alias mullvad_Switzerland_off='sudo wg-quick down mullvad-ch2'
-
-# Kitty
-alias kitpic="kitty +kitten icat"
-alias kitdiff="kitty +kitten diff"
