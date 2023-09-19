@@ -8,14 +8,6 @@
 export VISUAL=vim
 export EDITOR=vim
 
-# Python2 virtualenvwrapper
-# export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
-# export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv2
-
-# Python3 virtualenvwrapper
-#export WORKON_HOME=~/.virtualenvs
-#source /usr/bin/virtualenvwrapper.sh
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
