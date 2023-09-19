@@ -5,7 +5,6 @@ set showbreak=+++	" Wrap-broken line prefix
 set showmatch	" Highlight matching brace
 set visualbell	" Use visual bell (no beeping)
 set ruler	" Show row and column ruler information
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 
 " Toggle relative or absolute number lines
 nnoremap <leader>tn :call NumberToggle()<CR>
