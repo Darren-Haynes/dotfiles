@@ -5,13 +5,42 @@ set showbreak=+++	" Wrap-broken line prefix
 set showmatch	" Highlight matching brace
 set visualbell	" Use visual bell (no beeping)
 set ruler	" Show row and column ruler information
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 
-" Search
+" Toggle relative or absolute number lines
+nnoremap <leader>tn :call NumberToggle()<CR>
+
+function! NumberToggle()
+    if(&nu == 1)
+        set nu!
+        set rnu
+    else
+        set nornu
+        set nu
+    endif
+endfunction
+
+" Search / Match
 set hlsearch	" Highlight all search results
 set smartcase	" Enable smart-case search
 set ignorecase	" Always case-insensitive
 set incsearch	" Searches for strings incrementally
-set wildignore+=*.pdf,*.o,*.obj,*.jpg,*.png,*.mp4,*.mp3,*.ini
+set matchpairs+=<:> "especially handy for html
+set wildmenu
+set wildignore+=*/tmp/*,*.so,*.zip               " Linux
+set wildignore+=*.pyc,*.out                      " Compiled files
+set wildignore+=__pycache__			 " Py cache folder
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.mp4,*.mp3			 " Media
+set wildignore+=*.pdf,*.o,*.obj,*.ini		 " Other
+
+" Toggle highlight search
+let hlstate=0
+nnoremap <leader>hl :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr><cr>
+
 
 " Indent
 set autoindent	" Auto-indent new lines
@@ -20,9 +49,14 @@ set smartindent	" Enable smart-indent
 set smarttab	" Enable smart-tabs
 set softtabstop=4	" Number of spaces per Tab
  
-" Advanced
+" Undo
+set undofile	" Maintain undo history
+set undodir=~/.config/vim/.undo	" Undo folder
 set undolevels=1000	" Number of undo levels
+
+" Editing
 set backspace=indent,eol,start	" Backspace behaviour
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Stop autocommenting on next line
 
 " Use powershell on windows
 if has('win64')
@@ -56,6 +90,40 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-"Splits
+" Splits
 set splitbelow
 set splitright
+
+" make horizontal split full height
+nnoremap <leader>ru <C-w><C-_>
+" make vertical split full width
+nnoremap <leader>rw <C-w>\|
+" make split full screen (full width and height)
+nnoremap <leader>rf <C-w><C-_><C-w>\|
+" make splits equal size
+nnoremap <leader>r= <C-w>=
+
+" increase width by 5
+nnoremap <leader>rl :vertical resize +5<CR>
+" decrease width by 5
+nnoremap <leader>rh :vertical resize -5<CR>
+" increase height by 5
+nnoremap <leader>rk :res +5<CR>
+" decrease height by 5
+nnoremap <leader>rj :res -5<CR>
+
+" increase width by 1
+nnoremap <leader>rL :vertical resize +1<CR>
+" decrease width by 1
+nnoremap <leader>rH :vertical resize -1<CR>
+" increase height by 1
+nnoremap <leader>rK :res +1<CR>
+" decrease height by 1
+nnoremap <leader>rJ :res -1<CR>
+
+" Spell Check
+nnoremap <leader>sp :setlocal spell! spelllang=en_us<CR>
+nnoremap <leader>sl ]s
+nnoremap <leader>sh [s
+nnoremap <leader>sa zg
+nnoremap <leader>sn z=
