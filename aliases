@@ -43,6 +43,7 @@ alias vimbash='nvim ~/.bash_scripts/**/*'
 alias vimrc='nvim ~/.vimrc'
 alias vimx='nvim ~/.Xresources'
 alias vimz='nvim ~/.zshrc'
+alias nv='/usr/local/bin/nvim.appimage'
 
 # IMAGE MAGICK
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
