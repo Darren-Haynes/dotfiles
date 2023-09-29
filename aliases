@@ -12,7 +12,8 @@ alias cdM='cd ~/Music'
 alias cdP='cd ~/Pictures'
 alias cdV='cd ~/Videos'
 alias cdoc='cd ~/Documents'
-alias dot='cdot ~/dotfiles'
+alias cdot='cd ~/dotfiles'
+alias cdc='cd ~/.config'
 alias cdfonts='cd /usr/share/fonts/'
 
 # LISTING
@@ -34,6 +35,7 @@ alias lsl='ls -al | lolcat'
 alias co='colorize'
 
 # VIM / NVIM
+alias nvim='/usr/local/bin/nvim.appimage'
 alias basha='nvim ~/.bash_aliases'
 alias bashrc='nvim ~/.bashrc'
 alias vcss="nvim **/*.css"
@@ -43,6 +45,7 @@ alias vimbash='nvim ~/.bash_scripts/**/*'
 alias vimrc='nvim ~/.vimrc'
 alias vimx='nvim ~/.Xresources'
 alias vimz='nvim ~/.zshrc'
+alias vimconfigs='nvim ~/dotfiles/**/*'
 
 # IMAGE MAGICK
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
