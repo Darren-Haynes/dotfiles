@@ -3,7 +3,7 @@
 bash $HOME/.config/bspwm/.fehbg 
 
 pgrep -x sxhkd > /dev/null || sxhkd &
-$HOME/.config/bspwm/polybar/launch.sh
+# $HOME/.config/bspwm/polybar/launch.sh
 
 bspc monitor -d '' '' '' '' '' ''
 
