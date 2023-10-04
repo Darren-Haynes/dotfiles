@@ -1,4 +1,4 @@
-#      _    _     ___    _    ____
+#      _    _    ___    _    ____
 #     / \  | |   |_ _|  / \  / ___|
 #    / _ \ | |    | |  / _ \ \___ \
 #   / ___ \| |___ | | / ___ \ ___)
@@ -34,8 +34,11 @@ alias lsl='ls -al | lolcat'
 # ZSH
 alias co='colorize'
 
-# VIM / NVIM
+# Execute
 alias nvim='/usr/local/bin/nvim.appimage'
+alias kitty='~/.local/kitty.app/bin/kitty'
+
+# VIM / NVIM
 alias basha='nvim ~/.bash_aliases'
 alias bashrc='nvim ~/.bashrc'
 alias vcss="nvim **/*.css"
@@ -46,6 +49,8 @@ alias vimrc='nvim ~/.vimrc'
 alias vimx='nvim ~/.Xresources'
 alias vimz='nvim ~/.zshrc'
 alias vimconfigs='nvim ~/dotfiles/**/*'
+alias icat="kitty +kitten icat"
+
 
 # IMAGE MAGICK
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
