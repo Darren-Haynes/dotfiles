@@ -1,0 +1,6 @@
+set previewer ctpv
+set cleaner ctpvclear
+set hidden!
+&ctpv -s $id
+&ctpvquit $id
+
