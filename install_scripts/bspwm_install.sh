@@ -17,4 +17,12 @@ sudo apt-get install -y \
     thunar \
     gpick \
     vim \
-    man
+    man \
+    mpv
+
+source "$HOME/Dotfiles/install_scripts/fonts.sh"
+source "$HOME/Dotfiles/install_scripts/neovim.sh"
+source "$HOME/Dotfiles/install_scripts/kitty.sh"
+source "$HOME/Dotfiles/install_scripts/chrome.sh"
+source "$HOME/Dotfiles/install_scripts/lf.sh"
+
