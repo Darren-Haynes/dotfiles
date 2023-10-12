@@ -11,8 +11,29 @@ if [[ "$os" = "ID=debian" ]]; then
     wget -P $working_dir $url
     tar -xf "$working_dir/lf-linux-amd64.tar.gz" -C $working_dir
     sudo mv "$working_dir/lf" /usr/local/bin/
-    rm -rf $working_dir
     echo "LF version $(lf --version) has been installed to /usr/local/bin"
+    ln -s $HOME/Dotfiles/lf $HOME/.config/
+
+    # Install cptv for images previews in LF.
+    sudo apt-get install -y \
+	libmagic-dev \
+	libssl-dev \
+	build-essential \
+	bat \ # syntax highlighting
+	file \
+	w3m \ # html highlighting
+	poppler-utils # pdf preview
+
+    mkdir $HOME/GitClones
+    cd $HOME/GitClones
+    git clone https://github.com/NikitaIvanovV/ctpv
+    cd ctpv
+    make
+    sudo make install
+    cd $HOME
+    ln -s $HOME/Dotfiles/cptv $HOME/.config/
+    echo "CPTV installed for LF previews."
+     
 fi
 
 
