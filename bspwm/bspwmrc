@@ -45,12 +45,12 @@ fi
 sxhkd &
 
 # Enable power management
-# xfce4-power-manager &
+xfce4-power-manager &
 
 # start compositor
 #while pgrep -u $UID -x compton >/dev/null; do sleep 1; done
 # compton -b
-
+picom --config $HOME/.config/bspwm/picom.conf
 # replace neovim colorscheme
 # sed -i "s/theme =.*$/theme = \"tokyonight\",/g" $HOME/.config/nvim/lua/custom/chadrc.lua 
 # change xfce4-terminal colorscheme
