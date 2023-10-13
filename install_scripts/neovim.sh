@@ -16,6 +16,7 @@ if [[ "$os" = "ID=debian" ]]; then
     chmod u+x "$working_dir/nvim.appimage"
     sudo mv "$working_dir/nvim.appimage" /usr/local/bin
     rm -rf $working_dir
+    ln -s $HOME/Dotfiles/nvim $HOME/.config/
     echo "Neovim v0.9.4 has been install to /usr/local/bin"
 fi
 

@@ -18,7 +18,13 @@ sudo apt-get install -y \
     gpick \
     vim \
     man \
-    mpv
+    mpv \
+    lxappearance
+
+ln -s $HOME/Dotfiles/bspwm $HOME/.config
+ln -s $HOME/Dotfiles/sxkhd $HOME/.config
+ln -s $HOME/Dotfiles/X/xinitrc $HOME/.xinitrc
+ln -s $HOME/Dotfiles/aliases $HOME/.aliases
 
 source "$HOME/Dotfiles/install_scripts/fonts.sh"
 source "$HOME/Dotfiles/install_scripts/neovim.sh"
