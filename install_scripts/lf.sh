@@ -19,10 +19,10 @@ if [[ "$os" = "ID=debian" ]]; then
 	libmagic-dev \
 	libssl-dev \
 	build-essential \
-	bat \ # syntax highlighting
+	bat \
 	file \
-	w3m \ # html highlighting
-	poppler-utils # pdf preview
+	w3m \
+	poppler-utils
 
     mkdir $HOME/GitClones
     cd $HOME/GitClones
