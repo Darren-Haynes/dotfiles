@@ -28,3 +28,4 @@ dotvenv
 Session.vim
 VENV/
 tags
+nvim/lazy-lock.json
