@@ -21,8 +21,11 @@ sudo apt-get install -y \
     mpv \
     lxappearance
 
+if [ ! "$HOME/.config" ]; then 
+    mkdir $HOME/.config
+fi
 ln -s $HOME/Dotfiles/bspwm $HOME/.config/
-ln -s $HOME/Dotfiles/sxkhd $HOME/.config/
+ln -s $HOME/Dotfiles/sxhkd $HOME/.config/
 ln -s $HOME/Dotfiles/X/xinitrc $HOME/.xinitrc
 ln -s $HOME/Dotfiles/aliases $HOME/.aliases
 
