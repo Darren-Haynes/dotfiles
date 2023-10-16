@@ -25,6 +25,8 @@ fi
 if [[ "$os" = "ID=kali" || "$os" == "ID=debian" ]]; then
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     sudo mv $HOME/.local/kitty.app /usr/local/bin/
-    rmdir $HOME/.config/kitty
+    if [ -d "$HOME/.config/kitty" ]; then
+	rm -r $HOME/.config/kitty
+    fi
     ln -s $HOME/Dotfiles/kitty $HOME/.config/
 fi

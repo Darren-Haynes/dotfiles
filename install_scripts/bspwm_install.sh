@@ -21,7 +21,7 @@ sudo apt-get install -y \
     mpv \
     lxappearance
 
-if [ ! "$HOME/.config" ]; then 
+if [ ! -d "$HOME/.config" ]; then 
     mkdir $HOME/.config
 fi
 ln -s $HOME/Dotfiles/bspwm $HOME/.config/
