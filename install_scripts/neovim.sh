@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # Install and configure Neovim
-sudo apt install -y python3-neovim
-
 os=$(grep -E ^ID= /etc/os-release)
 
 mkdir $HOME/tmp
