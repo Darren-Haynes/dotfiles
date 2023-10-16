@@ -13,6 +13,7 @@ if [[ "$os" = "ID=debian" ]]; then
     sudo mv "$working_dir/lf" /usr/local/bin/
     echo "LF version $(lf --version) has been installed to /usr/local/bin"
     ln -s $HOME/Dotfiles/lf $HOME/.config/
+    rm -r $working_dir
 
     # Install cptv for images previews in LF.
     sudo apt-get install -y \
@@ -31,8 +32,8 @@ if [[ "$os" = "ID=debian" ]]; then
     make
     sudo make install
     cd $HOME
-    ln -s $HOME/Dotfiles/cptv $HOME/.config/
-    echo "CPTV installed for LF previews."
+    ln -s $HOME/Dotfiles/ctpv $HOME/.config/
+    echo "CTPV installed for LF previews."
      
 fi
 

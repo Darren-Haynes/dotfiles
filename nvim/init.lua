@@ -1,4 +1,4 @@
-vim.cmd('source ~/Dotfiles/nvim/init.vim')
+vim.cmd('source ~/.config/nvim/init.vim')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
