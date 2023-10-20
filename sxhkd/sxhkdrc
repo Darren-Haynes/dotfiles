@@ -25,6 +25,25 @@ super + shift + i
 XF86Audio{RaiseVolume,LowerVolume,Mute}
     volume{ --up, --down, --toggle}
 
+F10
+    pactl set-sink-mute 0 toggle
+
+F11
+    pactl set-sink-volume 0 -5%
+
+F12
+    pactl set-sink-volume 0 +5%
+
+F5
+    pactl set-sink-volume @DEFAULT_SINK@ 50%
+
+F6
+    pactl set-sink-volume @DEFAULT_SINK@ 100%
+
+# Switch Audio Output
+super + shift + a
+    $HOME/Dotfiles/Bin/pa_sink_switch.sa
+
 # Brightness controls
 XF86MonBrightness{Up,Down}
     brightness{ --up, --down}

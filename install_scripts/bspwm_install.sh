@@ -19,7 +19,8 @@ sudo apt-get install -y \
     vim \
     man \
     mpv \
-    lxappearance
+    lxappearance \
+    pulseaudio
 
 if [ ! -d "$HOME/.config" ]; then 
     mkdir $HOME/.config
