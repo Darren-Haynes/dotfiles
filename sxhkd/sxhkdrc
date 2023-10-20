@@ -14,6 +14,13 @@ super + l
 super + {e,b,g,s,d,k}
     {thunar,google-chrome-stable,gpick,lxappearance,discord,kitty}
 
+# Screenshots
+super + i
+    flameshot gui
+
+super + shift + i
+    flameshot screen --clipboard --path $HOME/Downloads --delay 3000
+
 # Volume controls
 XF86Audio{RaiseVolume,LowerVolume,Mute}
     volume{ --up, --down, --toggle}
