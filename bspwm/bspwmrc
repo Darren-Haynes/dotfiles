@@ -31,6 +31,7 @@ bspc rule -a Thunar desktop='^3' follow=on focus=on
 bspc rule -a discord desktop='^4'
 bspc rule -a Gpick state=floating center=true
 bspc rule -a Lxappearance state=floating center=true
+bspc rule -a SpeedCrunch state=floating rectangle 300x400+0+0 center=true 
 
 # Enable Super Keys For Menu
 # ksuperkey -e 'Super_L=Alt_L|F1' &

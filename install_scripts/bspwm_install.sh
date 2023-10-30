@@ -20,7 +20,8 @@ sudo apt-get install -y \
     man \
     mpv \
     lxappearance \
-    pulseaudio
+    pulseaudio \
+    speedcrunch
 
 if [ ! -d "$HOME/.config" ]; then 
     mkdir $HOME/.config
