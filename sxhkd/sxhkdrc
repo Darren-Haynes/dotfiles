@@ -11,8 +11,8 @@ super + l
     i3lock -i $HOME/.config/bspwm/tokyo-night-blurred.jpg
 
 # Launch Applications
-super + {e,b,g,s,d,k}
-    {thunar,google-chrome-stable,gpick,lxappearance,discord,kitty}
+super + {e,b,g,s,d,k,c}
+    {thunar,google-chrome-stable,gpick,lxappearance,discord,kitty, speedcrunch}
 
 # Screenshots
 super + i
