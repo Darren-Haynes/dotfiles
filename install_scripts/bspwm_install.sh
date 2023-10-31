@@ -37,4 +37,5 @@ source "$HOME/Dotfiles/install_scripts/kitty.sh"
 source "$HOME/Dotfiles/install_scripts/chrome.sh"
 source "$HOME/Dotfiles/install_scripts/lf.sh"
 source "$HOME/Dotfiles/install_scripts/oh-my-bash.sh"
+source "$HOME/Dotfiles/install_scripts/MS-Fonts.sh"
 
