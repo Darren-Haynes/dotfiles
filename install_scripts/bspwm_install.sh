@@ -14,6 +14,10 @@ sudo apt-get install -y \
     imagemagick \
     xz-utils \
     xfce4-power-manager \
+    pm-utils \
+    upower \
+    xfconf \
+    libnotify4 \
     thunar \
     gpick \
     vim \
@@ -21,7 +25,13 @@ sudo apt-get install -y \
     mpv \
     lxappearance \
     pulseaudio \
-    speedcrunch
+    speedcrunch \
+    bpytop \
+    lpr \
+    cups \
+    xsel \
+    unzip \
+    gtk2-engines-murrine
 
 if [ ! -d "$HOME/.config" ]; then 
     mkdir $HOME/.config
