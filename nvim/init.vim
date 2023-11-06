@@ -89,6 +89,9 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
+" When navigating to terminal auto enter into insert mode
+:au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
 " Splits
 set splitbelow
 set splitright
