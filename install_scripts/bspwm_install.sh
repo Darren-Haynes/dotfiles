@@ -1,46 +1,16 @@
 #!/bin/bash
+echo ' ____                                    ___              _          _  _ '
+echo '| __ )  ___  _ __ __      __ _ __ ___   |_ _| _ __   ___ | |_  __ _ | || |'
+echo '|  _ \ / __|| '_ \\ \ /\ / /| '_ ` _ \   | | | '_ \ / __|| __|/ _` || || |'
+echo '| |_) |\__ \| |_) |\ V  V / | | | | | |  | | | | | |\__ \| |_| (_| || || |'
+echo '|____/ |___/| .__/  \_/\_/  |_| |_| |_| |___||_| |_||___/ \__|\__,_||_||_|'
+echo '            |_|                                                           '
 
-sudo apt-get install -y \
-    xinit \
-    lm-sensors \
-    mesa-utils \
-    x11-xserver-utils \
-    libxcb-xkb1 \
-    bspwm \
-    sxhkd \
-    curl \
-    wget \
-    feh \
-    imagemagick \
-    xz-utils \
-    xfce4-power-manager \
-    pm-utils \
-    upower \
-    xfconf \
-    libnotify4 \
-    thunar \
-    gpick \
-    vim \
-    man \
-    mpv \
-    lxappearance \
-    pulseaudio \
-    speedcrunch \
-    bpytop \
-    lpr \
-    cups \
-    xsel \
-    unzip \
-    gtk2-engines-murrine
-
-if [ ! -d "$HOME/.config" ]; then 
-    mkdir $HOME/.config
-fi
-ln -s $HOME/Dotfiles/bspwm $HOME/.config/
-ln -s $HOME/Dotfiles/sxhkd $HOME/.config/
-ln -s $HOME/Dotfiles/X/xinitrc $HOME/.xinitrc
-ln -s $HOME/Dotfiles/aliases $HOME/.aliases
-
+source "$HOME/Dotfiles/install_scripts/utils.sh"
+source "$HOME/Dotfiles/install_scripts/config.sh"
+source "$HOME/Dotfiles/install_scripts/X.sh"
+source "$HOME/Dotfiles/install_scripts/bspwm.sh"
+source "$HOME/Dotfiles/install_scripts/apt-apps.sh"
 source "$HOME/Dotfiles/install_scripts/fonts.sh"
 source "$HOME/Dotfiles/install_scripts/neovim.sh"
 source "$HOME/Dotfiles/install_scripts/kitty.sh"
@@ -48,4 +18,12 @@ source "$HOME/Dotfiles/install_scripts/chrome.sh"
 source "$HOME/Dotfiles/install_scripts/lf.sh"
 source "$HOME/Dotfiles/install_scripts/oh-my-bash.sh"
 source "$HOME/Dotfiles/install_scripts/MS-Fonts.sh"
+source "$HOME/Dotfiles/install_scripts/printing.sh"
 
+echo ' ___           _        _ _    ____                      _      _'
+echo '|_ _|_ __  ___| |_ __ _| | |  / ___|___  _ __ ___  _ __ | | ___| |_ ___'
+echo ' | ||  _ \/ __| __/ _  | | | | |   / _ \|  _   _ \|  _ \| |/ _ \ __/ _ \'
+echo ' | || | | \__ \ || (_| | | | | |__| (_) | | | | | | |_) | |  __/ ||  __/'
+echo '|___|_| |_|___/\__\__,_|_|_|  \____\___/|_| |_| |_| .__/|_|\___|\__\___|'
+echo '                                                  |_|'
+echo -e '\n'
