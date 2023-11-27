@@ -84,7 +84,7 @@ super + {_,shift + }{Left,Down,Up,Right}
 
 # Change focus to next window, including floating window
 super + {_,shift + }Tab
-    bspc node -f {next.local,prev.local}
+    bspc node -f {next,prev}
  
 #
 # focus/swap
