@@ -1,7 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install -y \
-  ripgrep
+sudo apt-get install -y ripgrep
 
 rm -rf ~/.config/nvim
 rm -rf ~/.local/share/nvim

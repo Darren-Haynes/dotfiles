@@ -1,7 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install -y \
-    mupdf
+sudo apt-get install -y mupdf
 
 origF=$HOME/.local/share/applications/mimeapps.list
 targetF=$HOME/Dotfiles/mupdf/mimeapps.list
