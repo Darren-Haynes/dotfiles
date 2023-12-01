@@ -1,58 +1,57 @@
 #!/bin/bash
 
-# Install python build dependencies fir pyenv
-sudo apt-get install -y \
-  build-essential \ 
-  libssl-dev zlib1g-dev \
-  libbz2-dev \ 
-  libreadline-dev \ 
-  libsqlite3-dev curl \
-  libncursesw5-dev \
-  xz-utils \
-  tk-dev \
-  libxml2-dev \
-  libxmlsec1-dev \
-  libffi-dev \
-  liblzma-dev
+# Install python build dependencies for pyenv
+sudo apt-get install -y build-essential  
+sudo apt-get install -y libssl-dev zlib1g-dev 
+sudo apt-get install -y libbz2-dev  
+sudo apt-get install -y libreadline-dev  
+sudo apt-get install -y libsqlite3-dev curl 
+sudo apt-get install -y libncursesw5-dev 
+sudo apt-get install -y xz-utils 
+sudo apt-get install -y tk-dev 
+sudo apt-get install -y libxml2-dev 
+sudo apt-get install -y libxmlsec1-dev 
+sudo apt-get install -y libffi-dev 
+sudo apt-get install -y liblzma-dev
 
 # Install pyenv
 if [ ! -d "$HOME/.pyenv" ]; then 
-  echo 'Installing pyenv to $HOME/.pyenv/'
+  printf 'Installing pyenv to $HOME/.pyenv/'
   curl https://pyenv.run | bash
   # set up pyenv .bashrc environment
-  echo 'Appending pyenv environment to .bashrc'
-  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-  echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-  echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+  printf 'Appending pyenv environment to .bashrc'
+  printf 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+  printf 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+  printf 'eval "$(pyenv init -)"' >> ~/.bashrc
 
   # Set up pyenv .profile environment
-  echo 'Appending pyenv environment to .profile'
-  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
-  echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
-  echo 'eval "$(pyenv init -)"' >> ~/.profile
+  printf 'Appending pyenv environment to .profile'
+  printf 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+  printf 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+  printf 'eval "$(pyenv init -)"' >> ~/.profile
 
   # Set up pyenv .bash_profile environment
   if [[ -f "$HOME/.bash_profile" ]]; then
-    echo 'Appending pyenv environment to .bash_profile'
-    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
-    echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-    echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+    printf 'Appending pyenv environment to .bash_profile'
+    printf 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+    printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+    printf 'eval "$(pyenv init -)"' >> ~/.bash_profile
   else
-    echo "No bash_profile file - skipping adding pyenv environment to bash_profile"
+    printf "No bash_profile file - skipping adding pyenv environment to bash_profile"
   fi
 
   # Set up pyenv .bash_login environment
   if [[ -f "$HOME/.bash_login" ]]; then
-    echo 'Appending pyenv environment to .bash_login'
-    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_login
-    echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_login
-    echo 'eval "$(pyenv init -)"' >> ~/.bash_login
+    printf 'Appending pyenv environment to .bash_login'
+    printf 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_login
+    printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_login
+    printf 'eval "$(pyenv init -)"' >> ~/.bash_login
   else
-    echo "No bash_login file - skipping adding pyenv environment to bash_login"
+    printf "No bash_login file - skipping adding pyenv environment to bash_login"
   fi
 
 else
-  echo 'Pyenv already installed. Skipping...'
+  printf 'Pyenv already installed. Skipping...'
 fi
 
 exec "$SHELL"

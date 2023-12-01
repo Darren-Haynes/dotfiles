@@ -1,18 +1,17 @@
 #!/bin/bash
 
-sudo apt-get install -y \
-  bspwm \
-  sxhkd \                 # bspwm keyboard interface
-  libxcb-xkb1 \           # X keyboard controller
-  feh \                   # manage wallpaper
-  pm-utils \              # power management utils
-  upower \                # freedesktop power management
-  xfce4-power-manager \   # power manager
-  xfconf \                # xfce settings
-  lxappearance \          # theme management
-  gtk2-engines-murrine \  # glass purdy
-  libnotify4 \            # desktop notifications
-  pulseaudio              # audio
+sudo apt-get install bspwm -y
+sudo apt-get installsxhkd -y               			# bspwm keyboard interface
+sudo apt-get installlibxcb-xkb1 -y         			# x keyboard controller
+sudo apt-get installfeh -y                 			# manage wallpaper
+sudo apt-get installpm-utils -y            			# power management utils
+sudo apt-get installupower -y              			# freedesktop power management
+sudo apt-get installxfce4-power-manager -y 			# power manager
+sudo apt-get installxfconf -y              			# xfce settings
+sudo apt-get installlxappearance -y        			# theme management
+sudo apt-get installgtk2-engines-murrine -y			# glass purdy
+sudo apt-get installlibnotify4 -y          			# desktop notifications
+sudo apt-get installpulseaudio -y             	# audio
 
 ln -s $HOME/Dotfiles/bspwm $HOME/.config/
 ln -s $HOME/Dotfiles/sxhkd $HOME/.config/
