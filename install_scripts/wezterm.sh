@@ -9,15 +9,19 @@ dlAddr=https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd
 AppImage=WezTerm-20230712-072601-f4abf8fd-Ubuntu20.04.AppImage
 
 if [ "$os" == "ID=debian" ]; then
-  echo "Installing wezterm"
- #    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
- #    if [ -d "$HOME/.config/kitty" ]; then
-	# rm -r $HOME/.config/kitty
- #    fi
- #    ln -s $HOME/Dotfiles/kitty $HOME/.config/
+  printf "Installing wezterm"
   curl -LO "$dlAddr"
   chmod +x "$AppImage"
   sudo mv "$AppImage" /usr/local/bin/wezterm
+
+  srcFile="$HOME/Dotfiles/wezterm/wezterm.lua"
+  destFile="$HOME/.wezterm.lua"
+
+  if [ -f "$destFile" ]; then
+    rm "$destFile"
+  fi
+
+  ln -s "$srcFile" "$destFile"
 fi
 
 rm -r "$tmpDir"
