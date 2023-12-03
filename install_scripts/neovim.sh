@@ -31,7 +31,7 @@ if [[ "$os" = "ID=debian" ]]; then
   cd "$tmpDir/Python-3.11.6/"
   ./configure --enable-optimizations
   make -j $(nproc)
-  sudo make altinstall -y
+  sudo make altinstall
   python3.11 -m pip install pynvim
 
   printf "Installing Neovim for Debian"
