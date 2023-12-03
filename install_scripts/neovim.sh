@@ -23,10 +23,12 @@ if [[ "$os" = "ID=debian" ]]; then
   sudo apt-get install -y libreadline-dev
   sudo apt-get install -y zlib1g-dev
   sudo apt-get install -y libffi-dev
+  sudo apt-get install -y pkg-config
 
   wget -P $tmpDir $py3_11_6_URL
-  cd "$tmpDir/Python-3.11.6/"
+  cd "$tmpDir"
   tar -xf Python-3.11.6.tar.xz
+  cd "$tmpDir/Python-3.11.6/"
   ./configure --enable-optimizations
   make -j $(nproc)
   sudo make altinstall -y
