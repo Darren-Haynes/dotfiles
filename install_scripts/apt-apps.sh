@@ -8,4 +8,5 @@ sudo apt install -y mpv                # yep
 sudo apt install -y bpytop             # terminal-based system monitor
 sudo apt install -y figlet             # terminal-based ascii font generator
 sudo apt install -y toilet             # works with figlet
+sudo apt install -y flameshot	       # dem screenshots
 

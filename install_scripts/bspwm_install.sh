@@ -8,7 +8,6 @@ printf "            |_|                                                         
 
 source "$HOME/Dotfiles/install_scripts/utils.sh"
 source "$HOME/Dotfiles/install_scripts/config.sh"
-source "$HOME/Dotfiles/install_scripts/X.sh"
 source "$HOME/Dotfiles/install_scripts/bspwm.sh"
 source "$HOME/Dotfiles/install_scripts/apt-apps.sh"
 source "$HOME/Dotfiles/install_scripts/fonts.sh"
