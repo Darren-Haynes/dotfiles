@@ -15,27 +15,27 @@ sudo apt-get install -y libffi-dev
 sudo apt-get install -y liblzma-dev
 
 # Install pyenv
-if [ ! -d "$HOME/.pyenv" ]; then 
+if [ -d "$HOME/.pyenv" ]; then 
   printf 'Installing pyenv to $HOME/.pyenv/'
-  curl https://pyenv.run | bash
+  curl -fsSL https://pyenv.run | bash
   # set up pyenv .bashrc environment
-  printf 'Appending pyenv environment to .bashrc'
-  printf 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-  printf 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-  printf 'eval "$(pyenv init -)"' >> ~/.bashrc
+  printf 'export PYENV_ROOT="$HOME/.pyenv"' >> $HOME/.bashrc
+  printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> $HOME/.bashrc
+  printf 'eval "$(pyenv init - bash)"' >> $HOME/.bashrc
 
   # Set up pyenv .profile environment
   printf 'Appending pyenv environment to .profile'
-  printf 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
-  printf 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
-  printf 'eval "$(pyenv init -)"' >> ~/.profile
+  printf 'export PYENV_ROOT="$HOME/.pyenv"' >> $HOME/.profile
+  printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> $HOME/.profile
+  printf 'eval "$(pyenv init - bash)"' >> $HOME/.profile
+
 
   # Set up pyenv .bash_profile environment
   if [[ -f "$HOME/.bash_profile" ]]; then
     printf 'Appending pyenv environment to .bash_profile'
-    printf 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
-    printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-    printf 'eval "$(pyenv init -)"' >> ~/.bash_profile
+    printf 'export PYENV_ROOT="$HOME/.pyenv"' >> $HOME/.bash_profile
+    printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> $HOME/.bash_profile
+    printf 'eval "$(pyenv init - bash)"' >> $HOME/.bash_profile
   else
     printf "No bash_profile file - skipping adding pyenv environment to bash_profile"
   fi
@@ -43,9 +43,9 @@ if [ ! -d "$HOME/.pyenv" ]; then
   # Set up pyenv .bash_login environment
   if [[ -f "$HOME/.bash_login" ]]; then
     printf 'Appending pyenv environment to .bash_login'
-    printf 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_login
-    printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_login
-    printf 'eval "$(pyenv init -)"' >> ~/.bash_login
+    printf 'export PYENV_ROOT="$HOME/.pyenv"' >> $HOME/.bash_login
+    printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> $HOME/.bash_login
+    printf 'eval "$(pyenv init - bash)"' >> $HOME/.bash_login
   else
     printf "No bash_login file - skipping adding pyenv environment to bash_login"
   fi
@@ -55,10 +55,6 @@ else
 fi
 
 exec "$SHELL"
-pyenv install 3.12.0
-pyenv global 3.12.0
+pyenv install 3
+pyenv global 3
 exec "$SHELL"
-python3 -m pip install --user --upgrade pynvim
-pyenv virtualenv 3.12.0 py3neovim
-pyenv activate py3neovim
-python3 -m pip install pynvim
