@@ -1,0 +1,9 @@
+configuration {
+  modes: [ combi ];
+  combi-modes: [ window, drun, run ];
+}
+
+@theme "tokyonight"
+ 
+/* Insert theme modifications after this */
+
