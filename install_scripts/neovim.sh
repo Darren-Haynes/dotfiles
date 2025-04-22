@@ -52,3 +52,7 @@ if [[ "$os" = "ID=debian" ]]; then
   rm -rf $tmpDir
 fi
 
+python3 -m pip install --user --upgrade pynvim
+pyenv virtualenv 3.12.0 py3neovim
+pyenv activate py3neovim
+python3 -m pip install pynvim
