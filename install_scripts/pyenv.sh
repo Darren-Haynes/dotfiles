@@ -15,7 +15,7 @@ sudo apt-get install -y libffi-dev
 sudo apt-get install -y liblzma-dev
 
 # Install pyenv
-if [ -d "$HOME/.pyenv" ]; then 
+if [ ! -d "$HOME/.pyenv" ]; then 
   printf 'Installing pyenv to $HOME/.pyenv/'
   curl -fsSL https://pyenv.run | bash
   # set up pyenv .bashrc environment
