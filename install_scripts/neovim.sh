@@ -1,58 +1,28 @@
 #!/bin/bash
 
 # Install and configure Neovim
-os=$(grep -E ^ID= /etc/os-release)
+sudo apt-get install -y ssh-askpass-gnome
+sudo apt-get install -y ssh-askpass
 
-mkdir $HOME/.tmp
-tmpDir=$HOME/.tmp
-configSrc=$HOME/Dotfiles/nvim/init.lua
-configDest=$HOME/.config/nvim/lua/custom/
-nvimUrl=https://github.com/neovim/neovim/releases/download/v0.9.4/nvim.appimage
-py3_11_6_URL=https://www.python.org/ftp/python/3.11.6/Python-3.11.6.tar.xz
+cd $HOME/Downloads
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-arm64.tar.gz
+sudo rm -rf /opt/nvim*
+sudo tar -C /opt -xzf nvim-linux-arm64.tar.gz
+rm nvim-linux-arm64.tar.gz
+cd $HOME
 
-if [[ "$os" = "ID=debian" ]]; then
+printf '\nexport PATH="$PATH:/opt/nvim-linux-arm64/bin"\n' >> $HOME/.bashrc
+printf '\nexport PATH="$PATH:/opt/nvim-linux-arm64/bin"\n' >> $HOME/.profile
 
-  printf "Installing Python 3.11.6 for neovim pynvim executable"
-  sudo apt-get install -y build-essential
-  sudo apt-get install -y libssl-dev
-  sudo apt-get install -y libsqlite3-dev
-  sudo apt-get install -y libbz2-dev
-  sudo apt-get install -y libgdbm-dev
-  sudo apt-get install -y libncurses5-dev
-  sudo apt-get install -y libncursesw5-dev
-  sudo apt-get install -y libreadline-dev
-  sudo apt-get install -y zlib1g-dev
-  sudo apt-get install -y libffi-dev
-  sudo apt-get install -y pkg-config
+#lazynvim
+mv ~/.config/nvim{,.bak}
 
-  wget -P $tmpDir $py3_11_6_URL
-  cd "$tmpDir"
-  tar -xf Python-3.11.6.tar.xz
-  cd "$tmpDir/Python-3.11.6/"
-  ./configure --enable-optimizations
-  make -j $(nproc)
-  sudo make altinstall
-  python3.11 -m pip install pynvim
+# optional but recommended
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
 
-  printf "Installing Neovim for Debian"
-  sudo apt-get install -y xsel  # clipboard support
-  printf "$tmpDir"
-  printf "$nvimUrl"
-  wget -P $tmpDir $nvimUrl
-  chmod u+x "$tmpDir/nvim.appimage"
-  sudo mv "$tmpDir/nvim.appimage" /usr/local/bin
-  printf "Neovim v0.9.4 has been install to /usr/local/bin"
-  
-  if [ -f "$configDest/init.lua" ]; then
-    rm "$configDest/inig.lua"
-  fi
+git clone https://github.com/LazyVim/starter $HOME/.config/nvim
+rm -rf $HOME/.config/nvim/.git
 
-  printf "Linking $configSrc --> $configDest"
-  ln -s $configSrc $configDest
-  rm -rf $tmpDir
-fi
-
-python3 -m pip install --user --upgrade pynvim
-pyenv virtualenv 3.12.0 py3neovim
-pyenv activate py3neovim
-python3 -m pip install pynvim
+source $HOME/.bashrc

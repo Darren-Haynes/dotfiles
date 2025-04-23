@@ -35,9 +35,7 @@ alias lsl='ls -al | lolcat'
 alias co='colorize'
 
 # Execute
-alias nvim='/usr/local/bin/nvim.appimage'
 alias wezterm='/usr/local/bin/wezterm'
-alias kitty='~/.local/kitty.app/bin/kitty'
 
 # VIM / NVIM
 alias basha='nvim ~/.bash_aliases'
