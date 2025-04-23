@@ -1,3 +1,3 @@
-sudo apt install chromium
-sudo apt install qutebrowser
+sudo apt install -y chromium
+sudo apt install -y qutebrowser
 
