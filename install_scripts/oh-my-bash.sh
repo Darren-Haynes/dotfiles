@@ -6,7 +6,7 @@ function install() {
 
 function update_profiles() {
     printf 'source "$HOME"/.aliases' >> $HOME/.bashrc
-    sed -i 's/OSH_THEME="font"/OSH_THEME="mairan"/' $HOME/.bashrc
+    sed -i 's/OSH_THEME="font"/OSH_THEME="purity"/' $HOME/.bashrc
 }
 
 install &
