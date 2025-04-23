@@ -19,6 +19,8 @@ source "$HOME/Dotfiles/install_scripts/wezterm.sh"
 source "$HOME/Dotfiles/install_scripts/MS-Fonts.sh"
 source "$HOME/Dotfiles/install_scripts/printing.sh"
 source "$HOME/Dotfiles/install_scripts/pyenv.sh"
+source "$HOME/Dotfiles/install_scripts/mupdf.sh"
+source "$HOME/Dotfiles/install_scripts/rofi.sh"
 
 printf " ___           _        _ _    ____                      _      _\n"
 printf "|_ _|_ __  ___| |_ __ _| | |  / ___|___  _ __ ___  _ __ | | ___| |_ ___\n"

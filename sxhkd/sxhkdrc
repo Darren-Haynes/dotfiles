@@ -11,8 +11,8 @@ super + l
     i3lock -i $HOME/.config/bspwm/tokyo-night-blurred.jpg
 
 # Launch Applications
-super + {e,b,g,s,d,k,c}
-    {thunar,google-chrome-stable,gpick,lxappearance,discord,kitty, speedcrunch}
+super + {e,b,g,s,d,c}
+    {thunar,qutebrowser,gpick,lxappearance,discord,speedcrunch}
 
 # Screenshots
 super + i
@@ -64,7 +64,7 @@ super + q
 
 # alternate between the tiled and monocle layout
 super + space
-	bspc node -t "~"{floating,tiled}
+	rofi -show run
 
 #
 # state/flags

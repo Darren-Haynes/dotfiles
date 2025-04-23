@@ -5,4 +5,5 @@ if [ ! -d "$HOME/.config" ]; then
 fi
 
 ln -s $HOME/Dotfiles/aliases $HOME/.aliases
-
+ln -s $HOME/Dotfiles/X/xinitrc $HOME/.xinitrc
+ln -s $HOME/Dotfiles/X/Xresources $HOME/.Xresources
