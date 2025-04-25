@@ -8,7 +8,7 @@ super + Return
 
 # Lock Screen
 super + l
-    i3lock -i $HOME/.config/bspwm/tokyo-night-blurred.jpg
+    i3lock -i ~/Dotfiles/bspwm/lock-screen.png
 
 # Launch Applications
 super + {e,b,g,s,d,c}

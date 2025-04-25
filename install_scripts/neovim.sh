@@ -22,7 +22,7 @@ fi
 cd $HOME/GitClones/Lazygit
 curl -Lo lazygit.tar.gz https://github.com/jesseduffield/lazygit/releases/download/v0.49.0/lazygit_0.49.0_Linux_arm64.tar.gz
 tar xzf lazygit.tar.gz
-sudo apt install lazygit -D -t /usr/local/bin/
+sudo install lazygit -D -t /usr/local/bin/
 cd $HOME
 
 # Install and configure Neovim
