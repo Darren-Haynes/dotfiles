@@ -7,3 +7,4 @@ sudo apt install -y wezterm
 
 mkdir $HOME/.config/wezterm
 ln -s $HOME/Dotfiles/wezterm/wezterm.lua $HOME/.config/wezterm/
+ln -s $HOME/Dotfiles/wezterm/ShakyamuniBuddhaTerminalBackground.jpg $HOME/.config/wezterm/
