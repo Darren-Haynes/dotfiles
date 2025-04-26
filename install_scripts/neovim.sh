@@ -6,6 +6,7 @@ sudo apt-get install -y libreadline-dev
 sudo apt-get install -y unzip
 sudo apt-get install -y libssl-dev
 sudo apt-get install -y lua5.1
+sudo apt-get install -y luajit
 sudo apt-get install -y luarocks
 
 # Install useful dependencies for full functioning neovim
@@ -25,10 +26,10 @@ tar xzf lazygit.tar.gz
 sudo install lazygit -D -t /usr/local/bin/
 cd $HOME
 
-# Install and configure Neovim
 sudo apt-get install -y ssh-askpass-gnome
 sudo apt-get install -y ssh-askpass
 
+# Install and configure Neovim
 cd $HOME/Downloads
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-arm64.tar.gz
 sudo rm -rf /opt/nvim*
@@ -49,5 +50,13 @@ mv ~/.cache/nvim{,.bak}
 
 git clone https://github.com/LazyVim/starter $HOME/.config/nvim
 rm -rf $HOME/.config/nvim/.git
+
+# Pyenv virtual env default for neovim
+pyenv virtualenv 3.13.3 nvim-3.13.3.venv
+pyenv activate nvim-3.13.3.venv
+pip install pynim
+
+# Add personal configs to init.lua
+cat $HOME/Dotfiles/nvim/init.lua >>$HOME/.config/nvim/init.lua
 
 source $HOME/.bashrc
