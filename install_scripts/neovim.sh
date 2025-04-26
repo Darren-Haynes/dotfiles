@@ -58,5 +58,6 @@ pip install pynim
 
 # Add personal configs to init.lua
 cat $HOME/Dotfiles/nvim/init.lua >>$HOME/.config/nvim/init.lua
+ln -s $HOME/Dotfiles/nvim/themes.lua $HOME/.config/nvim/lua/plugins/
 
 source $HOME/.bashrc
