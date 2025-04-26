@@ -6,15 +6,14 @@
 
 
 # NAVIGATION
-alias .bash='cd ~/.bash_scripts'
-alias cdD='cd ~/Downloads'
-alias cdM='cd ~/Music'
-alias cdP='cd ~/Pictures'
-alias cdV='cd ~/Videos'
-alias cdoc='cd ~/Documents'
-alias cdot='cd ~/dotfiles'
-alias cdc='cd ~/.config'
-alias cdfonts='cd /usr/share/fonts/'
+alias fdl='cd ~/Downloads'
+alias fm='cd ~/Music'
+alias fpic='cd ~/Pictures'
+alias fvid='cd ~/Videos'
+alias fdc='cd ~/Documents'
+alias fdot='cd ~/Dotfiles'
+alias fconf='cd ~/.config'
+alias ffonts='cd /usr/share/fonts/'
 
 # LISTING
 alias a='ls -A'
@@ -29,7 +28,6 @@ alias lsdoc='ls ~/Documents'
 alias lsdot='ls ~/dotfiles'
 alias lsfonts='ls /usr/share/fonts/'
 alias lsh='ls ~/'
-alias lsl='ls -al | lolcat'
 
 # ZSH
 alias co='colorize'
@@ -48,7 +46,6 @@ alias vimrc='nvim ~/.vimrc'
 alias vimx='nvim ~/.Xresources'
 alias vimz='nvim ~/.zshrc'
 alias vimconfigs='nvim ~/dotfiles/**/*'
-alias icat="kitty +kitten icat"
 
 
 # IMAGE MAGICK
@@ -121,6 +118,7 @@ alias which_chip='glxinfo | egrep "OpenGL vendor|OpenGL renderer*"'
 
 # SOURCING
 alias soa='source ~/.aliases'
+alias sob='source ~/.bashrc'
 alias soz='source ~/.zshrc'
 
 # NETWORKING
