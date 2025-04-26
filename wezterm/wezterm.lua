@@ -12,7 +12,7 @@ end
 
 -- Color scheme
 config.color_scheme = "Tokyo Night"
-config.window_background_image = "../wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
+config.window_background_image = "/home/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
 
 config.window_background_image_hsb = {
 	-- Darken the background image by reducing it to 1/3rd
