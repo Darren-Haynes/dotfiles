@@ -1,5 +1,7 @@
 #!/bin/bash
 
+arch=$(uname -m)
+
 # Install lua
 sudo apt-get install -y build-essential
 sudo apt-get install -y libreadline-dev
@@ -21,7 +23,7 @@ if [ ! -d "$HOME/GitClones/Lazygit" ]; then
 fi
 
 cd $HOME/GitClones/Lazygit
-curl -Lo lazygit.tar.gz https://github.com/jesseduffield/lazygit/releases/download/v0.49.0/lazygit_0.49.0_Linux_arm64.tar.gz
+curl -Lo lazygit.tar.gz https://github.com/jesseduffield/lazygit/releases/download/v0.49.0/lazygit_0.49.0_Linux_${arch}.tar.gz
 tar xzf lazygit.tar.gz
 sudo install lazygit -D -t /usr/local/bin/
 cd $HOME
@@ -31,14 +33,14 @@ sudo apt-get install -y ssh-askpass
 
 # Install and configure Neovim
 cd $HOME/Downloads
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-arm64.tar.gz
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${arch}.tar.gz
 sudo rm -rf /opt/nvim*
-sudo tar -C /opt -xzf nvim-linux-arm64.tar.gz
-rm nvim-linux-arm64.tar.gz
+sudo tar -C /opt -xzf nvim-linux-${arch}.tar.gz
+rm nvim-linux-${arch}.tar.gz
 cd $HOME
 
-printf '\nexport PATH="$PATH:/opt/nvim-linux-arm64/bin"\n' >>$HOME/.bashrc
-printf '\nexport PATH="$PATH:/opt/nvim-linux-arm64/bin"\n' >>$HOME/.profile
+printf '\nexport PATH="$PATH:/opt/nvim-linux-${arch}/bin"\n' >>$HOME/.bashrc
+printf '\nexport PATH="$PATH:/opt/nvim-linux-${arch}/bin"\n' >>$HOME/.profile
 
 #lazynvim
 mv ~/.config/nvim{,.bak}
