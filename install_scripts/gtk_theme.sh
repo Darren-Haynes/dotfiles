@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -d "$HOME/.local/share/icons" ]; then
-  mkdir $HOME/.local/share/icons
+  mkdir -p  $HOME/.local/share/icons
 fi
 
 if [ ! -d "$HOME/.local/share/themes" ]; then
@@ -9,7 +9,7 @@ if [ ! -d "$HOME/.local/share/themes" ]; then
 fi
 
 if [ ! -d "$HOME/.config/gtk-3.0" ]; then
-  mkdir $HOME/.config/gtk-3.0
+  mkdir -p $HOME/.config/gtk-3.0
 fi
 
 cp -R $HOME/Dotfiles/themes/Tokyonight-Dark-BL-LB $HOME/.local/share/themes/
