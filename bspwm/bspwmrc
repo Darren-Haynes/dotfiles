@@ -31,6 +31,7 @@ bspc rule -a Thunar desktop='^3' follow=on focus=on
 bspc rule -a discord desktop='^4'
 bspc rule -a Gpick state=floating center=true
 bspc rule -a Lxappearance state=floating center=true
+bspc rule -a Arandr state=floating center=true
 bspc rule -a SpeedCrunch state=floating rectangle 300x400+0+0 center=true
 
 # Enable Super Keys For Menu
@@ -52,12 +53,6 @@ xfce4-power-manager &
 #while pgrep -u $UID -x compton >/dev/null; do sleep 1; done
 # compton -b
 picom --config $HOME/.config/bspwm/picom.conf
-# replace neovim colorscheme
-# sed -i "s/theme =.*$/theme = \"tokyonight\",/g" $HOME/.config/nvim/lua/custom/chadrc.lua
-# change xfce4-terminal colorscheme
+
 XFCE_TERM_PATH="$HOME/.config/xfce4/terminal"
 cp "$XFCE_TERM_PATH"/colorschemes/tokyo-night "$XFCE_TERM_PATH"/terminalrc
-
-# change cava colorscheme
-# CAVA_PATH="$HOME/.config/cava"
-# cp "$CAVA_PATH"/colorschemes/tokyo-night "$CAVA_PATH"/config

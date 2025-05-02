@@ -16,5 +16,5 @@ sudo apt-get install i3lock -y               # simple lock screen
 sudo apt-get install arandr -y               # screen management
 sudo apt-get install xorg -y                 # cause you need windows
 
-ln -s $HOME/Dotfiles/bspwm $HOME/.config/
-ln -s $HOME/Dotfiles/sxhkd $HOME/.config/
+ln -s "$HOME/Dotfiles/bspwm" "$HOME/.config/"
+ln -s "$HOME/Dotfiles/sxhkd" "$HOME/.config/"

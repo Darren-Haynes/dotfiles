@@ -6,15 +6,18 @@
 
 
 # NAVIGATION
-alias fdl='cd ~/Downloads'
-alias fm='cd ~/Music'
-alias fpic='cd ~/Pictures'
-alias fvid='cd ~/Videos'
-alias fdc='cd ~/Documents'
-alias fdot='cd ~/Dotfiles'
-alias fconf='cd ~/.config'
-alias ffonts='cd /usr/share/fonts/'
-
+alias ddl='cd ~/Downloads'
+alias dm='cd ~/Music'
+alias dpic='cd ~/Pictures'
+alias dvid='cd ~/Videos'
+alias ddc='cd ~/Documents'
+alias ddot='cd ~/Dotfiles'
+alias dconf='cd ~/.config'
+alias dnvim='cd ~/.config/nvim/'
+alias dfonts='cd /usr/share/fonts/'
+alias dpy='cd ~/Code/Python/'
+alias dpy3='cd ~/Code/Python/Playground_3.13/'
+      
 # LISTING
 alias a='ls -A'
 alias cls='clear && ls'
@@ -29,11 +32,17 @@ alias lsdot='ls ~/dotfiles'
 alias lsfonts='ls /usr/share/fonts/'
 alias lsh='ls ~/'
 
-# ZSH
-alias co='colorize'
+# lSD 
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
 
-# Execute
-alias wezterm='/usr/local/bin/wezterm'
+# CAT 
+alias catb="cat ~/.bashrc"
+alias catn="cat ~/Dotfiles/nvim/init.lua"
+alias catp="cat ~/.profile"
 
 # VIM / NVIM
 alias basha='nvim ~/.bash_aliases'
@@ -41,12 +50,12 @@ alias bashrc='nvim ~/.bashrc'
 alias vcss="nvim **/*.css"
 alias vhtml="nvim **/*.html"
 alias vima='nvim ~/.aliases'
-alias vimbash='nvim ~/.bash_scripts/**/*'
-alias vimrc='nvim ~/.vimrc'
 alias vimx='nvim ~/.Xresources'
 alias vimz='nvim ~/.zshrc'
-alias vimconfigs='nvim ~/dotfiles/**/*'
 
+# Zellij
+alias zD="zellij attach CONFIG"
+alias zP="zellij attach PythonPlayGround_3.13"
 
 # IMAGE MAGICK
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'

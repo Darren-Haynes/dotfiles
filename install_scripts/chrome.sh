@@ -7,7 +7,7 @@ sudo apt install -y xdg-utils
 
 os=$(grep -E ^ID= /etc/os-release)
 
-mkdir $HOME/tmp
+mkdir "$HOME/tmp"
 tempDir=$HOME/tmp
 if [[ "$os" = "ID=debian" ]]; then
   echo "Installing Chrome for Debian"
