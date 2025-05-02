@@ -22,12 +22,14 @@ if [ ! -d "$HOME/.pyenv" ]; then
   printf '\nexport PYENV_ROOT="$HOME/.pyenv"\n' >>$HOME/.bashrc
   printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"\n' >>$HOME/.bashrc
   printf 'eval "$(pyenv init - bash)"\n' >>$HOME/.bashrc
+  printf 'eval "$(pyenv virtualenv-init -)"' >>$HOME/.bashrc
 
   # Set up pyenv .profile environment
   printf 'Appending pyenv environment to .profile'
   printf '\nexport PYENV_ROOT="$HOME/.pyenv"\n' >>$HOME/.profile
   printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"\n' >>$HOME/.profile
   printf 'eval "$(pyenv init - bash)"\n' >>$HOME/.profile
+  printf 'eval "$(pyenv virtualenv-init -)"' >>$HOME/.profile
 
   # Set up pyenv .bash_profile environment
   if [[ -f "$HOME/.bash_profile" ]]; then
@@ -35,6 +37,7 @@ if [ ! -d "$HOME/.pyenv" ]; then
     printf '\nexport PYENV_ROOT="$HOME/.pyenv"\n' >>$HOME/.bash_profile
     printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"\n' >>$HOME/.bash_profile
     printf 'eval "$(pyenv init - bash)"\n' >>$HOME/.bash_profile
+    printf 'eval "$(pyenv virtualenv-init -)"' >>$HOME/.bash_profile
   else
     printf "No bash_profile file - skipping adding pyenv environment to bash_profile"
   fi
@@ -45,6 +48,7 @@ if [ ! -d "$HOME/.pyenv" ]; then
     printf '\nexport PYENV_ROOT="$HOME/.pyenv"\n' >>$HOME/.bash_login
     printf '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"\n' >>$HOME/.bash_login
     printf 'eval "$(pyenv init - bash)"\n' >>$HOME/.bash_login
+    printf 'eval "$(pyenv virtualenv-init -)"' >>$HOME/.bash_login
   else
     printf "No bash_login file - skipping adding pyenv environment to bash_login"
   fi
