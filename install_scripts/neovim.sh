@@ -56,10 +56,11 @@ rm -rf $HOME/.config/nvim/.git
 # Pyenv virtual env default for neovim
 pyenv virtualenv 3.13.3 nvim-3.13.3.venv
 pyenv activate nvim-3.13.3.venv
-pip install pynim
+pip install pynvim
 
 # Add personal configs to init.lua
-cat $HOME/Dotfiles/nvim/init.lua >>$HOME/.config/nvim/init.lua
+rm -f $HOME/.config/nvim/init.lua
+ln -s $HOME/Dotfiles/nvim/init.lua $HOME/.config/nvim/init.lua
 ln -s $HOME/Dotfiles/nvim/themes.lua $HOME/.config/nvim/lua/plugins/
 
 source $HOME/.bashrc
