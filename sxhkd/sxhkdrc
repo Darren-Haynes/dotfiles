@@ -55,7 +55,7 @@ XF86MonBrightness{Up,Down}
 #
 
 # quit/restart bspwm
-super + {Escape,r}
+super + shift + {Escape,r}
     bspc {quit,wm -r}
 
 # close and kill
