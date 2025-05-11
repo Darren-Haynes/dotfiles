@@ -17,6 +17,7 @@ sudo apt-get install -y fd-find
 sudo apt-get install -y fzf
 sudo apt-get install -y nodejs
 sudo apt-get install -y npm
+sudo apt-get install -y texlive
 
 if [ ! -d "$HOME/GitClones/Lazygit" ]; then
   mkdir -p "$HOME/GitClones/Lazygit"
