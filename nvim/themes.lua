@@ -7,6 +7,4 @@ return {
 			floats = "transparent",
 		},
 	},
-
-	{ "EdenEast/nightfox.nvim" },
 }

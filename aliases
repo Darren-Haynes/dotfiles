@@ -11,13 +11,20 @@ alias dm='cd ~/Music'
 alias dpic='cd ~/Pictures'
 alias dvid='cd ~/Videos'
 alias ddc='cd ~/Documents'
+
+# NAVIGATION CONFIG 
 alias ddot='cd ~/Dotfiles'
 alias dconf='cd ~/.config'
 alias dnvim='cd ~/.config/nvim/'
 alias dfonts='cd /usr/share/fonts/'
+
+# NAVIGATION CODING
 alias dpy='cd ~/Code/Python/'
 alias dpy3='cd ~/Code/Python/Playground_3.13/'
-      
+
+# NAVIGATION CODE PROJECTS
+alias dpda='cd ~/Code/Python/PythonProjects/DSA_Python/'
+
 # LISTING
 alias a='ls -A'
 alias cls='clear && ls'
@@ -44,6 +51,10 @@ alias catb="cat ~/.bashrc"
 alias catn="cat ~/Dotfiles/nvim/init.lua"
 alias catp="cat ~/.profile"
 
+# PYTHON
+alias idarren="ipython --profile=darren"
+alias ptest="pytest -q --cov --cov-report=term-missing"
+
 # VIM / NVIM
 alias basha='nvim ~/.bash_aliases'
 alias bashrc='nvim ~/.bashrc'
@@ -57,12 +68,13 @@ alias vimz='nvim ~/.zshrc'
 alias zD="zellij attach CONFIG"
 alias zP="zellij attach PythonPlayGround_3.13"
 
-# IMAGE MAGICK
+# IMAGES
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
 alias r180="convert -rotate 180 " # then 'from.jpg' to 'to.jpg'
 alias screenshot='. ~/.bash_scripts/screenshot.sh'
 alias windowshot="import -screen " # then filename
 alias drawarea="import root " # then filename
+alias show="wezterm imgcat "
 
 # VOLUME AND BRIGHTNESS
 alias b10='xrandr --output eDP-1  --brightness 1.0'

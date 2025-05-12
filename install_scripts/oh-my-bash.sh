@@ -7,6 +7,10 @@ function install() {
 function update_profiles() {
   printf 'source "$HOME"/.aliases' >>$HOME/.bashrc
   sed -i 's/OSH_THEME="font"/OSH_THEME="bobby-python"/' $HOME/.bashrc
+  printf '# Bash vim mode' >>$HOME/.bashrc
+  printf 'set -o vi' >>$HOME/.bashrc
+  printf '# Bash vim mode' >>$HOME/.profile
+  printf 'set -o vi' >>$HOME/.profile
 }
 
 install &
