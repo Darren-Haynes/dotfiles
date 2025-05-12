@@ -65,5 +65,7 @@ ln -s "$HOME/Dotfiles/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 ln -s "$HOME/Dotfiles/nvim/python.lua" "$HOME/.config/nvim/lua/plugins/"
 ln -s "$HOME/Dotfiles/nvim/themes.lua" "$HOME/.config/nvim/lua/plugins/"
 ln -s "$HOME/Dotfiles/nvim/zellij.lua" "$HOME/.config/nvim/lua/plugins/"
+rm -f "$HOME/.config/nvim/lua/config/keymaps.lua"
+ln -s "$HOME/Dotfiles/nvim/keymaps.lua" "$HOME/.config/nvim/lua/config/"
 
 source "$HOME/.bashrc"
