@@ -3,6 +3,6 @@
 -- Add any additional keymaps here
 
 -- Escape terminal
-vim.keymap.set("t", "jk", [[<C-\><C-n>]])
+vim.keymap.set("t", "kj", [[<C-\><C-n>]])
 -- Escape insert mode
-vim.keymap.set("i", "jk", "<ESC>", { silent = true })
+vim.keymap.set("i", "kj", "<ESC>", { silent = true })

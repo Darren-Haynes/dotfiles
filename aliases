@@ -106,16 +106,18 @@ alias vu='pactl set-sink-volume 0 +5%' #Arch
 
 # GITHUB / VERSION CONTROL
 alias ga='git add --all .'
-alias gb='git branch'
+alias gb='git branch -d '
 alias gd='git diff '
 alias gc="git commit -m "
 alias gpom='git push origin master'
+alias gpon='git push origin main'
 alias gst='git status'
+alias gcm='git checkout master'
+alias gcn='git checkout main'
 
 # LINUX SHORTCUTS
 alias ag='alias | grep '
 alias c='clear'
-alias copy='xsel --clipboard < '
 alias ctl='systemctl '
 alias dg='systemctl | grep '
 alias dimension='eval $(slop -t 0 -b 1) && notify-send "Selection info" "Area: ${W} x ${Y}px \n Position: X = ${X}px, Y = ${Y}px" && echo ${W}x${H} | xsel -bi'
@@ -126,6 +128,9 @@ alias ramsort="ps -e -o pid,vsz,comm= | sort -n -k 2"
 alias sortsize='du -h --max-depth=0 * | sort -h'
 alias xinfo='xrandr --nograb --current'
 alias xr='xrdb ~/dotfiles/X/Xresources'
+
+# COPY
+alias copy='xsel --clipboard < '
 
 #APTITUDE
 alias update='sudo apt update && sudo apt upgrade'

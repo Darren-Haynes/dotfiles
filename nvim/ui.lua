@@ -10,4 +10,5 @@ return {
 			},
 		},
 	},
+	{ "kovetskiy/sxhkd-vim" },
 }

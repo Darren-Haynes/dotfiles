@@ -7,11 +7,12 @@ super + Return
     wezterm
 
 # Lock Screen
-super + l
+super + shift + l
     i3lock -i ~/Dotfiles/bspwm/lock-screen.png
 
 # Launch Applications
-super + {e,b,g,s,d,c}
+super + o ; {e,b,g,s,d,c}
+
     {thunar,qutebrowser,gpick,lxappearance,discord,speedcrunch}
 
 # Screenshots
@@ -22,31 +23,23 @@ super + shift + i
     flameshot screen --clipboard --path $HOME/Downloads --delay 3000
 
 # Volume controls
-XF86Audio{RaiseVolume,LowerVolume,Mute}
-    volume{ --up, --down, --toggle}
+# XF86Audio{RaiseVolume,LowerVolume,Mute}
+#volume{ --up, --down, --toggle}
 
-F10
+super + a ; {j,k,h,l}
+	  pactl set-sink-volume {0 -5%,0 +5%,@DEFAULT_SINK@ 50%,@DEFAULT_SINK@ 100%}
+
+# Toggle volume
+super + a ; t
     pactl set-sink-mute 0 toggle
 
-F11
-    pactl set-sink-volume 0 -5%
-
-F12
-    pactl set-sink-volume 0 +5%
-
-F5
-    pactl set-sink-volume @DEFAULT_SINK@ 50%
-
-F6
-    pactl set-sink-volume @DEFAULT_SINK@ 100%
-
 # Switch Audio Output
-super + shift + a
-    $HOME/Dotfiles/Bin/pa_sink_switch.sa
+super + a ; s
+    $HOME/Dotfiles/bin/pa_sink_switch.sh
 
 # Brightness controls
-XF86MonBrightness{Up,Down}
-    brightness{ --up, --down}
+#XF86MonBrightness{Up,Down}
+#brightness{ --up, --down}
 
 #
 #
@@ -62,7 +55,7 @@ super + shift + {Escape,r}
 super + q
     bspc node -c
 
-# alternate between the tiled and monocle layout
+# Rofi
 super + space
 	rofi -show run
 
@@ -78,13 +71,9 @@ super + {t,ctrl + t,f}
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
-# Send the window to another edge of the screen
-super + {_,shift + }{Left,Down,Up,Right}
-    bspc node -{f,s} {west,south,north,east}
-
 # Change focus to next window, including floating window
-super + {_,shift + }Tab
-    bspc node -f {next,prev}
+#super + {_,shift + }Tab
+#    bspc node -f {next,prev}
  
 #
 # focus/swap
@@ -95,8 +84,8 @@ super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous window in the current desktop
 alt + {_,shift + }Tab
@@ -111,10 +100,10 @@ super + {grave,Tab}
 	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
-super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
+#super + {o,i}
+# bspc wm -h off; \
+# bspc node {older,newer} -f; \
+# bspc wm -h on
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
