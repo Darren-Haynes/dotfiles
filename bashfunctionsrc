@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# BW PW
+getpw() {
+  bw get password -- "$1" | xsel --clipboard
+}
+
+getun() {
+  bw get username -- "$1" | xsel --clipboard
+}
+
+# Create file of random text
+# How to use:
+# `loremipsum paragraphs 10 > file.txt`
+loremipsum () {
+  if [ "${1}" = "" ] || [ "${2}" = "" ]; then
+    echo "Usage: loremipsum [paragraphs, sentences] [integer]"
+  else
+    curl -s http://metaphorpsum.com/"${1}"/"${2}" && printf "\n"
+  fi
+}
+
+# Directly create 10 paragraphs of random text
+random_10_paragraphs () {
+    loremipsum paragraphs 10 > random_10_paragraphs.txt
+  }
+
+# Directly create 20 paragraphs of random text
+random_20_paragraphs () {
+    loremipsum paragraphs 20 > random_20_paragraphs.txt
+  }
+
+# Random gibberish file of 10 lines
+random_gibberish() {
+    base64 /dev/urandom | awk '{print(0==NR%10)?"":$1}' | sed 's/[^[:alpha:]]/ /g' | head -$1 | awk '{ print NR,$0 }' > random_gibberish.txt
+  }
+
+# 100 lines of 5 words per line
+random_5_words_per_line() {
+  grep -v "'" /usr/share/dict/american-english |
+  shuf -r |
+  paste -d ' ' $(printf "%5s" | sed 's/ /- /g') |
+  sed -e 's/^\(.\)/\U\1/;s/$/./' |
+  head -n100 \
+  > lorem.txt
+  }
