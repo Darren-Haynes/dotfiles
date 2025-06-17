@@ -84,6 +84,8 @@ rm -f "$HOME/.config/nvim/lua/config/keymaps.lua"
 ln -s "$HOME/Dotfiles/nvim/keymaps.lua" "$HOME/.config/nvim/lua/config/"
 rm -f "$HOME/.config/nvim/lua/config/ui.lua"
 ln -s "$HOME/Dotfiles/nvim/ui.lua" "$HOME/.config/nvim/lua/plugins/"
+rm -f "$HOME/.config/nvim/lua/config/project.lua"
+ln -s "$HOME/Dotfiles/nvim/project.lua" "$HOME/.config/nvim/lua/plugins/"
 
 if [ ! -d "$HOME/.config/nvim/after/ftplugin" ]; then
   mkdir -p "$HOME/.config/nvim/after/ftplugin/"

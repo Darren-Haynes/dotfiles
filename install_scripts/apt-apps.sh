@@ -10,3 +10,4 @@ sudo apt install -y figlet      # terminal-based ascii font generator
 sudo apt install -y toilet      # works with figlet
 sudo apt install -y flameshot   # dem screenshots
 sudo apt install -y speedcrunch # a proper tidy calculator
+sudo apt install -y sqlite3     # He ain't heavy, he's my brother

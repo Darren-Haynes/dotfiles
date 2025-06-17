@@ -27,11 +27,11 @@ super + shift + i
 #volume{ --up, --down, --toggle}
 
 super + a ; {j,k,h,l}
-	  pactl set-sink-volume {0 -5%,0 +5%,@DEFAULT_SINK@ 50%,@DEFAULT_SINK@ 100%}
+	  pactl set-sink-volume {@DEFAULT_SINK@ -5%,@DEFAULT_SINK@ +5%,@DEFAULT_SINK@ 50%,@DEFAULT_SINK@ 100%}
 
 # Toggle volume
 super + a ; t
-    pactl set-sink-mute 0 toggle
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Switch Audio Output
 super + a ; s

@@ -3,3 +3,4 @@
 *.bak
 vim/view/
 nvim/lazy-lock.json
+nvim/project.lua
