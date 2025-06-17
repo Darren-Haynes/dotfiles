@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# BW PW
+# Bitwarden command line
 getpw() {
   bw get password -- "$1" | xsel --clipboard
 }

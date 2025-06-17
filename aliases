@@ -23,7 +23,7 @@ alias dpy='cd ~/Code/Python/'
 alias dpy3='cd ~/Code/Python/Playground_3.13/'
 
 # NAVIGATION CODE PROJECTS
-alias dpda='cd ~/Code/Python/PythonProjects/DSA_Python/'
+alias ddsa='cd ~/Code/Python/PythonProjects/DSA_Python/'
 
 # LISTING
 alias a='ls -A'
@@ -54,6 +54,7 @@ alias catp="cat ~/.profile"
 # PYTHON
 alias idarren="ipython --profile=darren"
 alias ptest="pytest -q --cov --cov-report=term-missing"
+
 
 # VIM / NVIM
 alias basha='nvim ~/.bash_aliases'

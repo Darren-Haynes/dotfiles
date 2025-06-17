@@ -11,22 +11,17 @@ if wezterm.config_builder then
 end
 
 -- Color scheme
-config.color_scheme = "Tokyo Night"
-config.window_background_image = "/home/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
+config.color_scheme = "Catppuccin Mocha"
+-- config.window_background_image = "/home/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
+--config.window_background_image = "/home/darren/Pictures/Wallpapers/Buddha-Thangka.jpg"
 
-config.window_background_image_hsb = {
-	-- Darken the background image by reducing it to 1/3rd
-	brightness = 0.01,
-
-	-- You can adjust the hue by scaling its value.
-	-- a multiplier of 1.0 leaves the value unchanged.
-	hue = 1.0,
-
-	-- You can adjust the saturation also.
-	saturation = 1.0,
-}
+--config.window_background_image_hsb = {
+--	brightness = 0.00,
+--	hue = 1.0,
+--	saturation = 1.0,
+--}
 -- Fonts
-config.font_size = 13.0
+config.font_size = 14.0
 config.adjust_window_size_when_changing_font_size = false
 
 -- No padding
@@ -41,7 +36,7 @@ config.window_padding = {
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
-config.show_tabs_in_tab_bar = true
+config.show_tabs_in_tab_bar = false
 
 config.keys = {
 	-- Turn off the default CMD-m Hide action, allowing CMD-m to

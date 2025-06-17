@@ -1,8 +1,12 @@
 return {
-	{ "samharju/synthweave.nvim" },
 	{ "ribru17/bamboo.nvim" },
-	{ "datsfilipe/vesper.nvim" },
 	{ "Everblush/nvim", name = "everblush" },
+	{ "ramojus/mellifluous.nvim" },
+	{
+		"uloco/bluloco.nvim",
+		lazy = false,
+		dependencies = { "rktjmp/lush.nvim" },
+	},
 	{
 		"folke/tokyonight.nvim",
 		opts = {
@@ -13,14 +17,5 @@ return {
 			},
 		},
 	},
-	{
-		"catppuccin/nvim",
-		opts = {
-			transparent_background = true,
-			styles = {
-				sidebars = "transparent",
-				floats = "transparent",
-			},
-		},
-	},
+	{ "catppuccin/nvim" },
 }
