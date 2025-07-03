@@ -35,7 +35,7 @@ alias lsM='ls ~/Music'
 alias lsP='ls ~/Pictures'
 alias lsV='ls ~/Videos'
 alias lsdoc='ls ~/Documents'
-alias lsdot='ls ~/dotfiles'
+alias lsdot='ls ~/Dotfiles'
 alias lsfonts='ls /usr/share/fonts/'
 alias lsh='ls ~/'
 
@@ -65,10 +65,6 @@ alias vima='nvim ~/.aliases'
 alias vimx='nvim ~/.Xresources'
 alias vimz='nvim ~/.zshrc'
 
-# Zellij
-alias zD="zellij attach CONFIG"
-alias zP="zellij attach PythonPlayGround_3.13"
-
 # IMAGES
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
 alias r180="convert -rotate 180 " # then 'from.jpg' to 'to.jpg'
@@ -78,32 +74,16 @@ alias drawarea="import root " # then filename
 alias show="wezterm imgcat "
 
 # VOLUME AND BRIGHTNESS
-alias b10='xrandr --output eDP-1  --brightness 1.0'
-alias b1='xrandr --output eDP-1  --brightness 0.1'
-alias b2='xrandr --output eDP-1  --brightness 0.2'
-alias b3='xrandr --output eDP-1  --brightness 0.3'
-alias b4='xrandr --output eDP-1  --brightness 0.4'
-alias b5='xrandr --output eDP-1  --brightness 0.5'
-alias b6='xrandr --output eDP-1  --brightness 0.6'
-alias b7='xrandr --output eDP-1  --brightness 0.7'
-alias b8='xrandr --output eDP-1  --brightness 0.8'
-alias b9='xrandr --output eDP-1  --brightness 0.9'
-alias bd='xbacklight -dec 5' #Arch
-alias bu='xbacklight -inc 5' #Arch
-alias v10='amixer -D pulse sset Master 100%' #ubuntu
-alias v1='amixer -D pulse sset Master 10%' #ubuntu
-alias v2='amixer -D pulse sset Master 20%' #ubuntu
-alias v3='amixer -D pulse sset Master 30%' #ubuntu
-alias v4='amixer -D pulse sset Master 40%' #ubuntu
-alias v5='amixer -D pulse sset Master 50%' #ubuntu
-alias v6='amixer -D pulse sset Master 60%' #ubuntu
-alias v7='amixer -D pulse sset Master 70%' #ubuntu
-alias v8='amixer -D pulse sset Master 80%' #ubuntu
-alias v9='amixer -D pulse sset Master 90%' #ubuntu
-alias vd='pactl set-sink-volume 0 -5%' #Arch
-alias voff='amixer -D pulse sset Master 0%' #ubuntu
-alias vt='pactl set-sink-mute 0 toggle' #Arch
-alias vu='pactl set-sink-volume 0 +5%' #Arch
+alias b10='xrandr --output HDMI-1  --brightness 1.0'
+alias b1='xrandr --output HDMI-1  --brightness 0.1'
+alias b2='xrandr --output HDMI-1  --brightness 0.2'
+alias b3='xrandr --output HDMI-1  --brightness 0.3'
+alias b4='xrandr --output HDMI-1  --brightness 0.4'
+alias b5='xrandr --output HDMI-1  --brightness 0.5'
+alias b6='xrandr --output HDMI-1  --brightness 0.6'
+alias b7='xrandr --output HDMI-1  --brightness 0.7'
+alias b8='xrandr --output HDMI-1  --brightness 0.8'
+alias b9='xrandr --output HDMI-1  --brightness 0.9'
 
 # GITHUB / VERSION CONTROL
 alias ga='git add --all .'
@@ -119,7 +99,6 @@ alias gcn='git checkout main'
 # LINUX SHORTCUTS
 alias ag='alias | grep '
 alias c='clear'
-alias ctl='systemctl '
 alias dg='systemctl | grep '
 alias dimension='eval $(slop -t 0 -b 1) && notify-send "Selection info" "Area: ${W} x ${Y}px \n Position: X = ${X}px, Y = ${Y}px" && echo ${W}x${H} | xsel -bi'
 alias fontlist="fc-list : family | sort"
@@ -137,11 +116,6 @@ alias copy='xsel --clipboard < '
 alias update='sudo apt update && sudo apt upgrade'
 alias upgradable='apt list --upgradable'
 alias as='apt-cache search '
-
-#UBUNTU
-alias intel="sudo prime-select intel"
-alias nvidia="sudo prime-select nvidia"
-alias which_chip='glxinfo | egrep "OpenGL vendor|OpenGL renderer*"'
 
 # SOURCING
 alias soa='source ~/.aliases'

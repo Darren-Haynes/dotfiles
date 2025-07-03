@@ -1,33 +1,38 @@
-#
-# wm independent hotkeys
-#
-
-# Launch Terminal
-super + Return
-    wezterm
-
-# Lock Screen
+#################
+#  Lock Screen  #
+#################
 super + shift + l
     i3lock -i ~/Dotfiles/bspwm/lock-screen.png
 
-# Launch Applications
-super + o ; {e,b,g,s,d,c}
+#################
+#  Launch Apps  #
+#################
+super + space
+	rofi -show run
 
-    {thunar,qutebrowser,gpick,lxappearance,discord,speedcrunch}
+super + Return
+    wezterm
 
-# Screenshots
-super + i
+super + o ; {e,b,g,s,d,c,f}
+    {thunar,qutebrowser,gpick,lxappearance,discord,speedcrunch,flameshot gui}
+
+#################
+#  Sreen Tools  #
+#################
+super + s ; s
     flameshot gui
 
-super + shift + i
+super + s ; f 
     flameshot screen --clipboard --path $HOME/Downloads --delay 3000
 
-# Volume controls
-# XF86Audio{RaiseVolume,LowerVolume,Mute}
-#volume{ --up, --down, --toggle}
-
+#################
+#Volume controls#
+#################
 super + a ; {j,k,h,l}
 	  pactl set-sink-volume {@DEFAULT_SINK@ -5%,@DEFAULT_SINK@ +5%,@DEFAULT_SINK@ 50%,@DEFAULT_SINK@ 100%}
+
+super + a ; {1,2,3,4,5,6,7,8,9,0}
+	  pactl set-sink-volume {@DEFAULT_SINK@ 10%,@DEFAULT_SINK@ 20%,@DEFAULT_SINK@ 30%,@DEFAULT_SINK@ 40%,@DEFAULT_SINK@ 50%,@DEFAULT_SINK@ 60%,@DEFAULT_SINK@ 70%,@DEFAULT_SINK@ 80%,@DEFAULT_SINK@ 90%,@DEFAULT_SINK@ 100%}
 
 # Toggle volume
 super + a ; t
@@ -37,15 +42,18 @@ super + a ; t
 super + a ; s
     $HOME/Dotfiles/bin/pa_sink_switch.sh
 
+####################
+#Monitor Brightness#
+####################
 # Brightness controls
 #XF86MonBrightness{Up,Down}
 #brightness{ --up, --down}
+super + b ; {1,2,3,4,5,6,7,8,9,0}
+		xrandr --output HDMI-1  {--brightness 0.1,--brightness 0.2,--brightness 0.3,--brightness 0.4,--brightness 0.5,--brightness 0.6,--brightness 0.7,--brightness 0.8,--brightness 0.9,--brightness 1.0,}'
 
-#
-#
-# BSPWM HOTKEYS
-#
-#
+####################
+#  BSPWM HOTKEYS   #
+####################
 
 # quit/restart bspwm
 super + shift + {Escape,r}
@@ -55,9 +63,6 @@ super + shift + {Escape,r}
 super + q
     bspc node -c
 
-# Rofi
-super + space
-	rofi -show run
 
 #
 # state/flags
