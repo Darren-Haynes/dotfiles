@@ -11,7 +11,10 @@ if wezterm.config_builder then
 end
 
 -- Color scheme
-config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "nord"
+-- config.color_scheme = "Tokyo Night Moon"
+-- config.color_scheme = "GitHub Dark"
+config.color_scheme = "Everforest Dark (Gogh)"
 -- config.window_background_image = "/home/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
 --config.window_background_image = "/home/darren/Pictures/Wallpapers/Buddha-Thangka.jpg"
 
@@ -21,7 +24,12 @@ config.color_scheme = "Catppuccin Mocha"
 --	saturation = 1.0,
 --}
 -- Fonts
-config.font_size = 14.0
+config.font = wezterm.font("FiraCode Nerd Font")
+-- config.font = wezterm.font("Nimbus Mono PS")
+-- config.font = wezterm.font("Liberation Mono")
+-- config.font = wezterm.font("Latin Modern Mono")
+-- config.font = wezterm.font("SpaceMono Nerd Font")
+config.font_size = 13.5
 config.adjust_window_size_when_changing_font_size = false
 
 -- No padding
@@ -37,6 +45,7 @@ config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
 config.show_tabs_in_tab_bar = false
+config.enable_tab_bar = false
 
 config.keys = {
 	-- Turn off the default CMD-m Hide action, allowing CMD-m to

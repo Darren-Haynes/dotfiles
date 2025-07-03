@@ -1,21 +1,23 @@
 return {
-	{ "ribru17/bamboo.nvim" },
-	{ "Everblush/nvim", name = "everblush" },
-	{ "ramojus/mellifluous.nvim" },
+	{ "catppuccin/nvim" },
+	{ "folke/tokyonight.nvim" },
+	{ "sainnhe/everforest" },
+	{ "projekt0n/github-nvim-theme", name = "github-theme" },
 	{
-		"uloco/bluloco.nvim",
+		"webhooked/kanso.nvim",
 		lazy = false,
-		dependencies = { "rktjmp/lush.nvim" },
 	},
 	{
-		"folke/tokyonight.nvim",
+		"thesimonho/kanagawa-paper.nvim",
+		lazy = false,
+	},
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
 		opts = {
-			transparent = true,
 			styles = {
-				sidebars = "transparent",
-				floats = "transparent",
+				italic = false,
 			},
 		},
 	},
-	{ "catppuccin/nvim" },
 }

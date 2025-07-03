@@ -10,9 +10,3 @@ require("config.lazy")
 -- python3 virtenv
 --vim.g.loaded_python3_provider = 1
 -- vim.g.python3_host_prog = "/home/darren/.pyenv/versions/nvim-3.13.venv/bin/python"
-
--- Windows 11
-vim.api.nvim_create_autocmd("VimLeave", {
-	pattern = "*",
-	command = "silent !zellij action switch-mode normal",
-})
