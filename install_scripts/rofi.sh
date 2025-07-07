@@ -4,15 +4,16 @@
 
 #!/bin/bash
 
-if [ ! -d "$HOME/.config/rofi" ]; then 
-    mkdir $HOME/.config/rofi
-    ln -s $HOME/Dotfiles/rofi/config.rasi $HOME/.config/rofi/
+if [ ! -d "$HOME/.config/rofi" ]; then
+  mkdir "$HOME/.config/rofi"
+  ln -s "$HOME/Dotfiles/rofi/config.rasi" "$HOME/.config/rofi/"
 fi
 
-sudo apt install -y rofi	       # application launcher and switcher
+sudo apt install -y rofi # application launcher and switcher
 
 # Install tokyonight rofi theme
-mkdir $HOME/Downloads
-curl https://raw.githubusercontent.com/w8ste/Tokyonight-rofi-theme/refs/heads/main/tokyonight_big2.rasi > $HOME/Downloads/tokyonight.rasi
-sudo mv $HOME/Downloads/tokyonight.rasi /usr/share/rofi/themes
-
+mkdir "$HOME/Downloads"
+curl https://raw.githubusercontent.com/w8ste/Tokyonight-rofi-theme/refs/heads/main/tokyonight_big2.rasi >"$HOME/Downloads/tokyonight.rasi"
+sudo mv "$HOME/Downloads/tokyonight.rasi" /usr/share/rofi/themes
+curl https://raw.githubusercontent.com/dennis-n-schneider/rofi-everforest/refs/heads/main/everforest.rasi >"$HOME/Downloads/everforest.rasi"
+sudo mv "$HOME/Downloads/everforest.rasi" /usr/share/rofi/themes

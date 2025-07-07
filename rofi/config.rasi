@@ -3,7 +3,7 @@ configuration {
   combi-modes: [ window, drun, run ];
 }
 
-@theme "tokyonight"
+@theme "everforest"
  
 /* Insert theme modifications after this */
 

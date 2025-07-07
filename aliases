@@ -54,6 +54,7 @@ alias catp="cat ~/.profile"
 # PYTHON
 alias idarren="ipython --profile=darren"
 alias ptest="pytest -q --cov --cov-report=term-missing"
+alias jf="python main.py"
 
 
 # VIM / NVIM

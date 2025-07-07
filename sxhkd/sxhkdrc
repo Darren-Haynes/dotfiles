@@ -13,7 +13,7 @@ super + space
 super + Return
     wezterm
 
-super + o ; {e,b,g,s,d,c,f}
+super + o ; {e,b,g,l,d,c,f}
     {thunar,qutebrowser,gpick,lxappearance,discord,speedcrunch,flameshot gui}
 
 #################
@@ -45,11 +45,8 @@ super + a ; s
 ####################
 #Monitor Brightness#
 ####################
-# Brightness controls
-#XF86MonBrightness{Up,Down}
-#brightness{ --up, --down}
 super + b ; {1,2,3,4,5,6,7,8,9,0}
-		xrandr --output HDMI-1  {--brightness 0.1,--brightness 0.2,--brightness 0.3,--brightness 0.4,--brightness 0.5,--brightness 0.6,--brightness 0.7,--brightness 0.8,--brightness 0.9,--brightness 1.0,}'
+	  xrandr --output HDMI-1  {--brightness 0.1,--brightness 0.2,--brightness 0.3,--brightness 0.4,--brightness 0.5,--brightness 0.6,--brightness 0.7,--brightness 0.8,--brightness 0.9,--brightness 1.0,}
 
 ####################
 #  BSPWM HOTKEYS   #
@@ -63,11 +60,6 @@ super + shift + {Escape,r}
 super + q
     bspc node -c
 
-
-#
-# state/flags
-#
-
 # set the window state
 super + {t,ctrl + t,f}
 	bspc node -t {tiled,pseudo_tiled,fullscreen}
@@ -76,21 +68,9 @@ super + {t,ctrl + t,f}
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
-# Change focus to next window, including floating window
-#super + {_,shift + }Tab
-#    bspc node -f {next,prev}
- 
-#
-# focus/swap
-#
-
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
-
-# focus the node for the given path jump
-# super + {p,b,comma,period}
-# 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous window in the current desktop
 alt + {_,shift + }Tab
@@ -104,19 +84,9 @@ super + bracket{left,right}
 super + {grave,Tab}
 	bspc {node,desktop} -f last
 
-# focus the older or newer node in the focus history
-#super + {o,i}
-# bspc wm -h off; \
-# bspc node {older,newer} -f; \
-# bspc wm -h on
-
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
-
-#
-# preselect
-#
 
 # preselect the direction
 super + ctrl + {h,j,k,l}
@@ -133,10 +103,6 @@ super + ctrl + space
 # cancel the preselection for the focused desktop
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-#
-# move/resize
-#
 
 # Expanding windows
 super + control {Left,Right,Up,Down}
