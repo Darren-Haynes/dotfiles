@@ -33,21 +33,15 @@ bspc rule -a Lxappearance state=floating center=true
 bspc rule -a Arandr state=floating rectangle 850x850+0+0 center=true
 bspc rule -a SpeedCrunch state=floating rectangle 300x400+0+0 center=true
 
-# polkit agent
+# Autostart
 if [[ ! $(pidof polkit-gnome-authentication-agent-1) ]]; then
   /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 fi
-
-# Launch keybindings daemon
 sxhkd &
-
-# Enable power management
 xfce4-power-manager &
+dunst -conf "$HOME/.config/dunst/dunstrc" &
 
 # start compositor
 #while pgrep -u $UID -x compton >/dev/null; do sleep 1; done
 # compton -b
 picom --config "$HOME/.config/bspwm/picom.conf"
-
-XFCE_TERM_PATH="$HOME/.config/xfce4/terminal"
-cp "$XFCE_TERM_PATH"/colorschemes/tokyo-night "$XFCE_TERM_PATH"/terminalrc
