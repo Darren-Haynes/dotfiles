@@ -1,23 +1,11 @@
 return {
-	{ "catppuccin/nvim" },
-	{ "folke/tokyonight.nvim" },
-	{ "sainnhe/everforest" },
-	{ "projekt0n/github-nvim-theme", name = "github-theme" },
+	{ "sainnhe/everforest", lazy = false, priority = 1000 },
+
+	-- Configure LazyVim to load everforest
 	{
-		"webhooked/kanso.nvim",
-		lazy = false,
-	},
-	{
-		"thesimonho/kanagawa-paper.nvim",
-		lazy = false,
-	},
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
+		"LazyVim/LazyVim",
 		opts = {
-			styles = {
-				italic = false,
-			},
+			colorscheme = "everforest",
 		},
 	},
 }

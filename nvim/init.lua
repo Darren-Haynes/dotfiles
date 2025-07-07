@@ -6,7 +6,3 @@ require("config.lazy")
 -- | |\  | \ V / | || | | | | | | |___| (_) || | | ||  _|| || (_| |
 -- |_| \_|  \_/  |_||_| |_| |_|  \____|\___/ |_| |_||_|  |_| \__, |
 --                                                           |___/
-
--- python3 virtenv
---vim.g.loaded_python3_provider = 1
--- vim.g.python3_host_prog = "/home/darren/.pyenv/versions/nvim-3.13.venv/bin/python"
