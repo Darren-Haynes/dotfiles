@@ -13,8 +13,11 @@ super + space
 super + Return
     wezterm
 
-super + o ; {e,b,g,l,d,c,f}
-    {thunar,qutebrowser,gpick,lxappearance,discord,speedcrunch,flameshot gui}
+super + o ; {a,b,c,d,f,g}
+    {anki,bitwarden,speedcrunch,discord,thunar,gpick}
+
+super + o ; {l,p,s,q}
+    {lxappearance,pavucontrol-qt,simplescreenrecorder,qutebrowser}
 
 #################
 #  Sreen Tools  #
@@ -23,20 +26,23 @@ super + s ; s
     flameshot gui
 
 super + s ; f 
-    flameshot screen --clipboard --path $HOME/Downloads --delay 3000
+    flameshot screen --clipboard --path $HOME/Pictures/Screenshots/
+
+super + s ; d 
+    flameshot screen --clipboard --path $HOME/Pictures/Screenshots/ --delay 3000
 
 #################
 #Volume controls#
 #################
 super + a ; {j,k,h,l}
-	  pactl set-sink-volume {@DEFAULT_SINK@ -5%,@DEFAULT_SINK@ +5%,@DEFAULT_SINK@ 50%,@DEFAULT_SINK@ 100%}
+	  pactl set-sink-volume {@DEFAULT_SINK@ -5%,@DEFAULT_SINK@ +5%,@DEFAULT_SINK@ 50%,@DEFAULT_SINK@ 100%}; bash $HOME/Dotfiles/bin/sink_volume.sh
 
 super + a ; {1,2,3,4,5,6,7,8,9,0}
-	  pactl set-sink-volume {@DEFAULT_SINK@ 10%,@DEFAULT_SINK@ 20%,@DEFAULT_SINK@ 30%,@DEFAULT_SINK@ 40%,@DEFAULT_SINK@ 50%,@DEFAULT_SINK@ 60%,@DEFAULT_SINK@ 70%,@DEFAULT_SINK@ 80%,@DEFAULT_SINK@ 90%,@DEFAULT_SINK@ 100%}
+	  pactl set-sink-volume {@DEFAULT_SINK@ 10%,@DEFAULT_SINK@ 20%,@DEFAULT_SINK@ 30%,@DEFAULT_SINK@ 40%,@DEFAULT_SINK@ 50%,@DEFAULT_SINK@ 60%,@DEFAULT_SINK@ 70%,@DEFAULT_SINK@ 80%,@DEFAULT_SINK@ 90%,@DEFAULT_SINK@ 100%}; bash $HOME/Dotfiles/bin/sink_volume.sh
 
 # Toggle volume
 super + a ; t
-    pactl set-sink-mute @DEFAULT_SINK@ toggle
+    pactl set-sink-mute @DEFAULT_SINK@ toggle; bash $HOME/Dotfiles/bin/volume_toggle.sh
 
 # Switch Audio Output
 super + a ; s
@@ -48,21 +54,38 @@ super + a ; s
 super + b ; {1,2,3,4,5,6,7,8,9,0}
 	  xrandr --output HDMI-1  {--brightness 0.1,--brightness 0.2,--brightness 0.3,--brightness 0.4,--brightness 0.5,--brightness 0.6,--brightness 0.7,--brightness 0.8,--brightness 0.9,--brightness 1.0,}
 
+super + b ; h
+	  xrandr --output HDMI-1 --brightness 0.7; dunstify "Brightness changed to 70%"
+
+super + b ; l
+	  xrandr --output HDMI-1 --brightness 1.0; dunstify "Brightness changed to 100%"
+
+####################
+#   INFORMATION    #
+####################
+super + i ; d
+   bash $HOME/Dotfiles/bin/datetime.sh
+
+
 ####################
 #  BSPWM HOTKEYS   #
 ####################
 
-# quit/restart bspwm
-super + shift + {Escape,r}
-    bspc {quit,wm -r}
+# quit bspwm
+super + shift + Escape
+    bspc quit
+
+# restart bspwm
+super + shift + r
+    bspc wm -r; dunstify --timeout=3000 --icon=$HOME/Dotfiles/icons/penguin.png "Bspwm" "Reloaded"
 
 # close and kill
-super + q
+super + shift + q
     bspc node -c
 
 # set the window state
-super + {t,ctrl + t,f}
-	bspc node -t {tiled,pseudo_tiled,fullscreen}
+super + {t,ctrl + t,f, ctrl + f}
+	bspc node -t {tiled,pseudo_tiled,fullscreen,floating}
 
 # set the node flags
 super + ctrl + {m,x,y,z}
