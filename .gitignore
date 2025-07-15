@@ -1,6 +1,8 @@
 *.swp
 *.swo
 *.bak
+/**/*.pyc
+__pycache__
 vim/view/
 nvim/lazy-lock.json
 nvim/project.lua
