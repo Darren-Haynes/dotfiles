@@ -9,3 +9,5 @@ sudo apt-get install -y wget       # aya download from web
 sudo apt-get install -y xclip      # clipboard util
 sudo apt-get install -y xsel       # and another clipboard util
 sudo apt-get install -y tldr       # and another clipboard util
+sudo apt-get install -y psmisc     # for 'killall' command
+sudo apt-get install -y bluetooth  # because my teeth are blue
