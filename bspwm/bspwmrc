@@ -12,7 +12,7 @@ bspc config normal_border_color "#3D484D"
 bspc config active_border_color "#FFFFFF"
 
 bspc config borderless_monocle true
-bspc config gapless_monocle true
+bspc config gapless_monocle false
 bspc config paddingless_monocle true
 bspc config single_monocle true
 bspc config focus_follows_pointer true
@@ -22,7 +22,7 @@ xsetroot -cursor_name left_ptr
 
 # workspaces
 bspc rule -a qutebrowser desktop='^2' follow=on focus=on
-bspc rule -a chromium desktop='^3' follow=on focus=on
+bspc rule -a Chromium desktop='^3' follow=on focus=on
 bspc rule -a discord desktop='^4' follow=on focus=on
 bspc rule -a Gpick state=floating rectangle 850x350+0+0 center=true
 bspc rule -a Lxappearance state=floating rectangle 850x450+0+0 center=true
