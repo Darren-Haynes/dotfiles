@@ -11,10 +11,10 @@ if wezterm.config_builder then
 end
 
 -- Color scheme
--- config.color_scheme = "nord"
+config.color_scheme = "nord"
 -- config.color_scheme = "Tokyo Night Moon"
 -- config.color_scheme = "GitHub Dark"
-config.color_scheme = "Everforest Dark (Gogh)"
+-- config.color_scheme = "Everforest Dark (Gogh)"
 -- config.window_background_image = "/home/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
 --config.window_background_image = "/home/darren/Pictures/Wallpapers/Buddha-Thangka.jpg"
 

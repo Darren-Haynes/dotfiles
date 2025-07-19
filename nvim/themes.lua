@@ -1,5 +1,5 @@
 return {
-	{ "sainnhe/everforest", lazy = false, priority = 1000 },
+	{ "sainnhe/everforest" },
 
 	-- Configure LazyVim to load everforest
 	{
@@ -8,4 +8,5 @@ return {
 			colorscheme = "everforest",
 		},
 	},
+	{ "gbprod/nord.nvim", lazy = false, priority = 1000 },
 }

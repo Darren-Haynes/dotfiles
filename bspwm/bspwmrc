@@ -3,7 +3,7 @@ bash "$HOME/.config/bspwm/.fehbg"
 
 bspc monitor -d '' '' '' '' '' ''
 
-bspc config border_width 1
+bspc config border_width 3
 bspc config window_gap 10
 bspc config split_ratio 0.50
 
@@ -11,8 +11,10 @@ bspc config focused_border_color "#83C092"
 bspc config normal_border_color "#3D484D"
 bspc config active_border_color "#FFFFFF"
 
+# When only 1 window open, no border
 bspc config borderless_monocle true
-bspc config gapless_monocle false
+# When only 1 window open, no gaps
+bspc config gapless_monocle true
 bspc config paddingless_monocle true
 bspc config single_monocle true
 bspc config focus_follows_pointer true
@@ -30,16 +32,18 @@ bspc rule -a Arandr state=floating rectangle 850x850+0+0 center=true
 bspc rule -a SpeedCrunch state=floating rectangle 300x400+0+0 center=true
 bspc rule -a SimpleScreenRecorder state=floating rectangle 850x850+0+0 center=true
 bspc rule -a Bitwarden state=floating rectangle 927x573+0+0 center=true
+bspc rule -a wezterm state=floating rectangle 950x950+0+0 center=true
+bspc rule -a feh state=floating
 
 # Autostart
-if [[ ! $(pidof polkit-gnome-authentication-agent-1) ]]; then
-  /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-fi
+# if [ ! "$(pidof polkit-gnome-authentication-agent-1)" ]; then
+#   /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+# fi
 kill "$(pgrep -x sxhkd | awk 'NR==1 {print $0}')"
-dunstify --timeout=3000 --icon="$HOME/Dotfiles/icons/keyboard.png" "Sxhkd" "configuration reloaded"
 sxhkd &
 xfce4-power-manager &
 dunst -conf "$HOME/.config/dunst/dunstrc" &
+dunstify --timeout=3000 --icon="$HOME/Dotfiles/icons/keyboard.png" "Sxhkd" "configuration reloaded"
 
 # start compositor
 #while pgrep -u $UID -x compton >/dev/null; do sleep 1; done
