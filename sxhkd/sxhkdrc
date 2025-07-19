@@ -77,6 +77,22 @@ super + i ; r
    bash $HOME/Dotfiles/bin/ram.sh
 
 ####################
+#      SYSTEM      #
+####################
+
+# Restart networking
+super + s ; n
+   bash $HOME/Dotfiles/bin/network-restart.sh
+
+# Choose Wifi
+super + s ; w
+   wezterm start -- nmtui
+
+# Restart system
+super + s ; r
+   bash $HOME/Dotfiles/bin/system-restart.sh
+
+####################
 #  BSPWM HOTKEYS   #
 ####################
 
