@@ -4,7 +4,7 @@ bash "$HOME/.config/bspwm/.fehbg"
 bspc monitor -d '' '' '' '' '' ''
 
 bspc config border_width 3
-bspc config window_gap 10
+bspc config window_gap 5
 bspc config split_ratio 0.50
 
 bspc config focused_border_color "#83C092"
@@ -23,7 +23,7 @@ bspc config focus_follows_pointer true
 xsetroot -cursor_name left_ptr
 
 # workspaces
-bspc rule -a qutebrowser desktop='^2' follow=on focus=on
+bspc rule -a qutebrowser desktop='^1' follow=on focus=on
 bspc rule -a Chromium desktop='^3' follow=on focus=on
 bspc rule -a discord desktop='^4' follow=on focus=on
 bspc rule -a Gpick state=floating rectangle 850x350+0+0 center=true
@@ -31,8 +31,8 @@ bspc rule -a Lxappearance state=floating rectangle 850x450+0+0 center=true
 bspc rule -a Arandr state=floating rectangle 850x850+0+0 center=true
 bspc rule -a SpeedCrunch state=floating rectangle 300x400+0+0 center=true
 bspc rule -a SimpleScreenRecorder state=floating rectangle 850x850+0+0 center=true
-bspc rule -a Bitwarden state=floating rectangle 927x573+0+0 center=true
-bspc rule -a wezterm state=floating rectangle 950x950+0+0 center=true
+bspc rule -a Bitwarden state=floating rectangle 927x673+0+0 center=true
+bspc rule -a my-electron-app state=floating
 bspc rule -a feh state=floating
 
 # Autostart

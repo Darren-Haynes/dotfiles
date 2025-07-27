@@ -8,13 +8,13 @@ defaultSink=$(pactl info | grep "Default Sink: " | awk '{ print $3 }')
 # Query the list of all available sinks
 sinks=()
 i=0
-while read line; do
+
+while read -r line; do
   index=$(echo "$line" | awk '{ print $1 }')
   sinks[${#sinks[@]}]=$index
 
   # Find the current DEFAULT_SINK
   if grep -q "$defaultSink" <<<"$line"; then
-    defaultIndex=$index
     defaultPos=$i
   fi
 
@@ -38,27 +38,32 @@ bluetooth='D8_90_05_78_FB_12'
 
 icon="$HOME/Dotfiles/icons/sound-icon-red.png"
 if [[ "$sound" == *"$razor"* ]]; then
-  sound="Razor BlackShark Headphones"
+  sound="Razor BlackShark"
   icon="$HOME/Dotfiles/icons/headphones-razor.png"
 fi
 if [[ "$sound" == *"$dell"* ]]; then
-  sound="Dell Monitor Speakers"
+  sound="Dell Monitor"
   icon="$HOME/Dotfiles/icons/monitor-speakers.png"
 fi
 if [[ "$sound" == *"$bluetooth"* ]]; then
-  sound="JLab Go Air Sport"
+  sound="JLab Go Air"
   icon="$HOME/Dotfiles/icons/bluetooth.png"
 fi
 
-dunstify --timeout=3000 --icon=$icon "Sound Output Device" "$sound"
+volume=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print substr($5, 1, length($5)-1)}')
+volume_txt="Volume: $volume\n"
+toggle_state=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+toggle_txt="Muted: $toggle_state"
+
+dunstify --timeout=3000 --icon="$icon" "$sound" "$volume_txt $toggle_txt"
 
 # Move all current playing streams to the new DEFAULT_SINK
-while read stream; do
+while read -r stream; do
   # Check whether there is a stream playing in the first place
   if [ -z "$stream" ]; then
     break
   fi
 
-  streamId=$(echo $stream | awk '{ print $1 }')
-  pactl move-sink-input $streamId @DEFAULT_SINK@
+  streamId=$(echo "$stream" | awk '{ print $1 }')
+  pactl move-sink-input "$streamId" @DEFAULT_SINK@
 done <<<"$(pactl list short sink-inputs)"

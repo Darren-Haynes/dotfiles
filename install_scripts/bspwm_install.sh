@@ -26,6 +26,7 @@ source "$HOME/Dotfiles/install_scripts/gtk_theme.sh"
 source "$HOME/Dotfiles/install_scripts/neovim.sh"
 source "$HOME/Dotfiles/install_scripts/neovim_after.sh"
 source "$HOME/Dotfiles/install_scripts/bluetooth.sh"
+source "$HOME/Dotfiles/install_scripts/java21-and-closure.sh"
 
 printf " ___           _        _ _    ____                      _      _\n"
 printf "|_ _|_ __  ___| |_ __ _| | |  / ___|___  _ __ ___  _ __ | | ___| |_ ___\n"

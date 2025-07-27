@@ -13,7 +13,6 @@ end
 -- Color scheme
 config.color_scheme = "nord"
 -- config.color_scheme = "Tokyo Night Moon"
--- config.color_scheme = "GitHub Dark"
 -- config.color_scheme = "Everforest Dark (Gogh)"
 -- config.window_background_image = "/home/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
 --config.window_background_image = "/home/darren/Pictures/Wallpapers/Buddha-Thangka.jpg"
@@ -26,8 +25,6 @@ config.color_scheme = "nord"
 -- Fonts
 config.font = wezterm.font("FiraCode Nerd Font")
 -- config.font = wezterm.font("Nimbus Mono PS")
--- config.font = wezterm.font("Liberation Mono")
--- config.font = wezterm.font("Latin Modern Mono")
 -- config.font = wezterm.font("SpaceMono Nerd Font")
 config.font_size = 13.5
 config.adjust_window_size_when_changing_font_size = false

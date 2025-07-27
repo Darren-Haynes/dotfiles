@@ -52,13 +52,7 @@ super + a ; s
 #Monitor Brightness#
 ####################
 super + b ; {1,2,3,4,5,6,7,8,9,0}
-	  xrandr --output HDMI-1  {--brightness 0.1,--brightness 0.2,--brightness 0.3,--brightness 0.4,--brightness 0.5,--brightness 0.6,--brightness 0.7,--brightness 0.8,--brightness 0.9,--brightness 1.0,}
-
-super + b ; h
-	  xrandr --output HDMI-1 --brightness 0.7; dunstify --icon=$HOME/Dotfiles/icons/brightness.png "Brightness changed to 70%"
-
-super + b ; l
-	  xrandr --output HDMI-1 --brightness 1.0; dunstify --icon=$HOME/Dotfiles/icons/brightness.png  "Brightness changed to 100%"
+	  xrandr --output HDMI-1  {--brightness 0.1,--brightness 0.2,--brightness 0.3,--brightness 0.4,--brightness 0.5,--brightness 0.6,--brightness 0.7,--brightness 0.8,--brightness 0.9,--brightness 1.0,} ; bash $HOME/Dotfiles/bin/brightness.sh
 
 ####################
 #   INFORMATION    #
@@ -75,6 +69,18 @@ super + i ; t
 # Total, used & free memory notification
 super + i ; r
    bash $HOME/Dotfiles/bin/ram.sh
+
+# Name of current audio output
+super + i ; a
+   bash $HOME/Dotfiles/bin/audio-output.sh
+
+# Name of current network connection
+super + i ; n
+   bash $HOME/Dotfiles/bin/network-connection.sh
+
+# Home partition disk usage
+super + i ; h
+   bash $HOME/Dotfiles/bin/disk-usage.sh
 
 ####################
 #      SYSTEM      #
