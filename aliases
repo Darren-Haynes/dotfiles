@@ -74,6 +74,7 @@ alias screenshot='. ~/.bash_scripts/screenshot.sh'
 alias windowshot="import -screen " # then filename
 alias drawarea="import root " # then filename
 alias show="wezterm imgcat "
+alias fehs="feh --scale-down "
 
 # VOLUME AND BRIGHTNESS
 alias b10='xrandr --output HDMI-1  --brightness 1.0'
@@ -102,23 +103,25 @@ alias gcn='git checkout main'
 # LINUX SHORTCUTS
 alias ag='alias | grep '
 alias c='clear'
+alias caps='setxkbmap -option caps:escape'
 alias dg='systemctl | grep '
 alias dimension='eval $(slop -t 0 -b 1) && notify-send "Selection info" "Area: ${W} x ${Y}px \n Position: X = ${X}px, Y = ${Y}px" && echo ${W}x${H} | xsel -bi'
 alias fontlist="fc-list : family | sort"
 alias hg='history | grep '
+alias ht='history | tail '
 alias now="date '+%R'"
 alias ramsort="ps -e -o pid,vsz,comm= | sort -n -k 2"
 alias sortsize='du -h --max-depth=0 * | sort -h'
 alias xinfo='xrandr --nograb --current'
-alias xr='xrdb ~/dotfiles/X/Xresources'
+alias xr='xrdb ~/.Xresources'
 
 # COPY
 alias copy='xsel --clipboard < '
 
 #APTITUDE
+alias as='apt-cache search '
 alias update='sudo apt update && sudo apt upgrade'
 alias upgradable='apt list --upgradable'
-alias as='apt-cache search '
 
 # SOURCING
 alias soa='source ~/.aliases'
