@@ -3,7 +3,7 @@ bash "$HOME/.config/bspwm/.fehbg"
 
 bspc monitor -d '' '' '' '' '' ''
 
-bspc config border_width 3
+bspc config border_width 5
 bspc config window_gap 5
 bspc config split_ratio 0.50
 
@@ -32,8 +32,9 @@ bspc rule -a Arandr state=floating rectangle 850x850+0+0 center=true
 bspc rule -a SpeedCrunch state=floating rectangle 300x400+0+0 center=true
 bspc rule -a SimpleScreenRecorder state=floating rectangle 850x850+0+0 center=true
 bspc rule -a Bitwarden state=floating rectangle 927x673+0+0 center=true
-bspc rule -a my-electron-app state=floating
-bspc rule -a feh state=floating
+bspc rule -a XTerm state=floating rectangle 520x782+0+0 center=true
+bspc rule -a electron-react-boilerplate state=floating
+# bspc rule -a feh state=floating rectangle 200x200+0+0 center=false
 
 # Autostart
 # if [ ! "$(pidof polkit-gnome-authentication-agent-1)" ]; then

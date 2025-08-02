@@ -2,7 +2,13 @@
 #  Lock Screen  #
 #################
 super + shift + l
-    i3lock -i ~/Dotfiles/bspwm/lock-screen.png
+   bash $HOME/Dotfiles/bin/lock-suspend.sh
+
+##################
+# POLYBAR TOGGLE #
+##################
+super + shift + p
+   bash $HOME/Dotfiles/bin/toggle-polybar.sh
 
 #################
 #  Launch Apps  #
@@ -16,8 +22,8 @@ super + Return
 super + o ; {a,b,c,d,f,g}
     {anki,bitwarden,speedcrunch,discord,thunar,gpick}
 
-super + o ; {l,p,s,q}
-    {lxappearance,pavucontrol-qt,simplescreenrecorder,qutebrowser}
+super + o ; {l,p,s,q,v}
+    {lxappearance,pavucontrol-qt,simplescreenrecorder,qutebrowser,VirtualBox Manager}
 
 #################
 #  Sreen Tools  #
@@ -30,6 +36,19 @@ super + s ; f
 
 super + s ; d 
     flameshot screen --clipboard --path $HOME/Pictures/Screenshots/ --delay 3000
+
+#################
+# Terminal Apps #
+#################
+
+# Open bluetui - bluetooth tui tool
+super + s ; b
+   bash $HOME/Dotfiles/bin/launch-bluetui.sh
+
+# Open network manager tui
+super + s ; n
+	xterm -e "ls -lrt;nmtui"
+
 
 #################
 #Volume controls#
@@ -177,3 +196,11 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + control + alt + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# Rotate tree
+super + shift + {j,k}
+    bspc node @/ -C {forward,backward}
+
+# swap the current node and the biggest node
+super + shift + s
+	bspc node -s biggest.local
