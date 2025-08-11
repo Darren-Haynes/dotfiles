@@ -46,9 +46,11 @@ super + s ; b
    bash $HOME/Dotfiles/bin/launch-bluetui.sh
 
 # Open network manager tui
-super + s ; n
+super + shift + s ; n
 	xterm -e "ls -lrt;nmtui"
 
+super + s ; n
+	$HOME/Dotfiles/bin/wifimenu.sh
 
 #################
 #Volume controls#
@@ -112,6 +114,10 @@ super + s ; n
 # Choose Wifi
 super + s ; w
    wezterm start -- nmtui
+
+# Suspend
+super + s ; s
+   systemctl suspend
 
 # Restart system
 super + s ; r
