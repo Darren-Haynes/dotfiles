@@ -37,9 +37,9 @@ bspc rule -a electron-react-boilerplate state=floating
 # bspc rule -a feh state=floating rectangle 200x200+0+0 center=false
 
 # Autostart
-# if [ ! "$(pidof polkit-gnome-authentication-agent-1)" ]; then
-#   /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-# fi
+if [ ! "$(pidof polkit-gnome-authentication-agent-1)" ]; then
+  /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+fi
 kill "$(pgrep -x sxhkd | awk 'NR==1 {print $0}')"
 sxhkd &
 xfce4-power-manager &
