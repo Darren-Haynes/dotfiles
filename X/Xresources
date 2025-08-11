@@ -4,7 +4,8 @@
 !    /  \| | |  __/\__ \ (_) | |_| | | | (_|  __/\__ \
 !   /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/
 
-
+! #include "nord.theme"
+#include "everforest.theme"
 !!!!!!!!!! RESOLUTIONS !!!!!!!!!!
 !!!!!!!!!! & SCREEN    !!!!!!!!!!
 ! Xft.dpi:		192
@@ -22,8 +23,8 @@ Xft.rgba:		rgb
 
 !!!!!!!!!! XTERM    !!!!!!!!!!
 !!!!!!!!!! SETTINGS !!!!!!!!!!
-xterm*faceName: SpaceMono Nerd Font Mono:size=11:antialias=false
-xterm*font:		7x11
+xterm*faceName: SpaceMono Nerd Font Mono:size=12:antialias=false
+xterm*font:		7x15
 
 ! Change copy and paste keys
 XTerm*vt100.translations: #override \
@@ -33,37 +34,6 @@ XTerm*vt100.translations: #override \
 ! Make Alt work like you expect it too.
 XTerm.vt100.metaSendsEscape: true
 
-
-!!!!!!!!!! URXVT    !!!!!!!!!!
-!!!!!!!!!! SETTINGS !!!!!!!!!!
-URxvt.perl-ext-common:	   keyboard-select,default,url-select,clipboard,font-size
-URxvt.keysym.M-u:          perl:url-select:select_next
-URxvt.keysym.M-Escape:     perl:keyboard-select:activate
-URxvt.url-select.launcher: /usr/bin/qutebrowser
-URxvt.url-select.underline: true
-
-! copy to primary and clipboard
-URxvt.clipboard.autocopy: true
-
-URxvt.fading:	 10
-URxvt.saveLines: 4095
-URxvt.font: xft:SpaceMono Nerd Font Mono:size=11
-! URxvt*font: xft:monospace:size=11
-
-! transparency
-!URxvt.transparent: true
-URxvt.shading: 12
-
-URxvt.scrollBar: false
-
-! Change font size with keyboard commands on the fly
-URxvt.keysym.C-Up:     font-size:increase
-URxvt.keysym.C-Down:   font-size:decrease
-URxvt.keysym.C-S-Up:   font-size:incglobal
-URxvt.keysym.C-S-Down: font-size:decglobal
-URxvt.keysym.C-equal:  font-size:reset
-URxvt.keysym.C-slash:  font-size:show
-
 rofi.theme:		solarized_alternate.rasi
 rofi.font:      SpaceMono for Powerline 24
 rofi.width:     40
@@ -72,40 +42,3 @@ rofi.opacity:   20
 rofi.position:  2
 
 
-! Color Scheme
-! Ashes Dark
-*.foreground:   #c5c8c6
-*.background:   #1d1f21
-*.cursorColor:  #c5c8c6
-
-! black
-*.color0:       #282a2e
-*.color8:       #373b41
-
-! red
-*.color1:       #a54242
-*.color9:       #cc6666
-
-! green
-*.color2:       #8c9440
-*.color10:      #b5bd68
-
-! yellow
-*.color3:       #de935f
-*.color11:      #f0c674
-
-! blue
-*.color4:       #5f819d
-*.color12:      #81a2be
-
-! magenta
-*.color5:       #85678f
-*.color13:      #b294bb
-
-! cyan
-*.color6:       #5e8d87
-*.color14:      #8abeb7
-
-! white
-*.color7:       #707880
-*.color15:      #c5c8c6
