@@ -113,7 +113,8 @@ alias now="date '+%R'"
 alias ramsort="ps -e -o pid,vsz,comm= | sort -n -k 2"
 alias sortsize='du -h --max-depth=0 * | sort -h'
 alias xinfo='xrandr --nograb --current'
-alias xr='xrdb ~/.Xresources'
+alias xr='xrdb ~/.X/Xresources'
+alias xra='xrdb -query -all'
 
 # COPY
 alias copy='xsel --clipboard < '
