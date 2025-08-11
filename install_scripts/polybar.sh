@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo apt-get install -y polybar
+#TODO: I installed material icons with apt - figureout where they are and now to use them in polbar
 
 if [ ! -d "$HOME/.config/polybar/" ]; then
   mkdir -p "$HOME/.config/polybar/"
