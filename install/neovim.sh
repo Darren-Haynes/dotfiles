@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 arch=$(uname -m)
 
 # Install lua
@@ -19,15 +21,11 @@ sudo apt-get install -y nodejs
 sudo apt-get install -y npm
 sudo apt-get install -y texlive
 
+# Lazygit
 if [ ! -d "$HOME/GitClones/Lazygit" ]; then
   mkdir -p "$HOME/GitClones/Lazygit"
 fi
-
-cd "$HOME/GitClones/Lazygit" || exit
-curl -Lo lazygit.tar.gz https://github.com/jesseduffield/lazygit/releases/download/v0.49.0/lazygit_0.49.0_Linux_"${arch}".tar.gz
-tar xzf lazygit.tar.gz
-sudo install lazygit -D -t /usr/local/bin/
-cd "$HOME" || exit
+sudo apt-get install -y lazygit
 
 sudo apt-get install -y ssh-askpass-gnome
 sudo apt-get install -y ssh-askpass
@@ -40,8 +38,8 @@ sudo tar -C /opt -xzf nvim-linux-"${arch}".tar.gz
 rm nvim-linux-"${arch}".tar.gz
 cd "$HOME" || exit
 
-printf '\nexport PATH="$PATH:/opt/nvim-linux-${arch}/bin"\n' >>"$HOME/.bashrc"
-printf '\nexport PATH="$PATH:/opt/nvim-linux-${arch}/bin"\n' >>"$HOME/.profile"
+printf "\nexport PATH='$PATH:/opt/nvim-linux-%s/bin'\n" "$arch" >>"$HOME/.bashrc"
+printf "\nexport PATH='$PATH:/opt/nvim-linux-%s/bin'\n" "$arch" >>"$HOME/.profile"
 
 #lazynvim
 if [ -d "$HOME/.config/nvim.bak" ]; then

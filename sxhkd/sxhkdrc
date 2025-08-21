@@ -151,6 +151,25 @@ super + ctrl + {m,x,y,z}
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
+# move node in the given direction
+super + w ; h
+	$HOME/Dotfiles/bspwm/move-window.sh west
+
+# move node in the given direction
+super + w ; j
+	$HOME/Dotfiles/bspwm/move-window.sh south
+
+# move node in the given direction
+super + w ; k
+	$HOME/Dotfiles/bspwm/move-window.sh north
+
+# move node in the given direction
+super + w ; l
+	$HOME/Dotfiles/bspwm/move-window.sh east
+
+# super + shift + {n,m,v,b}
+# 	$HOME/Dotfiles/bspwm/move-window.sh {west,south,north,east}
+
 # focus the next/previous window in the current desktop
 alt + {_,shift + }Tab
 	bspc node -f {next,prev}.local.!hidden.window
@@ -211,10 +230,14 @@ super + alt + shift + {h,j,k,l}
 super + control + alt + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-# Rotate tree
-super + shift + {j,k}
-    bspc node @/ -C {forward,backward}
+# Rotate tree forward
+super + w ; k
+    bspc node @/ -C forward
+
+# Rotate tree backward
+super + w ; j 
+    bspc node @/ -C backward
 
 # swap the current node and the biggest node
-super + shift + s
+super + w ; s
 	bspc node -s biggest.local
