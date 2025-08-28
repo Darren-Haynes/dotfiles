@@ -3,7 +3,7 @@ configuration {
   combi-modes: [ window, drun, run ];
 }
 
-@theme "everforest"
+@theme "nord"
  
 /* Insert theme modifications after this */
 

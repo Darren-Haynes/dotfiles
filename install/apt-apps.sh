@@ -9,3 +9,4 @@ sudo apt install -y pavucontrol-qt   # cute sound control
 sudo apt install -y sqlite3          # He ain't heavy, he's my brother
 sudo apt install -y transmission-cli # Torrents and magnets
 sudo apt install -y vim              # of course
+sudo apt install -y timeshift        # Back up

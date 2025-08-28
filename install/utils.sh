@@ -12,3 +12,4 @@ sudo apt-get install -y xclip      # clipboard util
 sudo apt-get install -y xsel       # and another clipboard util
 sudo apt-get install -y xz-utils   # compression utilities
 sudo apt-get install -y lsd        # hello my pretty
+sudo apt-get install -y gpg        # it's a sign
