@@ -22,8 +22,11 @@ super + Return
 super + o ; {a,b,c,d,f,g}
     {anki,bitwarden,speedcrunch,discord,thunar,gpick}
 
-super + o ; {l,p,s,q,v}
-    {lxappearance,pavucontrol-qt,simplescreenrecorder,qutebrowser,VirtualBox Manager}
+super + o ; {l,p,s,q,v,w}
+    {lxappearance,pavucontrol-qt,simplescreenrecorder,qutebrowser,VirtualBox Manager,webcamoid}
+
+super + o ; t
+	bash $HOME/Dotfiles/bin/timeshift-admin.sh
 
 #################
 #  Sreen Tools  #
