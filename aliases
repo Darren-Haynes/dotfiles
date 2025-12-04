@@ -99,6 +99,10 @@ alias gpon='git push origin main'
 alias gst='git status'
 alias gcm='git checkout master'
 alias gcn='git checkout main'
+alias gg='git log --all --graph'
+
+# NODE / NPM
+alias ns='npm start'
 
 # LINUX SHORTCUTS
 alias ag='alias | grep '
@@ -137,3 +141,9 @@ alias wifis='nmcli dev wifi list'
 alias wificon='nmcli connection show | head -2 '
 alias wifioff='nmcli radio wifi off'
 alias wifion='nmcli radio wifi on'
+
+# Pastel terminal tool
+alias rgb='pastel format rgb'
+alias hex='pastel format hex'
+alias hsl='pastel format hex'
+alias pc='pastel pick'

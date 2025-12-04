@@ -6,3 +6,4 @@ __pycache__
 vim/view/
 nvim/lazy-lock.json
 nvim/project.lua
+.DS_Store

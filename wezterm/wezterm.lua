@@ -10,23 +10,26 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+config.window_decorations = "RESIZE"
+
 -- Color scheme
-config.color_scheme = "nord"
--- config.color_scheme = "Tokyo Night Moon"
+-- config.color_scheme = "nord"
+config.color_scheme = "Tokyo Night Moon"
 -- config.color_scheme = "Everforest Dark (Gogh)"
 -- config.window_background_image = "/home/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
 --config.window_background_image = "/home/darren/Pictures/Wallpapers/Buddha-Thangka.jpg"
 
---config.window_background_image_hsb = {
---	brightness = 0.00,
---	hue = 1.0,
---	saturation = 1.0,
---}
+-- config.window_background_opacity = 0.9
+-- config.window_background_image_hsb = {
+-- 	brightness = 0.00,
+-- 	hue = 1.0,
+-- 	saturation = 1.0,
+-- }
 -- Fonts
-config.font = wezterm.font("FiraCode Nerd Font")
+config.font = wezterm.font("Fira Code")
 -- config.font = wezterm.font("Nimbus Mono PS")
 -- config.font = wezterm.font("SpaceMono Nerd Font")
-config.font_size = 13.5
+config.font_size = 16
 config.adjust_window_size_when_changing_font_size = false
 
 -- No padding
