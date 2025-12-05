@@ -38,14 +38,19 @@ pip install pynvim
 # Add personal configs to init.lua
 rm -f "$HOME/.config/nvim/init.lua"
 ln -s "$HOME/Dotfiles/nvim/init.lua" "$HOME/.config/nvim/init.lua"
+
 rm -f "$HOME/.config/nvim/lua/plugins/python.lua"
 ln -s "$HOME/Dotfiles/nvim/python.lua" "$HOME/.config/nvim/lua/plugins/"
+
 rm -f "$HOME/.config/nvim/lua/plugins/themes.lua"
 ln -s "$HOME/Dotfiles/nvim/themes.lua" "$HOME/.config/nvim/lua/plugins/"
+
 rm -f "$HOME/.config/nvim/lua/config/keymaps.lua"
 ln -s "$HOME/Dotfiles/nvim/keymaps.lua" "$HOME/.config/nvim/lua/config/"
+
 rm -f "$HOME/.config/nvim/lua/config/ui.lua"
 ln -s "$HOME/Dotfiles/nvim/ui.lua" "$HOME/.config/nvim/lua/plugins/"
+
 rm -f "$HOME/.config/nvim/lua/config/project.lua"
 ln -s "$HOME/Dotfiles/nvim/project.lua" "$HOME/.config/nvim/lua/plugins/"
 
