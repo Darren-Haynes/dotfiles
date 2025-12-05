@@ -12,7 +12,7 @@ alias dpic='cd ~/Pictures'
 alias dvid='cd ~/Videos'
 alias ddc='cd ~/Documents'
 
-# NAVIGATION CONFIG 
+# NAVIGATION CONFIG
 alias ddot='cd ~/Dotfiles'
 alias dconf='cd ~/.config'
 alias dnvim='cd ~/.config/nvim/'
@@ -40,14 +40,14 @@ alias lsdot='ls ~/Dotfiles'
 alias lsfonts='ls /usr/share/fonts/'
 alias lsh='ls ~/'
 
-# lSD 
+# lSD
 alias ls='lsd'
 alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 
-# CAT 
+# CAT
 alias cat="ccat "
 alias catb="ccat ~/.bashrc"
 alias catn="ccat ~/Dotfiles/nvim/init.lua"
