@@ -1,0 +1,145 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-w t": "terminal_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-j": "workspace::ActivatePaneDown"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-k": "workspace::ActivatePaneUp"
+    }
+  },
+  {
+    "context": "((VimControl && !menu) || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-k": "workspace::ActivatePaneUp"
+    }
+  },
+  {
+    "context": "((VimControl && !menu) || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-j": "workspace::ActivatePaneDown"
+    }
+  },
+  {
+    "context": "((VimControl && !menu) || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "((VimControl && !menu) || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft"
+    }
+  },
+  {
+    "context": "(GitPanel && ChangesList)",
+    "bindings": {
+      "ctrl-l": "git_panel::FocusEditor"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-d d": "debugger::Start"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-d s": "debugger::Stop"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-d r": "debugger::Rerun"
+    }
+  },
+  {
+    "context": "(Workspace && debugger_stopped)",
+    "bindings": {
+      "ctrl-d c": "debugger::Continue"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-d i": "debugger::StepInto"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-d o": "debugger::StepOut"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-d f": "debugger::StepOver"
+    }
+  },
+  {
+    "context": "BreakpointList",
+    "bindings": {
+      "ctrl-d b": "debugger::ToggleEnableBreakpoint"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-d b": "editor::ToggleBreakpoint"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-d q": "debugger::Stop"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-shift-o": [
+        "projects::OpenRecent",
+        {
+          "create_new_window": false
+        }
+      ]
+    }
+  }
+]
