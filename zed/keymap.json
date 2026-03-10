@@ -10,126 +10,126 @@
     "context": "Workspace",
     "bindings": {
       // "shift shift": "file_finder::Toggle"
-    }
+    },
   },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       // "j k": "vim::NormalBefore"
-    }
+    },
   },
   {
     "bindings": {
-      "ctrl-w t": "terminal_panel::ToggleFocus"
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft"
-    }
+      "ctrl-w t": "terminal_panel::ToggleFocus",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-l": "workspace::ActivatePaneRight"
-    }
+      "ctrl-h": "workspace::ActivatePaneLeft",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-j": "workspace::ActivatePaneDown"
-    }
+      "ctrl-l": "workspace::ActivatePaneRight",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-k": "workspace::ActivatePaneUp"
-    }
+      "ctrl-j": "workspace::ActivatePaneDown",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-k": "workspace::ActivatePaneUp",
+    },
   },
   {
     "context": "((VimControl && !menu) || (!Editor && !Terminal))",
     "bindings": {
-      "ctrl-k": "workspace::ActivatePaneUp"
-    }
+      "ctrl-k": "workspace::ActivatePaneUp",
+    },
   },
   {
     "context": "((VimControl && !menu) || (!Editor && !Terminal))",
     "bindings": {
-      "ctrl-j": "workspace::ActivatePaneDown"
-    }
+      "ctrl-j": "workspace::ActivatePaneDown",
+    },
   },
   {
     "context": "((VimControl && !menu) || (!Editor && !Terminal))",
     "bindings": {
-      "ctrl-l": "workspace::ActivatePaneRight"
-    }
+      "ctrl-l": "workspace::ActivatePaneRight",
+    },
   },
   {
     "context": "((VimControl && !menu) || (!Editor && !Terminal))",
     "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft"
-    }
+      "ctrl-h": "workspace::ActivatePaneLeft",
+    },
   },
   {
     "context": "(GitPanel && ChangesList)",
     "bindings": {
-      "ctrl-l": "git_panel::FocusEditor"
-    }
+      "ctrl-l": "git_panel::FocusEditor",
+    },
   },
   {
     "bindings": {
-      "ctrl-d d": "debugger::Start"
-    }
+      "ctrl-cmd-enter": "debugger::Start",
+    },
   },
   {
     "bindings": {
-      "ctrl-d s": "debugger::Stop"
-    }
+      "ctrl-d s": "debugger::Stop",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-d r": "debugger::Rerun"
-    }
+      "ctrl-cmd-r": "debugger::Rerun",
+    },
   },
   {
     "context": "(Workspace && debugger_stopped)",
     "bindings": {
-      "ctrl-d c": "debugger::Continue"
-    }
+      "ctrl-d c": "debugger::Continue",
+    },
   },
   {
     "bindings": {
-      "ctrl-d i": "debugger::StepInto"
-    }
+      "ctrl-d i": "debugger::StepInto",
+    },
   },
   {
     "bindings": {
-      "ctrl-d o": "debugger::StepOut"
-    }
+      "ctrl-d o": "debugger::StepOut",
+    },
   },
   {
     "bindings": {
-      "ctrl-d f": "debugger::StepOver"
-    }
+      "ctrl-d f": "debugger::StepOver",
+    },
   },
   {
     "context": "BreakpointList",
     "bindings": {
-      "ctrl-d b": "debugger::ToggleEnableBreakpoint"
-    }
+      "ctrl-d b": "debugger::ToggleEnableBreakpoint",
+    },
   },
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-d b": "editor::ToggleBreakpoint"
-    }
+      "ctrl-d b": "editor::ToggleBreakpoint",
+    },
   },
   {
     "bindings": {
-      "ctrl-d q": "debugger::Stop"
-    }
+      "ctrl-d q": "debugger::Stop",
+    },
   },
   {
     "context": "Workspace",
@@ -137,9 +137,56 @@
       "cmd-shift-o": [
         "projects::OpenRecent",
         {
-          "create_new_window": false
-        }
-      ]
-    }
-  }
+          "create_new_window": false,
+        },
+      ],
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-d space": "debugger::ClearAllBreakpoints",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-cmd-j": "debugger::StepOver",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-cmd-e": "debugger::Stop",
+    },
+  },
+  {
+    "context": "(Workspace && debugger_stopped)",
+    "bindings": {
+      "ctrl-cmd-k": "debugger::Continue",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-cmd-i": "debugger::StepInto",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-cmd-o": "debugger::StepOut",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-cmd-x": "debugger::RerunSession",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-cmd-shift-enter": "debugger::Restart",
+    },
+  },
+  {
+    "context": "vim_mode",
+    "bindings": {
+      "ctrl-o c": "outline_panel::CollapseAllEntries",
+    },
+  },
 ]

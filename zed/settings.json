@@ -7,45 +7,88 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "agent_ui_font_size": 16.0,
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "agent_buffer_font_size": 14.0,
+  "ui_font_family": "Galvji",
+  "agent_ui_font_size": 14.0,
   "buffer_line_height": "standard",
   "vim_mode": true,
   "relative_line_numbers": "enabled",
   "terminal": {
+    "shell": {
+      "program": "bash",
+    },
     "font_weight": 395.0,
     "toolbar": {
-      "breadcrumbs": false
+      "breadcrumbs": false,
     },
     "font_family": "Noto Sans",
-    "font_size": 16.0
+    "font_size": 15.0,
   },
   "base_keymap": "VSCode",
   "status_bar": {
-    "experimental.show": false
+    "experimental.show": false,
   },
   "tab_bar": {
-    "show": false
+    "show": false,
   },
   "sticky_scroll": {
-    "enabled": false
+    "enabled": false,
   },
   "minimap": {
-    "show": "never"
+    "show": "never",
+  },
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_project_items": false,
+    "show_branch_name": false,
+    "show_user_menu": false,
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
   },
   "scrollbar": {
     "axes": {
-      "vertical": false
-    }
+      "vertical": false,
+    },
   },
   "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace"],
-  "buffer_font_family": "Google Sans Flex",
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "linked_edits": true,
-  "icon_theme": "Colored Zed Icons Theme Dark",
-  "ui_font_size": 16,
-  "buffer_font_size": 17.0,
+  "icon_theme": "Phosphor Icons Theme",
+  "ui_font_size": 15.0,
+  "buffer_font_size": 16.0,
   "theme": {
-    "mode": "dark",
+    "mode": "light",
     "light": "One Light",
-    "dark": "Nord Dark"
-  }
+    "dark": "Mint dark",
+  },
+  "which_key": { "enabled": true },
+  "project_panel": {
+    "hide_root": true,
+    "auto_fold_dirs": false,
+    "sticky_scroll": false,
+    "default_width": 400,
+    "scrollbar": {
+      "show": "never",
+    },
+    "indent_guides": {
+      "show": "never",
+    },
+  },
+  "outline_panel": {
+    "default_width": 400,
+  },
+  "gutter": {
+    "min_line_number_digits": 0,
+    "folds": false,
+  },
 }
