@@ -7,10 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ui_font_weight": 400.0,
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "tree_view": true,
+    "dock": "left"
+  },
   "agent": {
+    "dock": "right",
     "default_model": {
+      "enable_thinking": true,
       "provider": "copilot_chat",
-      "model": "gpt-5-mini",
+      "model": "claude-haiku-4.5",
     },
     "favorite_models": [],
     "model_parameters": [],
@@ -23,13 +33,13 @@
   "relative_line_numbers": "enabled",
   "terminal": {
     "shell": {
-      "program": "bash",
+      "program": "zsh",
     },
     "font_weight": 395.0,
     "toolbar": {
       "breadcrumbs": false,
     },
-    "font_family": "Noto Sans",
+    "font_family": "SpaceMono Nerd Font Propo",
     "font_size": 15.0,
   },
   "base_keymap": "VSCode",
@@ -61,18 +71,19 @@
     },
   },
   "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace"],
-  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_family": "Symbols Nerd Font Mono",
   "linked_edits": true,
-  "icon_theme": "Phosphor Icons Theme",
+  "icon_theme": "Zed (Default)",
   "ui_font_size": 15.0,
   "buffer_font_size": 16.0,
   "theme": {
     "mode": "dark",
-    "light": "One Light",
-    "dark": "Anya",
+    "light": "Falcon Light Green",
+    "dark": "Mariana Sublime",
   },
   "which_key": { "enabled": true },
   "project_panel": {
+    "dock": "left",
     "hide_root": true,
     "auto_fold_dirs": false,
     "sticky_scroll": false,
@@ -85,6 +96,7 @@
     },
   },
   "outline_panel": {
+    "dock": "left",
     "default_width": 400,
   },
   "gutter": {

@@ -10,21 +10,23 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.window_decorations = "RESIZE"
+config.window_decorations = "TITLE | RESIZE"
 
 -- Color scheme
--- config.color_scheme = "nord"
-config.color_scheme = "Tokyo Night Moon"
+-- config.color_scheme = 'Muse (terminal.sexy)'
+config.color_scheme = "nord"
+-- config.color_scheme = "Vesper"
+-- config.color_scheme = "Tokyo Night Moon"
 -- config.color_scheme = "Everforest Dark (Gogh)"
--- config.window_background_image = "/home/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
+config.window_background_image = "/Users/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
 --config.window_background_image = "/home/darren/Pictures/Wallpapers/Buddha-Thangka.jpg"
 
--- config.window_background_opacity = 0.9
--- config.window_background_image_hsb = {
--- 	brightness = 0.00,
--- 	hue = 1.0,
--- 	saturation = 1.0,
--- }
+-- config.window_background_opacity = 0.7
+config.window_background_image_hsb = {
+	brightness = 0.20,
+	hue = 1.0,
+	saturation = 1.0,
+}
 -- Fonts
 config.font = wezterm.font("Fira Code")
 -- config.font = wezterm.font("Nimbus Mono PS")
@@ -34,17 +36,17 @@ config.adjust_window_size_when_changing_font_size = false
 
 -- No padding
 config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
-	bottom = 0,
+	left = "35px",
+	right = "35px",
+	top = "0px",
+	bottom = "25px",
 }
 
 -- Tab bar
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
-config.show_tabs_in_tab_bar = false
+config.show_tabs_in_tab_bar = true
 config.enable_tab_bar = false
 
 config.keys = {
