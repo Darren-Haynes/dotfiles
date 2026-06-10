@@ -4,41 +4,9 @@
 #   / ___ \| |___ | | / ___ \ ___)
 #  /_/   \_\_____|___/_/   \_\____/
 
-
-# NAVIGATION
-alias ddl='cd ~/Downloads'
-alias dm='cd ~/Music'
-alias dpic='cd ~/Pictures'
-alias dvid='cd ~/Videos'
-alias ddc='cd ~/Documents'
-
-# NAVIGATION CONFIG
-alias ddot='cd ~/Dotfiles'
-alias dconf='cd ~/.config'
-alias dnvim='cd ~/.config/nvim/'
-alias dfonts='cd /usr/share/fonts/'
-
-# NAVIGATION CODING
-alias dpy='cd ~/Code/Python/'
-alias dpy3='cd ~/Code/Python/Playground_3.13/'
-
-# NAVIGATION CODE PROJECTS
-alias ddsa='cd ~/Code/Python/PythonProjects/DSA_Python/'
-alias dots='cd ~/Dotfiles/ && nvim'
-
 # LISTING
-alias a='ls -A'
-alias cls='clear && ls'
-alias l='ls -l'
-alias la='ls -lA'
-alias lsD='ls ~/Downloads'
-alias lsM='ls ~/Music'
-alias lsP='ls ~/Pictures'
-alias lsV='ls ~/Videos'
-alias lsdoc='ls ~/Documents'
-alias lsdot='ls ~/Dotfiles'
+alias l='ls -lA'
 alias lsfonts='ls /usr/share/fonts/'
-alias lsh='ls ~/'
 
 # lSD
 alias ls='lsd'
@@ -47,86 +15,38 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 
-# CAT
-alias cat="ccat "
-alias catb="ccat ~/.bashrc"
-alias catn="ccat ~/Dotfiles/nvim/init.lua"
-alias catp="ccat ~/.profile"
-
 # PYTHON
 alias idarren="ipython --profile=darren"
 alias ptest="pytest -q --cov --cov-report=term-missing"
 alias jf="python main.py"
 
-# VIM / NVIM
-alias basha='nvim ~/.bash_aliases'
-alias bashrc='nvim ~/.bashrc'
-alias vcss="nvim **/*.css"
-alias vhtml="nvim **/*.html"
-alias vima='nvim ~/.aliases'
-alias vimx='nvim ~/.Xresources'
-alias vimz='nvim ~/.zshrc'
-
 # IMAGES
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
 alias r180="convert -rotate 180 " # then 'from.jpg' to 'to.jpg'
-alias screenshot='. ~/.bash_scripts/screenshot.sh'
-alias windowshot="import -screen " # then filename
-alias drawarea="import root " # then filename
-alias show="wezterm imgcat "
-alias fehs="feh --scale-down "
-
-# VOLUME AND BRIGHTNESS
-alias b10='xrandr --output HDMI-1  --brightness 1.0'
-alias b1='xrandr --output HDMI-1  --brightness 0.1'
-alias b2='xrandr --output HDMI-1  --brightness 0.2'
-alias b3='xrandr --output HDMI-1  --brightness 0.3'
-alias b4='xrandr --output HDMI-1  --brightness 0.4'
-alias b5='xrandr --output HDMI-1  --brightness 0.5'
-alias b6='xrandr --output HDMI-1  --brightness 0.6'
-alias b7='xrandr --output HDMI-1  --brightness 0.7'
-alias b8='xrandr --output HDMI-1  --brightness 0.8'
-alias b9='xrandr --output HDMI-1  --brightness 0.9'
 
 # GITHUB / VERSION CONTROL
 alias ga='git add --all .'
-alias gb='git branch -d '
 alias gd='git diff '
 alias gc="git commit -m "
-alias gpo='git push origin '
-alias gpom='git push origin master'
-alias gpon='git push origin main'
+alias gpom='git push origin main'
 alias gst='git status'
-alias gcm='git checkout master'
-alias gcn='git checkout main'
+alias gcm='git checkout main'
 alias gg='git log --all --graph'
 
 # NODE / NPM
-alias ns='npm start'
+alias ns='npm run start'
 
 # LINUX SHORTCUTS
 alias ag='alias | grep '
 alias c='clear'
 alias caps='setxkbmap -option caps:escape'
-alias dg='systemctl | grep '
-alias dimension='eval $(slop -t 0 -b 1) && notify-send "Selection info" "Area: ${W} x ${Y}px \n Position: X = ${X}px, Y = ${Y}px" && echo ${W}x${H} | xsel -bi'
-alias fontlist="fc-list : family | sort"
+alias fontlist="fc-list : family | sort" # works on linux and macos
 alias hg='history | grep '
 alias ht='history | tail '
 alias now="date '+%R'"
-alias ramsort="ps -e -o pid,vsz,comm= | sort -n -k 2"
-alias sortsize='du -h --max-depth=0 * | sort -h'
-alias xinfo='xrandr --nograb --current'
-alias xr='xrdb ~/Dotfiles/X/Xresources'
-alias xra='xrdb -query -all'
 
 # COPY
 alias copy='xsel --clipboard < '
-
-#APTITUDE
-alias as='apt-cache search '
-alias update='sudo apt update && sudo apt upgrade'
-alias upgradable='apt list --upgradable'
 
 # SOURCING
 alias soa='source ~/.aliases'
@@ -135,15 +55,3 @@ alias soz='source ~/.zshrc'
 
 # NETWORKING
 alias myip='curl ifconfig.me'
-alias netoff='nmcli networking off'
-alias neton='nmcli networking on'
-alias wifis='nmcli dev wifi list'
-alias wificon='nmcli connection show | head -2 '
-alias wifioff='nmcli radio wifi off'
-alias wifion='nmcli radio wifi on'
-
-# Pastel terminal tool
-alias rgb='pastel format rgb'
-alias hex='pastel format hex'
-alias hsl='pastel format hex'
-alias pc='pastel pick'

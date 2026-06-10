@@ -48,6 +48,12 @@
     },
   },
   {
+    "context": "Debugger",
+    "bindings": {
+      "ctrl-k": "workspace::ActivatePaneUp",
+    },
+  },
+  {
     "context": "((VimControl && !menu) || (!Editor && !Terminal))",
     "bindings": {
       "ctrl-k": "workspace::ActivatePaneUp",
@@ -189,4 +195,25 @@
       "ctrl-o c": "outline_panel::CollapseAllEntries",
     },
   },
+  {
+    "bindings": {
+      "ctrl-shift-l": "pane::ActivateNextItem",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-shift-h": "pane::ActivatePreviousItem",
+    },
+  },
+  {
+    "context": "GitPanel && ChangesList && !GitBranchSelector && Editor && Terminal && DebugConsole",
+    "bindings": {
+      "cmd-shift-g": "git_panel::ToggleFocus",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-shift-a": "agent::Toggle"
+    }
+  }
 ]
