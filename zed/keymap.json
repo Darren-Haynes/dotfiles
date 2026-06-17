@@ -215,5 +215,17 @@
     "bindings": {
       "ctrl-shift-a": "agent::Toggle"
     }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-r": ["task::Spawn", { "task_name": "Run Python File" }]
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-n": ["task::Spawn", { "task_name": "Run JS File" }]
+    }
   }
 ]

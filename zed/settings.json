@@ -9,11 +9,11 @@
 {
   "ui_font_weight": 400.0,
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "git_panel": {
     "tree_view": true,
-    "dock": "left"
+    "dock": "left",
   },
   "agent": {
     "dock": "right",
@@ -78,8 +78,8 @@
   "buffer_font_size": 16.0,
   "theme": {
     "mode": "dark",
-    "light": "Falcon Light Green",
-    "dark": "Mariana Sublime",
+    "light": "Gruvbox Light",
+    "dark": "Electron Highlighter",
   },
   "which_key": { "enabled": true },
   "project_panel": {
@@ -102,5 +102,9 @@
   "gutter": {
     "min_line_number_digits": 0,
     "folds": false,
+  },
+  // Syntax highlighting for alias files
+  "file_types": {
+    "Shell Script": ["alias", "aliases"],
   },
 }
