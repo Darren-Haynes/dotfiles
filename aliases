@@ -29,9 +29,12 @@ alias ga='git add --all .'
 alias gd='git diff '
 alias gc="git commit -m "
 alias gpom='git push origin main'
+alias gpull='git pull origin main'
 alias gst='git status'
 alias gcm='git checkout main'
+alias gsm='git switch main'
 alias gg='git log --all --graph'
+alias parent="git log --pretty=format:'%D' HEAD^ | grep 'origin/' | head -n1 | sed 's@origin/@@' | sed 's@,.*@@'"
 
 # NODE / NPM
 alias ns='npm run start'
