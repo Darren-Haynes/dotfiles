@@ -33,16 +33,16 @@ alias gg='git log --all --graph'
 alias parent="git log --pretty=format:'%D' HEAD^ | grep 'origin/' | head -n1 | sed 's@origin/@@' | sed 's@,.*@@'"
 
 # GITHUB / PUSH
-alias gpom='git push origin main'
-alias gpoma='git push origin master'
-alias gpot='git push origin testing'
-alias gpof='git push origin front-end'
+alias pushm='git push origin main'
+alias pushmaster='git push origin master'
+alias pusht='git push origin testing'
+alias pushf='git push origin front-end'
 
 # GITHUB / PULL
-alias gpull='git pull origin main'
-alias gpullma='git pull origin master'
-alias gput='git pull origin testing'
-alias gpuf='git pull origin front-end'
+alias pullm='git pull origin main'
+alias pullmaster='git pull origin master'
+alias pullt='git pull origin testing'
+alias pullf='git pull origin front-end'
 
 # GITHUB / SWITCH & CHECKOUT
 alias gcm='git checkout main'
