@@ -28,16 +28,30 @@ alias r180="convert -rotate 180 " # then 'from.jpg' to 'to.jpg'
 alias ga='git add --all .'
 alias gd='git diff '
 alias gc="git commit -m "
-alias gpom='git push origin main'
-alias gpull='git pull origin main'
 alias gst='git status'
-alias gcm='git checkout main'
-alias gsm='git switch main'
 alias gg='git log --all --graph'
 alias parent="git log --pretty=format:'%D' HEAD^ | grep 'origin/' | head -n1 | sed 's@origin/@@' | sed 's@,.*@@'"
 
-# NODE / NPM
+# GITHUB / PUSH
+alias gpom='git push origin main'
+alias gpoma='git push origin master'
+alias gpot='git push origin testing'
+alias gpof='git push origin front-end'
+
+# GITHUB / PULL
+alias gpull='git pull origin main'
+alias gpullma='git pull origin master'
+alias gput='git pull origin testing'
+alias gpuf='git pull origin front-end'
+
+# GITHUB / SWITCH & CHECKOUT
+alias gcm='git checkout main'
+alias gsm='git switch main'
+alias gsma='git switch master'
+
+# NODE / NPM / NPX
 alias ns='npm run start'
+alias play='npx playwright test'
 
 # LINUX SHORTCUTS
 alias ag='alias | grep '
