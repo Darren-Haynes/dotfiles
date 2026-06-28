@@ -34,20 +34,21 @@ alias parent="git log --pretty=format:'%D' HEAD^ | grep 'origin/' | head -n1 | s
 
 # GITHUB / PUSH
 alias pushm='git push origin main'
-alias pushmaster='git push origin master'
+alias pushmast='git push origin master'
 alias pusht='git push origin testing'
 alias pushf='git push origin front-end'
 
 # GITHUB / PULL
 alias pullm='git pull origin main'
-alias pullmaster='git pull origin master'
+alias pullmast='git pull origin master'
 alias pullt='git pull origin testing'
 alias pullf='git pull origin front-end'
 
 # GITHUB / SWITCH & CHECKOUT
-alias gcm='git checkout main'
-alias gsm='git switch main'
-alias gsma='git switch master'
+alias gomain='git switch main'
+alias gomast='git switch master'
+alias got='git switch testing'
+alias gof='git switch front-end'
 
 # NODE / NPM / NPX
 alias ns='npm run start'
