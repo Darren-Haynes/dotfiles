@@ -71,5 +71,8 @@ alias soa='source ~/.aliases'
 alias sob='source ~/.bashrc'
 alias soz='source ~/.zshrc'
 
+# MACOS
+alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
+
 # NETWORKING
 alias myip='curl ifconfig.me'
