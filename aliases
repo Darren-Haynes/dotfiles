@@ -26,6 +26,7 @@ alias r180="convert -rotate 180 " # then 'from.jpg' to 'to.jpg'
 
 # GITHUB / VERSION CONTROL
 alias ga='git add --all .'
+alias gca='git commit --all'
 alias gd='git diff '
 alias gc="git commit -m "
 alias gst='git status'
@@ -73,6 +74,9 @@ alias soz='source ~/.zshrc'
 
 # MACOS
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
+alias spanish="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Spanish"
+alias spanish-study="nvim ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/Spanish/AI-Book/Spanish-Book-AI*"
+
 
 # NETWORKING
 alias myip='curl ifconfig.me'
