@@ -7,6 +7,13 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "active_pane_modifiers": {
+    "border_size": 0.0
+  },
+  "centered_layout": {
+    "right_padding": 0.0,
+    "left_padding": 0.0
+  },
   "ui_font_weight": 400.0,
   "collaboration_panel": {
     "dock": "left",
@@ -15,16 +22,18 @@
     "tree_view": true,
     "dock": "left",
   },
-  "agent": {
-    "dock": "right",
+  /* Duplicated key auto-commented: "agent": {
     "default_model": {
-      "enable_thinking": true,
       "provider": "copilot_chat",
-      "model": "claude-haiku-4.5",
+      "model": "claude-sonnet-5",
+      "enable_thinking": true,
+      "effort": "high"
     },
+    "enabled": true,
+    "dock": "right",
     "favorite_models": [],
     "model_parameters": [],
-  },
+  }, */
   "agent_buffer_font_size": 14.0,
   "ui_font_family": "Galvji",
   "agent_ui_font_size": 14.0,
@@ -78,8 +87,8 @@
   "buffer_font_size": 16.0,
   "theme": {
     "mode": "dark",
-    "light": "Gruvbox Light",
-    "dark": "Electron Highlighter",
+    "light": "Gruvbox Light Soft",
+    "dark": "One Dark",
   },
   "which_key": { "enabled": true },
   "project_panel": {
@@ -107,4 +116,25 @@
   "file_types": {
     "Shell Script": ["alias", "aliases"],
   },
+    "language_models": {
+      "ollama": {
+        "api_url": "http://localhost:11434",
+        "auto_discover": true
+      }
+    },
+    "agent": {
+      "sidebar_side": "right",
+      "dock": "right",
+      "default_model": {
+        "provider": "ollama",
+        "model": "qwen2.5-coder:7b"
+      }
+    },
+    "edit_predictions": {
+      "provider": "ollama",
+      "ollama": {
+        "model": "qwen2.5-coder:14b",
+        "prompt_format": "infer"
+      }
+    }
 }
