@@ -13,13 +13,8 @@ end
 config.window_decorations = "TITLE | RESIZE"
 
 -- Color scheme
--- config.color_scheme = 'Muse (terminal.sexy)'
 config.color_scheme = "nord"
--- config.color_scheme = "Vesper"
--- config.color_scheme = "Tokyo Night Moon"
--- config.color_scheme = "Everforest Dark (Gogh)"
 config.window_background_image = "/Users/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
---config.window_background_image = "/home/darren/Pictures/Wallpapers/Buddha-Thangka.jpg"
 
 -- config.window_background_opacity = 0.7
 config.window_background_image_hsb = {
@@ -47,7 +42,7 @@ config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
 config.show_tabs_in_tab_bar = true
-config.enable_tab_bar = false
+config.enable_tab_bar = true
 
 config.keys = {
 	-- Turn off the default CMD-m Hide action, allowing CMD-m to
