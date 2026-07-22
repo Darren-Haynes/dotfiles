@@ -152,6 +152,12 @@ config.keys = {
 		mods = "SUPER",
 		action = wezterm.action.DisableDefaultAssignment,
 	},
+	-- Toggle maximize pane
+	{
+        key = 'Escape',
+        mods = 'SHIFT',
+        action = wezterm.action.TogglePaneZoomState,
+    }
 }
 -- and finally, return the configuration to wezterm
 return config
