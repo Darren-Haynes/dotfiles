@@ -13,8 +13,8 @@ end
 config.window_decorations = "TITLE | RESIZE"
 
 -- Color scheme
-config.color_scheme = "nord"
-config.window_background_image = "/Users/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
+config.color_scheme = "OneDark (base16)"
+-- config.window_background_image = "/Users/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
 
 -- config.window_background_opacity = 0.7
 config.window_background_image_hsb = {
