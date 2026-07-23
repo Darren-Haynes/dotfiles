@@ -54,6 +54,8 @@ alias gof='git switch front-end'
 # NODE / NPM / NPX
 alias ns='npm run start'
 alias play='npx playwright test'
+alias e2e='npm run test:e2e'
+alias coverage='npm run test:coverage'
 
 # LINUX SHORTCUTS
 alias ag='alias | grep '
@@ -77,6 +79,15 @@ alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
 alias spanish="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Spanish"
 alias spanish-study="nvim ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/Spanish/AI-Book/Spanish-Book-AI*"
 
-
 # NETWORKING
 alias myip='curl ifconfig.me'
+
+# MUSIC
+alias music='mpv --shuffle ~/Music/MyMusic'
+alias jazz='mpv --shuffle ~/Music/MyMusic/Jazz'
+alias classic='mpv --shuffle ~/Music/MyMusic/Classical'
+alias classical='mpv --shuffle ~/Music/MyMusic/Classical/Classical'
+alias baroque='mpv --shuffle ~/Music/MyMusic/Classical/Baroque'
+alias romantic='mpv --shuffle ~/Music/MyMusic/Classical/Romantic'
+alias reggae='mpv --shuffle ~/Music/MyMusic/Reggae'
+alias easy='mpv --shuffle ~/Music/MyMusic/Easy'
