@@ -35,7 +35,7 @@
     "model_parameters": [],
   }, */
   "agent_buffer_font_size": 14.0,
-  "ui_font_family": "Galvji",
+  "ui_font_family": "IosevkaTerm Nerd Font Mono",
   "agent_ui_font_size": 14.0,
   "buffer_line_height": "standard",
   "vim_mode": true,
@@ -48,8 +48,8 @@
     "toolbar": {
       "breadcrumbs": false,
     },
-    "font_family": "SpaceMono Nerd Font Propo",
-    "font_size": 15.0,
+    "font_family": "IosevkaTerm Nerd Font Mono",
+    "font_size": 17.0,
   },
   "base_keymap": "VSCode",
   "status_bar": {
@@ -80,15 +80,15 @@
     },
   },
   "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace"],
-  "buffer_font_family": "Symbols Nerd Font Mono",
+  "buffer_font_family": "IosevkaTerm Nerd Font Mono",
   "linked_edits": true,
   "icon_theme": "Zed (Default)",
-  "ui_font_size": 15.0,
-  "buffer_font_size": 16.0,
+  "ui_font_size": 16.0,
+  "buffer_font_size": 17.0,
   "theme": {
     "mode": "dark",
-    "light": "Gruvbox Light Soft",
-    "dark": "One Dark",
+    "light": "Gruvbox Light",
+    "dark": "Dram",
   },
   "which_key": { "enabled": true },
   "project_panel": {

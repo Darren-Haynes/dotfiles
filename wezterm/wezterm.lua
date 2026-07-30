@@ -10,17 +10,67 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.window_decorations = "TITLE | RESIZE"
+-- 1. CRITICAL PLATFORM DETECTION (Moved to top so shortcuts can use primary_mod)
+local is_mac = wezterm.target_triple:find("apple") ~= nil
+local primary_mod = is_mac and "SUPER" or "CTRL"
 
--- Color scheme
-config.color_scheme = "OneDark (base16)"
--- config.window_background_image = "/Users/darren/.config/wezterm/ShakyamuniBuddhaTerminalBackground.jpg"
+-- DISABLE MACOS NATIVE TOP BAR (Changed from "TITLE | RESIZE" to "RESIZE")
+config.window_decorations = "RESIZE"
 
--- config.window_background_image_hsb settings
-config.window_background_image_hsb = {
-	brightness = 0.20,
-	hue = 1.0,
-	saturation = 1.0,
+-- 2. Color scheme natively injected
+config.colors = {
+	foreground = "#b1c9c3",
+	background = "#0f3b3a",
+	cursor_bg = "#b1c9c3",
+	cursor_fg = "#0f3b3a",
+	cursor_border = "#b1c9c3",
+	selection_bg = "rgba(64, 164, 185, 0.24)", -- Pure CSS format bypasses hex parser issues
+	selection_fg = "none",
+
+	ansi = {
+		"#0f3b3a", -- black
+		"#d74200", -- red
+		"#009403", -- green
+		"#e99f10", -- yellow
+		"#0096ff", -- blue
+		"#b154cf", -- magenta
+		"#77bfc3", -- cyan
+		"#b1c9c3", -- white
+	},
+	brights = {
+		"#5c7279", -- bright black
+		"#f15f22", -- bright red
+		"#00c420", -- bright green
+		"#cfc041", -- bright yellow
+		"#40a4b9", -- bright blue
+		"#da5bd6", -- bright magenta
+		"#77bfc3", -- bright cyan
+		"#e1f9f3", -- bright white
+	},
+
+	tab_bar = {
+		background = "#155352",
+		active_tab = {
+			bg_color = "#0f3b3a",
+			fg_color = "#b1c9c3",
+		},
+		inactive_tab = {
+			bg_color = "#155352",
+			fg_color = "#819993",
+		},
+		inactive_tab_hover = {
+			bg_color = "#357372",
+			fg_color = "#b1c9c3",
+		},
+		new_tab = {
+			bg_color = "#155352",
+			fg_color = "#b1c9c3",
+		},
+		new_tab_hover = {
+			bg_color = "#357372",
+			fg_color = "#b1c9c3",
+		},
+	},
 }
 
 -- Fonts
@@ -42,34 +92,9 @@ config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
 config.show_tabs_in_tab_bar = true
 config.enable_tab_bar = true
+config.tab_max_width = 100 -- FIX: Prevents truncation of custom renamed tabs
 
--- 1. Unify the window frame container background to eliminate hidden layers
-config.window_frame = {
-	active_titlebar_bg = "none",
-	inactive_titlebar_bg = "none",
-}
-
--- 2. Clear out the global tab tracking margins
-config.colors = {
-	tab_bar = {
-		background = "none",
-		active_tab = { bg_color = "none", fg_color = "none" },
-		inactive_tab = { bg_color = "none", fg_color = "none" },
-		inactive_tab_hover = { bg_color = "none", fg_color = "none" },
-		new_tab = { bg_color = "none", fg_color = "none" },
-		new_tab_hover = { bg_color = "none", fg_color = "none" },
-	},
-	-- Toggle maximize pane
-	{
-        key = 'Escape',
-        mods = 'SHIFT',
-        action = wezterm.action.TogglePaneZoomState,
-    }
-}
-
-config.tab_max_width = 999
-
--- 3. Format tab titles dynamically and show bright orange contrast when zoomed
+-- 3. Dynamic tab formatting block mapped to Dram Palette
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local index = tab.tab_index + 1
 	local title = tab.active_pane.title
@@ -81,21 +106,21 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	local is_zoomed = tab.active_pane.is_zoomed
 	local formatted_text = string.format(" %d: %s ", index, title)
 
-	local bg_color = "none"
-	local fg_color = "#5c6370"
+	local bg_color = "#155352" -- Inactive tab background
+	local fg_color = "#819993" -- Inactive muted text
 
 	if tab.is_active then
 		if is_zoomed then
-			bg_color = "#d19a66" -- OneDark Orange accent block
-			fg_color = "#282c34"
+			bg_color = "#00c420" -- Dram Bright Green accent block for zoom visibility
+			fg_color = "#0f3b3a" -- Dark active background text
 			formatted_text = string.format(" 🔍 %d: %s [ZOOMED] ", index, title)
 		else
-			bg_color = "#3e4452" -- Standard active bubble
-			fg_color = "#abb2bf"
+			bg_color = "#0f3b3a" -- Active tab background
+			fg_color = "#b1c9c3" -- Active foreground text
 		end
 	elseif hover then
-		bg_color = "#2c313c"
-		fg_color = "#abb2bf"
+		bg_color = "#357372" -- Hover element background
+		fg_color = "#b1c9c3" -- Active text contrast
 	end
 
 	return {
@@ -105,11 +130,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	}
 end)
 
--- 4. Dynamic cross-platform detection variables
-local is_mac = wezterm.target_triple:find("apple") ~= nil
-local primary_mod = is_mac and "SUPER" or "CTRL"
-
--- 5. Move focus or split window shortcut helper
+-- 4. Move focus or split window shortcut helper
 local function move_or_split(direction)
 	return wezterm.action_callback(function(window, pane)
 		window:perform_action(wezterm.action.ActivatePaneDirection(direction), pane)

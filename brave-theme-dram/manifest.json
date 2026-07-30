@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Dram Theme",
+  "version": "1.0",
+  "theme": {
+    "colors": {
+      "frame": [15, 59, 58],
+      "frame_inactive": [21, 83, 82],
+      "toolbar": [15, 59, 58],
+      "tab_text": [177, 201, 195],
+      "tab_background_text": [129, 153, 147],
+      "bookmark_text": [177, 201, 195],
+      "ntp_background": [15, 59, 58],
+      "ntp_text": [177, 201, 195]
+    },
+    "tints": {
+      "buttons": [0.47, 0.15, 0.65]
+    },
+    "properties": {
+      "ntp_background_alignment": "bottom"
+    }
+  }
+}
