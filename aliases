@@ -65,6 +65,7 @@ alias fontlist="fc-list : family | sort" # works on linux and macos
 alias hg='history | grep '
 alias ht='history | tail '
 alias now="date '+%R'"
+alias rmsymlinks="rm -- *(@)"
 
 # COPY
 alias copy='xsel --clipboard < '
