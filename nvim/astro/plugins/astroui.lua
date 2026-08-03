@@ -100,14 +100,40 @@ return {
         WinSeparator = { fg = "#357372", bg = "#0f3b3a" }, 
         VertSplit = { fg = "#357372", bg = "#0f3b3a" },    
         WinBar = { bg = "#0f3b3a", fg = "#b1c9c3" },      
+
+        -- ========================================================
+        -- COMPREHENSIVE NEO-TREE FIX (Erase all black fragments)
+        -- ========================================================
+        -- Main sidebar background canvases
+        NeoTreeNormal = { bg = "#155352", fg = "#b1c9c3" },
+        NeoTreeNormalNC = { bg = "#155352", fg = "#b1c9c3" },
         
+        -- The actual Text Tab buttons ("Files", "Buffers", "Git")
+        NeoTreeTabActive = { bg = "#155352", fg = "#b1c9c3", bold = true },
+        NeoTreeTabInactive = { bg = "#155352", fg = "#819993" },
+        
+        -- Structural background blocks and filler spaces around the buttons
+        NeoTreeTabBar = { bg = "#155352", fg = "#155352" },
+        NeoTreeTabBackground = { bg = "#155352", fg = "#155352" },
+        NeoTreeHeaderBar = { bg = "#155352", fg = "#155352" },
+        
+        -- The character dividers between active/inactive buttons (The Square Culprits)
+        NeoTreeTabSeparator = { bg = "#155352", fg = "#155352" },
+        NeoTreeTabSeparatorActive = { bg = "#155352", fg = "#155352" },
+        NeoTreeTabSeparatorInactive = { bg = "#155352", fg = "#155352" },
+        
+        -- Underlying structural container rules
+        NeoTreeWindowsDefined = { bg = "#155352", fg = "#155352" },
+
+        -- The right-hand divider border separating the explorer from your code files
+        NeoTreeWinSeparator = { fg = "#357372", bg = "#155352" },
         -- Neo-tree / File managers canvas matching
         NeoTreeNormal = { bg = "#155352", fg = "#b1c9c3" },
         NeoTreeNormalNC = { bg = "#155352", fg = "#b1c9c3" },
         
         -- HEIRLINE TABBAR OVERRIDES
-        HeirlineTabline = { bg = "#155352" },
-        TabLineFill = { bg = "#155352" },
+        HeirlineTabline = { bg = "#0f3b3a" },
+        TabLineFill = { bg = "#0f3b3a" },
         TabLine = { bg = "#155352", fg = "#819993" },
         TabLineSel = { bg = "#0f3b3a", fg = "#b1c9c3", bold = true },
         
