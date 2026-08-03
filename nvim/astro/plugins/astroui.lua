@@ -32,46 +32,98 @@ return {
     -- Map variables explicitly to Neovim structural components
     highlights = {
       astrodark = {
+        -- ==========================================
+        -- CORE SYNTAX OVERRIDES (Aligned with Zed)
+        -- ==========================================
+        -- Functions & Methods (Zed Gold)
+        ["@function"] = { fg = "#cfc041" },
+        ["@function.builtin"] = { fg = "#cfc041" },
+        ["@function.call"] = { fg = "#cfc041" },
+        ["@method"] = { fg = "#cfc041" },
+        ["@method.call"] = { fg = "#cfc041" },
+
+        -- Keywords & Properties (Zed Cyan/Teal)
+        ["@keyword"] = { fg = "#77bfcf" },
+        ["@keyword.function"] = { fg = "#77bfcf" },
+        ["@keyword.operator"] = { fg = "#a64a2e" }, -- Match operator color
+        ["@property"] = { fg = "#77bfcf" },
+        ["@variable.member"] = { fg = "#77bfcf" },
+
+        -- Brackets & Punctuation
+        ["@punctuation.bracket"] = { fg = "#77bfcf" },
+        ["@punctuation.delimiter"] = { fg = "#b1c9c3" },
+        ["@punctuation.special"] = { fg = "#819993" },
+
+        -- Variables & Parameters (Zed base text color)
+        ["@variable"] = { fg = "#b1c9c3" },
+        ["@variable.parameter"] = { fg = "#b1c9c3" },
+        ["@variable.builtin"] = { fg = "#b1c9c3" },
+
+        -- Types & Enums (Zed Pure White / Rust-orange)
+        ["@type"] = { fg = "#ffffff" },
+        ["@type.builtin"] = { fg = "#ffffff" },
+        ["@type.definition"] = { fg = "#ffffff" },
+
+        -- Constants & Booleans
+        ["@constant"] = { fg = "#a666ba" },
+        ["@constant.builtin"] = { fg = "#a666ba" },
+        ["@boolean"] = { fg = "#0096ff" },
+
+        -- Literals (Numbers, Operators & Strings)
+        ["@number"] = { fg = "#a64a2e" },
+        ["@float"] = { fg = "#a64a2e" },
+        ["@operator"] = { fg = "#a64a2e" },
+        ["@string"] = { fg = "#98875f" },
+        ["@string.escape"] = { fg = "#98875f" },
+        ["@string.regex"] = { fg = "#98875f" },
+        ["@string.special.symbol"] = { fg = "#cfc041" },
+
+        -- Tags (HTML / JSX)
+        ["@tag"] = { fg = "#b1c9c3" },
+        ["@tag.attribute"] = { fg = "#77bfcf" },
+        ["@tag.delimiter"] = { fg = "#b1c9c3" },
+
+        -- ==========================================
+        -- EXISTING PLUGIN & UI HIGHLIGHTS (Retained)
+        -- ==========================================
         -- Base Editor overrides
         Normal = { bg = "#0f3b3a", fg = "#b1c9c3" },
         NormalNC = { bg = "#0f3b3a", fg = "#b1c9c3" },
         NormalFloat = { bg = "#155352", fg = "#b1c9c3" },
         Comment = { fg = "#009403", italic = true },
+        ["@comment"] = { fg = "#009403", italic = true },
+        ["@comment.documentation"] = { fg = "#009403" },
         
         CursorLine = { bg = "#155352" },
         Visual = { bg = "#1b5458" },
         Search = { bg = "#cfc041", fg = "#0f3b3a" },
-        WinSeparator = { fg = "#357372", bg = "#0f3b3a" }, -- The line between splits (Medium teal border)
-        VertSplit = { fg = "#357372", bg = "#0f3b3a" },    -- Fallback for vertical splits
-        WinBar = { bg = "#0f3b3a", fg = "#b1c9c3" },      -- Active window top bar
-        -- Optional: Make the separator blend in completely by matching background
-        -- WinSeparator = { fg = "#0f3b3a", bg = "#0f3b3a" }, -- Invisible separator
+        WinSeparator = { fg = "#357372", bg = "#0f3b3a" }, 
+        VertSplit = { fg = "#357372", bg = "#0f3b3a" },    
+        WinBar = { bg = "#0f3b3a", fg = "#b1c9c3" },      
         
         -- Neo-tree / File managers canvas matching
         NeoTreeNormal = { bg = "#155352", fg = "#b1c9c3" },
         NeoTreeNormalNC = { bg = "#155352", fg = "#b1c9c3" },
         
-        -- HEIRLINE TABBAR OVERRIDES (Forces the empty space on the tab bar to turn teal)
+        -- HEIRLINE TABBAR OVERRIDES
         HeirlineTabline = { bg = "#155352" },
         TabLineFill = { bg = "#155352" },
         TabLine = { bg = "#155352", fg = "#819993" },
         TabLineSel = { bg = "#0f3b3a", fg = "#b1c9c3", bold = true },
         
-        -- HEIRLINE STATUSLINE OVERRIDES (Eliminates the black status bar background)
+        -- HEIRLINE STATUSLINE OVERRIDES
         StatusLine = { bg = "#155352", fg = "#b1c9c3" },
         StatusLineNC = { bg = "#155352", fg = "#819993" },
         HeirlineStatusline = { bg = "#155352" },
 
-        -- HEIRLINE SPECIFIC WINBAR (The actual culprit)
+        -- HEIRLINE SPECIFIC WINBAR
         HeirlineWinBar = { bg = "#0f3b3a", fg = "#b1c9c3" },
         HeirlineWinBarNC = { bg = "#0f3b3a", fg = "#819993" },
-        
-        -- Ensure the file icon and path components also match
         HeirlineFileIcon = { bg = "#0f3b3a", fg = "#b1c9c3" },
         HeirlineFileName = { bg = "#0f3b3a", fg = "#b1c9c3" },
         HeirlineFilePath = { bg = "#0f3b3a", fg = "#b1c9c3" },
 
-        -- STATUSLINE MODE BLOCKS (Custom palette synchronization)
+        -- STATUSLINE MODE BLOCKS 
         Heirline_normal = { bg = "#b1c9c3", fg = "#0f3b3a", bold = true },  
         Heirline_insert = { bg = "#00c420", fg = "#0f3b3a", bold = true },  
         Heirline_visual = { bg = "#e99f10", fg = "#0f3b3a", bold = true },  
@@ -92,7 +144,6 @@ return {
         
         -- Window Borders and dividers
         FloatBorder = { fg = "#559392", bg = "#155352" },
-        VertSplit = { fg = "#357372", bg = "#0f3b3a" }, 
         LineNr = { fg = "#559392" },
         CursorLineNr = { fg = "#b1c9c3", bold = true },
       },

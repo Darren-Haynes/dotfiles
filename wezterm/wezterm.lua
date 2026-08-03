@@ -18,14 +18,18 @@ local primary_mod = is_mac and "SUPER" or "CTRL"
 config.window_decorations = "RESIZE"
 
 -- 2. Color scheme natively injected
+-- 2. Color scheme natively injected (Optimized for Dram Ecosystem)
 config.colors = {
 	foreground = "#b1c9c3",
 	background = "#0f3b3a",
 	cursor_bg = "#b1c9c3",
 	cursor_fg = "#0f3b3a",
 	cursor_border = "#b1c9c3",
-	selection_bg = "rgba(64, 164, 185, 0.24)", -- Pure CSS format bypasses hex parser issues
+	selection_bg = "rgba(64, 164, 185, 0.24)", 
 	selection_fg = "none",
+
+	-- Subtle borders separating WezTerm splits natively
+	split = "#357372",
 
 	ansi = {
 		"#0f3b3a", -- black
@@ -34,7 +38,7 @@ config.colors = {
 		"#e99f10", -- yellow
 		"#0096ff", -- blue
 		"#b154cf", -- magenta
-		"#77bfc3", -- cyan
+		"#77bfcf", -- cyan (Fixed typo from c3 to cf to match Zed exactly)
 		"#b1c9c3", -- white
 	},
 	brights = {
@@ -44,7 +48,7 @@ config.colors = {
 		"#cfc041", -- bright yellow
 		"#40a4b9", -- bright blue
 		"#da5bd6", -- bright magenta
-		"#77bfc3", -- bright cyan
+		"#77bfcf", -- bright cyan (Fixed typo from c3 to cf to match Zed exactly)
 		"#e1f9f3", -- bright white
 	},
 
@@ -53,6 +57,7 @@ config.colors = {
 		active_tab = {
 			bg_color = "#0f3b3a",
 			fg_color = "#b1c9c3",
+			intensity = "Bold", -- Adds extra visual weight to the active workspace tab
 		},
 		inactive_tab = {
 			bg_color = "#155352",
@@ -71,6 +76,17 @@ config.colors = {
 			fg_color = "#b1c9c3",
 		},
 	},
+}
+
+-- Optional but Highly Recommended UI Flattening Additions:
+config.inactive_pane_hsb = {
+  saturation = 0.9, -- Slightly desaturate inactive text
+  brightness = 0.7, -- Dim the background and foreground down to 70%
+}
+
+config.window_frame = {
+	active_titlebar_bg = "#155352",
+	inactive_titlebar_bg = "#155352",
 }
 
 -- Fonts
