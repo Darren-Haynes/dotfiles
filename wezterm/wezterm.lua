@@ -110,26 +110,8 @@ config.show_tabs_in_tab_bar = true
 config.enable_tab_bar = true
 config.tab_max_width = 100
 
-wezterm.on("window-config-reloaded", function(window, pane)
-  local active_tab = window:active_tab()
-  if not active_tab then return end
 
-  -- This reads the actual, post-render zoom state reliably
-  local is_zoomed = active_tab:active_pane():is_zoomed()
-
-  -- Safely pull current overrides to prevent clearing other custom runtime settings
-  local overrides = window:get_config_overrides() or {}
-
-  if is_zoomed then
-    overrides.enable_tab_bar = false
-  else
-    overrides.enable_tab_bar = true
-  end
-
-  window:set_config_overrides(overrides)
-end)
-
--- 3. Dynamic tab formatting block mapped to Dram Palette
+-- Dynamic tab formatting block mapped to Dram Palette
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local index = tab.tab_index + 1
 	local title = tab.active_pane.title
@@ -280,8 +262,28 @@ config.keys = {
 	{ key = "UpArrow",    mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
 	{ key = "DownArrow",  mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
 
-	-- Zoom toggle mapping
-	{ key = "Escape", mods = "SHIFT", action = wezterm.action.TogglePaneZoomState },
+	-- Zoom toggle mapping (Cleaned Lua Syntax)
+	{
+		key = "Escape",
+		mods = "SHIFT",
+		action = wezterm.action_callback(function(window, pane)
+			-- 1. Fire the actual pane zoom command natively
+			window:perform_action(wezterm.action.TogglePaneZoomState, pane)
+
+			-- 2. Fetch the active configuration overrides layer
+			local overrides = window:get_config_overrides() or {}
+
+			-- 3. Toggle the tab bar based explicitly on its CURRENT override status
+			if overrides.enable_tab_bar == nil or overrides.enable_tab_bar == true then
+				overrides.enable_tab_bar = false
+			else
+				overrides.enable_tab_bar = true
+			end
+
+			-- 4. Instantly load the override state to hide/show the bar
+			window:set_config_overrides(overrides)
+		end),
+	},
 
   -- Show the launcher in fuzzy selection mode and have it list all workspaces
   -- and allow activating one.
