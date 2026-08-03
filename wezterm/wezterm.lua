@@ -96,10 +96,10 @@ config.adjust_window_size_when_changing_font_size = false
 
 -- Padding configuration
 config.window_padding = {
-	left = "35px",
-	right = "35px",
-	top = "0px",
-	bottom = "25px",
+	left = "30px",
+	right = "30px",
+	top = "10px",
+	bottom = "0px",
 }
 
 -- Tab bar layout settings
