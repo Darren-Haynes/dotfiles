@@ -25,7 +25,7 @@ config.colors = {
 	cursor_bg = "#b1c9c3",
 	cursor_fg = "#0f3b3a",
 	cursor_border = "#b1c9c3",
-	selection_bg = "rgba(64, 164, 185, 0.24)", 
+	selection_bg = "rgba(64, 164, 185, 0.24)",
 	selection_fg = "none",
 
 	-- Subtle borders separating WezTerm splits natively
@@ -80,8 +80,8 @@ config.colors = {
 
 -- Optional but Highly Recommended UI Flattening Additions:
 config.inactive_pane_hsb = {
-  saturation = 0.9, -- Slightly desaturate inactive text
-  brightness = 0.7, -- Dim the background and foreground down to 70%
+	saturation = 0.93, -- Slightly desaturate inactive text
+	brightness = 0.85, -- Dim the background and foreground down to 70%
 }
 
 config.window_frame = {
@@ -109,7 +109,6 @@ config.use_fancy_tab_bar = false
 config.show_tabs_in_tab_bar = true
 config.enable_tab_bar = true
 config.tab_max_width = 100
-
 
 -- Dynamic tab formatting block mapped to Dram Palette
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
@@ -148,70 +147,77 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 end)
 
 local function is_vim(pane)
-  -- Method 1: Check User Variable (Most reliable for multiplexers)
-  -- wezterm-move.nvim sets IS_NVIM = "true" when active
-  local user_vars = pane:get_user_vars()
-  if user_vars.IS_NVIM == "true" then
-    return true
-  end
+	-- Method 1: Check User Variable (Most reliable for multiplexers)
+	-- wezterm-move.nvim sets IS_NVIM = "true" when active
+	local user_vars = pane:get_user_vars()
+	if user_vars.IS_NVIM == "true" then
+		return true
+	end
 
-  -- Method 2: Fallback to process info (for non-mux or if var fails)
-  local process_info = pane:get_foreground_process_info()
-  if not process_info then return false end
+	-- Method 2: Fallback to process info (for non-mux or if var fails)
+	local process_info = pane:get_foreground_process_info()
+	if not process_info then
+		return false
+	end
 
-  if process_info.name == "nvim" or process_info.name == "vim" then
-    return true
-  end
+	if process_info.name == "nvim" or process_info.name == "vim" then
+		return true
+	end
 
-  if process_info.args then
-    for _, arg in ipairs(process_info.args) do
-      if arg:match("nvim") or arg:match("vim") then
-        return true
-      end
-    end
-  end
-  return false
+	if process_info.args then
+		for _, arg in ipairs(process_info.args) do
+			if arg:match("nvim") or arg:match("vim") then
+				return true
+			end
+		end
+	end
+	return false
 end
 
 local direction_keys = {
-  Left = "h", Down = "j", Up = "k", Right = "l",
-  h = "Left", j = "Down", k = "Up", l = "Right",
+	Left = "h",
+	Down = "j",
+	Up = "k",
+	Right = "l",
+	h = "Left",
+	j = "Down",
+	k = "Up",
+	l = "Right",
 }
 
 local function split_nav(resize_or_move, key)
-  return {
-    key = key,
-    mods = resize_or_move == "resize" and "META" or "CTRL",
-    action = wezterm.action_callback(function(win, pane)
-      if is_vim(pane) then
-        -- ALWAYS send the key to Neovim to trigger the plugin
-        win:perform_action({
-          SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },
-        }, pane)
-      else
-        -- WezTerm native action
-        if resize_or_move == "resize" then
-          win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
-        else
-          win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
-        end
-      end
-    end),
-  }
+	return {
+		key = key,
+		mods = resize_or_move == "resize" and "META" or "CTRL",
+		action = wezterm.action_callback(function(win, pane)
+			if is_vim(pane) then
+				-- ALWAYS send the key to Neovim to trigger the plugin
+				win:perform_action({
+					SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },
+				}, pane)
+			else
+				-- WezTerm native action
+				if resize_or_move == "resize" then
+					win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
+				else
+					win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
+				end
+			end
+		end),
+	}
 end
-
 
 -- multiplexer
 config.unix_domains = {
-  {
-    name = 'HOME',
-    -- Automatically start the server if it's not running
-    no_serve_automatically = false,
-  },
+	{
+		name = "HOME",
+		-- Automatically start the server if it's not running
+		no_serve_automatically = false,
+	},
 }
 
 -- Connect to the multiplexer on startup
-config.default_gui_startup_args = { 'connect', 'HOME' }
+config.default_gui_startup_args = { "connect", "HOME" }
 
 config.keys = {
 	-- Clear out default OS hotkey assignments
@@ -236,31 +242,51 @@ config.keys = {
 	{ key = "k", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
 	{ key = "f", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
 
-    -- Cross-platform Copy & Paste
+	-- Cross-platform Copy & Paste
 	{ key = "c", mods = primary_mod, action = wezterm.action.CopyTo("Clipboard") },
 	{ key = "v", mods = primary_mod, action = wezterm.action.PasteFrom("Clipboard") },
 
 	-- Move between panes -- Resize panes (Meta/Alt + hjkl)
-	split_nav("move", "h"), split_nav("move", "j"),
-  split_nav("move", "k"), split_nav("move", "l"),
-  split_nav("resize", "h"), split_nav("resize", "j"),
-  split_nav("resize", "k"), split_nav("resize", "l"),
+	split_nav("move", "h"),
+	split_nav("move", "j"),
+	split_nav("move", "k"),
+	split_nav("move", "l"),
+	split_nav("resize", "h"),
+	split_nav("resize", "j"),
+	split_nav("resize", "k"),
+	split_nav("resize", "l"),
 
 	-- Navigate tabs left/right
 	{ key = "H", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTabRelative(-1) },
 	{ key = "L", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTabRelative(1) },
 
-  -- SPLIT PANES
-  { key = 'RightArrow', mods = 'SUPER|ALT', action = wezterm.action.SplitPane { direction = 'Right', size = { Percent = 25 } } },
-  { key = 'DownArrow',  mods = 'SUPER|ALT', action = wezterm.action.SplitPane { direction = 'Down', size = { Percent = 25 } } },
-  { key = 'LeftArrow',  mods = 'SUPER|ALT', action = wezterm.action.SplitPane { direction = 'Left', size = { Percent = 25 } } },
-  { key = 'UpArrow',    mods = 'SUPER|ALT', action = wezterm.action.SplitPane { direction = 'Up', size = { Percent = 25 } } },
+	-- SPLIT PANES
+	{
+		key = "RightArrow",
+		mods = "SUPER|ALT",
+		action = wezterm.action.SplitPane({ direction = "Right", size = { Percent = 25 } }),
+	},
+	{
+		key = "DownArrow",
+		mods = "SUPER|ALT",
+		action = wezterm.action.SplitPane({ direction = "Down", size = { Percent = 25 } }),
+	},
+	{
+		key = "LeftArrow",
+		mods = "SUPER|ALT",
+		action = wezterm.action.SplitPane({ direction = "Left", size = { Percent = 25 } }),
+	},
+	{
+		key = "UpArrow",
+		mods = "SUPER|ALT",
+		action = wezterm.action.SplitPane({ direction = "Up", size = { Percent = 25 } }),
+	},
 
 	-- Resize split layouts
-	{ key = "LeftArrow",  mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
+	{ key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
 	{ key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
-	{ key = "UpArrow",    mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
-	{ key = "DownArrow",  mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
+	{ key = "UpArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
+	{ key = "DownArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
 
 	-- Zoom toggle mapping (Cleaned Lua Syntax)
 	{
@@ -285,43 +311,43 @@ config.keys = {
 		end),
 	},
 
-  -- Show the launcher in fuzzy selection mode and have it list all workspaces
-  -- and allow activating one.
-  { key = 'o', mods = 'SUPER|ALT', action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES', }, },
+	-- Show the launcher in fuzzy selection mode and have it list all workspaces
+	-- and allow activating one.
+	{ key = "o", mods = "SUPER|ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 
 	-- Switch to the default workspace
-  {
-    key = 'y',
-    mods = 'CTRL|SHIFT',
-    action = wezterm.action.SwitchToWorkspace {
-      name = 'default',
-    },
-  },
-  -- Prompt for a name to use for a new workspace and switch to it.
-  {
-    key = 'W',
-    mods = 'CTRL|SHIFT',
-    action = wezterm.action.PromptInputLine {
-      description = wezterm.format {
-        { Attribute = { Intensity = 'Bold' } },
-        { Foreground = { AnsiColor = 'Fuchsia' } },
-        { Text = 'Enter name for new workspace' },
-      },
-      action = wezterm.action_callback(function(window, pane, line)
-        -- line will be `nil` if they hit escape without entering anything
-        -- An empty string if they just hit enter
-        -- Or the actual line of text they wrote
-        if line then
-          window:perform_action(
-            wezterm.action.SwitchToWorkspace {
-              name = line,
-            },
-            pane
-          )
-        end
-      end),
-    },
-  },
+	{
+		key = "y",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SwitchToWorkspace({
+			name = "default",
+		}),
+	},
+	-- Prompt for a name to use for a new workspace and switch to it.
+	{
+		key = "W",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PromptInputLine({
+			description = wezterm.format({
+				{ Attribute = { Intensity = "Bold" } },
+				{ Foreground = { AnsiColor = "Fuchsia" } },
+				{ Text = "Enter name for new workspace" },
+			}),
+			action = wezterm.action_callback(function(window, pane, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
+				if line then
+					window:perform_action(
+						wezterm.action.SwitchToWorkspace({
+							name = line,
+						}),
+						pane
+					)
+				end
+			end),
+		}),
+	},
 
 	-- Dynamic tab renaming prompt
 	{
