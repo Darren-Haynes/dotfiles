@@ -102,7 +102,9 @@
       "space d j": "debugger::StepOver",
       "space d i": "debugger::StepInto",
       "space d o": "debugger::StepOut",
-    }
+       // Toggle the entire Debugger UI Layout simultaneously (Variables & Console Panels)
+      "space d u": "debug_panel::ToggleFocus"
+      }
   },
 
   // AI MANAGEMENT //
