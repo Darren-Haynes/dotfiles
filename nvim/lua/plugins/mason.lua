@@ -25,12 +25,4 @@ return {
       },
     },
   },
-
-  "williamboman/mason.nvim",
-  opts = {
-    ensure_installed = {
-      "js-debug-adapter", -- The vscode-js-debug adapter
-      "typescript-language-server",
-    },
-  },
 }
