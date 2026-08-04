@@ -6,44 +6,14 @@
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
 [
-  {
-    "context": "Workspace",
-    "bindings": {
-      // "shift shift": "file_finder::Toggle"
-    },
-  },
-  {
-    "context": "Editor && vim_mode == insert",
-    "bindings": {
-      // "j k": "vim::NormalBefore"
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-w t": "terminal_panel::ToggleFocus",
-    },
-  },
+  // STANDARD MOVE BETWEEN SPLITS / PANES VIM BINDINGS //
+  // ------------------------------------------------  //
   {
     "context": "Workspace",
     "bindings": {
       "ctrl-h": "workspace::ActivatePaneLeft",
-    },
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
       "ctrl-l": "workspace::ActivatePaneRight",
-    },
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
       "ctrl-j": "workspace::ActivatePaneDown",
-    },
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
       "ctrl-k": "workspace::ActivatePaneUp",
     },
   },
@@ -57,40 +27,42 @@
     "context": "((VimControl && !menu) || (!Editor && !Terminal))",
     "bindings": {
       "ctrl-k": "workspace::ActivatePaneUp",
-    },
-  },
-  {
-    "context": "((VimControl && !menu) || (!Editor && !Terminal))",
-    "bindings": {
       "ctrl-j": "workspace::ActivatePaneDown",
-    },
-  },
-  {
-    "context": "((VimControl && !menu) || (!Editor && !Terminal))",
-    "bindings": {
       "ctrl-l": "workspace::ActivatePaneRight",
-    },
-  },
-  {
-    "context": "((VimControl && !menu) || (!Editor && !Terminal))",
-    "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-h": "workspace::ActivatePaneLeft"
     },
   },
   {
     "context": "(GitPanel && ChangesList)",
     "bindings": {
-      "ctrl-l": "git_panel::FocusEditor",
+      "ctrl-l": "git_panel::FocusEditor"
     },
   },
+
+  // VIM STANDARDS //
+  // ------------- //
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // Better Escape (jj and jk to exit Insert Mode)
+      "j j": "vim::NormalBefore",
+      "j k": "vim::NormalBefore",
+      "k j": "vim::NormalBefore"
+    }
+  },
+
+  // DEBUGGING //
+  //-----------//
   {
     "bindings": {
       "ctrl-cmd-enter": "debugger::Start",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-d s": "debugger::Stop",
+      "ctrl-cmd-j": "debugger::StepOver",
+      "ctrl-d space": "debugger::ClearAllBreakpoints",
+      "ctrl-cmd-e": "debugger::Stop",
+      "ctrl-cmd-i": "debugger::StepInto",
+      "ctrl-cmd-o": "debugger::StepOut",
+      "ctrl-cmd-x": "debugger::RerunSession",
+      "ctrl-cmd-shift-enter": "debugger::Restart",
     },
   },
   {
@@ -100,43 +72,77 @@
     },
   },
   {
-    "context": "(Workspace && debugger_stopped)",
-    "bindings": {
-      "ctrl-d c": "debugger::Continue",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-d i": "debugger::StepInto",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-d o": "debugger::StepOut",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-d f": "debugger::StepOver",
-    },
-  },
-  {
-    "context": "BreakpointList",
-    "bindings": {
-      "ctrl-d b": "debugger::ToggleEnableBreakpoint",
-    },
-  },
-  {
     "context": "Editor",
     "bindings": {
       "ctrl-d b": "editor::ToggleBreakpoint",
     },
   },
   {
+    "context": "(Workspace && debugger_stopped)",
     "bindings": {
-      "ctrl-d q": "debugger::Stop",
+      "ctrl-cmd-k": "debugger::Continue",
     },
   },
+  {
+    "context": "Editor && VimControl && !VimWaiting",
+    "bindings": {
+      // Start, Pause, Restart, Run-To, Stop
+      "space d c": "debugger::Start",
+      "space d p": "debugger::Pause",
+      "space d r": "debugger::Restart",
+      "space d s": "debugger::RunToCursor",
+      "space d q": "debugger::Stop",
+      "space d Q": "workspace::ShutdownDebugAdapters",
+
+      // Breakpoint Mechanics
+      "space d b": "editor::ToggleBreakpoint",
+      "space d B": "debugger::ClearAllBreakpoints",
+
+      // Step Sequences
+      "space d j": "debugger::StepOver",
+      "space d i": "debugger::StepInto",
+      "space d o": "debugger::StepOut",
+    }
+  },
+
+  // AI MANAGEMENT //
+  // _________ //
+  {
+    "bindings": {
+      "ctrl-shift-a": "agent::Toggle",
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-a": "agent::Toggle",
+      "space a": "workspace::ToggleRightDock"
+    }
+  },
+
+  // RUN FILES //
+  // _________ //
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-r": ["task::Spawn", { "task_name": "Run Python File" }],
+      "ctrl-shift-n": ["task::Spawn", { "task_name": "Run JS File" }]
+    }
+  },
+
+  // TERMINAL //
+  // _________ //
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-t": "workspace::NewTerminal",
+      "ctrl-shift-l": "pane::ActivateNextItem",
+      "ctrl-shift-h": "pane::ActivatePreviousItem"
+    }
+  },
+
+  // PROJECTS //
+  // _________ //
   {
     "context": "Workspace",
     "bindings": {
@@ -148,90 +154,36 @@
       ],
     },
   },
-  {
-    "bindings": {
-      "ctrl-d space": "debugger::ClearAllBreakpoints",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-cmd-j": "debugger::StepOver",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-cmd-e": "debugger::Stop",
-    },
-  },
-  {
-    "context": "(Workspace && debugger_stopped)",
-    "bindings": {
-      "ctrl-cmd-k": "debugger::Continue",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-cmd-i": "debugger::StepInto",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-cmd-o": "debugger::StepOut",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-cmd-x": "debugger::RerunSession",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-cmd-shift-enter": "debugger::Restart",
-    },
-  },
-  {
-    "context": "vim_mode",
-    "bindings": {
-      "ctrl-o c": "outline_panel::CollapseAllEntries",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-shift-l": "pane::ActivateNextItem",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-shift-h": "pane::ActivatePreviousItem",
-    },
-  },
+
+  // GIT GIT GIT //
+  // _________ //
   {
     "context": "GitPanel && ChangesList && !GitBranchSelector && Editor && Terminal && DebugConsole",
     "bindings": {
       "cmd-shift-g": "git_panel::ToggleFocus",
     },
   },
-  {
-    "bindings": {
-      "ctrl-shift-a": "agent::Toggle"
-    }
-  },
-  {
-    "context": "Editor",
-    "bindings": {
-      "ctrl-shift-r": ["task::Spawn", { "task_name": "Run Python File" }]
-    }
-  },
-  {
-    "context": "Editor",
-    "bindings": {
-      "ctrl-shift-n": ["task::Spawn", { "task_name": "Run JS File" }]
-    }
-  },
+
+  // FILE EXPLORER //
+  // _________ //
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-shift-t": "workspace::NewTerminal"
-  }
-}
+      "space e": "project_panel::ToggleFocus",
+      "space l a": "editor::ToggleCodeActions",
+      "space l r": "editor::Rename",
+      "space l f": "editor::Format"
+    }
+  },
+
+  // LSP MAPPINGS //
+  // _________ //
+  {
+    "context": "Workspace",
+    "bindings": {
+      "space l a": "editor::ToggleCodeActions",
+      "space l r": "editor::Rename",
+      "space l f": "editor::Format"
+    }
+  },
 ]
