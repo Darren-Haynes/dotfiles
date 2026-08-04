@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 -- This table will hold the configuration.
 local config = {}
@@ -10,15 +11,28 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- 1. CRITICAL PLATFORM DETECTION (Moved to top so shortcuts can use primary_mod)
+-- CRITICAL PLATFORM DETECTION (Moved to top so shortcuts can use primary_mod)
 local is_mac = wezterm.target_triple:find("apple") ~= nil
 local primary_mod = is_mac and "SUPER" or "CTRL"
 
 -- DISABLE MACOS NATIVE TOP BAR (Changed from "TITLE | RESIZE" to "RESIZE")
 config.window_decorations = "RESIZE"
 
--- 2. Color scheme natively injected
--- 2. Color scheme natively injected (Optimized for Dram Ecosystem)
+-- PERSISTENT MUX SESSIONS
+resurrect.apply(config, {
+	-- Enable auto-save every N seconds (e.g., 300 seconds = 5 minutes)
+	auto_save_interval = 300,
+	save_workspaces = true,
+	save_tabs = true,
+	save_panes = true,
+})
+
+-- Restore session on GUI startup
+wezterm.on("gui-startup", function(cmd)
+	resurrect.state_manager.resurrect_on_gui_startup(cmd)
+end)
+
+-- Color scheme natively injected (Optimized for Dram Ecosystem)
 config.colors = {
 	foreground = "#b1c9c3",
 	background = "#0f3b3a",
