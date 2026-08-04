@@ -7,9 +7,7 @@ local config = {}
 
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
-if wezterm.config_builder then
-	config = wezterm.config_builder()
-end
+local config = wezterm.config_builder()
 
 -- CRITICAL PLATFORM DETECTION (Moved to top so shortcuts can use primary_mod)
 local is_mac = wezterm.target_triple:find("apple") ~= nil
@@ -18,18 +16,24 @@ local primary_mod = is_mac and "SUPER" or "CTRL"
 -- DISABLE MACOS NATIVE TOP BAR (Changed from "TITLE | RESIZE" to "RESIZE")
 config.window_decorations = "RESIZE"
 
+-- ========================
 -- PERSISTENT MUX SESSIONS
-resurrect.apply(config, {
-	-- Enable auto-save every N seconds (e.g., 300 seconds = 5 minutes)
-	auto_save_interval = 300,
-	save_workspaces = true,
-	save_tabs = true,
-	save_panes = true,
-})
-
--- Restore session on GUI startup
+-- ========================
+-- ========================================================
+-- PERSISTENT MUX SESSIONS (Corrected)
+-- ========================================================
+-- Wrap your hooks inside gui-startup so they register safely in the background
 wezterm.on("gui-startup", function(cmd)
+	-- 1. Fire the native startup resurrection script instantly
 	resurrect.state_manager.resurrect_on_gui_startup(cmd)
+
+	-- 2. Safely kick off the periodic save loop background thread
+	resurrect.state_manager.periodic_save({
+		interval_seconds = 300, -- 5 minutes
+		save_workspaces = true,
+		save_windows = true,
+		save_tabs = true,
+	})
 end)
 
 -- Color scheme natively injected (Optimized for Dram Ecosystem)
