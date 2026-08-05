@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Cross-Platform Clipboard Clear Script
+# Clears the system clipboard on macOS and Linux (X11/Wayland)
+
+clear_clipboard() {
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS: Use built-in pbcopy
+        pbcopy < /dev/null
+
+    elif [[ "$OSTYPE" == "linux-gnu"* ]] || [[ "$OSTYPE" == "linux-musl"* ]]; then
+        # Linux: Detect available tool
+        if command -v wl-copy &> /dev/null; then
+            # Wayland
+            wl-copy --clear
+        elif command -v xsel &> /dev/null; then
+            # X11 (xsel is often preferred for clearing)
+            xsel --clipboard --clear
+            # Also clear primary selection just in case
+            xsel --primary --clear 2>/dev/null
+        elif command -v xclip &> /dev/null; then
+            # X11 (fallback to xclip)
+            echo -n | xclip -selection clipboard
+            echo -n | xclip -selection primary 2>/dev/null
+        else
+            echo "Error: No Linux clipboard utility found."
+            echo "Please install 'wl-clipboard', 'xsel', or 'xclip'."
+            exit 1
+        fi
+    else
+        echo "Error: Unsupported OS '$OSTYPE'."
+        exit 1
+    fi
+
+    echo "✓ Clipboard cleared."
+}
+
+clear_clipboard
