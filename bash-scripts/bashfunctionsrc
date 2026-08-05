@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Bitwarden command line
+getpw() {
+  bw get password -- "$1" | xsel --clipboard
+}
+
+getun() {
+  bw get username -- "$1" | xsel --clipboard
+}
+
+# GIT fast forward main branch to origin branch
+ffmain() {
+  git fetch origin
+  git merge ff-only origin/main
+}

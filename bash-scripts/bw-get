@@ -1,0 +1,116 @@
+#!/bin/bash
+
+# -----------------------------------------------------------------------------
+# Bitwarden Smart Retrieve Script
+# Features:
+# 1. Auto-detects macOS (pbcopy) vs Linux (xclip/xsel/wl-copy).
+# 2. If 1 result: Copies password immediately and prints username.
+# 3. If >1 result: Lists names for selection (requires fzf) or exits with error.
+# -----------------------------------------------------------------------------
+
+set -e
+
+# 1. Detect OS and set Clipboard Command
+set_clipboard_cmd() {
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        CLIP_CMD="pbcopy"
+    elif [[ "$OSTYPE" == "linux-gnu"* ]] || [[ "$OSTYPE" == "linux-musl"* ]]; then
+        # Linux: Check for available tools in order of preference
+        if command -v wl-copy &> /dev/null; then
+            CLIP_CMD="wl-copy" # Wayland
+        elif command -v xclip &> /dev/null; then
+            CLIP_CMD="xclip -selection clipboard" # X11
+        elif command -v xsel &> /dev/null; then
+            CLIP_CMD="xsel --clipboard --input" # Alternative X11
+        else
+            echo "Error: No clipboard utility found. Please install 'xclip', 'xsel', or 'wl-copy'."
+            exit 1
+        fi
+    else
+        echo "Error: Unsupported OS '$OSTYPE'."
+        exit 1
+    fi
+}
+
+# 2. Ensure Session is Unlocked
+ensure_unlocked() {
+    if [ -z "$BW_SESSION" ]; then
+        # Check if already logged in by trying a dummy command quietly
+        if ! bw status &> /dev/null; then
+            echo "Bitwarden is locked. Unlocking..."
+            BW_SESSION=$(bw unlock --raw)
+            export BW_SESSION
+        fi
+    fi
+}
+
+# 3. Main Logic
+main() {
+    if [ -z "$1" ]; then
+        echo "Usage: bw-get <search_term>"
+        exit 1
+    fi
+
+    SEARCH_TERM="$1"
+    set_clipboard_cmd
+    ensure_unlocked
+
+    # Fetch JSON data
+    JSON_DATA=$(bw list items --search "$SEARCH_TERM")
+
+    # Count results
+    COUNT=$(echo "$JSON_DATA" | jq 'length')
+
+    if [ "$COUNT" -eq 0 ]; then
+        echo "No items found for '$SEARCH_TERM'."
+        exit 0
+    elif [ "$COUNT" -eq 1 ]; then
+        # --- SINGLE RESULT: Auto-copy password ---
+        ITEM=$(echo "$JSON_DATA" | jq '.[0]')
+        NAME=$(echo "$ITEM" | jq -r '.name')
+        USERNAME=$(echo "$ITEM" | jq -r '.login.username')
+        PASSWORD=$(echo "$ITEM" | jq -r '.login.password')
+
+        # Copy password to clipboard
+        echo "$PASSWORD" | $CLIP_CMD
+
+        # Output info to terminal
+        echo "Found 1 item: $NAME"
+        echo "Username: $USERNAME"
+        echo "Password: COPIED TO CLIPBOARD"
+
+        # Optional: Copy username too if desired, or handle TOTP here
+    else
+        # --- MULTIPLE RESULTS: List them ---
+        # Check if fzf is installed for interactive selection
+        if command -v fzf &> /dev/null; then
+            echo "Multiple items found ($COUNT). Select one:"
+
+            # Use fzf to select an item name
+            SELECTED_NAME=$(echo "$JSON_DATA" | jq -r '.[].name' | fzf --reverse --prompt="Select Item: ")
+
+            if [ -z "$SELECTED_NAME" ]; then
+                echo "No selection made."
+                exit 0
+            fi
+
+            # Re-fetch or filter the specific item based on selection
+            ITEM=$(echo "$JSON_DATA" | jq --arg name "$SELECTED_NAME" '.[] | select(.name == $name)')
+            USERNAME=$(echo "$ITEM" | jq -r '.login.username')
+            PASSWORD=$(echo "$ITEM" | jq -r '.login.password')
+
+            echo "$PASSWORD" | $CLIP_CMD
+            echo "Selected: $SELECTED_NAME"
+            echo "Username: $USERNAME"
+            echo "Password: COPIED TO CLIPBOARD"
+        else
+            echo "Multiple items found ($COUNT). Install 'fzf' for interactive selection, or refine your search."
+            echo "Matches:"
+            echo "$JSON_DATA" | jq -r '.[].name'
+            exit 1
+        fi
+    fi
+}
+
+main "$@"
