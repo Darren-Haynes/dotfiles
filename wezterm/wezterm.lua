@@ -136,7 +136,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	end
 
 	local is_zoomed = tab.active_pane.is_zoomed
-	local formatted_text = string.format(" %d: %s ", index, title)
+	local formatted_text = string.format(" (%d) ---%s--- ", index, title)
 
 	local bg_color = "#155352" -- Inactive tab background
 	local fg_color = "#819993" -- Inactive muted text
@@ -235,7 +235,7 @@ config.unix_domains = {
 -- Connect to the multiplexer on startup
 config.default_gui_startup_args = { "connect", "HOME" }
 
-config.keys = {	-- Clear out default OS hotkey assignments
+config.keys = { -- Clear out default OS hotkey assignments
 	{ key = "m", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
 	{ key = "n", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
 	{ key = "v", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
@@ -275,108 +275,108 @@ config.keys = {	-- Clear out default OS hotkey assignments
 	{ key = "H", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTabRelative(-1) },
 	{ key = "L", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTabRelative(1) },
 
--- 	-- SPLIT PANES
+	-- 	-- SPLIT PANES
 	{
 		key = "RightArrow",
 		mods = "SUPER|ALT",
-			action = wezterm.action.SplitPane({ direction = "Right", size = { Percent = 25 } }),
-		},
-		{
-			key = "DownArrow",
-			mods = "SUPER|ALT",
-			action = wezterm.action.SplitPane({ direction = "Down", size = { Percent = 25 } }),
-		},
-		{
-			key = "LeftArrow",
-			mods = "SUPER|ALT",
-			action = wezterm.action.SplitPane({ direction = "Left", size = { Percent = 25 } }),
-		},
-		{
-			key = "UpArrow",
-			mods = "SUPER|ALT",
-			action = wezterm.action.SplitPane({ direction = "Up", size = { Percent = 25 } }),
-		},
+		action = wezterm.action.SplitPane({ direction = "Right", size = { Percent = 25 } }),
+	},
+	{
+		key = "DownArrow",
+		mods = "SUPER|ALT",
+		action = wezterm.action.SplitPane({ direction = "Down", size = { Percent = 25 } }),
+	},
+	{
+		key = "LeftArrow",
+		mods = "SUPER|ALT",
+		action = wezterm.action.SplitPane({ direction = "Left", size = { Percent = 25 } }),
+	},
+	{
+		key = "UpArrow",
+		mods = "SUPER|ALT",
+		action = wezterm.action.SplitPane({ direction = "Up", size = { Percent = 25 } }),
+	},
 
-		-- Resize split layouts
-		{ key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
-		{ key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
-		{ key = "UpArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
-		{ key = "DownArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
+	-- Resize split layouts
+	{ key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
+	{ key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
+	{ key = "UpArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
+	{ key = "DownArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
 
-		-- Zoom toggle mapping (Cleaned Lua Syntax)
-		{
-			key = "Escape",
-			mods = "SHIFT",
-			action = wezterm.action_callback(function(window, pane)
-				-- 1. Fire the actual pane zoom command natively
-				window:perform_action(wezterm.action.TogglePaneZoomState, pane)
+	-- Zoom toggle mapping (Cleaned Lua Syntax)
+	{
+		key = "Escape",
+		mods = "SHIFT",
+		action = wezterm.action_callback(function(window, pane)
+			-- 1. Fire the actual pane zoom command natively
+			window:perform_action(wezterm.action.TogglePaneZoomState, pane)
 
-				-- 2. Fetch the active configuration overrides layer
-				local overrides = window:get_config_overrides() or {}
+			-- 2. Fetch the active configuration overrides layer
+			local overrides = window:get_config_overrides() or {}
 
-				-- 3. Toggle the tab bar based explicitly on its CURRENT override status
-				if overrides.enable_tab_bar == nil or overrides.enable_tab_bar == true then
-					overrides.enable_tab_bar = false
-				else
-					overrides.enable_tab_bar = true
+			-- 3. Toggle the tab bar based explicitly on its CURRENT override status
+			if overrides.enable_tab_bar == nil or overrides.enable_tab_bar == true then
+				overrides.enable_tab_bar = false
+			else
+				overrides.enable_tab_bar = true
+			end
+
+			-- 4. Instantly load the override state to hide/show the bar
+			window:set_config_overrides(overrides)
+		end),
+	},
+
+	-- Show the launcher in fuzzy selection mode and have it list all workspaces
+	-- and allow activating one.
+	{ key = "o", mods = "SUPER|ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+
+	-- Switch to the default workspace
+	{
+		key = "y",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SwitchToWorkspace({
+			name = "default",
+		}),
+	},
+	-- Prompt for a name to use for a new workspace and switch to it.
+	{
+		key = "W",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PromptInputLine({
+			description = wezterm.format({
+				{ Attribute = { Intensity = "Bold" } },
+				{ Foreground = { AnsiColor = "Fuchsia" } },
+				{ Text = "Enter name for new workspace" },
+			}),
+			action = wezterm.action_callback(function(window, pane, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
+				if line then
+					window:perform_action(
+						wezterm.action.SwitchToWorkspace({
+							name = line,
+						}),
+						pane
+					)
 				end
-
-				-- 4. Instantly load the override state to hide/show the bar
-				window:set_config_overrides(overrides)
 			end),
-		},
+		}),
+	},
 
-		-- Show the launcher in fuzzy selection mode and have it list all workspaces
-		-- and allow activating one.
-		{ key = "o", mods = "SUPER|ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
-
-		-- Switch to the default workspace
-		{
-			key = "y",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action.SwitchToWorkspace({
-				name = "default",
-			}),
-		},
-		-- Prompt for a name to use for a new workspace and switch to it.
-		{
-			key = "W",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action.PromptInputLine({
-				description = wezterm.format({
-					{ Attribute = { Intensity = "Bold" } },
-					{ Foreground = { AnsiColor = "Fuchsia" } },
-					{ Text = "Enter name for new workspace" },
-				}),
-				action = wezterm.action_callback(function(window, pane, line)
-					-- line will be `nil` if they hit escape without entering anything
-					-- An empty string if they just hit enter
-					-- Or the actual line of text they wrote
-					if line then
-						window:perform_action(
-							wezterm.action.SwitchToWorkspace({
-								name = line,
-							}),
-							pane
-						)
-					end
-				end),
-			}),
-		},
-
-		-- Dynamic tab renaming prompt
-		{
-			key = "R",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action.PromptInputLine({
-				description = "Enter new name for tab:",
-				action = wezterm.action_callback(function(window, pane, line)
-					if line then
-						window:active_tab():set_title(line)
-					end
-				end),
-			}),
-		},
+	-- Dynamic tab renaming prompt
+	{
+		key = "R",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PromptInputLine({
+			description = "Enter new name for tab:",
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
+	},
 }
 
 -- Inject Ctrl/Cmd + Number shortcuts dynamically for jumping to Tabs 1-9
