@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local mux = wezterm.mux
 -- local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 -- This table will hold the configuration.
@@ -15,24 +16,35 @@ end
 local is_mac = wezterm.target_triple:find("apple") ~= nil
 local primary_mod = is_mac and "SUPER" or "CTRL"
 
+-- Set inital height and width of wezterm (iMac maximum)
+config.initial_cols = 2240
+config.initial_rows = 1260
+
 -- DISABLE MACOS NATIVE TOP BAR (Changed from "TITLE | RESIZE" to "RESIZE")
 config.window_decorations = "RESIZE"
 
--- ========================
+-- Open wezterm maximized (but not fullscreen)
+local has_maximized = false
+wezterm.on("window-focus-changed", function(window, pane)
+	if window and not has_maximized then
+		window:maximize()
+		has_maximized = true -- Prevent infinite loops
+	end
+end)
+
 -- PERSISTENT MUX SESSIONS
--- ========================
--- wezterm.on("gui-startup", function(cmd)
--- 	-- 1. Fire the native startup resurrection script instantly
--- 	resurrect.state_manager.resurrect_on_gui_startup(cmd)
---
--- 	-- 2. Safely kick off the periodic save loop background thread
--- 	resurrect.state_manager.periodic_save({
--- 		interval_seconds = 300, -- 5 minutes
--- 		save_workspaces = true,
--- 		save_windows = true,
--- 		save_tabs = true,
--- 	})
--- end)
+wezterm.on("gui-startup", function(cmd)
+	-- Fire the native startup resurrection script instantly
+	resurrect.state_manager.resurrect_on_gui_startup(cmd)
+
+	-- Safely kick off the periodic save loop background thread
+	resurrect.state_manager.periodic_save({
+		interval_seconds = 300, -- 5 minutes
+		save_workspaces = true,
+		save_windows = true,
+		save_tabs = true,
+	})
+end)
 
 -- Color scheme natively injected (Optimized for Dram Ecosystem)
 config.colors = {
