@@ -1,7 +1,11 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+
+-- Add the 'colors' directory to Lua's package search path
+package.path = package.path .. ";./colors/?.lua"
+
 local mux = wezterm.mux
--- local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 -- This table will hold the configuration.
 local config = {}
@@ -46,66 +50,6 @@ wezterm.on("gui-startup", function(cmd)
 	})
 end)
 
--- Color scheme natively injected (Optimized for Dram Ecosystem)
-config.colors = {
-	foreground = "#b1c9c3",
-	background = "#0f3b3a",
-	cursor_bg = "#b1c9c3",
-	cursor_fg = "#0f3b3a",
-	cursor_border = "#b1c9c3",
-	selection_bg = "rgba(64, 164, 185, 0.24)",
-	selection_fg = "none",
-
-	-- Subtle borders separating WezTerm splits natively
-	split = "#357372",
-
-	ansi = {
-		"#0f3b3a", -- black
-		"#d74200", -- red
-		"#009403", -- green
-		"#e99f10", -- yellow
-		"#0096ff", -- blue
-		"#b154cf", -- magenta
-		"#77bfcf", -- cyan (Fixed typo from c3 to cf to match Zed exactly)
-		"#b1c9c3", -- white
-	},
-	brights = {
-		"#5c7279", -- bright black
-		"#f15f22", -- bright red
-		"#00c420", -- bright green
-		"#cfc041", -- bright yellow
-		"#40a4b9", -- bright blue
-		"#da5bd6", -- bright magenta
-		"#77bfcf", -- bright cyan (Fixed typo from c3 to cf to match Zed exactly)
-		"#e1f9f3", -- bright white
-	},
-
-	tab_bar = {
-		background = "#155352",
-		active_tab = {
-			bg_color = "#0f3b3a",
-			fg_color = "#b1c9c3",
-			intensity = "Bold", -- Adds extra visual weight to the active workspace tab
-		},
-		inactive_tab = {
-			bg_color = "#155352",
-			fg_color = "#819993",
-		},
-		inactive_tab_hover = {
-			bg_color = "#357372",
-			fg_color = "#b1c9c3",
-		},
-		new_tab = {
-			bg_color = "#155352",
-			fg_color = "#b1c9c3",
-		},
-		new_tab_hover = {
-			bg_color = "#357372",
-			fg_color = "#b1c9c3",
-		},
-	},
-}
-
 -- -- Optional but Highly Recommended UI Flattening Additions:
 config.inactive_pane_hsb = {
 	saturation = 0.93, -- Slightly desaturate inactive text
@@ -138,41 +82,90 @@ config.show_tabs_in_tab_bar = true
 config.enable_tab_bar = true
 config.tab_max_width = 100
 
--- Dynamic tab formatting block mapped to Dram Palette
+-- Apply colors to config
+local active_theme_name = 'colors.solarized_dark'
+local active_theme_name = 'colors.dram_theme'
+config.colors = require(active_theme_name)
+
+-- 3. Helper to get theme colors inside callbacks
+local function get_theme_colors()
+    -- Re-require the module to get fresh data (Lua caches require, but this ensures we use the variable)
+    return require(active_theme_name)
+end
+
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-	local index = tab.tab_index + 1
-	local title = tab.active_pane.title
+    local theme = get_theme_colors()
+    local t = theme.tab_bar -- Shortcut to tab colors
 
-	if tab.tab_title and #tab.tab_title > 0 then
-		title = tab.tab_title
-	end
+    local index = tab.tab_index + 1
+    local title = tab.active_pane.title
 
-	local is_zoomed = tab.active_pane.is_zoomed
-	local formatted_text = string.format(" (%d) ---%s--- ", index, title)
+    if tab.tab_title and #tab.tab_title > 0 then
+        title = tab.tab_title
+    end
 
-	local bg_color = "#155352" -- Inactive tab background
-	local fg_color = "#819993" -- Inactive muted text
+    local is_zoomed = tab.active_pane.is_zoomed
+    local formatted_text = string.format(" (%d) ---%s--- ", index, title)
 
-	if tab.is_active then
-		if is_zoomed then
-			bg_color = "#00c420" -- Dram Bright Green accent block for zoom visibility
-			fg_color = "#0f3b3a" -- Dark active background text
-			formatted_text = string.format(" 🔍 %d: %s [ZOOMED] ", index, title)
-		else
-			bg_color = "#0f3b3a" -- Active tab background
-			fg_color = "#b1c9c3" -- Active foreground text
-		end
-	elseif hover then
-		bg_color = "#357372" -- Hover element background
-		fg_color = "#b1c9c3" -- Active text contrast
-	end
+    -- Default (Inactive)
+    local bg_color = t.inactive_bg
+    local fg_color = t.inactive_fg
 
-	return {
-		{ Background = { Color = bg_color } },
-		{ Foreground = { Color = fg_color } },
-		{ Text = formatted_text },
-	}
+    if tab.is_active then
+        if is_zoomed then
+            bg_color = t.zoomed_bg
+            fg_color = t.zoomed_fg
+            formatted_text = string.format(" 🔍 %d: %s [ZOOMED] ", index, title)
+        else
+            bg_color = t.active_bg
+            fg_color = t.active_fg
+        end
+    elseif hover then
+        bg_color = t.hover_bg
+        fg_color = t.hover_fg
+    end
+
+    return {
+        { Background = { Color = bg_color } },
+        { Foreground = { Color = fg_color } },
+        { Text = formatted_text },
+    }
 end)
+-- Dynamic tab formatting block mapped to Dram Palette
+-- wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+-- 	local index = tab.tab_index + 1
+-- 	local title = tab.active_pane.title
+
+-- 	if tab.tab_title and #tab.tab_title > 0 then
+-- 		title = tab.tab_title
+-- 	end
+
+-- 	local is_zoomed = tab.active_pane.is_zoomed
+-- 	local formatted_text = string.format(" (%d) ---%s--- ", index, title)
+
+-- 	local bg_color = "#155352" -- Inactive tab background
+-- 	local fg_color = "#819993" -- Inactive muted text
+
+-- 	if tab.is_active then
+-- 		if is_zoomed then
+-- 			bg_color = "#00c420" -- Dram Bright Green accent block for zoom visibility
+-- 			fg_color = "#0f3b3a" -- Dark active background text
+-- 			formatted_text = string.format(" 🔍 %d: %s [ZOOMED] ", index, title)
+-- 		else
+-- 			bg_color = "#0f3b3a" -- Active tab background
+-- 			fg_color = "#b1c9c3" -- Active foreground text
+-- 		end
+-- 	elseif hover then
+-- 		bg_color = "#357372" -- Hover element background
+-- 		fg_color = "#b1c9c3" -- Active text contrast
+-- 	end
+
+-- 	return {
+-- 		{ Background = { Color = bg_color } },
+-- 		{ Foreground = { Color = fg_color } },
+-- 		{ Text = formatted_text },
+-- 	}
+-- end)
 
 local function is_vim(pane)
 	-- Method 1: Check User Variable (Most reliable for multiplexers)
