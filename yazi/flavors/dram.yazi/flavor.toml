@@ -1,0 +1,107 @@
+# ==========================================
+# YAZI COLOR SCHEME: Dram (Teal Variant)
+# Generated from AstroNvim Spec
+# ==========================================
+
+[manager]
+cwd = { fg = "#77bfc3", italic = true } # Cyan
+
+# Hovered and selected states
+hovered         = { fg = "#b1c9c3", bg = "#1b5458" }        # Visual selection surface
+selected        = { fg = "#0f3b3a", bg = "#cfc041", bold = true } # Search highlight yellow
+find_keyword    = { fg = "#cfc041", italic = true }
+find_position   = { fg = "#b154cf", bg = "reset", bold = true }
+
+# Border and dividers separating columns
+border_symbol   = "│"
+border_style    = { fg = "#357372" } # VertSplit border teal
+
+# Highlighting for current active file status indicators
+count           = { fg = "#b1c9c3", bg = "#155352" }
+
+[status]
+separator_open  = ""
+separator_close = ""
+separator_style = { bg = "#155352", fg = "#155352" }
+
+# Mode indicator styling mapped to Neovim Heirline modes
+mode_normal     = { fg = "#0f3b3a", bg = "#b1c9c3", bold = true } # Seafoam white
+mode_select     = { fg = "#0f3b3a", bg = "#e99f10", bold = true } # Yellow
+mode_unset      = { fg = "#b1c9c3", bg = "#d74200", bold = true } # Red
+mode_visual     = { fg = "#0f3b3a", bg = "#00c420", bold = true } # Bright green
+
+# Target information metadata panels
+permissions     = { fg = "#819993" } # Muted text
+name            = { fg = "#b1c9c3" }
+position        = { fg = "#b1c9c3", bg = "#155352" }
+
+[select]
+border          = { fg = "#559392" } # FloatBorder UI
+active          = { fg = "#b1c9c3", bg = "#1b5458" }
+inactive        = { fg = "#819993" }
+
+[input]
+border          = { fg = "#559392" }
+title           = { fg = "#b1c9c3" }
+value           = { fg = "#b1c9c3" }
+selected        = { bg = "#1b5458" }
+
+[completion]
+border          = { fg = "#559392" }
+active          = { fg = "#b1c9c3", bg = "#1b5458", bold = true }
+inactive        = { fg = "#b1c9c3" }
+
+[help]
+border          = { fg = "#559392" }
+key             = { fg = "#0096ff" } # Blue
+text            = { fg = "#819993" }
+footer          = { fg = "#b1c9c3", bg = "#155352" }
+
+# ==========================================
+# FILE TYPE ATTRIBUTES
+# ==========================================
+
+[filetype]
+rules = [
+	# Directories (Targeted via url glob instead of name)
+	{ url = "*/", fg = "#77bfc3", bold = true }, # Cyan
+
+	# Executables
+	{ url = "*", is = "exec", fg = "#00c420" }, # Bright green
+
+	# Hidden Files
+	{ url = "**/.*", fg = "#819993" },
+
+	# Fallback Regular File
+	{ url = "*", fg = "#b1c9c3" }
+]
+
+# ==========================================
+# SYNTAX HIGHLIGHTING (Built-in Code Previewer)
+# ==========================================
+
+[preview]
+syntect_theme = "" # Set blank to rely on custom terminal syntax styling if desired
+
+[syntax]
+"comment"      = { fg = "#009403", italic = true }
+"string"       = { fg = "#e99f10" } # Yellow
+"keyword"      = { fg = "#b154cf", bold = true } # Purple
+"operator"     = { fg = "#77bfc3" } # Cyan
+"type"         = { fg = "#0096ff" } # Blue
+"function"     = { fg = "#77bfc3" } # Cyan
+"constant"     = { fg = "#d74200" } # Red
+"variable"     = { fg = "#b1c9c3" }
+"number"       = { fg = "#d74200" } # Red
+
+# ==========================================
+# GIT STATUS SIGNALS
+# ==========================================
+
+[git]
+status_added     = { fg = "#009403" } # GitSignsAdd Green
+status_modified  = { fg = "#e99f10" } # GitSignsChange Yellow
+status_deleted   = { fg = "#d74200" } # GitSignsDelete Red
+status_renamed   = { fg = "#77bfc3" }
+status_ignored   = { fg = "#819993" }
+
