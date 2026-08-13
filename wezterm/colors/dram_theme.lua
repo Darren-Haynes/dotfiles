@@ -1,7 +1,8 @@
 -- ~/.config/wezterm/dram_theme.lua
+local wezterm = require("wezterm")
 return {
 	foreground = "#b1c9c3",
-	background = "#0f3b3a",
+	background = "#0B2B2B",
 	cursor_bg = "#b1c9c3",
 	cursor_fg = "#0f3b3a",
 	cursor_border = "#b1c9c3",
@@ -19,14 +20,14 @@ return {
 	},
 
 	tab_bar = {
-		background = "#155352",
+		background = "#0f3b3a",
 		active_tab = {
-			bg_color = "#0f3b3a",
+    		bg_color = "#155352",
 			fg_color = "#b1c9c3",
 			intensity = "Bold",
 		},
 		inactive_tab = {
-			bg_color = "#155352",
+    		bg_color = "#0f3b3a",
 			fg_color = "#819993",
 		},
 		inactive_tab_hover = {
@@ -34,8 +35,8 @@ return {
 			fg_color = "#b1c9c3",
 		},
 		new_tab = {
-			bg_color = "#155352",
-			fg_color = "#b1c9c3",
+			bg_color = "#0f3b3a",
+			fg_color = "#155352",
 		},
 		new_tab_hover = {
 			bg_color = "#357372",

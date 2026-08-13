@@ -1,17 +1,10 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
--- Add the 'colors' directory to Lua's package search path
-package.path = package.path .. ";./colors/?.lua"
-
-local mux = wezterm.mux
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-
 -- This table will hold the configuration.
 local config = {}
 
--- In newer versions of wezterm, use the config_builder which will
--- help provide clearer error messages
+-- In newer versions of wezterm, use the config_builder which will help provide clearer error messages
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
@@ -37,6 +30,7 @@ wezterm.on("window-focus-changed", function(window, pane)
 end)
 
 -- PERSISTENT MUX SESSIONS
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 wezterm.on("gui-startup", function(cmd)
 	-- Fire the native startup resurrection script instantly
 	resurrect.state_manager.resurrect_on_gui_startup(cmd)
@@ -83,9 +77,12 @@ config.enable_tab_bar = true
 config.tab_max_width = 100
 
 -- Apply colors to config
-local active_theme_name = 'colors.solarized_dark'
-local active_theme_name = 'colors.dram_theme'
-config.colors = require(active_theme_name)
+-- local active_theme_name = 'colors.dram_theme'
+-- local active_theme_name = 'colors.solarized_dark'
+-- config.colors = require(active_theme_name)
+config.color_scheme = 'Ayu Mirage'
+local active_theme_name = 'Ayu Mirage'
+config.colors = wezterm.color.get_builtin_schemes()[active_theme_name]
 
 -- 3. Helper to get theme colors inside callbacks
 local function get_theme_colors()
@@ -94,35 +91,40 @@ local function get_theme_colors()
 end
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    local theme = get_theme_colors()
-    local t = theme.tab_bar -- Shortcut to tab colors
-
+    -- 1. Get colors directly from the required module using the global variable
+    local theme = require(active_theme_name)
+    local t = theme.tab_bar
     local index = tab.tab_index + 1
-    local title = tab.active_pane.title
+    local title = nil
 
     if tab.tab_title and #tab.tab_title > 0 then
         title = tab.tab_title
+
+    elseif tab.active_pane.title and #tab.active_pane.title > 0 then
+        title = tab.active_pane.title
+    end
+
+    if not title or #title == 0 then
+        title = "Shell"
     end
 
     local is_zoomed = tab.active_pane.is_zoomed
     local formatted_text = string.format(" (%d) ---%s--- ", index, title)
-
-    -- Default (Inactive)
-    local bg_color = t.inactive_bg
-    local fg_color = t.inactive_fg
+    local bg_color = t.inactive_tab.bg_color
+    local fg_color = t.inactive_tab.fg_color
 
     if tab.is_active then
         if is_zoomed then
-            bg_color = t.zoomed_bg
-            fg_color = t.zoomed_fg
-            formatted_text = string.format(" 🔍 %d: %s [ZOOMED] ", index, title)
+            bg_color = t.active_tab.bg_color
+            fg_color = t.active_tab.fg_color
+            formatted_text = string.format(" 🔍 (%d): %s [ZOOMED] ", index, title)
         else
-            bg_color = t.active_bg
-            fg_color = t.active_fg
+            bg_color = t.active_tab.bg_color
+            fg_color = t.active_tab.fg_color
         end
     elseif hover then
-        bg_color = t.hover_bg
-        fg_color = t.hover_fg
+        bg_color = t.inactive_tab_hover.bg_color
+        fg_color = t.inactive_tab_hover.fg_color
     end
 
     return {
@@ -131,51 +133,13 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         { Text = formatted_text },
     }
 end)
--- Dynamic tab formatting block mapped to Dram Palette
--- wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
--- 	local index = tab.tab_index + 1
--- 	local title = tab.active_pane.title
-
--- 	if tab.tab_title and #tab.tab_title > 0 then
--- 		title = tab.tab_title
--- 	end
-
--- 	local is_zoomed = tab.active_pane.is_zoomed
--- 	local formatted_text = string.format(" (%d) ---%s--- ", index, title)
-
--- 	local bg_color = "#155352" -- Inactive tab background
--- 	local fg_color = "#819993" -- Inactive muted text
-
--- 	if tab.is_active then
--- 		if is_zoomed then
--- 			bg_color = "#00c420" -- Dram Bright Green accent block for zoom visibility
--- 			fg_color = "#0f3b3a" -- Dark active background text
--- 			formatted_text = string.format(" 🔍 %d: %s [ZOOMED] ", index, title)
--- 		else
--- 			bg_color = "#0f3b3a" -- Active tab background
--- 			fg_color = "#b1c9c3" -- Active foreground text
--- 		end
--- 	elseif hover then
--- 		bg_color = "#357372" -- Hover element background
--- 		fg_color = "#b1c9c3" -- Active text contrast
--- 	end
-
--- 	return {
--- 		{ Background = { Color = bg_color } },
--- 		{ Foreground = { Color = fg_color } },
--- 		{ Text = formatted_text },
--- 	}
--- end)
 
 local function is_vim(pane)
-	-- Method 1: Check User Variable (Most reliable for multiplexers)
-	-- wezterm-move.nvim sets IS_NVIM = "true" when active
 	local user_vars = pane:get_user_vars()
 	if user_vars.IS_NVIM == "true" then
 		return true
 	end
 
-	-- Method 2: Fallback to process info (for non-mux or if var fails)
 	local process_info = pane:get_foreground_process_info()
 	if not process_info then
 		return false
@@ -212,12 +176,10 @@ local function split_nav(resize_or_move, key)
 		mods = resize_or_move == "resize" and "META" or "CTRL",
 		action = wezterm.action_callback(function(win, pane)
 			if is_vim(pane) then
-				-- ALWAYS send the key to Neovim to trigger the plugin
 				win:perform_action({
 					SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },
 				}, pane)
 			else
-				-- WezTerm native action
 				if resize_or_move == "resize" then
 					win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
 				else
@@ -229,16 +191,22 @@ local function split_nav(resize_or_move, key)
 end
 
 -- multiplexer
-config.unix_domains = {
-	{
-		name = "HOME",
-		-- Automatically start the server if it's not running
-		no_serve_automatically = false,
-	},
-}
+-- config.unix_domains = {
+-- 	{
+-- 		name = "HOME",
+-- 		no_serve_automatically = false,
+-- 	},
+-- }
 
 -- Connect to the multiplexer on startup
-config.default_gui_startup_args = { "connect", "HOME" }
+-- config.default_gui_startup_args = { "connect", "HOME" }
+
+-- LEADER KEY
+config.leader = {
+  key = 'a',
+  mods = 'CTRL',
+  timeout_milliseconds = 1000
+}
 
 config.keys = { -- Clear out default OS hotkey assignments
 	{ key = "m", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
@@ -280,33 +248,27 @@ config.keys = { -- Clear out default OS hotkey assignments
 	{ key = "H", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTabRelative(-1) },
 	{ key = "L", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTabRelative(1) },
 
-	-- 	-- SPLIT PANES
-	{
-		key = "RightArrow",
-		mods = "SUPER|ALT",
-		action = wezterm.action.SplitPane({ direction = "Right", size = { Percent = 25 } }),
-	},
-	{
-		key = "DownArrow",
-		mods = "SUPER|ALT",
-		action = wezterm.action.SplitPane({ direction = "Down", size = { Percent = 25 } }),
-	},
-	{
-		key = "LeftArrow",
-		mods = "SUPER|ALT",
-		action = wezterm.action.SplitPane({ direction = "Left", size = { Percent = 25 } }),
-	},
-	{
-		key = "UpArrow",
-		mods = "SUPER|ALT",
-		action = wezterm.action.SplitPane({ direction = "Up", size = { Percent = 25 } }),
-	},
+	-- Split panes
+    { key = 'h', mods = 'LEADER', action = wezterm.action.SplitPane { direction = 'Left', size = { Percent = 25 }, }, },
+    { key = 'j', mods = 'LEADER', action = wezterm.action.SplitPane { direction = 'Down', size = { Percent = 25 }, }, },
+    { key = 'k', mods = 'LEADER', action = wezterm.action.SplitPane { direction = 'Up', size = { Percent = 25 }, }, },
+    { key = 'l', mods = 'LEADER', action = wezterm.action.SplitPane { direction = 'Right', size = { Percent = 25 }, }, },
+
+    -- OPTIONAL: Double-tap Ctrl-A to send Ctrl-A to applications (like bash/tmux)
+    {
+        key = 'a',
+        mods = 'LEADER|CTRL',
+        action = wezterm.action.SendKey { key = 'a', mods = 'CTRL' },
+    },
 
 	-- Resize split layouts
 	{ key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
 	{ key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
 	{ key = "UpArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
 	{ key = "DownArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
+
+	-- Reload WezTerm config with Leader + r
+    { key = 'r', mods = 'LEADER', action = wezterm.action.ReloadConfiguration, },
 
 	-- Zoom toggle mapping (Cleaned Lua Syntax)
 	{
