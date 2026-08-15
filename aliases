@@ -24,7 +24,7 @@ alias jf="python main.py"
 alias r90="convert -rotate 90 " # then 'from.jpg' to 'to.jpg'
 alias r180="convert -rotate 180 " # then 'from.jpg' to 'to.jpg'
 
-# GITHUB / VERSION CONTROL
+# GIT / VERSION CONTROL
 alias ga='git add --all .'
 alias gca='git commit --all'
 alias gd='git diff '
@@ -33,23 +33,26 @@ alias gst='git status'
 alias gg='git log --all --graph'
 alias parent="git log --pretty=format:'%D' HEAD^ | grep 'origin/' | head -n1 | sed 's@origin/@@' | sed 's@,.*@@'"
 
-# GITHUB / PUSH
+# GIT / PUSH
 alias pushm='git push origin main'
 alias pushmast='git push origin master'
 alias pusht='git push origin testing'
 alias pushf='git push origin front-end'
 
-# GITHUB / PULL
+# GIT / PULL
 alias pullm='git pull origin main'
 alias pullmast='git pull origin master'
 alias pullt='git pull origin testing'
 alias pullf='git pull origin front-end'
 
-# GITHUB / SWITCH & CHECKOUT
+# GIT / SWITCH & CHECKOUT
 alias gomain='git switch main'
 alias gomast='git switch master'
 alias got='git switch testing'
 alias gof='git switch front-end'
+
+# GIT / DIFF
+alias gitdiff="git diff | delta --side-by-side"
 
 # NODE / NPM / NPX
 alias ns='npm run start'
