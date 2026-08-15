@@ -1,6 +1,14 @@
 [mgr]
 prepend_keymap = [
-	{ on = [ "g", "p" ], run = "cd ~/Projects", desc = "Go to Projects folder" },
+	{ on = [ "g", "a" ], run = "cd /Applications", desc = "Go to Applications folder" },
 	{ on = [ "g", "d" ], run = "cd ~/Downloads", desc = "Go to Downloads folder" },
-	{ on = [ "g", "a" ], run = "cd /Applications", desc = "Go to Applications folder" }
+	{ on = [ "g", "m" ], run = "cd ~/Music/MyMusic", desc = "Go to MyMusic folder" },
+	{ on = [ "g", "p" ], run = "cd ~/Projects", desc = "Go to Projects folder" },
+	{ on = [ "g", "s" ], run = "cd ~/Pictures/Screenshots", desc = "Go to Screenshots folder" },
+    { on  = "K", run = "plugin parent-arrow -1",  desc = "Up in parent directory" },
+    { on  = "J", run = "plugin parent-arrow 1",  desc = "Down in parent directory" },
+    { on  = "q", run = "plugin confirm-quit", desc = "Quit with confirmation if multiple tabs" },
+    { on = ["c", "p"], run = "plugin convert -- --extension='png'",  desc = "Convert selected files to PNG" },
+    { on = ["c", "j"],  run = "plugin convert -- --extension='jpg'",  desc = "Convert selected files to JPG" },
+    { on = ["c", "w"],  run = "plugin convert -- --extension='webp'",  desc = "Convert selected files to WebP" }
 ]
