@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+# Check if at least two arguments are provided (at least one image and an output expectation)
+if [ "$#" -lt 1 ]; then
+    echo "Error: No files specified."
+    echo "Usage: pdfmulti <image1> [image2 ...] [resize_argument]"
+    echo "Examples: pdfmulti page1.jpg page2.png"
+    echo "          pdfmulti doc_*.jpg 50%"
+    exit 1
+fi
+
+# Get the very last argument to check if it's a resize modifier
+LAST_ARG="${@: -1}"
+RESIZE_ARG=""
+IM_GEOMETRY=""
+
+# Parse if the last argument matches your signature resize tokens
+if [[ "$LAST_ARG" =~ ^[0-9]+w$ ]]; then
+    RESIZE_ARG="$LAST_ARG"
+    DIM_VALUE="${RESIZE_ARG%w}"
+    IM_GEOMETRY="${DIM_VALUE}"
+elif [[ "$LAST_ARG" =~ ^[0-9]+h$ ]]; then
+    RESIZE_ARG="$LAST_ARG"
+    DIM_VALUE="${RESIZE_ARG%h}"
+    IM_GEOMETRY="x${DIM_VALUE}"
+elif [[ "$LAST_ARG" =~ ^[0-9]+%$ ]]; then
+    RESIZE_ARG="$LAST_ARG"
+    IM_GEOMETRY="$RESIZE_ARG"
+fi
+
+# Determine our list of input images based on whether the last argument was a resize flag
+if [ -n "$RESIZE_ARG" ]; then
+    # Total input images are all arguments EXCEPT the last one
+    INPUT_FILES=("${@:1:$#-1}")
+else
+    # Total input images are ALL arguments
+    INPUT_FILES=("$@")
+fi
+
+# Validate that we actually have files to process
+if [ "${#INPUT_FILES[@]}" -eq 0 ]; then
+    echo "Error: No input images specified."
+    exit 1
+fi
+
+# Verify every input file actually exists before starting
+for FILE in "${INPUT_FILES[@]}"; do
+    if [ ! -f "$FILE" ]; then
+        echo "Error: File '$FILE' not found."
+        exit 1
+    fi
+done
+
+# Check if ImageMagick is installed
+if ! command -v magick &> /dev/null; then
+    MAGICK_CMD="convert"
+    IDENTIFY_CMD="identify"
+else
+    MAGICK_CMD="magick"
+    IDENTIFY_CMD="magick identify"
+fi
+
+# Base the final output PDF's name on the VERY FIRST image in the array
+FIRST_FILE="${INPUT_FILES[0]}"
+FIRST_FILENAME=$(basename -- "$FIRST_FILE")
+BASE_NAME="${FIRST_FILENAME%.*}"
+
+# CASE 1: No resize modifier provided
+if [ -z "$RESIZE_ARG" ]; then
+    OUTPUT_FILE="${BASE_NAME}_merged.pdf"
+    $MAGICK_CMD "${INPUT_FILES[@]}" "$OUTPUT_FILE"
+    echo "Successfully combined ${#INPUT_FILES[@]} images into '$OUTPUT_FILE'"
+    exit 0
+fi
+
+# CASE 2: Resize modifier provided
+# Create a temporary environment to render the first page so we can safely extract the final dimensions
+TMP_OUT=$(mktemp)
+
+$MAGICK_CMD "${INPUT_FILES[0]}" -resize "$IM_GEOMETRY" "pdf:$TMP_OUT"
+FINAL_DIM=$($IDENTIFY_CMD -format "%wx%h" "pdf:$TMP_OUT")
+FINAL_W="${FINAL_DIM%x*}"
+FINAL_H="${FINAL_DIM#*x}"
+rm -f "$TMP_OUT"
+
+# Construct output filename matching your exact format requirements
+OUTPUT_FILE="${BASE_NAME}_${FINAL_W}w_${FINAL_H}h.pdf"
+
+# Execute the multi-page batch conversion
+$MAGICK_CMD "${INPUT_FILES[@]}" -resize "$IM_GEOMETRY" "$OUTPUT_FILE"
+echo "Successfully resized and combined ${#INPUT_FILES[@]} images into '$OUTPUT_FILE'"
