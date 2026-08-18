@@ -10,5 +10,7 @@ prepend_keymap = [
     { on  = "q", run = "plugin confirm-quit", desc = "Quit with confirmation if multiple tabs" },
     { on = ["c", "p"], run = "plugin convert -- --extension='png'",  desc = "Convert selected files to PNG" },
     { on = ["c", "j"],  run = "plugin convert -- --extension='jpg'",  desc = "Convert selected files to JPG" },
-    { on = ["c", "w"],  run = "plugin convert -- --extension='webp'",  desc = "Convert selected files to WebP" }
+    { on = ["c", "w"],  run = "plugin convert -- --extension='webp'",  desc = "Convert selected files to WebP" },
+    { on = [".", "s"],  run = "plugin what-size",  desc = "Calculate size of selection or cwd" }
+
 ]

@@ -1,3 +1,77 @@
-[flavor]
-dark = "dram"
+# Ayu Mirage Theme for Yazi
+# Based on: https://github.com/ayu-theme/ayu-colors
 
+[app]
+# Terminal background (optional, requires OSC 11 support)
+overall = { bg = "#1f2430", fg = "#cbccc6" }
+
+[status]
+overall = { bg = "#212733", fg = "#cbccc6" }
+
+[mode]
+# Normal mode (Orange accent)
+normal_main = { bg = "#ffcc66", fg = "#1f2430", bold = true }
+normal_alt  = { bg = "#212733", fg = "#ffcc66" }
+
+# Select mode (Green accent)
+select_main = { bg = "#bae67e", fg = "#1f2430", bold = true }
+select_alt  = { bg = "#212733", fg = "#bae67e" }
+
+# Unset mode (Red accent)
+unset_main  = { bg = "#ff8f40", fg = "#1f2430", bold = true }
+unset_alt   = { bg = "#212733", fg = "#ff8f40" }
+
+[tabs]
+active   = { bg = "#212733", fg = "#ffcc66", bold = true }
+inactive = { bg = "#1f2430", fg = "#707a8c" }
+
+[manager]
+# Border and UI elements
+border_style = { fg = "#707a8c" }
+
+# File type colors
+[filetype]
+rules = [
+	# Directories
+	{ mime = "inode/directory", fg = "#36a3d9" }, # Blue
+
+	# Images
+	{ mime = "image/*", fg = "#bae67e" }, # Green
+
+	# Videos/Audio
+	{ mime = "{audio,video}/*", fg = "#ff8f40" }, # Orange
+
+	# Archives
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,bzip}", fg = "#ffcc66" }, # Yellow
+
+	# Documents
+	{ mime = "application/{pdf,doc*,xls*,ppt*,odt}", fg = "#d9b3ff" }, # Purple/Magenta
+
+	# Code/Text
+	{ mime = "text/*", fg = "#cbccc6" }, # Foreground
+
+	# Executables
+	{ mime = "application/x-executable", fg = "#ff8f40" }, # Orange
+
+	# Fallback
+	{ url = "*/", fg = "#36a3d9" },
+]
+
+[icon]
+# Custom icon colors matching Ayu Mirage
+prepend_dirs = [
+	{ name = "Desktop", text = "", fg = "#36a3d9" },
+	{ name = "Documents", text = "", fg = "#bae67e" },
+	{ name = "Downloads", text = "", fg = "#ffcc66" },
+	{ name = "Pictures", text = "", fg = "#d9b3ff" },
+	{ name = "Music", text = "", fg = "#ff8f40" },
+	{ name = "Videos", text = "", fg = "#ff8f40" },
+	{ name = "Code", text = "", fg = "#36a3d9" },
+]
+
+# Syntax Highlighting for Preview Pane
+# You need a matching .tmTheme file for full syntax highlighting in previews.
+# Download "ayu-mirage.tmTheme" from the Ayu VS Code repo and place it in:
+# ~/.config/yazi/ayu-mirage.tmTheme
+# Then uncomment the line below:
+# syntect_theme = "~/.config/yazi/ayu-mirage.tmTheme"

@@ -24,14 +24,6 @@ rev = "6cdac97"
 hash = "c3e2f01b50abced971c7f3491bd0f3bc"
 
 [[plugin.deps]]
-use = "boydaihungst/mediainfo"
-rev = "e079a00"
-hash = "8dd8bc3484547390ba50dfa58d7436b0"
-
-[[plugin.deps]]
 use = "atareao/convert"
 rev = "ce060d9"
 hash = "1c0465351f2a344e842f065ab316f265"
-
-[flavor]
-deps = []
