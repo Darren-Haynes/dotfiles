@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+# Check if at least the filename argument is provided
+if [ -z "$1" ]; then
+    echo "Error: No file specified."
+    echo "Usage: webp <filename> [resize_argument]"
+    echo "Examples: webp image.jpg 100w | webp image.png 200h | webp image.jpg 25%"
+    exit 1
+fi
+
+INPUT_FILE="$1"
+RESIZE_ARG="$2"
+
+# Ensure the input file actually exists
+if [ ! -f "$INPUT_FILE" ]; then
+    echo "Error: File '$INPUT_FILE' not found."
+    exit 1
+fi
+
+# Extract file details
+FILENAME=$(basename -- "$INPUT_FILE")
+BASE_NAME="${FILENAME%.*}"
+EXTENSION="${FILENAME##*.}"
+# Convert extension to lowercase for safe checking
+EXT_LOWER=$(echo "$EXTENSION" | tr '[:upper:]' '[:lower:]')
+
+# Check if ImageMagick is installed
+if ! command -v magick &> /dev/null; then
+    # Fallback to older 'convert' if 'magick' command (v7+) isn't available
+    MAGICK_CMD="convert"
+    IDENTIFY_CMD="identify"
+else
+    MAGICK_CMD="magick"
+    IDENTIFY_CMD="magick identify"
+fi
+
+# CASE 1: No resize argument provided
+if [ -z "$RESIZE_ARG" ]; then
+    if [ "$EXT_LOWER" = "webp" ]; then
+        echo "No action taken: '$INPUT_FILE' is already a WebP file."
+        exit 0
+    else
+        OUTPUT_FILE="${BASE_NAME}.webp"
+        $MAGICK_CMD "$INPUT_FILE" "$OUTPUT_FILE"
+        echo "Converted '$INPUT_FILE' to '$OUTPUT_FILE'"
+        exit 0
+    fi
+fi
+
+# CASE 2: Resize argument is provided
+# Parse the resize type and build the ImageMagick geometry option
+if [[ "$RESIZE_ARG" =~ ^[0-9]+w$ ]]; then
+    # Extract numbers before 'w'
+    DIM_VALUE="${RESIZE_ARG%w}"
+    IM_GEOMETRY="${DIM_VALUE}" # ImageMagick treats "100" as 100 width, preserving aspect ratio
+elif [[ "$RESIZE_ARG" =~ ^[0-9]+h$ ]]; then
+    # Extract numbers before 'h'
+    DIM_VALUE="${RESIZE_ARG%h}"
+    IM_GEOMETRY="x${DIM_VALUE}" # ImageMagick treats "x200" as 200 height, preserving aspect ratio
+elif [[ "$RESIZE_ARG" =~ ^[0-9]+%$ ]]; then
+    IM_GEOMETRY="$RESIZE_ARG"
+else
+    echo "Error: Invalid resize argument '$RESIZE_ARG'. Must be like 100w, 200h, or 50%."
+    exit 1
+fi
+
+# Universal Temp File Approach: Create a temporary file safely
+TMP_OUT=$(mktemp)
+
+# Convert to temporary file forcing WebP format stream
+$MAGICK_CMD "$INPUT_FILE" -resize "$IM_GEOMETRY" "webp:$TMP_OUT"
+
+# Fetch the newly generated width and height from the temp file
+FINAL_DIM=$($IDENTIFY_CMD -format "%wx%h" "webp:$TMP_OUT")
+FINAL_W="${FINAL_DIM%x*}"
+FINAL_H="${FINAL_DIM#*x}"
+
+# Clean up temporary file
+rm -f "$TMP_OUT"
+
+# Construct the requested filename format: name_100w_300h.webp
+OUTPUT_FILE="${BASE_NAME}_${FINAL_W}w_${FINAL_H}h.webp"
+
+# Execute the actual conversion to the final file
+$MAGICK_CMD "$INPUT_FILE" -resize "$IM_GEOMETRY" "$OUTPUT_FILE"
+echo "Created resized image: '$OUTPUT_FILE'"
