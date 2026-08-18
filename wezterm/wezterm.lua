@@ -1,5 +1,14 @@
+-- =====================================================================
+-- INITIALIZE
+-- =====================================================================
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+
+-- Wezterm session management
+local act = wezterm.action
+local sessions = wezterm.plugin.require(
+  "https://github.com/abidibo/wezterm-sessions"
+)
 
 -- This table will hold the configuration.
 local config = {}
@@ -9,11 +18,41 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- CRITICAL PLATFORM DETECTION (Moved to top so shortcuts can use primary_mod)
+-- =====================================================================
+-- GLOBAL THEME ENGINE SETUP
+-- =====================================================================
+config.color_scheme = 'Ayu Mirage'
+local active_theme_name = 'Ayu Mirage'
+-- config.color_scheme = 'BlulocoDark'
+-- local active_theme_name = 'BlulocoDark'
+
+-- Extract active theme definition properties dynamically from WezTerm
+local current_theme_table = wezterm.color.get_builtin_schemes()[active_theme_name]
+local dynamic_bg = (current_theme_table and current_theme_table.background) or "#1a1a1a"
+
+-- Initialize base configuration colors
+config.colors = current_theme_table or {}
+
+-- Dynamic Window Frame: Adapts empty tab space matching the theme background color
+config.window_frame = {
+	active_titlebar_bg = dynamic_bg,
+	inactive_titlebar_bg = dynamic_bg,
+	active_titlebar_border_bottom = dynamic_bg,
+	inactive_titlebar_border_bottom = dynamic_bg,
+}
+
+-- Fills retro/flat empty padding blocks in the tab bar safely
+config.colors.tab_bar = {
+    background = dynamic_bg,
+}
+
+-- =====================================================================
+-- PLATFORM & DISPLAY LAYOUT
+-- =====================================================================
 local is_mac = wezterm.target_triple:find("apple") ~= nil
 local primary_mod = is_mac and "SUPER" or "CTRL"
 
--- Set inital height and width of wezterm (iMac maximum)
+-- Set initial height and width of wezterm (iMac maximum)
 config.initial_cols = 2240
 config.initial_rows = 1260
 
@@ -29,38 +68,13 @@ wezterm.on("window-focus-changed", function(window, pane)
 	end
 end)
 
--- PERSISTENT MUX SESSIONS
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-wezterm.on("gui-startup", function(cmd)
-	-- Fire the native startup resurrection script instantly
-	resurrect.state_manager.resurrect_on_gui_startup(cmd)
-
-	-- Safely kick off the periodic save loop background thread
-	resurrect.state_manager.periodic_save({
-		interval_seconds = 300, -- 5 minutes
-		save_workspaces = true,
-		save_windows = true,
-		save_tabs = true,
-	})
-end)
-
--- -- Optional but Highly Recommended UI Flattening Additions:
-config.inactive_pane_hsb = {
-	saturation = 0.93, -- Slightly desaturate inactive text
-	brightness = 0.85, -- Dim the background and foreground down to 70%
-}
-
-config.window_frame = {
-	active_titlebar_bg = "#155352",
-	inactive_titlebar_bg = "#155352",
-}
-
--- Fonts
+-- =====================================================================
+-- TYPOGRAPHY & INTERFACE PADDING
+-- =====================================================================
 config.font = wezterm.font("Fira Code")
 config.font_size = 16
 config.adjust_window_size_when_changing_font_size = false
 
--- Padding configuration
 config.window_padding = {
 	left = "30px",
 	right = "30px",
@@ -68,38 +82,30 @@ config.window_padding = {
 	bottom = "0px",
 }
 
--- -- Tab bar layout settings
+-- =====================================================================
+-- TAB BAR INTERFACE SWITCHES
+-- =====================================================================
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
 config.show_tabs_in_tab_bar = true
 config.enable_tab_bar = true
 config.tab_max_width = 100
+config.show_new_tab_button_in_tab_bar = false
 
--- Apply colors to config
--- local active_theme_name = 'colors.dram_theme'
--- local active_theme_name = 'colors.solarized_dark'
--- config.colors = require(active_theme_name)
-config.color_scheme = 'Ayu Mirage'
-local active_theme_name = 'Ayu Mirage'
-config.colors = wezterm.color.get_builtin_schemes()[active_theme_name]
-
--- 3. Helper to get theme colors inside callbacks
-local function get_theme_colors()
-    -- Re-require the module to get fresh data (Lua caches require, but this ensures we use the variable)
-    return require(active_theme_name)
-end
-
+-- =====================================================================
+-- DYNAMIC TAB FORMATTING RENDER ENGINE
+-- =====================================================================
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    -- 1. Get colors directly from the required module using the global variable
-    local theme = require(active_theme_name)
-    local t = theme.tab_bar
+    -- Grabs the current engine theme state (e.g. 'Fairy Floss (Gogh)' or 'Ayu Mirage')
+    local theme = wezterm.color.get_builtin_schemes()[active_theme_name]
+    local t = (theme and theme.tab_bar) or {}
+
     local index = tab.tab_index + 1
     local title = nil
 
     if tab.tab_title and #tab.tab_title > 0 then
         title = tab.tab_title
-
     elseif tab.active_pane.title and #tab.active_pane.title > 0 then
         title = tab.active_pane.title
     end
@@ -110,21 +116,28 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
     local is_zoomed = tab.active_pane.is_zoomed
     local formatted_text = string.format(" (%d) ---%s--- ", index, title)
-    local bg_color = t.inactive_tab.bg_color
-    local fg_color = t.inactive_tab.fg_color
+
+    -- RESOLVE THEME BACKGROUNDS DYNAMICALLY:
+    -- If the scheme has native tab_bar fields, we read them.
+    -- If they do not exist, we extract the primary theme accent background elements.
+    local primary_bg = (theme and theme.background) or "#1a1a1a"
+    local primary_fg = (theme and theme.foreground) or "#ffffff"
+    local cursor_bg  = (theme and theme.cursor_bg) or "#ffcc66"
+
+    -- Assign rendering colors with explicit fallbacks based on the active theme colors
+    local bg_color = (t.inactive_tab and t.inactive_tab.bg_color) or primary_bg
+    local fg_color = (t.inactive_tab and t.inactive_tab.fg_color) or primary_fg
 
     if tab.is_active then
+        -- Highlights the current active tab using the theme's cursor/accent tone
+        bg_color = (t.active_tab and t.active_tab.bg_color) or cursor_bg
+        fg_color = (t.active_tab and t.active_tab.fg_color) or primary_bg
         if is_zoomed then
-            bg_color = t.active_tab.bg_color
-            fg_color = t.active_tab.fg_color
             formatted_text = string.format(" 🔍 (%d): %s [ZOOMED] ", index, title)
-        else
-            bg_color = t.active_tab.bg_color
-            fg_color = t.active_tab.fg_color
         end
     elseif hover then
-        bg_color = t.inactive_tab_hover.bg_color
-        fg_color = t.inactive_tab_hover.fg_color
+        bg_color = (t.inactive_tab_hover and t.inactive_tab_hover.bg_color) or primary_fg
+        fg_color = (t.inactive_tab_hover and t.inactive_tab_hover.fg_color) or primary_bg
     end
 
     return {
@@ -201,6 +214,65 @@ end
 -- Connect to the multiplexer on startup
 -- config.default_gui_startup_args = { "connect", "HOME" }
 
+-- =====================================================================
+-- 7. DYNAMIC RIGHT STATUS AREA (Workspace & Clock Engine)
+-- =====================================================================
+wezterm.on("update-status", function(window, pane)
+    -- Grab the active theme details for perfect color cohesion
+    local theme = wezterm.color.get_builtin_schemes()[active_theme_name]
+
+    -- Extract fallback colors relative to the active theme palette
+    local primary_bg = (theme and theme.background) or "#1a1a1a"
+    local primary_fg = (theme and theme.foreground) or "#ffffff"
+    local accent_color = (theme and theme.cursor_bg) or "#ffcc66"
+
+    -- 1. Resolve Icons via WezTerm's built-in Nerd Font translation map
+    local code_icon = wezterm.nerdfonts.cod_code
+    -- local clock_icon = wezterm.nerdfonts.md_clock
+
+    -- 2. Fetch the current active workspace name
+    local current_workspace = window:active_workspace()
+
+    -- 3. Format the date/time string (e.g., "Sun Aug 16 • 09:16 PM")
+    -- local time_string = wezterm.strftime(" %a %b %d • %I:%M %p ")
+
+    -- 4. Render the full styled layout across the right edge of the bar
+    window:set_right_status(wezterm.format({
+        -- =============================================================
+        -- WORKSPACE SEGMENT
+        -- =============================================================
+        { Background = { Color = primary_bg } },
+        { Foreground = { Color = accent_color } }, -- Accent color for briefcase
+        { Text = "  " .. code_icon .. " " },
+
+        { Background = { Color = primary_bg } },
+        { Foreground = { Color = primary_fg } }, -- Clean white/light gray text for name
+        { Attribute  = { Intensity = "Bold" } },
+        { Text = "***" .. current_workspace .. "***" },
+
+        -- Visual Separator Pipe
+        { Background = { Color = primary_bg } },
+        { Foreground = { Color = primary_fg } },
+        { Attribute  = { Intensity = "Half" } }, -- Subtly dims the separator line
+
+        { Background = { Color = primary_bg } },
+        { Foreground = { Color = accent_color } }, -- Accent color for briefcase
+        { Text = "" .. code_icon .. "  " },
+
+    --     -- =============================================================
+    --     -- CLOCK SEGMENT
+    --     -- =============================================================
+    --     { Background = { Color = primary_bg } },
+    --     { Foreground = { Color = primary_fg } }, -- Main text color for clock icon
+    --     { Text = " " .. clock_icon .. " " },
+
+    --     { Background = { Color = primary_bg } },
+    --     { Foreground = { Color = accent_color } }, -- Accent color for time string
+    --     { Attribute  = { Intensity = "Normal" } },
+        -- { Text = time_string },
+    }))
+end)
+
 -- LEADER KEY
 config.leader = {
   key = 'a',
@@ -254,13 +326,6 @@ config.keys = { -- Clear out default OS hotkey assignments
     { key = 'k', mods = 'LEADER', action = wezterm.action.SplitPane { direction = 'Up', size = { Percent = 25 }, }, },
     { key = 'l', mods = 'LEADER', action = wezterm.action.SplitPane { direction = 'Right', size = { Percent = 25 }, }, },
 
-    -- OPTIONAL: Double-tap Ctrl-A to send Ctrl-A to applications (like bash/tmux)
-    {
-        key = 'a',
-        mods = 'LEADER|CTRL',
-        action = wezterm.action.SendKey { key = 'a', mods = 'CTRL' },
-    },
-
 	-- Resize split layouts
 	{ key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
 	{ key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
@@ -270,31 +335,23 @@ config.keys = { -- Clear out default OS hotkey assignments
 	-- Reload WezTerm config with Leader + r
     { key = 'r', mods = 'LEADER', action = wezterm.action.ReloadConfiguration, },
 
-	-- Zoom toggle mapping (Cleaned Lua Syntax)
+	-- Zoom toggle mapping
 	{
 		key = "Escape",
 		mods = "SHIFT",
 		action = wezterm.action_callback(function(window, pane)
-			-- 1. Fire the actual pane zoom command natively
 			window:perform_action(wezterm.action.TogglePaneZoomState, pane)
-
-			-- 2. Fetch the active configuration overrides layer
 			local overrides = window:get_config_overrides() or {}
-
-			-- 3. Toggle the tab bar based explicitly on its CURRENT override status
 			if overrides.enable_tab_bar == nil or overrides.enable_tab_bar == true then
 				overrides.enable_tab_bar = false
 			else
 				overrides.enable_tab_bar = true
 			end
-
-			-- 4. Instantly load the override state to hide/show the bar
 			window:set_config_overrides(overrides)
 		end),
 	},
 
-	-- Show the launcher in fuzzy selection mode and have it list all workspaces
-	-- and allow activating one.
+	-- Show the launcher in fuzzy selection mode
 	{ key = "o", mods = "SUPER|ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 
 	-- Switch to the default workspace
@@ -305,7 +362,8 @@ config.keys = { -- Clear out default OS hotkey assignments
 			name = "default",
 		}),
 	},
-	-- Prompt for a name to use for a new workspace and switch to it.
+
+	-- Prompt for a name to use for a new workspace and switch to it
 	{
 		key = "W",
 		mods = "CTRL|SHIFT",
@@ -316,10 +374,7 @@ config.keys = { -- Clear out default OS hotkey assignments
 				{ Text = "Enter name for new workspace" },
 			}),
 			action = wezterm.action_callback(function(window, pane, line)
-				-- line will be `nil` if they hit escape without entering anything
-				-- An empty string if they just hit enter
-				-- Or the actual line of text they wrote
-				if line then
+				if line and #line > 0 then
 					window:perform_action(
 						wezterm.action.SwitchToWorkspace({
 							name = line,
@@ -333,12 +388,12 @@ config.keys = { -- Clear out default OS hotkey assignments
 
 	-- Dynamic tab renaming prompt
 	{
-		key = "R",
-		mods = "CTRL|SHIFT",
+		key = "r",
+		mods = "LEADER",
 		action = wezterm.action.PromptInputLine({
 			description = "Enter new name for tab:",
 			action = wezterm.action_callback(function(window, pane, line)
-				if line then
+				if line and #line > 0 then
 					window:active_tab():set_title(line)
 				end
 			end),
@@ -355,4 +410,12 @@ for i = 1, 9 do
 	})
 end
 
+-- Optional: adds default keybindings and plugin configuration
+sessions.apply_to_config(config, {
+  -- Auto-save interval in seconds (default: 30)
+  auto_save_interval_s = 30,
+  -- Warn when git branches changed on restore (default: true)
+  git_branch_warn = true,
+})
+-- return wezterm config just in case that wasn't clear
 return config
