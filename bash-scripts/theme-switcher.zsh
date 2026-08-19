@@ -13,6 +13,12 @@ THEMES=(
     "Oceanic Next"    "Oceanic-Next|Oceanic Next"
     "Pop Dark"        "Pop (base16)|Pop Dark"
     "Zenburn"         "Zenburn (base16)|Zenburn"
+    "One Dark"        "One Dark (Gogh)|One Dark"
+    "Tokyo Storm"     "Tokyo Night Storm (Gogh)|Tokyo Night Storm"
+    "Nord Fox"        "nordfox|Nordfox"
+    "Catppuccin"      "Catppuccin Frappé (Gogh)|Catppuccin Frappé"
+    "Mariana"         "Mariana|Mariana Sublime"
+    "Forest Night"    "Everforest Dark (Gogh)|Forest Night"
 )
 
 # 1. Prompt the user to select a theme using fzf
