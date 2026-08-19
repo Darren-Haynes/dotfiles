@@ -95,3 +95,6 @@ alias baroque='mpv --shuffle ~/Music/MyMusic/Classical/Baroque'
 alias romantic='mpv --shuffle ~/Music/MyMusic/Classical/Romantic'
 alias reggae='mpv --shuffle ~/Music/MyMusic/Reggae'
 alias easy='mpv --shuffle ~/Music/MyMusic/Easy'
+
+# THEMEING
+alias theme="~/Dotfiles/bash-scripts/theme-switcher.zsh"
