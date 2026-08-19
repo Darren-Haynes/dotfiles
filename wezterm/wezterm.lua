@@ -26,9 +26,41 @@ local active_theme_name = 'Ayu Mirage'
 -- config.color_scheme = 'BlulocoDark'
 -- local active_theme_name = 'BlulocoDark'
 
+
+-- =====================================================================
+-- PRE-CALCULATE THEME COLORS (Run ONCE at startup)
+-- =====================================================================
+local all_schemes = wezterm.color.get_builtin_schemes()
+local current_theme = all_schemes[active_theme_name] or {}
+
+-- Extract colors safely with fallbacks
+local theme_bg = current_theme.background or "#1a1a1a"
+local theme_fg = current_theme.foreground or "#ffffff"
+local theme_cursor = current_theme.cursor_bg or "#ffcc66"
+
+-- Extract Tab Bar specific colors if they exist, otherwise fallback to theme colors
+local tab_colors = current_theme.tab_bar or {}
+local inactive_tab_bg = (tab_colors.inactive_tab and tab_colors.inactive_tab.bg_color) or theme_bg
+local inactive_tab_fg = (tab_colors.inactive_tab and tab_colors.inactive_tab.fg_color) or theme_fg
+local active_tab_bg = (tab_colors.active_tab and tab_colors.active_tab.bg_color) or theme_cursor
+local active_tab_fg = (tab_colors.active_tab and tab_colors.active_tab.fg_color) or theme_bg
+local hover_tab_bg = (tab_colors.inactive_tab_hover and tab_colors.inactive_tab_hover.bg_color) or theme_fg
+local hover_tab_fg = (tab_colors.inactive_tab_hover and tab_colors.inactive_tab_hover.fg_color) or theme_bg
+
 -- Extract active theme definition properties dynamically from WezTerm
 local current_theme_table = wezterm.color.get_builtin_schemes()[active_theme_name]
 local dynamic_bg = (current_theme_table and current_theme_table.background) or "#1a1a1a"
+
+-- Pre-calculate colors for the Status Bar
+local status_bg = theme_bg
+local status_fg = theme_fg
+local status_accent = theme_cursor
+local status_icon_code = wezterm.nerdfonts.cod_code
+local status_icon_clock = wezterm.nerdfonts.md_clock
+
+-- Ayu Mirage Ansi colors: 1=Red, 2=Green, 3=Yellow, 4=Blue, 5=Magenta, 6=Cyan
+local ansi_green = (current_theme.ansi and current_theme.ansi[3]) or "#9CCD62"
+local ansi_dim_white = (current_theme.ansi and current_theme.ansi[8]) or "#C7C7C7"
 
 -- Initialize base configuration colors
 config.colors = current_theme_table or {}
@@ -97,47 +129,25 @@ config.show_new_tab_button_in_tab_bar = false
 -- DYNAMIC TAB FORMATTING RENDER ENGINE
 -- =====================================================================
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    -- Grabs the current engine theme state (e.g. 'Fairy Floss (Gogh)' or 'Ayu Mirage')
-    local theme = wezterm.color.get_builtin_schemes()[active_theme_name]
-    local t = (theme and theme.tab_bar) or {}
+    -- Use the pre-calculated global variables defined above
+    local bg_color = inactive_tab_bg
+    local fg_color = inactive_tab_fg
 
     local index = tab.tab_index + 1
-    local title = nil
-
-    if tab.tab_title and #tab.tab_title > 0 then
-        title = tab.tab_title
-    elseif tab.active_pane.title and #tab.active_pane.title > 0 then
-        title = tab.active_pane.title
-    end
-
-    if not title or #title == 0 then
-        title = "Shell"
-    end
+    local title = tab.tab_title and #tab.tab_title > 0 and tab.tab_title or (tab.active_pane.title and #tab.active_pane.title > 0 and tab.active_pane.title or "Shell")
 
     local is_zoomed = tab.active_pane.is_zoomed
     local formatted_text = string.format(" (%d) ---%s--- ", index, title)
 
-    -- RESOLVE THEME BACKGROUNDS DYNAMICALLY:
-    -- If the scheme has native tab_bar fields, we read them.
-    -- If they do not exist, we extract the primary theme accent background elements.
-    local primary_bg = (theme and theme.background) or "#1a1a1a"
-    local primary_fg = (theme and theme.foreground) or "#ffffff"
-    local cursor_bg  = (theme and theme.cursor_bg) or "#ffcc66"
-
-    -- Assign rendering colors with explicit fallbacks based on the active theme colors
-    local bg_color = (t.inactive_tab and t.inactive_tab.bg_color) or primary_bg
-    local fg_color = (t.inactive_tab and t.inactive_tab.fg_color) or primary_fg
-
     if tab.is_active then
-        -- Highlights the current active tab using the theme's cursor/accent tone
-        bg_color = (t.active_tab and t.active_tab.bg_color) or cursor_bg
-        fg_color = (t.active_tab and t.active_tab.fg_color) or primary_bg
+        bg_color = active_tab_bg
+        fg_color = active_tab_fg
         if is_zoomed then
             formatted_text = string.format(" 🔍 (%d): %s [ZOOMED] ", index, title)
         end
     elseif hover then
-        bg_color = (t.inactive_tab_hover and t.inactive_tab_hover.bg_color) or primary_fg
-        fg_color = (t.inactive_tab_hover and t.inactive_tab_hover.fg_color) or primary_bg
+        bg_color = hover_tab_bg
+        fg_color = hover_tab_fg
     end
 
     return {
@@ -146,30 +156,11 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         { Text = formatted_text },
     }
 end)
-
+-- REPLACE YOUR ENTIRE is_vim FUNCTION WITH THIS:
 local function is_vim(pane)
-	local user_vars = pane:get_user_vars()
-	if user_vars.IS_NVIM == "true" then
-		return true
-	end
-
-	local process_info = pane:get_foreground_process_info()
-	if not process_info then
-		return false
-	end
-
-	if process_info.name == "nvim" or process_info.name == "vim" then
-		return true
-	end
-
-	if process_info.args then
-		for _, arg in ipairs(process_info.args) do
-			if arg:match("nvim") or arg:match("vim") then
-				return true
-			end
-		end
-	end
-	return false
+    -- ONLY check user vars. This is instantaneous (0ms overhead).
+    local user_vars = pane:get_user_vars()
+    return user_vars.IS_NVIM == "true"
 end
 
 local direction_keys = {
@@ -203,73 +194,48 @@ local function split_nav(resize_or_move, key)
 	}
 end
 
--- multiplexer
--- config.unix_domains = {
--- 	{
--- 		name = "HOME",
--- 		no_serve_automatically = false,
--- 	},
--- }
-
--- Connect to the multiplexer on startup
--- config.default_gui_startup_args = { "connect", "HOME" }
-
 -- =====================================================================
--- 7. DYNAMIC RIGHT STATUS AREA (Workspace & Clock Engine)
+-- DYNAMIC RIGHT STATUS AREA (Workspace & Clock Engine)
 -- =====================================================================
 wezterm.on("update-status", function(window, pane)
-    -- Grab the active theme details for perfect color cohesion
-    local theme = wezterm.color.get_builtin_schemes()[active_theme_name]
-
-    -- Extract fallback colors relative to the active theme palette
-    local primary_bg = (theme and theme.background) or "#1a1a1a"
-    local primary_fg = (theme and theme.foreground) or "#ffffff"
-    local accent_color = (theme and theme.cursor_bg) or "#ffcc66"
-
-    -- 1. Resolve Icons via WezTerm's built-in Nerd Font translation map
-    local code_icon = wezterm.nerdfonts.cod_code
-    -- local clock_icon = wezterm.nerdfonts.md_clock
+    -- Use pre-calculated global variables (Zero overhead)
+    local primary_bg = status_bg
+    local primary_fg = status_fg
+    local accent_color = status_accent
+    local clock_icon = status_icon_clock
 
     -- 2. Fetch the current active workspace name
     local current_workspace = window:active_workspace()
 
-    -- 3. Format the date/time string (e.g., "Sun Aug 16 • 09:16 PM")
-    -- local time_string = wezterm.strftime(" %a %b %d • %I:%M %p ")
+    -- 3. Format the date/time string
+    local time_string = wezterm.strftime(" %b %d • %H:%M ")
 
-    -- 4. Render the full styled layout across the right edge of the bar
+    -- 4. Render the full styled layout
     window:set_right_status(wezterm.format({
-        -- =============================================================
         -- WORKSPACE SEGMENT
-        -- =============================================================
         { Background = { Color = primary_bg } },
-        { Foreground = { Color = accent_color } }, -- Accent color for briefcase
-        { Text = "  " .. code_icon .. " " },
+        { Foreground = { Color = accent_color } },
 
         { Background = { Color = primary_bg } },
-        { Foreground = { Color = primary_fg } }, -- Clean white/light gray text for name
+        { Foreground = { Color = ansi_green } },
         { Attribute  = { Intensity = "Bold" } },
-        { Text = "***" .. current_workspace .. "***" },
+        { Text = "<" .. current_workspace .. "/>" },
 
-        -- Visual Separator Pipe
+        -- Visual Separator
         { Background = { Color = primary_bg } },
         { Foreground = { Color = primary_fg } },
-        { Attribute  = { Intensity = "Half" } }, -- Subtly dims the separator line
+        { Attribute  = { Intensity = "Half" } },
+        { Text = " │" }, -- Added a visible separator character
+
+        -- CLOCK SEGMENT
+        { Background = { Color = primary_bg } },
+        { Foreground = { Color = ansi_dim_white } },
+        { Text = " " .. clock_icon .. " " },
 
         { Background = { Color = primary_bg } },
-        { Foreground = { Color = accent_color } }, -- Accent color for briefcase
-        { Text = "" .. code_icon .. "  " },
-
-    --     -- =============================================================
-    --     -- CLOCK SEGMENT
-    --     -- =============================================================
-    --     { Background = { Color = primary_bg } },
-    --     { Foreground = { Color = primary_fg } }, -- Main text color for clock icon
-    --     { Text = " " .. clock_icon .. " " },
-
-    --     { Background = { Color = primary_bg } },
-    --     { Foreground = { Color = accent_color } }, -- Accent color for time string
-    --     { Attribute  = { Intensity = "Normal" } },
-        -- { Text = time_string },
+        { Foreground = { Color = accent_color } },
+        { Attribute  = { Intensity = "Normal" } },
+        { Text = time_string },
     }))
 end)
 
