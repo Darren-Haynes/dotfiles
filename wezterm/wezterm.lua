@@ -21,10 +21,12 @@ end
 -- =====================================================================
 -- GLOBAL THEME ENGINE SETUP
 -- =====================================================================
-config.color_scheme = 'Ayu Mirage'
-local active_theme_name = 'Ayu Mirage'
--- config.color_scheme = 'BlulocoDark'
--- local active_theme_name = 'BlulocoDark'
+-- config.color_scheme = 'Ayu Mirage'
+-- local active_theme_name = 'Ayu Mirage'
+config.color_scheme = 'BlulocoDark'
+local active_theme_name = 'BlulocoDark'
+-- config.color_scheme = 'Solarized Dark (Gogh)'
+-- local active_theme_name = 'Solarized Dark (Gogh)'
 
 
 -- =====================================================================
@@ -32,6 +34,10 @@ local active_theme_name = 'Ayu Mirage'
 -- =====================================================================
 local all_schemes = wezterm.color.get_builtin_schemes()
 local current_theme = all_schemes[active_theme_name] or {}
+
+-- Ayu Mirage Ansi colors
+local ansi_green = (current_theme.ansi and current_theme.ansi[3]) or "#9CCD62"
+local ansi_white = (current_theme.ansi and current_theme.ansi[0]) or "#C7C7C7"
 
 -- Extract colors safely with fallbacks
 local theme_bg = current_theme.background or "#1a1a1a"
@@ -55,12 +61,6 @@ local dynamic_bg = (current_theme_table and current_theme_table.background) or "
 local status_bg = theme_bg
 local status_fg = theme_fg
 local status_accent = theme_cursor
-local status_icon_code = wezterm.nerdfonts.cod_code
-local status_icon_clock = wezterm.nerdfonts.md_clock
-
--- Ayu Mirage Ansi colors: 1=Red, 2=Green, 3=Yellow, 4=Blue, 5=Magenta, 6=Cyan
-local ansi_green = (current_theme.ansi and current_theme.ansi[3]) or "#9CCD62"
-local ansi_dim_white = (current_theme.ansi and current_theme.ansi[8]) or "#C7C7C7"
 
 -- Initialize base configuration colors
 config.colors = current_theme_table or {}
@@ -140,7 +140,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     local formatted_text = string.format(" (%d) ---%s--- ", index, title)
 
     if tab.is_active then
-        bg_color = active_tab_bg
+        bg_color = ansi_white
         fg_color = active_tab_fg
         if is_zoomed then
             formatted_text = string.format(" 🔍 (%d): %s [ZOOMED] ", index, title)
@@ -202,7 +202,6 @@ wezterm.on("update-status", function(window, pane)
     local primary_bg = status_bg
     local primary_fg = status_fg
     local accent_color = status_accent
-    local clock_icon = status_icon_clock
 
     -- 2. Fetch the current active workspace name
     local current_workspace = window:active_workspace()
@@ -228,10 +227,6 @@ wezterm.on("update-status", function(window, pane)
         { Text = " │" }, -- Added a visible separator character
 
         -- CLOCK SEGMENT
-        { Background = { Color = primary_bg } },
-        { Foreground = { Color = ansi_dim_white } },
-        { Text = " " .. clock_icon .. " " },
-
         { Background = { Color = primary_bg } },
         { Foreground = { Color = accent_color } },
         { Attribute  = { Intensity = "Normal" } },
