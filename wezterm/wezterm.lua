@@ -21,28 +21,38 @@ end
 -- =====================================================================
 -- GLOBAL THEME ENGINE SETUP
 -- =====================================================================
--- config.color_scheme = 'Ayu Mirage'
--- local active_theme_name = 'Ayu Mirage'
-config.color_scheme = 'BlulocoDark'
-local active_theme_name = 'BlulocoDark'
--- config.color_scheme = 'Solarized Dark (Gogh)'
--- local active_theme_name = 'Solarized Dark (Gogh)'
+local shhhed_theme_data = require("colors.shhhed_theme") -- Load the standalone file
 
+-- Register the theme under the name 'shhhed'
+config.color_schemes = {
+  ['shhhed'] = shhhed_theme_data,
+}
+
+config.color_scheme = 'shhhed' -- THEME_SWITCHER_SCHEME
+local active_theme_name = 'shhhed' -- THEME_SWITCHER_ACTIVE
 
 -- =====================================================================
 -- PRE-CALCULATE THEME COLORS (Run ONCE at startup)
 -- =====================================================================
-local all_schemes = wezterm.color.get_builtin_schemes()
-local current_theme = all_schemes[active_theme_name] or {}
 
--- Ayu Mirage Ansi colors
-local ansi_green = (current_theme.ansi and current_theme.ansi[3]) or "#9CCD62"
-local ansi_white = (current_theme.ansi and current_theme.ansi[0]) or "#C7C7C7"
+-- FIX: Check if the active theme is our custom one first
+local current_theme
+if active_theme_name == 'shhhed' then
+  current_theme = shhhed_theme_data
+else
+  -- Fallback to builtin schemes for other themes
+  local all_schemes = wezterm.color.get_builtin_schemes()
+  current_theme = all_schemes[active_theme_name] or {}
+end
 
--- Extract colors safely with fallbacks
+-- Extract colors safely with fallbacks (You can still use these for window_frame etc.)
 local theme_bg = current_theme.background or "#1a1a1a"
 local theme_fg = current_theme.foreground or "#ffffff"
 local theme_cursor = current_theme.cursor_bg or "#ffcc66"
+
+-- Extract ANSI colors safely
+local ansi_green = (current_theme.ansi and current_theme.ansi[3]) or "#9CCD62"
+local ansi_white = (current_theme.ansi and current_theme.ansi[1]) or "#C7C7C7"
 
 -- Extract Tab Bar specific colors if they exist, otherwise fallback to theme colors
 local tab_colors = current_theme.tab_bar or {}
@@ -53,30 +63,27 @@ local active_tab_fg = (tab_colors.active_tab and tab_colors.active_tab.fg_color)
 local hover_tab_bg = (tab_colors.inactive_tab_hover and tab_colors.inactive_tab_hover.bg_color) or theme_fg
 local hover_tab_fg = (tab_colors.inactive_tab_hover and tab_colors.inactive_tab_hover.fg_color) or theme_bg
 
--- Extract active theme definition properties dynamically from WezTerm
-local current_theme_table = wezterm.color.get_builtin_schemes()[active_theme_name]
-local dynamic_bg = (current_theme_table and current_theme_table.background) or "#1a1a1a"
-
 -- Pre-calculate colors for the Status Bar
 local status_bg = theme_bg
 local status_fg = theme_fg
 local status_accent = theme_cursor
 
--- Initialize base configuration colors
-config.colors = current_theme_table or {}
+if not config.colors then config.colors = {} end
+if not config.colors.tab_bar then config.colors.tab_bar = {} end
+config.colors.tab_bar.background = theme_bg
 
--- Dynamic Window Frame: Adapts empty tab space matching the theme background color
+-- Dynamic Window Frame (This is safe to set independently)
 config.window_frame = {
-	active_titlebar_bg = dynamic_bg,
-	inactive_titlebar_bg = dynamic_bg,
-	active_titlebar_border_bottom = dynamic_bg,
-	inactive_titlebar_border_bottom = dynamic_bg,
+  active_titlebar_bg = theme_bg,
+  inactive_titlebar_bg = theme_bg,
+  active_titlebar_border_bottom = theme_bg,
+  inactive_titlebar_border_bottom = theme_bg,
 }
-
 -- Fills retro/flat empty padding blocks in the tab bar safely
-config.colors.tab_bar = {
-    background = dynamic_bg,
-}
+if not config.colors.tab_bar then
+  config.colors.tab_bar = {}
+end
+config.colors.tab_bar.background = theme_bg
 
 -- =====================================================================
 -- PLATFORM & DISPLAY LAYOUT
@@ -129,25 +136,30 @@ config.show_new_tab_button_in_tab_bar = false
 -- DYNAMIC TAB FORMATTING RENDER ENGINE
 -- =====================================================================
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    -- Use the pre-calculated global variables defined above
-    local bg_color = inactive_tab_bg
-    local fg_color = inactive_tab_fg
+    -- ✅ Get the effective config which includes the resolved palette
+    local palette = config.resolved_palette
+
+    -- Use base palette colors as fallback (tab_bar is NOT in resolved_palette)
+    local bg_color = palette.background
+    local fg_color = palette.foreground
 
     local index = tab.tab_index + 1
-    local title = tab.tab_title and #tab.tab_title > 0 and tab.tab_title or (tab.active_pane.title and #tab.active_pane.title > 0 and tab.active_pane.title or "Shell")
+    local title = tab.tab_title and #tab.tab_title > 0 and tab.tab_title
+        or (tab.active_pane.title and #tab.active_pane.title > 0 and tab.active_pane.title or "Shell")
 
     local is_zoomed = tab.active_pane.is_zoomed
     local formatted_text = string.format(" (%d) ---%s--- ", index, title)
 
     if tab.is_active then
-        bg_color = ansi_white
-        fg_color = active_tab_fg
+        -- Use cursor_bg as accent for active tab
+        bg_color = palette.cursor_bg
+        fg_color = palette.background
         if is_zoomed then
             formatted_text = string.format(" 🔍 (%d): %s [ZOOMED] ", index, title)
         end
     elseif hover then
-        bg_color = hover_tab_bg
-        fg_color = hover_tab_fg
+        -- Lighten background slightly for hover
+        fg_color = palette.foreground
     end
 
     return {
@@ -156,6 +168,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         { Text = formatted_text },
     }
 end)
+
 -- REPLACE YOUR ENTIRE is_vim FUNCTION WITH THIS:
 local function is_vim(pane)
     -- ONLY check user vars. This is instantaneous (0ms overhead).
