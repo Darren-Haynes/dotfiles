@@ -22,14 +22,16 @@ end
 -- GLOBAL THEME ENGINE SETUP
 -- =====================================================================
 local shhhed_theme_data = require("colors.shhhed_theme") -- Load the standalone file
+local dram_theme_data = require("colors.dram_theme") -- Load the standalone file
 
 -- Register the theme under the name 'shhhed'
 config.color_schemes = {
   ['shhhed'] = shhhed_theme_data,
+  ['dram'] = dram_theme_data,
 }
 
-config.color_scheme = 'shhhed' -- THEME_SWITCHER_SCHEME
-local active_theme_name = 'shhhed' -- THEME_SWITCHER_ACTIVE
+config.color_scheme = 'dram' -- THEME_SWITCHER_SCHEME
+local active_theme_name = 'dram' -- THEME_SWITCHER_ACTIVE
 
 -- =====================================================================
 -- PRE-CALCULATE THEME COLORS (Run ONCE at startup)

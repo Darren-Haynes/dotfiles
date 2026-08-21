@@ -19,6 +19,8 @@ THEMES=(
     "Catppuccin"      "Catppuccin Frappé (Gogh)|Catppuccin Frappé"
     "Mariana"         "Mariana|Mariana Sublime"
     "Forest Night"    "Everforest Dark (Gogh)|Forest Night"
+    "shhhed"          "shhhed|shhhed"
+    "Dram"            "dram|Dram"
 )
 
 # 1. Prompt the user to select a theme using fzf
