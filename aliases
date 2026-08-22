@@ -8,6 +8,10 @@
 alias l='ls -lA'
 alias lsfonts='ls /usr/share/fonts/'
 
+# NAVIGATING
+alias cdd="cd ~/Downloads"
+alias cdot="cd ~/Dotfiles"
+
 # lSD
 alias ls='lsd'
 alias l='ls -l'
@@ -52,7 +56,8 @@ alias got='git switch testing'
 alias gof='git switch front-end'
 
 # GIT / DIFF
-alias gitdiff="git diff | delta --side-by-side"
+alias gd="git diff | delta --side-by-side"
+alias cgd="clear; git diff | delta --side-by-side"
 
 # NODE / NPM / NPX
 alias ns='npm run start'
@@ -98,3 +103,5 @@ alias easy='mpv --shuffle ~/Music/MyMusic/Easy'
 
 # THEMEING
 alias theme="~/Dotfiles/bash-scripts/theme-switcher.zsh"
+alias random-theme='~/Dotfiles/bash-scripts/theme-rotator.zsh'
+alias theme-rotator='~/Dotfiles/bash-scripts/theme-rotator-loop.zsh'
