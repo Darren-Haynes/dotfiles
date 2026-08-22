@@ -1,8 +1,10 @@
 #!/usr/bin/env zsh
 
+# Paths to your configuration files
 WEZTERM_CONFIG="$HOME/Dotfiles/wezterm/wezterm.lua"
 ZED_CONFIG="$HOME/Dotfiles/zed/settings.json"
 
+# Define theme mappings: ["Display Name"]="WeztermTheme|ZedTheme"
 typeset -A THEMES
 THEMES=(
     "Ayu Mirage"      "Ayu Mirage|Ayu Mirage"
@@ -24,39 +26,31 @@ THEMES=(
     "Green"           "Apathy (base16)|Base16 Apathy"
 )
 
-SELECTION=$(print -l ${(k)THEMES} | fzf --prompt="Choose Theme > ")
+# 1. Pick a random key from the THEMES associative array
+# $RANDOM % $#THEMES + 1 generates a random index between 1 and the total count
+THEME_KEYS=("${(@k)THEMES}")
+RANDOM_INDEX=$(( $RANDOM % $#THEME_KEYS + 1 ))
+SELECTION="${THEME_KEYS[$RANDOM_INDEX]}"
 
-if [ -z "$SELECTION" ]; then
-    echo "No theme selected. Exiting."
-    exit 0
-fi
-
+# 2. Extract specific theme names
 MAPPING_ARR=("${(@s:|:)THEMES[$SELECTION]}")
 WEZTERM_THEME="${MAPPING_ARR[1]}"
 ZED_THEME="${MAPPING_ARR[2]}"
 
-echo "Applying '$SELECTION'..."
-
-# Cross-platform sed
+# 3. Cross-platform sed setup
 if [[ "$OSTYPE" == "darwin"* ]]; then
     SED_INPLACE=(-i "")
 else
     SED_INPLACE=(-i)
 fi
 
-# Update WezTerm Config
+# 4. Update WezTerm Config
 sed "${SED_INPLACE[@]}" -E "s/(config\.color_scheme = ')[^']+'(.*-- THEME_SWITCHER_SCHEME)/\1$WEZTERM_THEME'\2/" "$WEZTERM_CONFIG"
 sed "${SED_INPLACE[@]}" -E "s/(local active_theme_name = ')[^']+'(.*-- THEME_SWITCHER_ACTIVE)/\1$WEZTERM_THEME'\2/" "$WEZTERM_CONFIG"
 
-# Update Zed Config
+# 5. Update Zed Config
 sed "${SED_INPLACE[@]}" -E "s/(\"dark\": \")[^\"]+(\".*\/\/ THEME_SWITCHER_DARK)/\1$ZED_THEME\2/" "$ZED_CONFIG"
 
-if [ $? -eq 0 ]; then
-    echo "✓ Theme successfully updated!"
-    echo "  WezTerm: $WEZTERM_THEME"
-    echo "  Zed: $ZED_THEME"
-    echo "  (WezTerm will auto-reload on file change)"
-else
-    echo "✗ Error updating configuration files."
-    exit 1
-fi
+# 6. Log the change (useful for cron debugging)
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+echo "[$TIMESTAMP] Applied theme: $SELECTION (WezTerm: $WEZTERM_THEME, Zed: $ZED_THEME)" >> "$HOME/.theme_rotator.log"
