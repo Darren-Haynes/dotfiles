@@ -41,6 +41,8 @@ local active_theme_name = 'dram' -- THEME_SWITCHER_ACTIVE
 local current_theme
 if active_theme_name == 'shhhed' then
   current_theme = shhhed_theme_data
+elseif active_theme_name == 'dram' then
+    current_theme = dram_theme_data
 else
   -- Fallback to builtin schemes for other themes
   local all_schemes = wezterm.color.get_builtin_schemes()
