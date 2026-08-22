@@ -30,8 +30,8 @@ config.color_schemes = {
   ['dram'] = dram_theme_data,
 }
 
-config.color_scheme = 'dram' -- THEME_SWITCHER_SCHEME
-local active_theme_name = 'dram' -- THEME_SWITCHER_ACTIVE
+config.color_scheme = 'Zenburn (base16)' -- THEME_SWITCHER_SCHEME
+local active_theme_name = 'Zenburn (base16)' -- THEME_SWITCHER_ACTIVE
 
 -- =====================================================================
 -- PRE-CALCULATE THEME COLORS (Run ONCE at startup)
