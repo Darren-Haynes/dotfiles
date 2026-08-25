@@ -11,6 +11,13 @@ alias lsfonts='ls /usr/share/fonts/'
 # NAVIGATING
 alias cdd="cd ~/Downloads"
 alias cdot="cd ~/Dotfiles"
+alias cdp="cd ~/Projects"
+alias cdm="cd ~/Music"
+alias cdbash="cd ~/Dotfiles/bash-scripts"
+alias cdyazi="cd ~/Dotfiles/yazi"
+alias cdwez="cd ~/Dotfiles/wezterm"
+alias cdzed="cd ~/Dotfiles/zed"
+alias cdwall="cd ~/Pictures/Wallpaper"
 
 # lSD
 alias ls='lsd'
