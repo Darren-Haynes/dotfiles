@@ -72,6 +72,12 @@ alias play='npx playwright test'
 alias e2e='npm run test:e2e'
 alias coverage='npm run test:coverage'
 
+# DOTNET
+alias csc='dotnet $(find /usr/local/share/dotnet/sdk -name "csc.dll" | sort | tail -n1)'
+alias dr="dotnet run"
+alias db="dotnet build"
+alias dt="dotnet test"
+
 # LINUX SHORTCUTS
 alias ag='alias | grep '
 alias c='clear'
