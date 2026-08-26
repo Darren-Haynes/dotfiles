@@ -363,7 +363,24 @@ config.keys = { -- Clear out default OS hotkey assignments
 			end),
 		}),
 	},
-
+	-- Prompt for a name to use for a new workspace and switch to it
+	{
+    key = 'w',
+    mods = 'LEADER',
+    action = wezterm.action.PromptInputLine {
+      description = 'Enter new name for session',
+      action = wezterm.action_callback(
+        function(window, pane, line)
+          if line then
+            wezterm.mux.rename_workspace(
+              window:mux_window():get_workspace(),
+              line
+            )
+          end
+        end
+      ),
+    },
+  },
 	-- Dynamic tab renaming prompt
 	{
 		key = "r",
