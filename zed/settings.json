@@ -7,6 +7,8 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "markdown_preview_font_size": 16.0,
+  "agent_ui_font_family": "JetBrainsMono Nerd Font Mono",
   "active_pane_modifiers": {
     "border_size": 0.0
   },
@@ -34,9 +36,9 @@
     "favorite_models": [],
     "model_parameters": [],
   }, */
-  "agent_buffer_font_size": 14.0,
-  "ui_font_family": "JetBrainsMono Nerd Font",
-  "agent_ui_font_size": 14.0,
+  "agent_buffer_font_size": 15.0,
+  "ui_font_family": "JetBrainsMono Nerd Font Mono",
+  "agent_ui_font_size": 16.0,
   "buffer_line_height": "standard",
   "vim_mode": true,
   "relative_line_numbers": "enabled",
@@ -83,12 +85,12 @@
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "linked_edits": true,
   "icon_theme": "Zed (Default)",
-  "ui_font_size": 14.0,
-  "buffer_font_size": 15.0,
+  "ui_font_size": 15.0,
+  "buffer_font_size": 16.0,
   "theme": {
     "mode": "dark",
-    "light": "Solarized Light",
-    "dark": "Solarized Dark",
+    "light": "Oceanic Next Light",
+    "dark": "Base16 Sandcastle" // THEME_SWITCHER_DARK
   },
   "which_key": { "enabled": true },
   "project_panel": {
@@ -123,15 +125,18 @@
       }
     },
     "agent": {
+      "play_sound_when_agent_done": "when_hidden",
       "sidebar_side": "right",
       "dock": "right",
       "default_model": {
-        "provider": "ollama",
-        "model": "qwen2.5-coder:7b"
+        "effort": "low",
+        "enable_thinking": true,
+        "provider": "google",
+        "model": "gemini-3.6-flash"
       }
     },
     "edit_predictions": {
-      "provider": "ollama",
+      "provider": "zed",
       "ollama": {
         "model": "qwen2.5-coder:14b",
         "prompt_format": "infer"
