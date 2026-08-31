@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Bubblegum",
+  "version": "1.0",
+  "description": "Bubblegum dark theme for Brave, by koalefant",
+  "theme": {
+    "colors": {
+      "frame": [42, 42, 42],
+      "frame_inactive": [42, 42, 42],
+      "frame_incognito": [42, 42, 42],
+      "frame_incognito_inactive": [42, 42, 42],
+      "toolbar": [58, 58, 58],
+      "toolbar_button_icon": [167, 167, 167],
+      "button_background": [58, 58, 58],
+      "tab_text": [215, 215, 215],
+      "tab_background_text": [167, 167, 167],
+      "tab_background_text_inactive": [167, 167, 167],
+      "tab_background_text_incognito": [167, 167, 167],
+      "tab_background_text_incognito_inactive": [167, 167, 167],
+      "bookmark_text": [167, 167, 167],
+      "omnibox_background": [58, 58, 58],
+      "omnibox_text": [215, 215, 215],
+      "ntp_background": [48, 48, 48],
+      "ntp_text": [215, 215, 215],
+      "ntp_link": [135, 215, 255],
+      "ntp_link_underline": [135, 215, 255],
+      "ntp_header": [58, 58, 58],
+      "ntp_section": [42, 42, 42],
+      "ntp_section_text": [215, 215, 215],
+      "ntp_section_link": [135, 215, 255],
+      "ntp_section_link_underline": [135, 215, 255]
+    },
+    "tints": {
+      "buttons": [-1, -1, -1],
+      "frame": [-1, -1, -1],
+      "frame_inactive": [-1, -1, -1],
+      "frame_incognito": [-1, -1, -1],
+      "frame_incognito_inactive": [-1, -1, -1],
+      "background_tab": [-1, -1, -1]
+    },
+    "properties": {
+      "ntp_background_alignment": "center",
+      "ntp_background_repeat": "no-repeat"
+    }
+  }
+}
