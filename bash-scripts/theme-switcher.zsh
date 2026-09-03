@@ -6,22 +6,15 @@ ZED_CONFIG="$HOME/Dotfiles/zed/settings.json"
 typeset -A THEMES
 THEMES=(
     "Ayu Mirage"      "Ayu Mirage|Ayu Mirage"
-    "Bluloco Dark"    "BlulocoDark|Bluloco Dark"
-    "Solarized Dark"  "Solarized Dark (Gogh)|Solarized Dark"
-    "Oceanic Next"    "OceanicNext (base16)|Oceanic Next"
-    "Pop Dark"        "Zenburn (base16)|Pop Dark"
-    "Zenburn"         "Zenburn (base16)|Zenburn"
+    "Oceanic Next"    "OceanicNext (base16)|Base16 OceanicNext"
+    "Zenburn"         "Zenburn (base16)|Base16 Zenburn"
+    "Bubblegum"       "Zenburn (base16)|Bubblegum"
     "One Dark"        "One Dark (Gogh)|One Dark"
-    "Tokyo Storm"     "Tokyo Night Storm (Gogh)|Tokyo Night Storm"
-    "Nord Fox"        "nordfox|Nordfox"
-    "Catppuccin"      "Catppuccin Frappé (Gogh)|Catppuccin Frappé"
-    "Mariana"         "Mariana|Mariana Sublime"
-    "Forest Night"    "Everforest Dark (Gogh)|Forest Night"
+    "Tokyo Storm"     "Tokyo Night Storm (Gogh)|Base16 Tokyo Night Storm"
+    "Everforest"      "Everforest Dark (Gogh)|Base16 Everforest Dark Hard"
     "shhhed"          "shhhed|shhhed"
     "Dram"            "dram|Dram"
-    "Pruple"          "MaterialDark|Pruple"
-    "Rose Pine"       "Rosé Pine Moon (base16)|Rosé Pine Moon"
-    "Green"           "Apathy (base16)|Base16 Apathy"
+    "Rose Pine"       "Rosé Pine Moon (base16)|Base16 Rosé Pine Moon"
 )
 
 SELECTION=$(print -l ${(k)THEMES} | fzf --prompt="Choose Theme > ")
