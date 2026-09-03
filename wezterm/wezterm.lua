@@ -30,8 +30,8 @@ config.color_schemes = {
   ['dram'] = dram_theme_data,
 }
 
-config.color_scheme = 'Zenburn (base16)' -- THEME_SWITCHER_SCHEME
-local active_theme_name = 'Zenburn (base16)' -- THEME_SWITCHER_ACTIVE
+config.color_scheme = 'shhhed' -- THEME_SWITCHER_SCHEME
+local active_theme_name = 'shhhed' -- THEME_SWITCHER_ACTIVE
 
 -- =====================================================================
 -- PRE-CALCULATE THEME COLORS (Run ONCE at startup)
@@ -89,27 +89,51 @@ if not config.colors.tab_bar then
 end
 config.colors.tab_bar.background = theme_bg
 
+config.window_background_opacity = 0.90  -- 0.0 (fully transparent) to 1.0 (opaque)
+
 -- =====================================================================
 -- PLATFORM & DISPLAY LAYOUT
 -- =====================================================================
+local mux = wezterm.mux
+
+--- OS / Distro Detection ---
+-- local is_mac = wezterm.target_triple:find("darwin") ~= nil
+local is_linux = wezterm.target_triple:find("linux") ~= nil
 local is_mac = wezterm.target_triple:find("apple") ~= nil
 local primary_mod = is_mac and "SUPER" or "CTRL"
 
--- Set initial height and width of wezterm (iMac maximum)
-config.initial_cols = 2240
-config.initial_rows = 1260
+local is_fedora_44_gnome = false
+if is_linux then
+  local fd = io.open("/etc/os-release", "r")
+  if fd then
+    local content = fd:read("*a")
+    fd:close()
+    local id = content:match('ID="([^"]+)"')
+    local version_id = content:match('VERSION_ID="([^"]+)"')
+    local desktop = (os.getenv("XDG_CURRENT_DESKTOP") or ""):lower()
+    is_fedora_44_gnome = (id == "fedora" and version_id == "44" and desktop:find("gnome") ~= nil)
+  end
+end
 
--- DISABLE MACOS NATIVE TOP BAR (Changed from "TITLE | RESIZE" to "RESIZE")
-config.window_decorations = "RESIZE"
-
--- Open wezterm maximized (but not fullscreen)
-local has_maximized = false
-wezterm.on("window-focus-changed", function(window, pane)
-	if window and not has_maximized then
-		window:maximize()
-		has_maximized = true -- Prevent infinite loops
-	end
-end)
+-- --- Startup: maximize behavior ---
+if is_mac then
+  wezterm.on('gui-startup', function(cmd)
+    local tab, pane, window = mux.spawn_window(cmd or {})
+    window:gui_window():maximize()
+  end)
+elseif is_fedora_44_gnome then
+  -- GNOME Wayland: maximize() at startup can go fullscreen.
+  -- Instead, size the window to fill the work area.
+  -- Adjust these to match your screen/font size.
+  config.initial_cols = 2240
+  config.initial_rows = 1260
+else
+  -- Other Linux: maximize normally
+  wezterm.on('gui-startup', function(cmd)
+    local tab, pane, window = mux.spawn_window(cmd or {})
+    window:gui_window():maximize()
+  end)
+end
 
 -- =====================================================================
 -- TYPOGRAPHY & INTERFACE PADDING
@@ -118,12 +142,22 @@ config.font = wezterm.font("Fira Code")
 config.font_size = 16
 config.adjust_window_size_when_changing_font_size = false
 
-config.window_padding = {
-	left = "30px",
-	right = "30px",
-	top = "10px",
-	bottom = "0px",
-}
+if is_mac then
+    config.window_padding = {
+    	left = "30px",
+    	right = "30px",
+    	top = "10px",
+    	bottom = "0px",
+    }
+else
+    config.font_size = 13
+    config.window_padding = {
+    	left = "10px",
+    	right = "10px",
+    	top = "10px",
+    	bottom = "0px",
+    }
+end
 
 -- =====================================================================
 -- TAB BAR INTERFACE SWITCHES
