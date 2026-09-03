@@ -1,11 +1,3 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
   "markdown_preview_font_size": 16.0,
   "agent_ui_font_family": "JetBrainsMono Nerd Font Mono",
@@ -24,18 +16,6 @@
     "tree_view": true,
     "dock": "left",
   },
-  /* Duplicated key auto-commented: "agent": {
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-sonnet-5",
-      "enable_thinking": true,
-      "effort": "high"
-    },
-    "enabled": true,
-    "dock": "right",
-    "favorite_models": [],
-    "model_parameters": [],
-  }, */
   "agent_buffer_font_size": 15.0,
   "ui_font_family": "JetBrainsMono Nerd Font Mono",
   "agent_ui_font_size": 16.0,
@@ -50,8 +30,9 @@
     "toolbar": {
       "breadcrumbs": false,
     },
-    "font_family": "JetBrainsMono Nerd Font",
+    "font_family": "Fira Code",
     "font_size": 15.0,
+    "font_fallbacks": ["Noto Color Emoji"]
   },
   "base_keymap": "VSCode",
   "status_bar": {
@@ -81,8 +62,8 @@
       "vertical": false,
     },
   },
-  "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace"],
-  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace", "Noto Color Emoji"],
+  "buffer_font_family": "Fira Code",
   "linked_edits": true,
   "icon_theme": "Zed (Default)",
   "ui_font_size": 15.0,
@@ -90,7 +71,7 @@
   "theme": {
     "mode": "dark",
     "light": "Oceanic Next Light",
-    "dark": "Base16 Sandcastle" // THEME_SWITCHER_DARK
+    "dark": "Base16 Zenburn" // THEME_SWITCHER_DARK
   },
   "which_key": { "enabled": true },
   "project_panel": {
@@ -114,32 +95,31 @@
     "min_line_number_digits": 0,
     "folds": false,
   },
-  // Syntax highlighting for alias files
   "file_types": {
     "Shell Script": ["alias", "aliases"],
   },
-    "language_models": {
-      "ollama": {
-        "api_url": "http://localhost:11434",
-        "auto_discover": true
-      }
-    },
-    "agent": {
-      "play_sound_when_agent_done": "when_hidden",
-      "sidebar_side": "right",
-      "dock": "right",
-      "default_model": {
-        "effort": "low",
-        "enable_thinking": true,
-        "provider": "google",
-        "model": "gemini-3.6-flash"
-      }
-    },
-    "edit_predictions": {
-      "provider": "zed",
-      "ollama": {
-        "model": "qwen2.5-coder:14b",
-        "prompt_format": "infer"
-      }
+  "language_models": {
+    "ollama": {
+      "api_url": "http://localhost:11434",
+      "auto_discover": true
     }
+  },
+  "agent": {
+    "play_sound_when_agent_done": "when_hidden",
+    "sidebar_side": "right",
+    "dock": "right",
+    "default_model": {
+      "effort": "low",
+      "enable_thinking": true,
+      "provider": "google",
+      "model": "gemini-3.6-flash"
+    }
+  },
+  "edit_predictions": {
+    "provider": "zed",
+    "ollama": {
+      "model": "qwen2.5-coder:14b",
+      "prompt_format": "infer"
+    }
+  }
 }
