@@ -83,7 +83,7 @@
 				"warning.background": "#4f3f30",
 				"warning.border": "#3f3f3f",
 				"terminal.background": "#303030",
-				"terminal.foreground": "#d7d7d7",
+				"terminal.foreground": "#808080",
 				"terminal.bright_foreground": "#d7d7d7",
 				"terminal.dim_foreground": "#808080",
 				"terminal.ansi.black": "#303030",
