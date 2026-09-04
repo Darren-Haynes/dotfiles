@@ -23,15 +23,17 @@ end
 -- =====================================================================
 local shhhed_theme_data = require("colors.shhhed_theme") -- Load the standalone file
 local dram_theme_data = require("colors.dram_theme") -- Load the standalone file
+local adwaita_theme_data = require("colors.adwaita_dark_theme") -- Load the standalone file
 
--- Register the theme under the name 'shhhed'
+-- Register the theme under the themes names, e.g 'shhhed'
 config.color_schemes = {
   ['shhhed'] = shhhed_theme_data,
   ['dram'] = dram_theme_data,
+  ['adwaita'] = adwaita_theme_data,
 }
 
-config.color_scheme = 'shhhed' -- THEME_SWITCHER_SCHEME
-local active_theme_name = 'shhhed' -- THEME_SWITCHER_ACTIVE
+config.color_scheme = 'adwaita' -- THEME_SWITCHER_SCHEME
+local active_theme_name = 'adwaita' -- THEME_SWITCHER_ACTIVE
 
 -- =====================================================================
 -- PRE-CALCULATE THEME COLORS (Run ONCE at startup)
@@ -43,6 +45,8 @@ if active_theme_name == 'shhhed' then
   current_theme = shhhed_theme_data
 elseif active_theme_name == 'dram' then
     current_theme = dram_theme_data
+elseif active_theme_name == 'adwaita' then
+    current_theme = adwaita_theme_data
 else
   -- Fallback to builtin schemes for other themes
   local all_schemes = wezterm.color.get_builtin_schemes()
