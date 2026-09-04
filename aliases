@@ -43,6 +43,7 @@ alias gc="git commit -m "
 alias gst='git status'
 alias gg='git log --all --graph'
 alias parent="git log --pretty=format:'%D' HEAD^ | grep 'origin/' | head -n1 | sed 's@origin/@@' | sed 's@,.*@@'"
+alias root='cd "$(git rev-parse --show-toplevel || echo .)"'
 
 # GIT / PUSH
 alias pushm='git push origin main'
@@ -92,7 +93,7 @@ alias rmsymlinks="rm -- *(@)"
 alias copy='xsel --clipboard < '
 
 # SOURCING
-alias soa='source ~/.aliases'
+alias soa='source ~/Dotfiles/aliases'
 alias sob='source ~/.bashrc'
 alias soz='source ~/.zshrc'
 
