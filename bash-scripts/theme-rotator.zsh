@@ -6,24 +6,19 @@ ZED_CONFIG="$HOME/Dotfiles/zed/settings.json"
 
 # Define theme mappings: ["Display Name"]="WeztermTheme|ZedTheme"
 typeset -A THEMES
+
 THEMES=(
     "Ayu Mirage"      "Ayu Mirage|Ayu Mirage"
-    "Bluloco Dark"    "BlulocoDark|Bluloco Dark"
-    "Solarized Dark"  "Solarized Dark (Gogh)|Solarized Dark"
-    "Oceanic Next"    "Oceanic-Next|Oceanic Next"
-    "Pop Dark"        "Pop (base16)|Pop Dark"
-    "Zenburn"         "Zenburn (base16)|Zenburn"
-    "One Dark"        "One Dark (Gogh)|One Dark"
-    "Tokyo Storm"     "Tokyo Night Storm (Gogh)|Tokyo Night Storm"
-    "Nord Fox"        "nordfox|Nordfox"
-    "Catppuccin"      "Catppuccin Frappé (Gogh)|Catppuccin Frappé"
-    "Mariana"         "Mariana|Mariana Sublime"
-    "Forest Night"    "Everforest Dark (Gogh)|Forest Night"
-    "shhhed"          "shhhed|shhhed"
+    "Bubblegum"       "Zenburn (base16)|Bubblegum"
     "Dram"            "dram|Dram"
-    "Pruple"          "MaterialDark|Pruple"
-    "Rose Pine"       "Rosé Pine Moon (base16)|Rosé Pine Moon"
-    "Green"           "Apathy (base16)|Base16 Apathy"
+    "Everforest"      "Everforest Dark (Gogh)|Base16 Everforest Dark Hard"
+    "Gnome Dark"      "adwaita|Dark Gnome"
+    "Oceanic Next"    "OceanicNext (base16)|Base16 OceanicNext"
+    "One Dark"        "One Dark (Gogh)|One Dark"
+    "Rose Pine"       "Rosé Pine Moon (base16)|Base16 Rosé Pine Moon"
+    "shhhed"          "shhhed|shhhed"
+    "Tokyo Storm"     "Tokyo Night Storm (Gogh)|Base16 Tokyo Night Storm"
+    "Zenburn"         "Zenburn (base16)|Base16 Zenburn"
 )
 
 # 1. Pick a random key from the THEMES associative array
