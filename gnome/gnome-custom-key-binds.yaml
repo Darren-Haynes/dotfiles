@@ -59,29 +59,47 @@ builtin:
           bindings:
             - <Control><Alt><Super>l
     org.gnome.shell.keybindings:
+        - key: switch-to-application-6
+          bindings:
+            - <Control><Alt><Super>6
         - key: switch-to-application-1
-          bindings: []
+          bindings:
+            - <Control><Alt><Super>y
         - key: focus-active-notification
           bindings:
             - <Shift><Super>n
         - key: toggle-message-tray
           bindings:
             - <Shift><Super>v
-        - key: switch-to-application-2
+        - key: switch-to-application-7
           bindings: []
+        - key: switch-to-application-2
+          bindings:
+            - <Control><Alt><Super>u
+        - key: switch-to-application-8
+          bindings:
+            - <Control><Alt><Super>8
         - key: show-screen-recording-ui
           bindings:
             - <Shift><Control><Alt><Super>r
         - key: switch-to-application-3
-          bindings: []
+          bindings:
+            - <Control><Alt><Super>i
+        - key: switch-to-application-9
+          bindings:
+            - <Control><Alt><Super>9
         - key: show-screenshot-ui
           bindings:
             - <Shift><Control><Alt><Super>p
         - key: switch-to-application-4
-          bindings: []
+          bindings:
+            - <Control><Alt><Super>o
         - key: screenshot-window
           bindings:
             - <Shift><Control><Alt><Super>w
+        - key: switch-to-application-5
+          bindings:
+            - <Control><Alt><Super>p
         - key: screenshot
           bindings:
             - <Shift><Control><Alt><Super>s
