@@ -1,0 +1,88 @@
+builtin:
+    org.gnome.desktop.wm.keybindings:
+        - key: switch-group
+          bindings:
+            - <Control>grave
+        - key: toggle-on-all-workspaces
+          bindings:
+            - <Control><Alt><Super>a
+        - key: maximize
+          bindings:
+            - <Control><Alt><Super>k
+        - key: close
+          bindings:
+            - <Control><Alt><Super>q
+        - key: switch-to-workspace-1
+          bindings:
+            - <Control><Alt><Super>7
+        - key: move-to-monitor-right
+          bindings:
+            - <Control><Alt><Super>Right
+        - key: panel-run-dialog
+          bindings:
+            - <Control><Alt><Super>r
+        - key: switch-to-workspace-2
+          bindings:
+            - <Control><Alt><Super>8
+        - key: move-to-workspace-1
+          bindings:
+            - <Control><Alt><Super>1
+        - key: switch-to-workspace-3
+          bindings:
+            - <Control><Alt><Super>9
+        - key: move-to-workspace-2
+          bindings:
+            - <Control><Alt><Super>2
+        - key: switch-to-workspace-4
+          bindings:
+            - <Control><Alt><Super>0
+        - key: move-to-workspace-3
+          bindings:
+            - <Control><Alt><Super>3
+        - key: move-to-monitor-left
+          bindings:
+            - <Control><Alt><Super>Left
+        - key: move-to-workspace-4
+          bindings:
+            - <Control><Alt><Super>4
+        - key: toggle-fullscreen
+          bindings:
+            - <Control><Alt><Super>j
+        - key: switch-group-backward
+          bindings:
+            - <Shift><Control>grave
+    org.gnome.mutter.keybindings:
+        - key: toggle-tiled-left
+          bindings:
+            - <Control><Alt><Super>h
+        - key: toggle-tiled-right
+          bindings:
+            - <Control><Alt><Super>l
+    org.gnome.shell.keybindings:
+        - key: switch-to-application-1
+          bindings: []
+        - key: focus-active-notification
+          bindings:
+            - <Shift><Super>n
+        - key: toggle-message-tray
+          bindings:
+            - <Shift><Super>v
+        - key: switch-to-application-2
+          bindings: []
+        - key: show-screen-recording-ui
+          bindings:
+            - <Shift><Control><Alt><Super>r
+        - key: switch-to-application-3
+          bindings: []
+        - key: show-screenshot-ui
+          bindings:
+            - <Shift><Control><Alt><Super>p
+        - key: switch-to-application-4
+          bindings: []
+        - key: screenshot-window
+          bindings:
+            - <Shift><Control><Alt><Super>w
+        - key: screenshot
+          bindings:
+            - <Shift><Control><Alt><Super>s
+custom: []
