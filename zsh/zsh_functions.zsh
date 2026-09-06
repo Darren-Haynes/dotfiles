@@ -17,3 +17,29 @@ touch() {
   done
   command touch -- "$@"
 }
+
+# gnome-keybinds - list or grep keybindings for GNOME
+# Usage:
+#   gnome-keybinds <search-term>
+#   gnome-keybinds
+gnome-keybinds() {
+  local schemas=(
+    org.gnome.shell.keybindings
+    org.gnome.desktop.wm.keybindings
+    org.gnome.mutter.keybindings
+    org.gnome.mutter.wayland.keybindings
+    org.gnome.settings-daemon.plugins.media-keys
+  )
+
+  # If an argument is given, grep across all schemas
+  if [[ -n "$1" ]]; then
+    for s in "${schemas[@]}"; do
+      gsettings list-recursively "$s" | grep -i --color "$1"
+    done
+  else
+    for s in "${schemas[@]}"; do
+      echo "=== $s ==="
+      gsettings list-recursively "$s"
+    done
+  fi
+}
