@@ -109,6 +109,8 @@ local primary_mod = is_mac and "SUPER" or "CTRL"
 local is_fedora_44_gnome = false
 if is_linux then
   local fd = io.open("/etc/os-release", "r")
+  config.enable_wayland = true
+  config.animation_fps = 30
   if fd then
     local content = fd:read("*a")
     fd:close()
