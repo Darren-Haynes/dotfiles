@@ -1,5 +1,7 @@
 {
-  "markdown_preview_font_size": 16.0,
+  "markdown_preview": {
+    "font_size": 16.0
+  },
   "agent_ui_font_family": "JetBrainsMono Nerd Font Mono",
   "active_pane_modifiers": {
     "border_size": 0.0
@@ -71,7 +73,7 @@
   "theme": {
     "mode": "dark",
     "light": "Oceanic Next Light",
-    "dark": "Base16 Zenburn" // THEME_SWITCHER_DARK
+    "dark": "Dram" // THEME_SWITCHER_DARK
   },
   "which_key": { "enabled": true },
   "project_panel": {
@@ -97,6 +99,7 @@
   },
   "file_types": {
     "Shell Script": ["alias", "aliases"],
+    "JSONC": ["**/config.kdl"]
   },
   "language_models": {
     "ollama": {
@@ -109,10 +112,10 @@
     "sidebar_side": "right",
     "dock": "right",
     "default_model": {
-      "effort": "low",
+      "effort": "medium",
       "enable_thinking": true,
-      "provider": "google",
-      "model": "gemini-3.6-flash"
+      "provider": "copilot_chat",
+      "model": "gpt-5.4-mini"
     }
   },
   "edit_predictions": {
