@@ -3,10 +3,10 @@
   "keyboard": "glove80",
   "firmware_api_version": "1",
   "locale": "en-US",
-  "uuid": "0d740598-7d2e-4aaf-a77b-991c89a6e842",
-  "parent_uuid": "0d740598-7d2e-4aaf-a77b-991c89a6e842",
+  "uuid": "dd8b814c-2f90-4ad2-8cb0-5d4b59c48287",
+  "parent_uuid": "4741d5f4-97c4-4756-ac88-0d6991c7afa9",
   "unlisted": false,
-  "date": 1789007227,
+  "date": 1789871164,
   "creator": "darrenhaynes",
   "title": "danden-layout",
   "notes": "Glove80 Factory Layout has an extra factory layer (layer 3) for factory testing. The factory test layer makes it easy to test every key switch. Please note that there is no way to switch from the factory layer. You will need to power off and on the Glove80 to return to the base layer.",
@@ -450,15 +450,18 @@
         ]
       },
       {
-        "value": "&lower"
-      },
-      {
         "value": "&kp",
         "params": [
           {
             "value": "LCTRL"
           }
         ]
+      },
+      {
+        "value": "&lower"
+      },
+      {
+        "value": "&lower"
       },
       {
         "value": "&kp",
@@ -469,15 +472,16 @@
         ]
       },
       {
-        "value": "&lower"
-      },
-      {
-        "value": "&kp",
+        "value": "Custom",
         "params": [
           {
-            "value": "RET"
+            "value": "&hyper_dance"
           }
-        ]
+        ],
+        "decoration": {
+          "label": "Hyper1",
+          "color": "#189142ff"
+        }
       },
       {
         "value": "&kp",
@@ -591,22 +595,18 @@
         ]
       },
       {
-        "value": "Custom",
-        "params": [
-          {
-            "value": "&hyper_dance"
-          }
-        ],
-        "decoration": {
-          "label": "Hyper1",
-          "color": "#189142ff"
-        }
-      },
-      {
         "value": "&sl",
         "params": [
           {
             "value": 5
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "RET"
           }
         ]
       },

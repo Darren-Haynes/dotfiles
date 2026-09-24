@@ -32,8 +32,8 @@ config.color_schemes = {
   ['adwaita'] = adwaita_theme_data,
 }
 
-config.color_scheme = 'adwaita' -- THEME_SWITCHER_SCHEME
-local active_theme_name = 'adwaita' -- THEME_SWITCHER_ACTIVE
+config.color_scheme = 'dram' -- THEME_SWITCHER_SCHEME
+local active_theme_name = 'dram' -- THEME_SWITCHER_ACTIVE
 
 -- =====================================================================
 -- PRE-CALCULATE THEME COLORS (Run ONCE at startup)
@@ -105,6 +105,7 @@ local mux = wezterm.mux
 local is_linux = wezterm.target_triple:find("linux") ~= nil
 local is_mac = wezterm.target_triple:find("apple") ~= nil
 local primary_mod = is_mac and "SUPER" or "CTRL"
+local copy_mod = is_mac and "SUPER" or "CTRL|SHIFT"
 
 local is_fedora_44_gnome = false
 if is_linux then
@@ -321,8 +322,8 @@ config.keys = { -- Clear out default OS hotkey assignments
 	{ key = "f", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
 
 	-- Cross-platform Copy & Paste
-	{ key = "c", mods = primary_mod, action = wezterm.action.CopyTo("Clipboard") },
-	{ key = "v", mods = primary_mod, action = wezterm.action.PasteFrom("Clipboard") },
+	{ key = "c", mods = copy_mod, action = wezterm.action.CopyTo("Clipboard") },
+	{ key = "v", mods = copy_mod, action = wezterm.action.PasteFrom("Clipboard") },
 
 	-- Move between panes -- Resize panes (Meta/Alt + hjkl)
 	split_nav("move", "h"),
