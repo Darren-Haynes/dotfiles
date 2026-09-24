@@ -6,18 +6,15 @@ WALLPAPER_DIR="$HOME/Pictures/Wallpaper"
 
 typeset -A THEMES
 THEMES=(
-    "Apple"           "Apple System Colors|macOS Classic Dark|default.jpg"
     "Ayu Mirage"      "Ayu Mirage|Ayu Mirage|default.jpg"
     "Bubblegum"       "Zenburn (base16)|Bubblegum|default.jpg"
     "Dram"            "dram|Dram|dram.jpg"
     "Everforest"      "Everforest Dark (Gogh)|Base16 Everforest Dark Hard|everforest.jpg"
-    "Gnome Dark"      "adwaita|Dark Gnome|default.jpg"
-    "Oceanic Next"    "OceanicNext (base16)|Base16 OceanicNext|default.jpg"
-    "One Dark"        "One Dark (Gogh)|One Dark|default.jpg"
-    "Rose Pine"       "Rosé Pine Moon (base16)|Base16 Rosé Pine Moon|default.jpg"
+    "Gnome Dark"      "adwaita|Dark Gnome|gnome.jpg"
+    "Oceanic Next"    "OceanicNext (base16)|Base16 OceanicNext|oceanic.jpg"
+    "One Dark"        "One Dark (Gogh)|One Dark|one-dark.jpg"
     "shhhed"          "shhhed|shhhed|shhhed.jpg"
-    "Tokyo Storm"     "Tokyo Night Storm (Gogh)|Base16 Tokyo Night Storm|default.jpg"
-    "Zenburn"         "Zenburn (base16)|Base16 Zenburn|default.jpg"
+    "Tokyo Storm"     "Tokyo Night Storm (Gogh)|Base16 Tokyo Night Storm|tokyo-night.jpg"
 )
 
 select_theme() {
