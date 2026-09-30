@@ -1,4 +1,5 @@
 {
+  "cli_default_open_behavior": "new_window",
   "markdown_preview": {
     "font_size": 16.0
   },
@@ -108,6 +109,13 @@
     }
   },
   "agent": {
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "default": "allow"
+        }
+      }
+    },
     "sandbox_permissions": {
       "allow_unsandboxed": true
     },

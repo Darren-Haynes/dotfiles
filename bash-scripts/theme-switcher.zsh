@@ -8,7 +8,7 @@ typeset -A THEMES
 THEMES=(
     "Ayu Mirage"      "Ayu Mirage|Ayu Mirage|default.jpg"
     "Bubblegum"       "Zenburn (base16)|Bubblegum|default.jpg"
-    "Dram"            "dram|Dram|dram.jpg"
+    "Dram"            "dram|Dram|oceanic.jpg"
     "Everforest"      "Everforest Dark (Gogh)|Base16 Everforest Dark Hard|everforest.jpg"
     "Gnome Dark"      "adwaita|Dark Gnome|gnome.jpg"
     "Oceanic Next"    "OceanicNext (base16)|Base16 OceanicNext|oceanic.jpg"
@@ -49,6 +49,12 @@ is_fedora_gnome() {
     done < /etc/os-release
 
     [[ "$os_id" == "fedora" && "$os_version_id" == "44" && "${current_desktop:l}" == *gnome* ]]
+}
+
+is_sway_session() {
+    local current_desktop="${XDG_CURRENT_DESKTOP:-${XDG_SESSION_DESKTOP:-}}"
+
+    [[ -n "$SWAYSOCK" || "${current_desktop:l}" == *sway* ]]
 }
 
 wallpaper_path_for() {
@@ -99,6 +105,31 @@ update_gnome_wallpaper() {
     return $rc
 }
 
+update_sway_wallpaper() {
+    local wallpaper_file="$1"
+    local wallpaper_path rc=0
+
+    wallpaper_path="$(wallpaper_path_for "$wallpaper_file")"
+
+    if [[ ! -f "$wallpaper_path" ]]; then
+        print -u2 "Wallpaper file not found: $wallpaper_path"
+        return 1
+    fi
+
+    if ! command -v swaybg >/dev/null 2>&1; then
+        print -u2 "swaybg not found; install it to set the Sway wallpaper."
+        return 1
+    fi
+
+    # swaybg has no "update in place" mechanism, so replace the running
+    # instance with a fresh one pointed at the new image.
+    pkill -x swaybg 2>/dev/null
+
+    (setsid swaybg -i "$wallpaper_path" -m fill >/dev/null 2>&1 &) || rc=$?
+
+    return $rc
+}
+
 SELECTION=$(select_theme)
 
 if [ -z "$SELECTION" ]; then
@@ -123,7 +154,9 @@ update_wezterm_config "$WEZTERM_THEME" || CONFIG_STATUS=$?
 update_zed_config "$ZED_THEME" || CONFIG_STATUS=$?
 
 WALLPAPER_STATUS=0
-if is_fedora_gnome; then
+if is_sway_session; then
+    update_sway_wallpaper "$WALLPAPER_FILE" || WALLPAPER_STATUS=$?
+elif is_fedora_gnome; then
     update_gnome_wallpaper "$WALLPAPER_FILE" || WALLPAPER_STATUS=$?
 fi
 
