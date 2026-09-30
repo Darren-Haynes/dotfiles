@@ -77,13 +77,22 @@ spaceship_os() {
       icon="🍎"
       ;;
     Linux)
-      # Detect Fedora Workstation specifically
-      if [[ -f /etc/os-release ]]; then
+      # Figure out the actual running session/WM first, since the same
+      # Fedora install can be logged into either GNOME or Sway.
+      local current_desktop="${XDG_CURRENT_DESKTOP:-${XDG_SESSION_DESKTOP:-}}"
+
+      if [[ -n "$SWAYSOCK" || "${current_desktop:l}" == *sway* ]]; then
+        icon="🎐"   # Sway icon — swaying wind chime
+      elif [[ "${current_desktop:l}" == *gnome* ]]; then
+        icon="🌀"   # GNOME icon — swap to whatever you prefer
+      elif [[ -f /etc/os-release ]]; then
+        # Fall back to distro detection when no session info is available
+        # (e.g. non-interactive shells, tty logins without a WM yet)
         local id variant
         id=$(grep -oP '^ID=\K.*' /etc/os-release | tr -d '"')
         variant=$(grep -oP '^VARIANT_ID=\K.*' /etc/os-release | tr -d '"')
         if [[ "$id" == "fedora" && "$variant" == "workstation" ]]; then
-          icon="🌀"   # GNOME icon — swap to whatever you prefer
+          icon="🌀"
         else
           icon="🐧"
         fi
