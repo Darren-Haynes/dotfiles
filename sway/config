@@ -36,6 +36,10 @@ exec_always "swaymsg -t get_outputs -r | grep -q HEADLESS-1 || swaymsg create_ou
 # which replaces the running swaybg process when the theme changes)
 exec_always "pkill -x swaybg; swaybg -i ~/Pictures/Wallpaper/oceanic.jpg -m fill"
 
+# 1c. Load the SSH key into the session ssh-agent once at startup so git
+# push/pull don't prompt for the key passphrase on every invocation.
+exec ssh-add -q ~/.ssh/id_ed25519
+
 # 2. Run the secure internal connection engine (Local Only)
 exec wayvnc --output=HEADLESS-1 127.0.0.1 5900
 
