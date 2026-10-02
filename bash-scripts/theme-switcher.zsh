@@ -2,19 +2,20 @@
 
 WEZTERM_CONFIG="$HOME/Dotfiles/wezterm/wezterm.lua"
 ZED_CONFIG="$HOME/Dotfiles/zed/settings.json"
+ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.toml"
 WALLPAPER_DIR="$HOME/Pictures/Wallpaper"
 
 typeset -A THEMES
 THEMES=(
-    "Ayu Mirage"      "Ayu Mirage|Ayu Mirage|default.jpg"
-    "Bubblegum"       "Zenburn (base16)|Bubblegum|default.jpg"
-    "Dram"            "dram|Dram|oceanic.jpg"
-    "Everforest"      "Everforest Dark (Gogh)|Base16 Everforest Dark Hard|everforest.jpg"
-    "Gnome Dark"      "adwaita|Dark Gnome|gnome.jpg"
-    "Oceanic Next"    "OceanicNext (base16)|Base16 OceanicNext|oceanic.jpg"
-    "One Dark"        "One Dark (Gogh)|One Dark|one-dark.jpg"
-    "shhhed"          "shhhed|shhhed|shhhed.jpg"
-    "Tokyo Storm"     "Tokyo Night Storm (Gogh)|Base16 Tokyo Night Storm|tokyo-night.jpg"
+    "Ayu Mirage"      "Ayu Mirage|Ayu Mirage|ayu_mirage.toml|default.jpg"
+    "Bubblegum"       "Zenburn (base16)|Bubblegum|zenburn.toml|default.jpg"
+    "Dram"            "dram|Dram|everforest_light.toml|oceanic.jpg"
+    "Everforest"      "Everforest Dark (Gogh)|Base16 Everforest Dark Hard|everforest_dark_hard.toml|everforest.jpg"
+    "Gnome Dark"      "adwaita|Dark Gnome|gnome_terminal.toml|gnome.jpg"
+    "Oceanic Next"    "OceanicNext (base16)|Base16 OceanicNext|oceanic_next.toml|oceanic.jpg"
+    "One Dark"        "One Dark (Gogh)|One Dark|one_dark.toml|one-dark.jpg"
+    "shhhed"          "shhhed|shhhed|afterglow.toml|shhhed.jpg"
+    "Tokyo Storm"     "Tokyo Night Storm (Gogh)|Base16 Tokyo Night Storm|tokyo_night_storm.toml|tokyo-night.jpg"
 )
 
 select_theme() {
@@ -26,7 +27,7 @@ parse_theme_mapping() {
     local -a mapping
 
     mapping=("${(@s:|:)THEMES[$selection]}")
-    print -r -- "${mapping[1]}|${mapping[2]}|${mapping[3]}"
+    print -r -- "${mapping[1]}|${mapping[2]}|${mapping[3]}|${mapping[4]}"
 }
 
 is_fedora_gnome() {
@@ -94,6 +95,26 @@ update_zed_config() {
     return $rc
 }
 
+update_alacritty_config() {
+    local alacritty_theme="$1"
+    local -a sed_inplace
+    local rc=0
+
+    if [[ ! -f "$ALACRITTY_CONFIG" ]]; then
+        return 0
+    fi
+
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed_inplace=(-i "")
+    else
+        sed_inplace=(-i)
+    fi
+
+    sed "${sed_inplace[@]}" -E "s|(import = \[\".*/themes/)[^']+(\"\])|\1$alacritty_theme\2|" "$ALACRITTY_CONFIG" || rc=$?
+
+    return $rc
+}
+
 update_gnome_wallpaper() {
     local wallpaper_file="$1"
     local wallpaper_uri rc=0
@@ -141,9 +162,11 @@ MAPPING="$(parse_theme_mapping "$SELECTION")"
 WEZTERM_THEME="${MAPPING%%|*}"
 REST="${MAPPING#*|}"
 ZED_THEME="${REST%%|*}"
-WALLPAPER_FILE="${REST#*|}"
+REST2="${REST#*|}"
+ALACRITTY_THEME="${REST2%%|*}"
+WALLPAPER_FILE="${REST2#*|}"
 
-if [[ "$WALLPAPER_FILE" == "$REST" ]]; then
+if [[ "$WALLPAPER_FILE" == "$REST2" ]]; then
     WALLPAPER_FILE="default.jpg"
 fi
 
@@ -152,6 +175,7 @@ echo "Applying '$SELECTION'..."
 CONFIG_STATUS=0
 update_wezterm_config "$WEZTERM_THEME" || CONFIG_STATUS=$?
 update_zed_config "$ZED_THEME" || CONFIG_STATUS=$?
+update_alacritty_config "$ALACRITTY_THEME" || CONFIG_STATUS=$?
 
 WALLPAPER_STATUS=0
 if is_sway_session; then
@@ -164,8 +188,9 @@ if [[ $CONFIG_STATUS -eq 0 && $WALLPAPER_STATUS -eq 0 ]]; then
     echo "✓ Theme successfully updated!"
     echo "  WezTerm: $WEZTERM_THEME"
     echo "  Zed: $ZED_THEME"
+    echo "  Alacritty: $ALACRITTY_THEME"
     echo "  Wallpaper: $WALLPAPER_FILE"
-    echo "  (WezTerm will auto-reload on file change)"
+    echo "  (Terminals will auto-reload on file change)"
 else
     echo "✗ Error updating configuration files."
     exit 1
