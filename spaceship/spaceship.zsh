@@ -82,7 +82,7 @@ spaceship_os() {
       local current_desktop="${XDG_CURRENT_DESKTOP:-${XDG_SESSION_DESKTOP:-}}"
 
       if [[ -n "$SWAYSOCK" || "${current_desktop:l}" == *sway* ]]; then
-        icon="🎐"   # Sway icon — swaying wind chime
+        icon=""   # Fedora icon (Nerd Fonts)
       elif [[ "${current_desktop:l}" == *gnome* ]]; then
         icon="🌀"   # GNOME icon — swap to whatever you prefer
       elif [[ -f /etc/os-release ]]; then
