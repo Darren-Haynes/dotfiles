@@ -3,7 +3,7 @@
   "markdown_preview": {
     "font_size": 16.0
   },
-  "agent_ui_font_family": "JetBrainsMono Nerd Font Mono",
+  "agent_ui_font_family": "Fira Code",
   "active_pane_modifiers": {
     "border_size": 0.0
   },
@@ -16,11 +16,12 @@
     "dock": "left",
   },
   "git_panel": {
+    "fallback_branch_name": "main",
     "tree_view": true,
     "dock": "left",
   },
   "agent_buffer_font_size": 15.0,
-  "ui_font_family": "JetBrainsMono Nerd Font Mono",
+  "ui_font_family": "Fira Code",
   "agent_ui_font_size": 16.0,
   "buffer_line_height": "standard",
   "vim_mode": true,
@@ -65,7 +66,7 @@
       "vertical": false,
     },
   },
-  "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace", "Noto Color Emoji"],
+  "buffer_font_fallbacks": ["Adwaita Mono", "DejaVu Sans Mono"],
   "buffer_font_family": "Fira Code",
   "linked_edits": true,
   "icon_theme": "Zed (Default)",
@@ -74,7 +75,7 @@
   "theme": {
     "mode": "dark",
     "light": "Oceanic Next Light",
-    "dark": "Dram" // THEME_SWITCHER_DARK
+    "dark": "Bubblegum" // THEME_SWITCHER_DARK
   },
   "which_key": { "enabled": true },
   "project_panel": {
@@ -109,6 +110,9 @@
     }
   },
   "agent": {
+    "threads_sidebar": {
+      "position": "right"
+    },
     "tool_permissions": {
       "tools": {
         "terminal": {
@@ -120,13 +124,12 @@
       "allow_unsandboxed": true
     },
     "play_sound_when_agent_done": "when_hidden",
-    "sidebar_side": "right",
     "dock": "right",
     "default_model": {
-      "effort": "medium",
+      "effort": "low",
       "enable_thinking": true,
-      "provider": "copilot_chat",
-      "model": "claude-sonnet-5"
+      "provider": "google",
+      "model": "gemini-3-flash-preview"
     }
   },
   "edit_predictions": {
