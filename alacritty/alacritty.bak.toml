@@ -1,0 +1,3 @@
+
+[general]
+import = ["/home/darren/.config/alacritty/themes/papercolor_dark.toml"]
