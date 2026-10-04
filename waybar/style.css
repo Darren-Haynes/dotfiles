@@ -1,0 +1,122 @@
+/* ==============================================================================
+ * Waybar Bubblegum Minimalist Stylesheet (Insulated Typography Version)
+ * Optimized for koalefant's dark monochrome + ice-blue theme palette
+ * ============================================================================== */
+
+/* 1. Global Text Baseline Rule */
+/* 1. Global Text Baseline Rule */
+* {
+    border: none;
+    border-radius: 0;
+    font-family: monospace;
+    font-size: 13px;
+    min-height: 0;
+}
+
+/* Entire Bar Window Container */
+window#waybar {
+    background-color: #2A2A2A; /* Base Frame Background */
+    border-bottom: 2px solid #3A3A3A; /* Subtle lower trim divider */
+    color: #A7A7A7; /* Soft Gray Subtext */
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* Workspace Button Group (Left Side) */
+#workspaces button {
+    padding: 0 10px;
+    background-color: transparent;
+    color: #A7A7A7;
+    border-bottom: 3px solid transparent;
+}
+
+/* Hovering over workspace tags */
+#workspaces button:hover {
+    background: #3A3A3A;
+    color: #D7D7D7;
+    border-bottom: 3px solid #87D7FF; /* Ice-blue underline flash */
+}
+
+/* The Workspace you are currently looking at */
+#workspaces button.focused {
+    background-color: #3A3A3A;
+    color: #87D7FF; /* Ice-Blue highlight text */
+    border-bottom: 3px solid #87D7FF; /* Sharp accent baseline link */
+    font-weight: bold;
+}
+
+/* Workspace containing a window flashing an urgent event alert */
+#workspaces button.urgent {
+    background-color: #D78787; /* Soft salmon/pink tint from your palette */
+    color: #ffffff;
+}
+/* 2. Individual Module Blocks */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+    padding: 0 12px;
+    background-color: #3A3A3A; 
+    color: #D7D7D7; 
+    border-radius: 4px;
+    margin: 4px 3px; 
+    font-family: monospace; 
+}
+
+/* Core Functional Module Accents */
+#clock {
+    color: #87D7FF; /* Accent Ice-Blue focal points for the time clock */
+    font-weight: bold;
+}
+
+#battery.charging, #battery.plugged {
+    color: #87D7FF;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #D78787;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#network.disconnected {
+    background-color: #D78787;
+    color: #ffffff;
+}
+
+#pulseaudio.muted {
+    background-color: #2A2A2A;
+    color: #A7A7A7;
+}
+
+/* Tooltips */
+tooltip {
+    background: #2A2A2A;
+    border: 1px solid #87D7FF;
+    border-radius: 4px;
+}
+
+tooltip label {
+    color: #D7D7D7;
+}
+

@@ -16,8 +16,10 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
+
 set $rofi_cmd rofi \
-        -terminal '$term'
+        -terminal '$term' \
+        -theme bubblegum
 # Shows a combined list of the applications with desktop files and
 # executables from PATH.
 set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
@@ -26,10 +28,17 @@ set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
 # Custom Output / Session Setup
 # ==============================================================================
 
-# 1. Define Named Workspace Variables
+# 1. Define Named Workspace Variables (All 10 slots safely declared)
 set $ws1 "1: Term"
 set $ws2 "2: Browse"
 set $ws3 "3: Zed"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # 2. Generate the perfect pixel-mapped 16:9 canvas on boot (idempotent: only
 # creates HEADLESS-1 if it doesn't already exist, so repeated reloads don't
@@ -61,13 +70,17 @@ workspace $ws10 output HEADLESS-1
 # 4. Assign Applications to Specific Named Workspaces
 assign [app_id="Alacritty"] $ws1
 assign [app_id="brave-browser"] $ws2
-# assign [class="Brave-browser"] $ws2
-assign [app_id="dev.zed.Zed"] $ws3
+#assign [app_id="dev.zed.Zed"] $ws3
 
 # 5. Automatically Boot & Route Your Apps on Login
-exec alacritty -e zellij
+exec alacritty -e zellij attach -c "DOTFILES" options --default-cwd "$HOME/Dotfiles"
 exec brave-browser
-exec Zed
+exec "sleep 5 && zed"
+exec "sleep 1 && env SWAYSOCK=$(ls /run/user/1000/sway-ipc.1000.*.sock | head -n 1) waybar"
+
+# Store text and images cleanly into the history database
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
 
 # 6. Run the secure internal connection engine (Local Only)
 exec wayvnc --output=HEADLESS-1 127.0.0.1 5900
@@ -77,18 +90,30 @@ bindsym Ctrl+Mod1+Mod4+u [app_id="brave-browser"] focus
 bindsym Ctrl+Mod1+Mod4+i [app_id="dev.zed.Zed"] focus
 bindsym Ctrl+Mod1+Mod4+y [app_id="Alacritty"] focus
 bindsym Ctrl+Mod1+Mod4+o [app_id="eu.betterbird.Betterbird"] focus
-bindsym Ctrl+Mod1+Mod4+c [app_id="org.speedcrunch.SpeedCrunch"] focus
+bindsym Ctrl+Mod1+Mod4+c exec speedcrunch
 bindsym Ctrl+Mod1+Mod4+p [app_id="org.gnome.Nautilus"] focus
 
-# Send a toggle signal to Waybar on Fedora using Ctrl+Alt+Super+Return (Keycode 36)
-bindcode Ctrl+Mod1+Mod4+36 exec pkill -USR1 waybar
+# Split-Screen Focus Warp Mode Toggle
+bindsym Ctrl+Mod1+Mod4+z exec $HOME/.config/sway/zed-brave-split.sh
+bindsym Ctrl+Mod1+Mod4+a exec $HOME/.config/sway/alacritty-brave-split.sh
+bindsym Ctrl+Mod1+Mod4+t exec $HOME/.config/sway/alacritty-zed-split.sh
+bindsym Ctrl+Mod1+Mod4+s exec $HOME/.config/sway/sway-swap-split.sh
+
+# Send a toggle signal to Waybar on Fedora using Ctrl+Alt+Super+Return
+bindsym Ctrl+Mod1+Mod4+Return exec killall -q -SIGUSR1 waybar
+
+# Press Mod4 (Super) + c to pop open your searchable clipboard history
+bindsym $mod+c exec cliphist list | rofi -dmenu -p "📋 Clipboard" -theme bubblegum | cliphist decode | wl-copy
 
 # Titlebar / Tab bar styling (starts collapsed/hidden in tabbed layout)
-titlebar_border_thickness 0
-titlebar_padding 0 0
-font pango:monospace 1
-for_window [title=".*"] title_format ""
-exec_always "touch /tmp/sway_tabbars_hidden"
+#titlebar_border_thickness 0
+#titlebar_padding 0 0
+#font pango:monospace 1
+#for_window [title=".*"] title_format ""
+#exec_always "touch /tmp/sway_tabbars_hidden"
+
+# Automatically format SpeedCrunch as a right-side sidebar whenever it spawns
+for_window [app_id="org.speedcrunch.SpeedCrunch"] floating enable, resize set width 40 ppt height 90 ppt, move position 60 ppt 5 ppt
 
 hide_edge_borders smart
 default_border none
@@ -235,13 +260,3 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-
-# ==============================================================================
-# Fedora Default Sway Extensions
-# ==============================================================================
-#
-# Pull in Fedora's default drop-in fragments (waybar, media/volume/brightness/
-# screenshot keys, swayidle lock, autostart agents, window rules, etc.) so this
-# config extends Fedora's defaults instead of replacing them. This is the same
-# include Fedora's stock /etc/sway/config uses.
-include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
