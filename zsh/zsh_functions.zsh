@@ -43,3 +43,30 @@ gnome-keybinds() {
     done
   fi
 }
+
+# ==============================================================================
+# Persistent SSH-Agent Socket Synchronization Engine
+# ==============================================================================
+function sync_ssh_agent() {
+    local SSH_ENV="$HOME/.ssh/agent-environment"
+
+    # Internal helper script loop to kick off a fresh authentication channel
+    function _start_agent_worker() {
+        echo "Initializing background SSH authentication agent..."
+        /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+        chmod 600 "${SSH_ENV}"
+        source "${SSH_ENV}" > /dev/null
+        /usr/bin/ssh-add -q "$HOME/.ssh/id_ed25519"
+    }
+
+    # Source existing references if the environment registry is alive
+    if [ -f "${SSH_ENV}" ]; then
+        source "${SSH_ENV}" > /dev/null
+        # Verify that the loaded PID points to a live process thread
+        ps -ef | grep -v grep | grep -q "${SSH_AGENT_PID}.*[s]sh-agent" > /dev/null || {
+            _start_agent_worker
+        }
+    else
+        _start_agent_worker
+    fi
+}
