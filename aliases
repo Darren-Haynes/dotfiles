@@ -117,5 +117,3 @@ alias easy='mpv --shuffle ~/Music/MyMusic/Easy'
 
 # THEMEING
 alias theme="~/Dotfiles/bash-scripts/theme-switcher.zsh"
-alias random-theme='~/Dotfiles/bash-scripts/theme-rotator.zsh'
-alias theme-rotator='~/Dotfiles/bash-scripts/theme-rotator-loop.zsh'
