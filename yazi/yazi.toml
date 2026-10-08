@@ -1,10 +1,22 @@
+# ==============================================================================
+# Yazi Modular Configuration Settings
+# Optimized for koalefant's dark monochrome + ice-blue palette layout
+# ==============================================================================
+
 [opener]
 edit = [
 	{ run = 'nvim "$@"', block = true, desc = "Neovim" }
 ]
+# Cleanly define swayimg as an independent task that unhooks from the terminal sandbox
+view_image = [
+    { run = 'swayimg --class=floating-viewer "$@"', block = false, orphan = true, desc = "Open floating image viewer" }
+]
 
 [open]
 prepend_rules = [
+	# 1. Force the native image MIME types to hit your new swayimg ruleset layout first
+	{ mime = "image/*", use = "view_image" },
+
 	# Source code and text files via MIME type
 	{ mime = "text/*", use = "edit" },
 	{ mime = "application/x-javascript", use = "edit" },
@@ -22,6 +34,7 @@ prepend_rules = [
 ]
 
 [preview]
+preview_method = "sixel"
 max_width = 1920
 max_height = 1080
 
@@ -37,4 +50,5 @@ group = "git"
 
 [manager]
 linemode = "none"
+# FIX: Safely closed with your original layout panel scaling proportions
 ratio = [1, 3, 2]

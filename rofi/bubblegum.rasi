@@ -1,0 +1,90 @@
+/**
+ * Bubblegum Theme for Rofi (Scaled-Up High Visibility Version)
+ * Extracted from koalefant's dark palette layout
+ */
+
+* {
+    /* Color Variable Mappings */
+    bg-frame:       #2A2A2Aff;   /* Base Background */
+    bg-toolbar:     #3A3A3Aff;   /* Active Input Panels */
+    txt-highlight:  #D7D7D7ff;   /* Sharp Off-White */
+    txt-muted:      #A7A7A7ff;   /* Soft Gray Subtext */
+    accent-blue:    #87D7FFff;   /* Ice-Blue Highlight Indicator */
+    transparent:    #00000000;
+
+    background-color:   @transparent;
+    text-color:         @txt-muted;
+
+    /* 1. Scaled Up Typography (Increased from 11 to 14) */
+    font:               "monospace 12";
+}
+
+window {
+    background-color:   @bg-frame;
+    border:            10px;            /* Thicker border frame */
+    border-color:      @accent-blue;
+    border-radius:     16px;
+
+    /* 2. Scaled Up Window Geometry (Widened from 600px to 850px) */
+    width:              950px;
+    padding:            20px;          /* Extra layout breathing room */
+}
+
+mainbox {
+    children:           [ inputbar, listview ];
+    spacing:            15px;
+}
+
+inputbar {
+    background-color:   @bg-toolbar;
+    text-color:         @txt-highlight;
+    border-radius:     6px;
+    padding:            12px 18px;     /* Thicker input field padding */
+    children:           [ prompt, entry ];
+}
+
+prompt {
+    text-color:         @accent-blue;
+    margin:             0px 12px 0px 0px;
+    font:               "monospace bold 14";
+}
+
+entry {
+    text-color:         @txt-highlight;
+    placeholder:        "Search...";
+    placeholder-color:  @txt-muted;
+}
+
+listview {
+    fixed-height:       false;
+    lines:              10;            /* Shows 10 items instead of 8 */
+    scrollbar:          false;
+    spacing:            6px;
+}
+
+element {
+    /* 3. Scaled Up List Element Rows */
+    padding:            10px 16px;     /* Taller rows for easy clicking/reading */
+    border-radius:     6px;
+}
+
+element normal.normal {
+    background-color:   @transparent;
+    text-color:         @txt-muted;
+}
+
+element alternate.normal {
+    background-color:   @transparent;
+    text-color:         @txt-muted;
+}
+
+element selected.normal {
+    background-color:   @bg-toolbar;
+    text-color:         @accent-blue;
+    border:            0px 0px 0px 6px; /* Prominent left indicator block */
+    border-color:      @accent-blue;
+}
+
+element-text {
+    text-color:         inherit;
+}
