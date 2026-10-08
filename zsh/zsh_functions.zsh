@@ -70,3 +70,13 @@ function sync_ssh_agent() {
         _start_agent_worker
     fi
 }
+
+# ==============================================================================
+# CLOSE VAULT
+# ==============================================================================
+close-vault() {
+  local was_in_vault=false
+  [[ "$(pwd)" == /home/darren/Vault* ]] && was_in_vault=true && cd ~
+  fusermount3 -u /home/darren/Vault 2>/dev/null || fusermount3 -uz /home/darren/Vault
+  [[ "$was_in_vault" == true ]] && echo "Vault locked."
+}
