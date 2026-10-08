@@ -14,20 +14,20 @@
 
     background-color:   @transparent;
     text-color:         @txt-muted;
-    
+
     /* 1. Scaled Up Typography (Increased from 11 to 14) */
-    font:               "monospace 14";
+    font:               "monospace 12";
 }
 
 window {
     background-color:   @bg-frame;
-    border:            2px;            /* Thicker border frame */
-    border-color:      @accent-blue; 
-    border-radius:     6px;
-    
+    border:            10px;            /* Thicker border frame */
+    border-color:      @accent-blue;
+    border-radius:     16px;
+
     /* 2. Scaled Up Window Geometry (Widened from 600px to 850px) */
-    width:              850px;
-    padding:            25px;          /* Extra layout breathing room */
+    width:              950px;
+    padding:            20px;          /* Extra layout breathing room */
 }
 
 mainbox {
