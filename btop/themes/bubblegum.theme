@@ -1,0 +1,54 @@
+# ==============================================================================
+# Btop Bubblegum Theme Profile
+# Optimized for koalefant's dark monochrome + ice-blue palette layout
+# ==============================================================================
+
+# Main background color (Bypass terminal fallback to force absolute match)
+theme[main_bg]="#2A2A2A"
+
+# Main text color (Sharp off-white)
+theme[main_fg]="#D7D7D7"
+
+# Title text color (Ice-blue focus accent bars)
+theme[title]="#87D7FF"
+
+# Highlighted text color
+theme[hi_fg]="#ffffff"
+
+# Inactive/Muted text and box outline frame lines (Soft monochrome gray)
+theme[div]="#3A3A3A"
+
+# Context graph outline borders
+theme[box_fg]="#A7A7A7"
+
+# Selected item background highlights
+theme[selected_bg]="#3A3A3A"
+theme[selected_fg]="#87D7FF"
+
+# Interactive text box input panels
+theme[text_bg]="#3A3A3A"
+
+# CPU Graph color lines (Ice-blue blending cleanly into your slate palette)
+theme[cpu_start]="#87D7FF"
+theme[cpu_mid]="#87D7FF"
+theme[cpu_end]="#D7AFD7" # Soft pink/salmon accent from your window frames
+
+# Memory/Disk Graph lines
+theme[mem_start]="#87D7FF"
+theme[mem_mid]="#A7A7A7"
+theme[mem_end]="#D7D7D7"
+
+# Network Graph streams (Download/Upload indicator blocks)
+theme[net_start]="#87D7FF"
+theme[net_mid]="#87D7FF"
+theme[net_end]="#ffffff"
+
+# Process monitor tree meters
+theme[proc_start]="#A7A7A7"
+theme[proc_mid]="#87D7FF"
+theme[proc_end]="#87D7FF"
+
+# Hard temperature warning indicators
+theme[temp_start]="#A7A7A7"
+theme[temp_mid]="#87D7FF"
+theme[temp_end]="#D78787" # Soft salmon warning tint from your config array
