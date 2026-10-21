@@ -14,11 +14,6 @@ rev = "bd3eaa5"
 hash = "92b5c58159a51c567f82b618cee2b78"
 
 [[plugin.deps]]
-use = "jessefarinacci/confirm-quit"
-rev = "6fec416"
-hash = "c6cce44dacc7d1d93b6604f15cdcc539"
-
-[[plugin.deps]]
 use = "lihuax-me/hevi"
 rev = "6cdac97"
 hash = "c3e2f01b50abced971c7f3491bd0f3bc"
