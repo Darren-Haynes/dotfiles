@@ -9,6 +9,8 @@ alias l='ls -lA'
 alias lsfonts='ls /usr/share/fonts/'
 
 # NAVIGATING
+alias ..='cd ..'
+alias ...='cd ../..'
 alias cdd="cd ~/Downloads"
 alias cdot="cd ~/Dotfiles"
 alias cdp="cd ~/Projects"
@@ -18,11 +20,12 @@ alias cdyazi="cd ~/Dotfiles/yazi"
 alias cdwez="cd ~/Dotfiles/wezterm"
 alias cdzed="cd ~/Dotfiles/zed"
 alias cdwall="cd ~/Pictures/Wallpaper"
+alias cdtrash="cd ~/.local/share/Trash/"
 
 # lSD
 alias ls='lsd'
-alias l='ls -l'
-alias la='ls -a'
+alias l='ls -lhF'
+alias la='ls -lhFA'
 alias lla='ls -la'
 alias lt='ls --tree'
 
@@ -66,6 +69,7 @@ alias gof='git switch front-end'
 # GIT / DIFF
 alias gd="git diff | delta --side-by-side"
 alias cgd="clear; git diff | delta --side-by-side"
+alias gb="git show-branch --all"
 
 # NODE / NPM / NPX
 alias ns='npm run start'
@@ -88,6 +92,7 @@ alias hg='history | grep '
 alias ht='history | tail '
 alias now="date '+%R'"
 alias rmsymlinks="rm -- *(@)"
+alias reload-foot="kill -SIGUSR1 $(pgrep -x foot)"
 
 # COPY
 alias copy='xsel --clipboard < '
@@ -115,5 +120,7 @@ alias romantic='mpv --shuffle ~/Music/MyMusic/Classical/Romantic'
 alias reggae='mpv --shuffle ~/Music/MyMusic/Reggae'
 alias easy='mpv --shuffle ~/Music/MyMusic/Easy'
 
-# THEMEING
+# THEMEING / COLORS
 alias theme="~/Dotfiles/bash-scripts/theme-switcher.zsh"
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
