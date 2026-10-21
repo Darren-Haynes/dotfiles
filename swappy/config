@@ -1,0 +1,5 @@
+[Default]
+save_dir=/home/darren/Pictures/Screenshots
+save_filename_format=Screenshot_%Y%m%d_%H%M%S.png
+early_exit=true
+
