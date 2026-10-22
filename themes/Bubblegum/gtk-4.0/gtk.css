@@ -1,0 +1,223 @@
+/* Bubblegum Theme — GTK4 */
+
+@define-color window_bg_color       #2a2a2a;
+@define-color window_fg_color       #d7d7d7;
+@define-color view_bg_color         #2a2a2a;
+@define-color view_fg_color         #d7d7d7;
+@define-color headerbar_bg_color    #3a3a3a;
+@define-color headerbar_fg_color    #d7d7d7;
+@define-color selected_bg_color     #87d7ff;
+@define-color selected_fg_color     #2a2a2a;
+@define-color accent_bg_color       #87d7ff;
+@define-color accent_fg_color       #2a2a2a;
+@define-color base_color            #303030;
+@define-color base_fg_color         #d7d7d7;
+@define-color border_color          #454545;
+@define-color destructive_fg_color  #d78787;
+
+/* Window */
+window.background {
+    background-color: #2a2a2a;
+    color: #d7d7d7;
+}
+
+/* Title bar / header */
+windowtitlebar, headerbar {
+    background-color: #3a3a3a;
+    color: #d7d7d7;
+    border-bottom: 1px solid #454545;
+}
+
+windowtitlebar button, headerbar button {
+    background-color: transparent;
+    color: #d7d7d7;
+    border: none;
+    box-shadow: none;
+}
+
+windowtitlebar button:hover, headerbar button:hover {
+    background-color: #454545;
+}
+
+windowtitlebar button:active {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* Scales (volume sliders — the main thing in pavucontrol) */
+scale {
+    color: #87d7ff;
+}
+
+scale trough {
+    background-color: #454545;
+    min-height: 6px;
+    border-radius: 3px;
+}
+
+scale trough highlight {
+    background-color: #87d7ff;
+    border-radius: 3px;
+}
+
+scale trough slider {
+    background-color: #d7d7d7;
+    border: 2px solid #87d7ff;
+    border-radius: 50%;
+    min-width: 14px;
+    min-height: 14px;
+}
+
+scale trough slider:hover {
+    background-color: #ffffff;
+}
+
+scale value {
+    color: #a7a7a7;
+}
+
+/* Switches (mute toggles) */
+switch {
+    background-color: #454545;
+    border-radius: 10px;
+    min-height: 20px;
+    min-width: 40px;
+}
+
+switch:checked {
+    background-color: #87d7ff;
+}
+
+switch slider {
+    background-color: #d7d7d7;
+    border-radius: 50%;
+}
+
+switch:checked slider {
+    background-color: #2a2a2a;
+}
+
+/* Buttons */
+button {
+    background-color: #3a3a3a;
+    color: #d7d7d7;
+    border: 1px solid #454545;
+    border-radius: 4px;
+    padding: 4px 12px;
+}
+
+button:hover {
+    background-color: #454545;
+}
+
+button:active, button:checked {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* Entries */
+entry {
+    background-color: #303030;
+    color: #d7d7d7;
+    border: 1px solid #454545;
+    border-radius: 4px;
+}
+
+entry:focus {
+    border-color: #87d7ff;
+    box-shadow: 0 0 0 1px #87d7ff;
+}
+
+entry selection {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* Popovers / menus */
+popover.background {
+    background-color: #3a3a3a;
+    color: #d7d7d7;
+    border: 1px solid #454545;
+    border-radius: 6px;
+}
+
+popover menuitem, popover button.flat {
+    color: #d7d7d7;
+    background-color: transparent;
+}
+
+popover menuitem:hover, popover button.flat:hover {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* Checkboxes / radios */
+checkbutton check, radiobutton radio {
+    background-color: #303030;
+    border: 1px solid #454545;
+    border-radius: 3px;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+checkbutton check:checked, radiobutton radio:checked {
+    background-color: #87d7ff;
+    border-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* Scrollbars */
+scrollbar {
+    background-color: #2a2a2a;
+}
+
+scrollbar slider {
+    background-color: #454545;
+    border-radius: 4px;
+    min-width: 8px;
+}
+
+scrollbar slider:hover {
+    background-color: #87d7ff;
+}
+
+/* Labels */
+label {
+    color: #d7d7d7;
+}
+
+.dim-label, label:disabled {
+    color: #a7a7a7;
+}
+
+/* Selection */
+:selected {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}   
+
+/* Notebook tabs (Playback / Recording / etc.) */
+notebook header {
+    background-color: #3a3a3a;
+    border-bottom: 1px solid #454545;
+}
+
+notebook header tab {
+    padding: 6px 16px;
+    margin: 0 2px;
+    color: #a7a7a7;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+}
+
+notebook header tab:hover {
+    color: #d7d7d7;
+    background-color: #454545;
+}
+
+notebook header tab:checked {
+    color: #d7afd7;
+    background-color: #2a2a2a;
+    border-bottom: 2px solid #d7afd7;
+}

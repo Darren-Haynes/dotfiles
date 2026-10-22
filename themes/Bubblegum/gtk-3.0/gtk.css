@@ -1,0 +1,360 @@
+/* ============================================
+   Bubblegum Theme — GTK3
+   Palette from foot + sway configs
+   ============================================ */
+
+@define-color theme_bg_color          #2a2a2a;
+@define-color theme_fg_color          #d7d7d7;
+@define-color theme_base_color        #303030;
+@define-color theme_text_color        #d7d7d7;
+@define-color theme_selected_bg_color #87d7ff;
+@define-color theme_selected_fg_color #ffffff;
+@define-color theme_unfocused_bg_color #2a2a2a;
+@define-color theme_unfocused_fg_color #a7a7a7;
+@define-color theme_unfocused_base_color #303030;
+@define-color theme_unfocused_text_color #a7a7a7;
+@define-color theme_unfocused_selected_bg_color #454545;
+@define-color theme_unfocused_selected_fg_color #a7a7a7;
+@define-color theme_tooltip_bg_color  #3a3a3a;
+@define-color theme_tooltip_fg_color  #d7d7d7;
+@define-color theme_engine            "Adwaita";
+
+/* ============================================
+   General window / base
+   ============================================ */
+
+window, .background {
+    background-color: #2a2a2a;
+    color: #d7d7d7;
+}
+
+/* ============================================
+   Header bar / toolbar
+   ============================================ */
+
+headerbar, .titlebar {
+    background-color: #3a3a3a;
+    color: #d7d7d7;
+    border-bottom: 1px solid #454545;
+}
+
+headerbar button, .titlebar button {
+    background-color: transparent;
+    color: #d7d7d7;
+    border: none;
+    box-shadow: none;
+}
+
+headerbar button:hover, .titlebar button:hover {
+    background-color: #454545;
+}
+
+headerbar button:active, .titlebar button:active {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* ============================================
+   Toolbar (Thunar-specific)
+   ============================================ */
+
+.thunar toolbar {
+    background-color: #3a3a3a;
+    border-bottom: 1px solid #454545;
+}
+
+.thunar toolbar button {
+    background-color: transparent;
+    color: #d7d7d7;
+    border: none;
+    box-shadow: none;
+}
+
+.thunar toolbar button:hover {
+    background-color: #454545;
+}
+
+.thunar toolbar button:active {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* ============================================
+   Path bar (Thunar location toolbar)
+   ============================================ */
+
+.thunar toolbar#location-toolbar button.path-bar-button {
+    background-color: transparent;
+    color: #d7afd7;
+    border: none;
+    box-shadow: none;
+}
+
+.thunar toolbar#location-toolbar button.path-bar-button:checked {
+    background-color: #d7afd7;
+    color: #2a2a2a;
+    border-radius: 4px;
+}
+
+/* ============================================
+   Sidebar (Thunar shortcuts / tree)
+   ============================================ */
+
+.thunar .sidebar,
+.thunar .sidebar .view {
+    background-color: #303030;
+    color: #d7d7d7;
+    border: none;
+}
+
+.thunar .sidebar .view:hover {
+    background-color: #3a3a3a;
+    color: #ffffff;
+}
+
+.thunar .sidebar .view:selected {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+.thunar .sidebar .view:active {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* ============================================
+   Main file view (list + icon)
+   ============================================ */
+
+.thunar .standard-view .view,
+.thunar notebook treeview.view {
+    background-color: #2a2a2a;
+    color: #d7d7d7;
+}
+
+.thunar .standard-view .view:hover,
+.thunar notebook treeview.view:hover {
+    background-color: #3a3a3a;
+    color: #ffffff;
+}
+
+.thunar .standard-view .view:selected,
+.thunar notebook treeview.view:selected {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+.thunar .standard-view iconview:selected,
+.thunar .standard-view iconview .view:selected {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* ============================================
+   Column headers
+   ============================================ */
+
+.thunar treeview.view header button {
+    background-color: #3a3a3a;
+    color: #a7a7a7;
+    border: none;
+    border-bottom: 1px solid #454545;
+    box-shadow: none;
+    font-weight: bold;
+}
+
+.thunar treeview.view header button:hover {
+    background-color: #454545;
+    color: #d7d7d7;
+}
+
+/* ============================================
+   Notebook / tabs
+   ============================================ */
+
+.thunar notebook header {
+    background-color: #3a3a3a;
+    border-bottom: 1px solid #454545;
+}
+
+.thunar notebook header tab {
+    background-color: transparent;
+    color: #a7a7a7;
+    border: none;
+}
+
+.thunar notebook header tab:hover {
+    color: #d7d7d7;
+    background-color: #454545;
+}
+
+.thunar notebook header tab:checked {
+    color: #d7afd7;
+    background-color: #2a2a2a;
+    border-bottom: 2px solid #d7afd7;
+}
+
+/* ============================================
+   Status bar
+   ============================================ */
+
+.thunar grid paned grid,
+.statusbar {
+    background-color: #303030;
+    color: #a7a7a7;
+    border-top: 1px solid #454545;
+}
+
+/* ============================================
+   Scrollbars
+   ============================================ */
+
+scrollbar {
+    background-color: #2a2a2a;
+}
+
+scrollbar slider {
+    background-color: #454545;
+    border-radius: 4px;
+    min-width: 8px;
+}
+
+scrollbar slider:hover {
+    background-color: #87d7ff;
+}
+
+scrollbar trough {
+    background-color: #2a2a2a;
+}
+
+/* ============================================
+   Entries / search
+   ============================================ */
+
+entry {
+    background-color: #303030;
+    color: #d7d7d7;
+    border: 1px solid #454545;
+    border-radius: 4px;
+}
+
+entry:focus {
+    border-color: #87d7ff;
+    box-shadow: 0 0 0 1px #87d7ff;
+}
+
+entry selection {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* ============================================
+   Menus / popovers
+   ============================================ */
+
+menu, .popover {
+    background-color: #3a3a3a;
+    color: #d7d7d7;
+    border: 1px solid #454545;
+}
+
+menu menuitem, .popover .menuitem {
+    color: #d7d7d7;
+    padding: 4px 8px;
+}
+
+menu menuitem:hover, .popover .menuitem:hover {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* ============================================
+   Buttons (general)
+   ============================================ */
+
+button {
+    background-color: #3a3a3a;
+    color: #d7d7d7;
+    border: 1px solid #454545;
+    border-radius: 4px;
+    padding: 4px 12px;
+}
+
+button:hover {
+    background-color: #454545;
+}
+
+button:active, button:checked {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* ============================================
+   Tooltips
+   ============================================ */
+
+tooltip {
+    background-color: #3a3a3a;
+    color: #d7d7d7;
+    border: 1px solid #454545;
+    border-radius: 4px;
+}
+
+/* ============================================
+   Selection (global fallback)
+   ============================================ */
+
+:selected {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+text selection, entry selection, spinbutton selection {
+    background-color: #87d7ff;
+    color: #2a2a2a;
+}
+
+/* ============================================
+   Switches / checks
+   ============================================ */
+
+switch {
+    background-color: #454545;
+    border-radius: 10px;
+}
+
+switch:checked {
+    background-color: #87d7ff;
+}
+
+checkbutton check, radiobutton radio {
+    background-color: #303030;
+    border: 1px solid #454545;
+}
+
+checkbutton check:checked, radiobutton radio:checked {
+    background-color: #87d7ff;
+    border-color: #87d7ff;
+}   
+
+/* ============================================
+   Menubar
+   ============================================ */
+menubar {
+    background-color: #3a3a3a;
+    color: #d7d7d7;
+    border-bottom: 1px solid #454545;
+    padding: 2px 4px;
+}
+
+menubar > menuitem {
+    padding: 4px 12px;
+    margin: 0 2px;
+    color: #d7d7d7;
+    border-radius: 4px;
+}
+
+menubar > menuitem:hover {
+    background-color: #454545;
+    color: #ffffff;
+}
