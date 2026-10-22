@@ -1,0 +1,15 @@
+#!/bin/bash
+case "$1" in
+    dark)
+        export GTK_THEME="Bubblegum"
+        ;;
+    light)
+        export GTK_THEME="Bubblegum Light"
+        ;;
+    *)
+        echo "Usage: bubblegum-theme [dark|light]"
+        exit 1
+        ;;
+esac
+# Kill and restart running GTK apps to pick up the change
+pkill -f thunar; pkill -f pavucontrol   

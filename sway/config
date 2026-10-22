@@ -147,7 +147,7 @@ bindsym $mod+Mod1+c exec cliphist list | rofi -dmenu -p "🗑️ Erase Clip" -th
 # Automatically open Gnome Characters in a floating window container
 for_window [app_id="org.gnome.Characters"] floating enable, resize set width 65 ppt height 75 ppt, move position center
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, resize set width 65 ppt height 75 ppt, move position center
-for_window [app_id="zenity"] floating enable, move position center
+for_window [app_id="zenity"] floating enable, border pixel 12, move position center
 
 # Automatically open your Yazi image viewers as high-visibility floating cards
 for_window [app_id="floating-viewer"] floating enable
@@ -158,7 +158,7 @@ for_window [app_id="floating-viewer"] floating enable
 # ==============================================================================
 hide_edge_borders smart
 default_border none
-default_floating_border pixel 8
+default_floating_border pixel 12
 titlebar_separator disable
 focus_follows_mouse no   
 
@@ -170,16 +170,19 @@ for_window [app_id="floating-nmtui"] floating enable
 for_window [app_id="org.gnome.Characters"] floating enable
 
 # FIX: Forcing an explicit border style reset completely strips the GTK application-level overrides!
-for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, border pixel 8, resize set width 60 ppt height 65 ppt, move position center
-for_window [app_id="thunar"] floating enable, border pixel 8, resize set width 60 ppt height 65 ppt, move position center
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, border pixel 12, resize set width 60 ppt height 65 ppt, move position center
+for_window [app_id="thunar"] floating enable, border pixel 12, resize set width 60 ppt height 65 ppt, move position center
 
 # Bubblegum Theme Palette (from zed/themes/bubblegum/bubblegum+.json)
 # Class                  border    backgr.   text      indicator child_border
-client.focused          "#488F6D" "#3A3A3A" "#ffffff" "#488F6D"   "#488F6D"
+client.focused          "#E0E0E0" "#3A3A3A" "#ffffff" "#E0E0E0"   "#E0E0E0"
 client.focused_inactive "#454545" "#2A2A2a" "#A7A7A7" "#303030"   "#222222"
 client.unfocused        "#303030" "#B5B3AD" "#808080" "#222222"   "#222222"
 client.urgent           "#D78787" "#402020" "#ffffff" "#D78787"   "#D78787"
 client.background       "#303030"
+
+bindsym Mod1+Shift+d exec gsettings set org.gnome.desktop.interface gtk-theme 'Bubblegum'
+bindsym Mod1+Shift+l exec gsettings set org.gnome.desktop.interface gtk-theme 'Bubblegum Light'   
 
 bindsym $mod+Shift+x exec hyprpicker
 bindsym $mod+Shift+t exec ~/.config/sway/toggle-titlebars.sh

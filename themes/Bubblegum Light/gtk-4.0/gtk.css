@@ -1,0 +1,228 @@
+@define-color window_bg_color       #f5f5f5;
+@define-color window_fg_color       #2a2a2a;
+@define-color view_bg_color         #f5f5f5;
+@define-color view_fg_color         #2a2a2a;
+@define-color headerbar_bg_color    #e0e0e0;
+@define-color headerbar_fg_color    #2a2a2a;
+@define-color selected_bg_color     #0088cc;
+@define-color selected_fg_color     #ffffff;
+@define-color accent_bg_color       #0088cc;
+@define-color accent_fg_color       #ffffff;
+@define-color base_color            #ececec;
+@define-color base_fg_color         #2a2a2a;
+@define-color border_color          #c8c8c8;
+@define-color destructive_fg_color  #cc3333;
+
+window.background {
+    background-color: #f5f5f5;
+    color: #2a2a2a;
+}
+
+windowtitlebar, headerbar {
+    background-color: #e0e0e0;
+    color: #2a2a2a;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+windowtitlebar button, headerbar button {
+    background-color: transparent;
+    color: #2a2a2a;
+    border: none;
+    box-shadow: none;
+}
+
+windowtitlebar button:hover, headerbar button:hover {
+    background-color: #d5d5d5;
+}
+
+windowtitlebar button:active {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+scale {
+    color: #0088cc;
+}
+
+scale trough {
+    background-color: #c8c8c8;
+    min-height: 6px;
+    border-radius: 3px;
+}
+
+scale trough highlight {
+    background-color: #0088cc;
+    border-radius: 3px;
+}
+
+scale trough slider {
+    background-color: #ffffff;
+    border: 2px solid #0088cc;
+    border-radius: 50%;
+    min-width: 14px;
+    min-height: 14px;
+}
+
+scale value {
+    color: #666666;
+}
+
+switch {
+    background-color: #c8c8c8;
+    border-radius: 10px;
+    min-height: 20px;
+    min-width: 40px;
+}
+
+switch:checked {
+    background-color: #0088cc;
+}
+
+switch slider {
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+button {
+    background-color: #e0e0e0;
+    color: #2a2a2a;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    padding: 4px 12px;
+}
+
+button:hover {
+    background-color: #d5d5d5;
+}
+
+button:active, button:checked {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+entry {
+    background-color: #ececec;
+    color: #2a2a2a;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+}
+
+entry:focus {
+    border-color: #0088cc;
+    box-shadow: 0 0 0 1px #0088cc;
+}
+
+entry selection {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+popover.background {
+    background-color: #e0e0e0;
+    color: #2a2a2a;
+    border: 1px solid #c8c8c8;
+    border-radius: 6px;
+}
+
+popover menuitem, popover button.flat {
+    color: #2a2a2a;
+    background-color: transparent;
+}
+
+popover menuitem:hover, popover button.flat:hover {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+checkbutton check, radiobutton radio {
+    background-color: #ececec;
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+checkbutton check:checked, radiobutton radio:checked {
+    background-color: #0088cc;
+    border-color: #0088cc;
+    color: #ffffff;
+}
+
+scrollbar {
+    background-color: #f5f5f5;
+}
+
+scrollbar slider {
+    background-color: #c8c8c8;
+    border-radius: 4px;
+    min-width: 8px;
+}
+
+scrollbar slider:hover {
+    background-color: #0088cc;
+}
+
+label {
+    color: #2a2a2a;
+}
+
+.dim-label, label:disabled {
+    color: #666666;
+}
+
+:selected {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+/* Notebook tabs (pavucontrol) */
+notebook header {
+    background-color: #e0e0e0;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+notebook header tab {
+    padding: 6px 16px;
+    margin: 0 2px;
+    color: #666666;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+}
+
+notebook header tab:hover {
+    color: #2a2a2a;
+    background-color: #d5d5d5;
+}
+
+notebook header tab:checked {
+    color: #b060a0;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #b060a0;
+}
+
+/* Menubar */
+menubar {
+    background-color: #e0e0e0;
+    color: #2a2a2a;
+    padding: 2px 4px;
+}
+
+menubar > item,
+menubar > menuitem {
+    padding: 4px 12px;
+    margin: 0 2px;
+    color: #2a2a2a;
+    border-radius: 4px;
+}
+
+menubar > item:hover,
+menubar > menuitem:hover {
+    background-color: #d5d5d5;
+    color: #2a2a2a;
+}
+
+menubar > item.active {
+    background-color: #0088cc;
+    color: #ffffff;
+}   

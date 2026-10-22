@@ -1,0 +1,270 @@
+@define-color theme_bg_color          #f5f5f5;
+@define-color theme_fg_color          #2a2a2a;
+@define-color theme_base_color        #ececec;
+@define-color theme_text_color        #2a2a2a;
+@define-color theme_selected_bg_color #0088cc;
+@define-color theme_selected_fg_color #ffffff;
+@define-color theme_unfocused_bg_color #f5f5f5;
+@define-color theme_unfocused_fg_color #666666;
+@define-color theme_unfocused_base_color #ececec;
+@define-color theme_unfocused_text_color #666666;
+@define-color theme_unfocused_selected_bg_color #c8c8c8;
+@define-color theme_unfocused_selected_fg_color #2a2a2a;
+@define-color theme_tooltip_bg_color  #e0e0e0;
+@define-color theme_tooltip_fg_color  #2a2a2a;
+@define-color theme_engine            "Adwaita";
+
+window, .background {
+    background-color: #f5f5f5;
+    color: #2a2a2a;
+}
+
+headerbar, .titlebar {
+    background-color: #e0e0e0;
+    color: #2a2a2a;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+headerbar button, .titlebar button {
+    background-color: transparent;
+    color: #2a2a2a;
+    border: none;
+    box-shadow: none;
+}
+
+headerbar button:hover, .titlebar button:hover {
+    background-color: #d5d5d5;
+}
+
+headerbar button:active, .titlebar button:active {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+.thunar toolbar {
+    background-color: #e0e0e0;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+.thunar toolbar button {
+    background-color: transparent;
+    color: #2a2a2a;
+    border: none;
+    box-shadow: none;
+}
+
+.thunar toolbar button:hover {
+    background-color: #d5d5d5;
+}
+
+.thunar toolbar button:active {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+.thunar toolbar#location-toolbar button.path-bar-button {
+    background-color: transparent;
+    color: #b060a0;
+    border: none;
+    box-shadow: none;
+}
+
+.thunar toolbar#location-toolbar button.path-bar-button:checked {
+    background-color: #b060a0;
+    color: #ffffff;
+    border-radius: 4px;
+}
+
+.thunar .sidebar,
+.thunar .sidebar .view {
+    background-color: #ececec;
+    color: #2a2a2a;
+    border: none;
+}
+
+.thunar .sidebar .view:hover {
+    background-color: #d5d5d5;
+}
+
+.thunar .sidebar .view:selected {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+.thunar .standard-view .view,
+.thunar notebook treeview.view {
+    background-color: #f5f5f5;
+    color: #2a2a2a;
+}
+
+.thunar .standard-view .view:hover,
+.thunar notebook treeview.view:hover {
+    background-color: #e0e0e0;
+}
+
+.thunar .standard-view .view:selected,
+.thunar notebook treeview.view:selected {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+.thunar treeview.view header button {
+    background-color: #e0e0e0;
+    color: #666666;
+    border: none;
+    border-bottom: 1px solid #c8c8c8;
+    box-shadow: none;
+    font-weight: bold;
+}
+
+.thunar treeview.view header button:hover {
+    background-color: #d5d5d5;
+    color: #2a2a2a;
+}
+
+.thunar notebook header {
+    background-color: #e0e0e0;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+.thunar notebook header tab {
+    background-color: transparent;
+    color: #666666;
+    border: none;
+}
+
+.thunar notebook header tab:hover {
+    color: #2a2a2a;
+    background-color: #d5d5d5;
+}
+
+.thunar notebook header tab:checked {
+    color: #b060a0;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #b060a0;
+}
+
+.statusbar {
+    background-color: #ececec;
+    color: #666666;
+    border-top: 1px solid #c8c8c8;
+}
+
+menubar {
+    background-color: #e0e0e0;
+    color: #2a2a2a;
+    border-bottom: 1px solid #c8c8c8;
+    padding: 2px 4px;
+}
+
+menubar > menuitem {
+    padding: 4px 12px;
+    margin: 0 2px;
+    color: #2a2a2a;
+    border-radius: 4px;
+}
+
+menubar > menuitem:hover {
+    background-color: #d5d5d5;
+    color: #2a2a2a;
+}
+
+scrollbar {
+    background-color: #f5f5f5;
+}
+
+scrollbar slider {
+    background-color: #c8c8c8;
+    border-radius: 4px;
+    min-width: 8px;
+}
+
+scrollbar slider:hover {
+    background-color: #0088cc;
+}
+
+entry {
+    background-color: #ececec;
+    color: #2a2a2a;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+}
+
+entry:focus {
+    border-color: #0088cc;
+    box-shadow: 0 0 0 1px #0088cc;
+}
+
+entry selection {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+menu, .popover {
+    background-color: #e0e0e0;
+    color: #2a2a2a;
+    border: 1px solid #c8c8c8;
+}
+
+menu menuitem, .popover .menuitem {
+    color: #2a2a2a;
+    padding: 4px 8px;
+}
+
+menu menuitem:hover, .popover .menuitem:hover {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+button {
+    background-color: #e0e0e0;
+    color: #2a2a2a;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    padding: 4px 12px;
+}
+
+button:hover {
+    background-color: #d5d5d5;
+}
+
+button:active, button:checked {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+tooltip {
+    background-color: #e0e0e0;
+    color: #2a2a2a;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+}
+
+:selected {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+text selection, entry selection, spinbutton selection {
+    background-color: #0088cc;
+    color: #ffffff;
+}
+
+switch {
+    background-color: #c8c8c8;
+    border-radius: 10px;
+}
+
+switch:checked {
+    background-color: #0088cc;
+}
+
+checkbutton check, radiobutton radio {
+    background-color: #ececec;
+    border: 1px solid #c8c8c8;
+}
+
+checkbutton check:checked, radiobutton radio:checked {
+    background-color: #0088cc;
+    border-color: #0088cc;
+}   
