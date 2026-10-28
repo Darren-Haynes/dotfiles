@@ -113,7 +113,7 @@ headerbar button:active, .titlebar button:active {
 }
 
 .thunar .sidebar .view:selected {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
