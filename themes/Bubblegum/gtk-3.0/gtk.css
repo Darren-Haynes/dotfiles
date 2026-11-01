@@ -17,7 +17,6 @@
 @define-color theme_unfocused_selected_fg_color #a7a7a7;
 @define-color theme_tooltip_bg_color  #3a3a3a;
 @define-color theme_tooltip_fg_color  #d7d7d7;
-@define-color theme_engine            "Adwaita";
 
 /* ============================================
    General window / base
@@ -357,4 +356,138 @@ menubar > menuitem {
 menubar > menuitem:hover {
     background-color: #454545;
     color: #ffffff;
+}
+
+/* ============================================
+   GtkFileChooser / xdg-desktop-portal-gtk
+   (the picker Brave, Betterbird, etc. open)
+   Note: GTK CSS has no !important, and the sidebar
+   is a GtkListBox: placessidebar > row, not a treeview.
+   ============================================ */
+
+/* --- Sidebar container --- */
+placessidebar {
+    background-color: #2a2a2a;
+    color: #d7d7d7;
+    border-right: 1px solid #454545;
+}
+
+placessidebar > viewport.frame {
+    border-style: none;
+}
+
+placessidebar list {
+    background-color: transparent;
+}
+
+/* --- Rows (layout lost when not inheriting Adwaita) --- */
+placessidebar row {
+    min-height: 36px;
+    padding: 0;
+    color: #d7d7d7;
+    background-color: transparent;
+    border-left: 3px solid transparent;
+}
+
+placessidebar row > revealer {
+    padding: 0 14px;
+}
+
+placessidebar row image.sidebar-icon {
+    padding-right: 8px;
+    color: #d7afd7;
+}
+
+placessidebar row label.sidebar-label {
+    padding-right: 2px;
+}
+
+/* --- Hover / selected --- */
+placessidebar row:hover {
+    background-color: #3a3a3a;
+    color: #ffffff;
+    border-left-color: #87d7ff;
+}
+
+placessidebar row:selected,
+placessidebar row:selected:focus {
+    background-color: #d7afd7;
+    color: #2a2a2a;
+    border-left-color: #87d7ff;
+}
+
+placessidebar row:selected image.sidebar-icon,
+placessidebar row:selected label {
+    color: #2a2a2a;
+}
+
+placessidebar row:disabled {
+    color: #808080;
+}
+
+/* --- Eject / unmount buttons inside rows --- */
+placessidebar row button.sidebar-button {
+    min-height: 26px;
+    min-width: 26px;
+    margin: 3px 0;
+    padding: 0;
+    border-radius: 100%;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: #a7a7a7;
+}
+
+placessidebar row button.sidebar-button:hover {
+    background-color: #454545;
+    color: #ffffff;
+}
+
+placessidebar row:selected button.sidebar-button {
+    color: #2a2a2a;
+}
+
+/* --- Drag & drop feedback --- */
+placessidebar row.sidebar-placeholder-row {
+    padding: 0 8px;
+    min-height: 2px;
+    background-image: image(#87d7ff);
+    background-clip: content-box;
+}
+
+placessidebar row.sidebar-new-bookmark-row {
+    color: #87d7ff;
+}
+
+placessidebar row:drop(active):not(:disabled) {
+    color: #87d7ff;
+    box-shadow: inset 0 1px #87d7ff, inset 0 -1px #87d7ff;
+}
+
+/* --- Section separators --- */
+placessidebar separator {
+    background-color: #454545;
+    min-height: 1px;
+    margin: 6px 14px;
+}
+
+/* --- "Other Locations" view --- */
+placesview {
+    background-color: #2a2a2a;
+    color: #d7d7d7;
+}
+
+placesview row.activatable:hover {
+    background-color: #3a3a3a;
+}
+
+/* --- File list selection contrast (dark text on cyan) --- */
+treeview.view:selected,
+treeview.view:selected:focus,
+treeview.view:selected:backdrop,
+iconview:selected,
+iconview:selected:backdrop,
+iconview .view:selected {
+    background-color: #87d7ff;
+    color: #2a2a2a;
 }

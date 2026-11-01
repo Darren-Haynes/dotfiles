@@ -1,192 +1,70 @@
 # ==============================================================================
-# M1 iMac Thin-Client Display Automation
+# M1 iMac Thin-Client Display Automation & Structural Architecture
 # ==============================================================================
 
-### Variables
-#
-# 0. Modifier key used by bindsym below (Mod4 = Super/Windows key)
-set $mod Mod4
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
-# Your preferred terminal emulator
-set $term foot
-# Your preferred application launcher
-set $rofi_cmd rofi \
-        -terminal '$term' \
-        -theme bubblegum
-# Shows a combined list of the applications with desktop files and executables from PATH.
-set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
+## Core Variables & Token Mapping
+set $mod          Mod4
+set $hyper        Ctrl+Mod1+Mod4
+set $hyper_shift  Ctrl+Mod1+Mod4+Shift
+
+set $left         h
+set $down         j
+set $up           k
+set $right        l
+
+set $term         foot
+set $lock         swaylock -f
+
+# Application Launcher Matrix
+set $rofi_cmd     rofi -terminal '$term' -theme bubblegum
+set $menu         $rofi_cmd -show combi -combi-modes drun#run -modes combi
+
+# Workspace Domain Assignments
+set $ws1          "1: "
+set $ws2          "2: "
+set $ws3          "3: "
+set $ws4          "4"
+set $ws5          "5"
+set $ws6          "6"
+set $ws7          "7"
+set $ws8          "8"
+set $ws9          "9"
+set $ws10         "10"
 
 # ==============================================================================
-# Custom Output / Session Setup
+# Compositor Pipeline, Boot Initialization & Daemon Orchestration
 # ==============================================================================
 
-# 1. Define Named Workspace Variables (All 10 slots safely declared)
-set $ws1 "1: "
-set $ws2 "2: "
-set $ws3 "3: "
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-
-# 2. Generate the perfect pixel-mapped 16:9 canvas on boot
+# Headless Canvas Target Engine
 exec_always "swaymsg -t get_outputs -r | grep -q HEADLESS-1 || swaymsg create_output HEADLESS-1; swaymsg output HEADLESS-1 mode 2240x1260 position 0 0 scale 1"
 
-# Start the xdg-desktop-portal
+# Environment Variables & Core Session Pipeline
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target   
 
-# 1b. Set the wallpaper
-exec_always "pkill -x swaybg; swaybg -i ~/Pictures/Wallpaper/oceanic.jpg -m fill"
-
-# 3. Bind your main development spaces to this crisp layout view
-output HDMI-A-1 disable
-workspace $ws1 output HEADLESS-1
-workspace $ws2 output HEADLESS-1
-workspace $ws3 output HEADLESS-1
-workspace $ws4 output HEADLESS-1
-workspace $ws5 output HEADLESS-1
-workspace $ws6 output HEADLESS-1
-workspace $ws7 output HEADLESS-1
-workspace $ws8 output HEADLESS-1
-workspace $ws9 output HEADLESS-1
-workspace $ws10 output HEADLESS-1
-
-# 4. Assign Applications to Specific Named Workspaces
-assign [app_id="foot-main"] $ws1
-assign [app_id="brave-browser"] $ws2
-assign [app_id="dev.zed.Zed"] $ws3
-
-# 5. Automatically Boot & Route Your Apps on Login
-exec foot --app-id="foot-main"
-exec brave-browser
-exec sleep 5 && zed
-
-# FIX: Wrapped inside a bash string execution container to cleanly parse both instructions on log-in
+# UI Daemons & Clipboard Sync Matrix
 exec_always "pkill waybar; waybar"
-
-# Store text and images cleanly into the history database
-exec wl-paste --type text --watch cliphist store
+exec_always "pkill -x swaybg; swaybg -i ~/Pictures/Wallpaper/pink-clouds.jpg -m fill"
+bindsym Ctrl+Mod1+Mod4+Return exec killall -q -SIGUSR1 waybar
+exec wl-paste --type text  --watch cliphist store
 exec wl-paste --type image --watch cliphist store
 
-# 6. Run the secure internal connection engine (Local Only)
+# Secure Local Headless Connection Core
 exec wayvnc --output=HEADLESS-1 127.0.0.1 5900
 
 # ==============================================================================
-# Window Rules & Management Macros
+# Bubblegum Theme Palette 
 # ==============================================================================
-
-# ==============================================================================
-# Foot + Btop Fullscreen Scratchpad Monitor (Native Focus Routing)
-# ==============================================================================
-# 1. Catch Foot-Btop on birth, enable its floating canvas, and hide it away first
-for_window [app_id="foot-scratchpad"] floating enable, move scratchpad
-
-# 2. Perfect Toggle Loop: Isolated inside brackets so its keys stay bound to Return!
-bindsym $mod+Shift+Return exec swaymsg '[app_id="foot-scratchpad"] scratchpad show' || (foot -a foot-scratchpad btop & sleep 0.15 && swaymsg '[app_id="foot-scratchpad"] scratchpad show, fullscreen enable')
-
-# ==============================================================================
-# Foot + Yazi Fullscreen File Cockpit (Native Sixel Engine)
-# ==============================================================================
-# 1. Catch Foot-Yazi on birth, enable its floating canvas, and hide it away first
-for_window [app_id="foot-yazi"] floating enable, move scratchpad
-for_window [app_id="foot-demand"] floating enable, move scratchpad
-
-# 2. Perfect Toggle Loop: Isolated inside brackets so its keys stay bound to F!
-bindsym $mod+f exec swaymsg '[app_id="foot-yazi"] scratchpad show, fullscreen enable' || (foot -a foot-yazi yazi & sleep 0.15 && swaymsg '[app_id="foot-yazi"] scratchpad show, fullscreen enable')
-bindsym $mod+t exec swaymsg '[app_id="foot-demand"] scratchpad show, fullscreen enable' || (foot -a foot-demand & sleep 0.15 && swaymsg '[app_id="foot-demand"] scratchpad show, fullscreen enable')   
-
-# Automatically format SpeedCrunch as a right-side sidebar whenever it spawns
-for_window [app_id="org.speedcrunch.SpeedCrunch"] floating enable, resize set width 40 ppt height 90 ppt, move position 60 ppt 5 ppt
-
-# ==============================================================================
-# Suspend To Ram - And Set Lock Screen Just Before
-# ==============================================================================
-# The idlehint 1 tells swayidle to mark the session as "idle" to logind after 1 second of no input. Logind then starts its own IdleActionSec countdown. Without this line, Sway never reports idle and logind's IdleAction never fires.
-# Suspend To Ram - And Set Lock Screen Just Before
-set $lock swaylock -f
-exec swayidle -w timeout 1 "idlehint 1" before-sleep "$lock"
-bindsym $mod+Escape exec $lock   
-# ==============================================================================
-
-# App-specific focus shortcuts (Ctrl+Alt+Super + Key)
-bindsym Ctrl+Mod1+Mod4+u [app_id="brave-browser"] focus
-bindsym Ctrl+Mod1+Mod4+i [app_id="dev.zed.Zed"] focus
-bindsym Ctrl+Mod1+Mod4+y [app_id="foot-main"] focus
-bindsym Ctrl+Mod1+Mod4+o [app_id="eu.betterbird.Betterbird"] focus
-bindsym Ctrl+Mod1+Mod4+c exec speedcrunch
-bindsym Ctrl+Mod1+Mod4+p [app_id="thunar"] focus
-
-# Split-Screen Focus Warp Mode Toggles
-
-# Unified Dynamic Pair Focus Warp Loop Macro (Super + Shift + z)
-bindsym $mod+Shift+z exec $HOME/.config/sway/sway-dynamic-pair.sh
-bindsym Ctrl+Mod1+Mod4+z exec $HOME/.config/sway/zed-brave-split.sh
-bindsym Ctrl+Mod1+Mod4+a exec $HOME/.config/sway/foot-brave-split.sh
-bindsym Ctrl+Mod1+Mod4+t exec $HOME/.config/sway/foot-zed-split.sh
-bindsym Ctrl+Mod1+Mod4+s exec $HOME/.config/sway/sway-swap-split.sh
-
-# Toggle your custom hardware monitor scratchpad layout on demand
-# bindsym $mod+Shift+Return [app_id="foot-scratchpad"] scratchpad show
-
-# Send a toggle signal to Waybar on Fedora using Ctrl+Alt+Super+Return
-bindsym Ctrl+Mod1+Mod4+Return exec killall -q -SIGUSR1 waybar
-
-# Press Mod4 (Super) + c to pop open your searchable clipboard history
-bindsym $mod+c exec cliphist list | rofi -dmenu -p "📋 Clipboard" -theme bubblegum | cliphist decode | wl-copy
-# Press Mod4 (Super) + Shift + c to target and completely erase a single cliphist entry
-bindsym $mod+Mod1+c exec cliphist list | rofi -dmenu -p "🗑️ Erase Clip" -theme bubblegum | cliphist delete
-
-# Automatically open Gnome Characters in a floating window container
-for_window [app_id="org.gnome.Characters"] floating enable, resize set width 65 ppt height 75 ppt, move position center
-for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, resize set width 65 ppt height 75 ppt, move position center
-for_window [app_id="zenity"] floating enable, border pixel 12, move position center
-
-# Automatically open your Yazi image viewers as high-visibility floating cards
-for_window [app_id="floating-viewer"] floating enable
-
-
-# ==============================================================================
-# Styling Parameters & Theme Sync
-# ==============================================================================
-hide_edge_borders smart
-default_border none
-default_floating_border pixel 12
-titlebar_separator disable
-focus_follows_mouse no   
-
-# Press Mod4 (Super) + n to pop open your interactive floating Wi-Fi menu
-bindsym $mod+Shift+n exec foot --app-id="floating-nmtui" -e nmtui
-
-# Automatically format specific application triggers on creation
-for_window [app_id="floating-nmtui"] floating enable
-for_window [app_id="org.gnome.Characters"] floating enable
-
-# FIX: Forcing an explicit border style reset completely strips the GTK application-level overrides!
-for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, border pixel 12, resize set width 60 ppt height 65 ppt, move position center
-for_window [app_id="thunar"] floating enable, border pixel 12, resize set width 60 ppt height 65 ppt, move position center
-
-# Bubblegum Theme Palette (from zed/themes/bubblegum/bubblegum+.json)
 # Class                  border    backgr.   text      indicator child_border
-client.focused          "#E0E0E0" "#3A3A3A" "#ffffff" "#E0E0E0"   "#E0E0E0"
+client.focused          "#3A3A3A" "#3A3A3A" "#ffffff" "#488F6D"   "#3A3A3A"
 client.focused_inactive "#454545" "#2A2A2a" "#A7A7A7" "#303030"   "#222222"
+client.unfocused        "#303030" "#222222" "#808080" "#222222"   "#222222"
 client.unfocused        "#303030" "#B5B3AD" "#808080" "#222222"   "#222222"
 client.urgent           "#D78787" "#402020" "#ffffff" "#D78787"   "#D78787"
 client.background       "#303030"
 
-bindsym Mod1+Shift+d exec gsettings set org.gnome.desktop.interface gtk-theme 'Bubblegum'
-bindsym Mod1+Shift+l exec gsettings set org.gnome.desktop.interface gtk-theme 'Bubblegum Light'   
-
-bindsym $mod+Shift+x exec hyprpicker
-bindsym $mod+Shift+t exec ~/.config/sway/toggle-titlebars.sh
-bindsym $mod+Shift+o exec grim -g "$(slurp)" - | tesseract - - | wl-copy
+# GTK + icon bubblegum light/dark theme toggle
+bindsym Mod1+Shift+d exec ~/Dotfiles/sway/toggle-theme.sh
 
 # ==============================================================================
 # Precision Wayland Screenshot Engine Matrix (grimshot + cliphist sync)
@@ -210,6 +88,8 @@ bindsym Ctrl+Shift+$mod+s exec grimshot save output - | swappy -f -
 bindsym Ctrl+Shift+$mod+w exec grimshot save active - | swappy -f -
 # Automatically format the swappy overlay framework beautifully
 for_window [app_id="swappy"] floating enable, resize set width 70 ppt height 75 ppt, move position center
+# In sway config
+bindsym $mod+Shift+r exec ~/Dotfiles/sway/screen-recorder-toggle.sh   
 
 # ==============================================================================
 # Floating Window Positional Macros
@@ -218,107 +98,73 @@ bindsym Ctrl+Mod1+Mod4+l floating enable, resize set width 50 ppt height 100 ppt
 bindsym Ctrl+Mod1+Mod4+h floating enable, resize set width 50 ppt height 100 ppt, move position 0 ppt 0 ppt
 bindsym Ctrl+Mod1+Mod4+j floating enable, resize set width 100 ppt height 50 ppt, move position 0 ppt 50 ppt
 bindsym Ctrl+Mod1+Mod4+k floating enable, resize set width 100 ppt height 50 ppt, move position 0 ppt 0 ppt
-bindsym Ctrl+Mod1+Mod4+equal floating enable, resize set width 80 ppt height 80 ppt, move position center
-bindsym $mod+Page_Up   resize grow width 10px, resize grow height 10px
-bindsym $mod+Page_Down resize shrink width 10px, resize shrink height 10px   
+bindsym Ctrl+Mod1+Mod4+equal floating enable, resize set width 60 ppt height 80 ppt, move position center
 
 # ==============================================================================
-# Key bindings (ported from Fedora's stock /etc/sway/config)
+# Hardware Output Mapping & Dedicated Application Routing Rules
 # ==============================================================================
-# Start a terminal
-bindsym $mod+Return exec $term
 
-# Kill focused window
-bindsym $mod+Shift+q kill
+output HDMI-A-1 disable
 
-# Start your launcher
-bindsym $mod+d exec $menu
+# Bind Workspaces Intuitively onto the Headless Canvas
+workspace $ws1  output HEADLESS-1
+workspace $ws2  output HEADLESS-1
+workspace $ws3  output HEADLESS-1
+workspace $ws4  output HEADLESS-1
+workspace $ws5  output HEADLESS-1
+workspace $ws6  output HEADLESS-1
+workspace $ws7  output HEADLESS-1
+workspace $ws8  output HEADLESS-1
+workspace $ws9  output HEADLESS-1
+workspace $ws10 output HEADLESS-1
 
+# Declarative Window Capture Matrix
+assign [app_id="foot-main"]     $ws1
+assign [app_id="brave-browser"] $ws2
+assign [app_id="dev.zed.Zed"]    $ws3
+
+# Boot-Time Sequencer Loop
+exec foot --app-id="foot-main"
+exec brave-browser
+exec sleep 5 && /home/darren/.local/bin/zed --foreground
+
+# ==============================================================================
+# Global Styling Parameters & Window Behavior Customizations
+# ==============================================================================
+
+hide_edge_borders smart
+default_border none
+default_floating_border pixel 12
+titlebar_separator disable
+focus_follows_mouse no   
 floating_modifier $mod normal
-
-# Reload the configuration file safely
-bindsym $mod+Shift+c reload
-
-# Exit sway
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-
-# Moving around focus loops:
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
-
-    # Move the focused window with Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-
-# Layout transitions:
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
-    bindsym $mod+Shift+f fullscreen
-    bindsym $mod+Shift+space floating toggle
-    bindsym $mod+space focus mode_toggle
-    bindsym $mod+a focus parent
-
-# Core Scratchpad navigation toggle:
-    bindsym $mod+Shift+minus move scratchpad
-    bindsym $mod+minus scratchpad show
-
-# Resizing containers:
-mode "resize" {
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+r mode "resize"
+title_align center   
 
 # ==============================================================================
-# Workspaces Navigation Matrix (Restored)
+# Dynamic Window Capture Rules & Floating Geometry Resizer Assignments
 # ==============================================================================
-# Switch to workspace using Mod4 + Number
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+for_window [app_id="foot"]                    	      border pixel 2
+for_window [app_id="floating-viewer"]                 floating enable
+for_window [app_id="zenity"]                          floating enable, border pixel 12, move position center
+for_window [app_id="xdg-desktop-portal-gtk"]          floating enable, border pixel 12, resize set width 60 ppt height 65 ppt, move position center
+for_window [app_id="mpv"]                             floating enable, border pixel 12, move position center
+for_window [app_id="ny-sheriff-summer-camp-scheduler"] floating enable, border pixel 4, move position center
+for_window [app_id="org.gnome.Characters"]            floating enable, resize set width 65 ppt height 75 ppt, move position center
+for_window [app_id="swappy"]                          floating enable, resize set width 70 ppt height 75 ppt, move position center
+for_window [app_id="thunar"]                          floating enable, border pixel 12, resize set width 60 ppt height 65 ppt, move position center
+for_window [app_id="blueman-manager"]                 floating enable, border pixel 12, resize set width 60 ppt height 65 ppt, move position center
+for_window [app_id="org.pulseaudio.pavucontrol"]      floating enable, border pixel 12, resize set width 60 ppt height 65 ppt, move position center
+for_window [app_id="com.transmissionbt.transmission"] floating enable, border pixel 12, resize set width 60 ppt height 65 ppt, move position center
+for_window [app_id="org.speedcrunch.SpeedCrunch"]     floating enable, border pixel 10 #87d7ff, resize set width 50 ppt height 100 ppt, move position 50 ppt 0 ppt
 
-# Move focused container to workspace using Mod4 + Shift + Number
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+# Scratchpad System Targets
+for_window [app_id="foot-scratchpad"]                 floating enable, move scratchpad
+for_window [app_id="foot-yazi"]                       floating enable, move scratchpad
+for_window [app_id="foot-demand"]                     floating enable, move scratchpad
 
 # ==============================================================================
 # Dynamic Split-Ratio Geometry Resizer Matrix (10% to 90%)
 # ==============================================================================
-# Focuses the left-hand container and forces its absolute layout width target
 bindsym Ctrl+Mod1+Mod4+1 focus left, resize set width 10 ppt
 bindsym Ctrl+Mod1+Mod4+2 focus left, resize set width 20 ppt
 bindsym Ctrl+Mod1+Mod4+3 focus left, resize set width 30 ppt
@@ -328,4 +174,119 @@ bindsym Ctrl+Mod1+Mod4+6 focus left, resize set width 60 ppt
 bindsym Ctrl+Mod1+Mod4+7 focus left, resize set width 70 ppt
 bindsym Ctrl+Mod1+Mod4+8 focus left, resize set width 80 ppt
 bindsym Ctrl+Mod1+Mod4+9 focus left, resize set width 90 ppt
+
+# ==============================================================================
+# Layer 1 Keybindings ($mod Cluster): System Structure & Spatial Layouts
+# ==============================================================================
+
+# Core System Lifecycles
+bindsym $mod+Return   exec $term
+bindsym $mod+Shift+q  kill
+bindsym $mod+d        exec $menu
+bindsym $mod+Shift+c  reload
+bindsym $mod+Shift+e  exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+# Clipboard & History Tools
+bindsym $mod+c        exec cliphist list | rofi -dmenu -p "📋 Clipboard" -theme bubblegum | cliphist decode | wl-copy
+bindsym $mod+Mod1+c   exec cliphist list | rofi -dmenu -p "🗑️ Erase Clip" -theme bubblegum | cliphist delete
+
+# Interactive Context Utility Triggers
+bindsym $mod+Shift+n  exec foot --app-id="floating-nmtui" -e nmtui
+bindsym $mod+Shift+x  exec hyprpicker
+bindsym $mod+Shift+t  exec ~/.config/sway/toggle-titlebars.sh
+bindsym $mod+Shift+o  exec grim -g "$(slurp)" - | tesseract - - | wl-copy
+
+# Power Infrastructure & Session Lock Loops
+exec swayidle -w timeout 1 "idlehint 1" before-sleep "$lock"
+bindsym $mod+Escape   exec $lock   
+
+# Tiling Toggles & Layout Changes
+bindsym $mod+b        splith
+bindsym $mod+v        splitv
+bindsym $mod+s        layout stacking
+bindsym $mod+w        layout tabbed
+bindsym $mod+e        layout toggle split
+bindsym $mod+Shift+f  fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space    focus mode_toggle
+bindsym $mod+a        focus parent
+
+# Interactive Scratchpad Core Infrastructure
+bindsym $mod+minus          scratchpad show
+bindsym $mod+Shift+minus    move scratchpad
+
+# Main Scratchpad Invocation Triggers
+bindsym $mod+Shift+Return   exec swaymsg '[app_id="foot-scratchpad"] scratchpad show' || (foot -a foot-scratchpad btop & sleep 0.15 && swaymsg '[app_id="foot-scratchpad"] scratchpad show, fullscreen enable')
+bindsym $mod+f              exec swaymsg '[app_id="foot-yazi"] scratchpad show, fullscreen enable' || (foot -a foot-yazi yazi & sleep 0.15 && swaymsg '[app_id="foot-yazi"] scratchpad show, fullscreen enable')
+bindsym $mod+t              exec swaymsg '[app_id="foot-demand"] scratchpad show, fullscreen enable' || (foot -a foot-demand & sleep 0.15 && swaymsg '[app_id="foot-demand"] scratchpad show, fullscreen enable')   
+
+# Unified Dynamic Pair Focus
+bindsym $mod+Shift+z exec $HOME/.config/sway/sway-dynamic-pair.sh
+bindsym Ctrl+Mod1+Mod4+z exec $HOME/.config/sway/zed-brave-split.sh
+bindsym Ctrl+Mod1+Mod4+a exec $HOME/.config/sway/foot-brave-split.sh
+bindsym Ctrl+Mod1+Mod4+t exec $HOME/.config/sway/foot-zed-split.sh
+bindsym Ctrl+Mod1+Mod4+s exec $HOME/.config/sway/sway-swap-split.sh
+
+# Spatial Focus Navigation Vector (Vim Home Row + Arrow Fallback Keys)
+bindsym $mod+$left          focus left
+bindsym $mod+$down          focus down
+bindsym $mod+$up            focus up
+bindsym $mod+$right         focus right
+bindsym $mod+Left           focus left
+bindsym $mod+Down           focus down
+bindsym $mod+Up             focus up
+bindsym $mod+Right          focus right
+
+# Window Container Relocation Engine
+bindsym $mod+Shift+$left    move left
+bindsym $mod+Shift+$down    move down
+bindsym $mod+Shift+$up      move up
+bindsym $mod+Shift+$right   move right
+bindsym $mod+Shift+Left     move left
+bindsym $mod+Shift+Down     move down
+bindsym $mod+Shift+Up       move up
+bindsym $mod+Shift+Right    move right
+
+# Workspace Jump Mapping
+bindsym $mod+1              workspace number $ws1
+bindsym $mod+2              workspace number $ws2
+bindsym $mod+3              workspace number $ws3
+bindsym $mod+4              workspace number $ws4
+bindsym $mod+5              workspace number $ws5
+bindsym $mod+6              workspace number $ws6
+bindsym $mod+7              workspace number $ws7
+bindsym $mod+8              workspace number $ws8
+bindsym $mod+9              workspace number $ws9
+bindsym $mod+0              workspace number $ws10
+
+# Workspace Window Migration Matrix
+bindsym $mod+Shift+1        move container to workspace number $ws1
+bindsym $mod+Shift+2        move container to workspace number $ws2
+bindsym $mod+Shift+3        move container to workspace number $ws3
+bindsym $mod+Shift+4        move container to workspace number $ws4
+bindsym $mod+Shift+5        move container to workspace number $ws5
+bindsym $mod+Shift+6        move container to workspace number $ws6
+bindsym $mod+Shift+7        move container to workspace number $ws7
+bindsym $mod+Shift+8        move container to workspace number $ws8
+bindsym $mod+Shift+9        move container to workspace number $ws9
+bindsym $mod+Shift+0        move container to workspace number $ws10
+
+# Manual Sizing Adjustments (Resize Mode)
+mode "resize" {
+    bindsym $left           resize shrink width 10px
+    bindsym $down           resize grow height 10px
+    bindsym $up             resize shrink height 10px
+    bindsym $right          resize grow width 10px
+    bindsym Return          mode "default"
+    bindsym Escape          mode "default"
+}
+bindsym $mod+r              mode "resize"
+bindsym $mod+Page_Up        resize grow width 10px, resize grow height 10px
+
+# Ensure systemd user services know where to look for themes and icons
+exec systemctl --user set-environment GTK_THEME=Bubblegum
+exec systemctl --user set-environment XDG_DATA_DIRS="$HOME/.local/share:$HOME/.themes:/usr/local/share:/usr/share"
+
+# Import environment variables into dbus/systemd
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP GTK_THEME
 
