@@ -1,0 +1,51 @@
+# ~/.zshrc  ->  symlinked to ~/Dotfiles/zsh/zshrc by install.sh
+
+source ~/Dotfiles/aliases
+source ~/Dotfiles/bash-scripts/bashfunctionsrc
+# Private aliases live in a separate private repo (cloned by install.sh if configured)
+[ -r ~/.config/private-dotfiles/private_aliases ] && source ~/.config/private-dotfiles/private_aliases
+source ~/Dotfiles/zsh/zsh_functions.zsh
+
+# COMPLETIONS
+# Pure prompt is cloned to ~/.local/share/zsh/pure by install.sh
+fpath+=("$HOME/.local/share/zsh/pure")
+autoload -Uz promptinit; promptinit
+autoload -Uz compinit && compinit -u   # -u skips security checks (faster)
+setopt COMPLETE_IN_WORD     # complete from mid-word
+setopt AUTO_MENU            # first tab lists, second cycles
+setopt LIST_PACKED          # tighter completion menu spacing
+
+# PROMPT
+prompt pure
+
+# HISTORY
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY          # sync across all open terminals
+setopt EXTENDED_HISTORY       # save timestamps
+setopt HIST_IGNORE_DUPS       # don't record consecutive dups
+setopt HIST_IGNORE_SPACE      # skip commands starting with space
+setopt HIST_REDUCE_BLANKS     # trim extra whitespace
+
+# VI
+set -o vi
+export KEYTIMEOUT=1         # snappier mode switching (default is 1s)
+bindkey 'Y' vi-yank-eol     # Y = yank to end of line (like vim)
+bindkey '^?' backward-delete-char  # backspace works in insert mode
+
+alias matcha='com.floatpane.matcha'
+
+# EDITOR
+export EDITOR=vim
+export VISUAL=vim
+export SUDO_EDITOR=vim
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias bw="flatpak run --command=bw com.bitwarden.desktop"
+
+# PATHS
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/var/lib/flatpak/exports/bin:$PATH"

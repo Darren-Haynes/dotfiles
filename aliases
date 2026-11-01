@@ -15,6 +15,7 @@ alias cdd="cd ~/Downloads"
 alias cdot="cd ~/Dotfiles"
 alias cdp="cd ~/Projects"
 alias cdm="cd ~/Music"
+alias cdv="cd ~/Videos"
 alias cdbash="cd ~/Dotfiles/bash-scripts"
 alias cdyazi="cd ~/Dotfiles/yazi"
 alias cdwez="cd ~/Dotfiles/wezterm"
@@ -95,7 +96,7 @@ alias rmsymlinks="rm -- *(@)"
 alias reload-foot="kill -SIGUSR1 $(pgrep -x foot)"
 
 # COPY
-alias copy='xsel --clipboard < '
+alias copy='clip <'
 
 # SOURCING
 alias soa='source ~/Dotfiles/aliases'
@@ -121,6 +122,9 @@ alias reggae='mpv --shuffle ~/Music/MyMusic/Reggae'
 alias easy='mpv --shuffle ~/Music/MyMusic/Easy'
 
 # THEMEING / COLORS
-alias theme="~/Dotfiles/bash-scripts/theme-switcher.zsh"
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
+
+# SCREEN RECORDING
+alias rec='wf-recorder -r 60 -c libx264 -a -f ~/Videos/recording_$(date +%Y-%m-%d_%H-%M-%S).mp4'
+

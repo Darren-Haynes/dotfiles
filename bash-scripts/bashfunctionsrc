@@ -2,11 +2,11 @@
 
 # Bitwarden command line
 getpw() {
-  bw get password -- "$1" | xsel --clipboard
+  bw get password -- "$1" | clip
 }
 
 getun() {
-  bw get username -- "$1" | xsel --clipboard
+  bw get username -- "$1" | clip
 }
 
 # GIT fast forward main branch to origin branch

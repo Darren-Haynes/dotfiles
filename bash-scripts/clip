@@ -1,0 +1,24 @@
+#!/bin/sh
+# clip: copy stdin to the system clipboard on Wayland (wl-copy) or X11 (xsel/xclip).
+# Usage: echo hello | clip     clip < file.txt
+
+if [ -n "$WAYLAND_DISPLAY" ] || [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    if command -v wl-copy >/dev/null 2>&1; then
+        exec wl-copy
+    fi
+    echo "clip: wl-copy not found (install wl-clipboard)" >&2
+    exit 1
+fi
+
+if [ -n "$DISPLAY" ]; then
+    if command -v xsel >/dev/null 2>&1; then
+        exec xsel --clipboard --input
+    elif command -v xclip >/dev/null 2>&1; then
+        exec xclip -selection clipboard
+    fi
+    echo "clip: xsel/xclip not found (install one of them)" >&2
+    exit 1
+fi
+
+echo "clip: no Wayland or X11 display detected" >&2
+exit 1
