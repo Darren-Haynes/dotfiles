@@ -1,0 +1,30 @@
+" ~/.vimrc -> symlinked to ~/Dotfiles/vim/vimrc by install.sh
+set nocompatible
+syntax on
+filetype plugin indent on
+set number cursorline
+set termguicolors
+" Truecolor escape codes for terminals (foot) where $TERM doesn't advertise them
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" Follow the desktop light/dark setting (sway/toggle-theme.sh flips the GNOME
+" color-scheme). Checked at startup and whenever the terminal regains focus.
+function! s:SyncTheme() abort
+  let l:scheme = system('gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null')
+  if v:shell_error == 0
+    let l:bg = l:scheme =~# 'prefer-light' ? 'light' : 'dark'
+    if &background !=# l:bg || get(g:, 'colors_name', '') !=# 'bubblegum'
+      let &background = l:bg
+      colorscheme bubblegum
+    endif
+  endif
+endfunction
+
+set background=dark
+colorscheme bubblegum
+call s:SyncTheme()
+augroup BubblegumSync
+  autocmd!
+  autocmd FocusGained * call s:SyncTheme()
+augroup END

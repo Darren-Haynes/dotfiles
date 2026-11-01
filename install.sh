@@ -130,7 +130,7 @@ install_packages() {
 
     local pkgs=(
         # Shell & CLI
-        zsh git git-delta curl lsd fzf vim-enhanced jq btop yazi zellij
+        zsh git git-delta curl lsd fzf vim-enhanced neovim jq btop yazi zellij
         ImageMagick mpv gocryptfs python3-ipython xdg-utils flatpak
         # Sway session pieces (most ship with the Sway spin; dnf skips what's there)
         waybar foot rofi dunst swaybg swayidle swaylock
@@ -217,7 +217,7 @@ setup_links() {
 
     log "Linking config into ~/.config"
     local d
-    for d in sway waybar foot rofi btop yazi swappy; do
+    for d in sway waybar foot rofi btop yazi swappy nvim; do
         link "$DOTFILES/$d" "$HOME/.config/$d"
     done
     link "$DOTFILES/zellij/config.kdl"   "$HOME/.config/zellij/config.kdl"
@@ -234,6 +234,8 @@ setup_links() {
     log "Linking themes, shell and tool configs"
     link "$DOTFILES/themes"                       "$HOME/.themes"
     link "$DOTFILES/zsh/zshrc"                    "$HOME/.zshrc"
+    link "$DOTFILES/vim/vimrc"                    "$HOME/.vimrc"
+    link "$DOTFILES/vim/colors"                   "$HOME/.vim/colors"
     link "$DOTFILES/ipython/profile_darren"       "$HOME/.ipython/profile_darren"
     link "$DOTFILES/SpeedCrunch/color-schemes"    "$HOME/.local/share/SpeedCrunch/color-schemes"
 
