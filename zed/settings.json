@@ -73,8 +73,8 @@
   "ui_font_size": 15.0,
   "buffer_font_size": 16.0,
   "theme": {
-    "mode": "dark",
-    "light": "Oceanic Next Light",
+    "mode": "system",
+    "light": "Bubblegum Light",
     "dark": "Bubblegum" // THEME_SWITCHER_DARK
   },
   "which_key": { "enabled": true },
