@@ -231,6 +231,16 @@ setup_links() {
     link "$DOTFILES/dunst/dunstrc"          "$HOME/.config/dunst/dunstrc"
     link "$DOTFILES/dunst/colors-dark.conf" "$HOME/.config/dunst/dunstrc.d/10-colors.conf"
 
+    # foot.ini includes this file (foot won't start without it); the theme
+    # toggle rewrites it. Seed with dark only if it doesn't exist yet.
+    run mkdir -p "$HOME/.local/state/foot"
+    if [ ! -e "$HOME/.local/state/foot/theme.ini" ]; then
+        info "seeding foot theme state (dark)"
+        if (( ! DRY_RUN )); then
+            printf '[main]\ninitial-color-theme=dark\n' > "$HOME/.local/state/foot/theme.ini"
+        fi
+    fi
+
     log "Linking themes, shell and tool configs"
     link "$DOTFILES/themes"                       "$HOME/.themes"
     link "$DOTFILES/zsh/zshrc"                    "$HOME/.zshrc"

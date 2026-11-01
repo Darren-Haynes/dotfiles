@@ -1,6 +1,6 @@
 #!/bin/bash
 # Toggle Bubblegum dark/light: GTK theme, icon theme, color-scheme, dunst
-# notification colors, and the GTK_THEME override used by
+# notification colors, foot terminals, and the GTK_THEME override used by
 # xdg-desktop-portal-gtk (the file picker).
 
 SCHEMA="org.gnome.desktop.interface"
@@ -12,12 +12,16 @@ if [ "$current" = "Bubblegum Light" ]; then
     scheme="prefer-dark"
     dunst_colors="colors-dark.conf"
     notify_icon="weather-clear-night"
+    foot_theme="dark"
+    foot_signal="USR1"
 else
     gtk_theme="Bubblegum Light"
     icon_theme="Colloid-Bubblegum-Light"
     scheme="prefer-light"
     dunst_colors="colors-light.conf"
     notify_icon="weather-clear"
+    foot_theme="light"
+    foot_signal="USR2"
 fi
 
 gsettings set "$SCHEMA" gtk-theme "$gtk_theme"
@@ -31,6 +35,13 @@ mkdir -p "$DUNST_CFG/dunstrc.d"
 ln -sfn "$DUNST_SRC/dunstrc" "$DUNST_CFG/dunstrc"
 ln -sfn "$DUNST_SRC/$dunst_colors" "$DUNST_CFG/dunstrc.d/10-colors.conf"
 dunstctl reload 2>/dev/null
+
+# foot: new windows read the state file via an include in foot.ini; running
+# ones switch live on SIGUSR1 (dark) / SIGUSR2 (light).
+FOOT_STATE="${XDG_STATE_HOME:-$HOME/.local/state}/foot"
+mkdir -p "$FOOT_STATE"
+printf '[main]\ninitial-color-theme=%s\n' "$foot_theme" > "$FOOT_STATE/theme.ini"
+pkill "-$foot_signal" -x foot 2>/dev/null
 
 # GTK_THEME env overrides gsettings for anything systemd/dbus launches,
 # so update it and restart the portal so the file picker follows the toggle.
