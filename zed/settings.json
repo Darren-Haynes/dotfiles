@@ -126,10 +126,10 @@
     "play_sound_when_agent_done": "when_hidden",
     "dock": "right",
     "default_model": {
-      "effort": "low",
+      "effort": "high",
       "enable_thinking": true,
-      "provider": "google",
-      "model": "gemini-3-flash-preview"
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-5.5"
     }
   },
   "edit_predictions": {
