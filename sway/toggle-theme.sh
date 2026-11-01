@@ -7,11 +7,11 @@ current=$(gsettings get "$SCHEMA" gtk-theme | tr -d "'")
 
 if [ "$current" = "Bubblegum Light" ]; then
     gtk_theme="Bubblegum"
-    icon_theme="Colloid-Pink-Dark"
+    icon_theme="Colloid-Bubblegum-Dark"
     scheme="prefer-dark"
 else
     gtk_theme="Bubblegum Light"
-    icon_theme="Colloid-Pink-Light"
+    icon_theme="Colloid-Bubblegum-Light"
     scheme="prefer-light"
 fi
 
