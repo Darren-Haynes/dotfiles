@@ -44,7 +44,7 @@ exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.t
 
 # UI Daemons & Clipboard Sync Matrix
 exec_always "pkill waybar; waybar"
-exec_always "pkill -x swaybg; swaybg -i ~/Pictures/Wallpaper/pink-clouds.jpg -m fill"
+exec_always ~/Dotfiles/sway/wallpaper-picker.sh --restore
 bindsym Ctrl+Mod1+Mod4+Return exec killall -q -SIGUSR1 waybar
 exec wl-paste --type text  --watch cliphist store
 exec wl-paste --type image --watch cliphist store
@@ -93,6 +93,7 @@ bindsym Ctrl+Shift+$mod+w exec grimshot save active - | swappy -f -
 for_window [app_id="swappy"] floating enable, resize set width 70 ppt height 75 ppt, move position center
 # In sway config
 bindsym $mod+Shift+r exec ~/Dotfiles/sway/screen-recorder-toggle.sh   
+bindsym $mod+Shift+w exec ~/Dotfiles/sway/wallpaper-picker.sh
 
 # ==============================================================================
 # Floating Window Positional Macros
