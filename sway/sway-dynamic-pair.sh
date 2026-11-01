@@ -12,7 +12,7 @@ evacuate_window() {
     local WIN="$1"
     case "$WIN" in
         "foot-main")     swaymsg "[app_id=\"$WIN\"] move container to workspace \"1: \"" ;;
-        "brave-browser") swaymsg "[app_id=\"$WIN\"] move container to workspace \"2: \"" ;;
+        "brave-browser") swaymsg "[app_id=\"$WIN\"] move container to workspace \"2: \"" ;;
         "dev.zed.Zed")   swaymsg "[app_id=\"$WIN\"] move container to workspace \"3: \"" ;;
         *)               swaymsg "[app_id=\"$WIN\"] move container to workspace \"1: \"" ;;
     esac

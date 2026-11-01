@@ -7,7 +7,7 @@
 
 # Define named workspace variables (exactly matching your main sway config)
 WS1="1: "
-WS2="2: "
+WS2="2: "
 WS3="3: "
 WS9="9: " # FIX: Synced to use your Font Awesome split window icon!
 
