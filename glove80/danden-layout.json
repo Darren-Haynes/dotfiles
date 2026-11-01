@@ -3,15 +3,15 @@
   "keyboard": "glove80",
   "firmware_api_version": "1",
   "locale": "en-US",
-  "uuid": "dd8b814c-2f90-4ad2-8cb0-5d4b59c48287",
-  "parent_uuid": "4741d5f4-97c4-4756-ac88-0d6991c7afa9",
+  "uuid": "9c9cb612-a162-40c7-9a03-61982cbcedab",
+  "parent_uuid": "9c9cb612-a162-40c7-9a03-61982cbcedab",
   "unlisted": false,
-  "date": 1789871164,
+  "date": 1792728362,
   "creator": "darrenhaynes",
   "title": "danden-layout",
   "notes": "Glove80 Factory Layout has an extra factory layer (layer 3) for factory testing. The factory test layer makes it easy to test every key switch. Please note that there is no way to switch from the factory layer. You will need to power off and on the Glove80 to return to the base layer.",
   "tags": [],
-  "custom_defined_behaviors": "\n    behaviors {\n        hyper_dance: hyper_dance {\n            compatible = \"zmk,behavior-tap-dance\";\n            label = \"HYPER_DANCE\";\n            #binding-cells = <0>;\n            tapping-term-ms = <250>;\n            bindings = <&sk LA(LC(LGUI))>, <&sk LS(LA(LC(LGUI)))>;\n        };\n\n        hrm: hrm {\n            compatible = \"zmk,behavior-hold-tap\";\n            label = \"HOME_ROW_MODS\";\n            #binding-cells = <2>;\n            tapping-term-ms = <280>;\n            quick-tap-ms = <175>;\n            require-prior-idle-ms = <150>;\n            flavor = \"balanced\";\n            bindings = <&kp>, <&kp>;\n        };\n\n    // Macro for Ctrl + Shift + C\n    rsi_copy: rsi_copy {\n        compatible = \"zmk,behavior-macro\";\n        #binding-cells = <0>;\n        bindings = <&macro_press &kp LCTRL &kp LSHFT>, \n                   <&macro_tap &kp C>, \n                   <&macro_release &kp LCTRL &kp LSHFT>;\n    };\n\n    // Macro for Ctrl + Shift + V\n    rsi_paste: rsi_paste {\n        compatible = \"zmk,behavior-macro\";\n        #binding-cells = <0>;\n        bindings = <&macro_press &kp LCTRL &kp LSHFT>, \n                   <&macro_tap &kp V>, \n                   <&macro_release &kp LCTRL &kp LSHFT>;\n    };\n\n };\n\n",
+  "custom_defined_behaviors": "\n    behaviors {\n        td_symbols: td_symbols {\n        compatible = \"zmk,behavior-tap-dance\";\n        label = \"SYM_TAP_DANCE\";\n        #binding-cells = <0>;\n        tapping-term-ms = <200>;\n        bindings = <&sl LAYER_Symbols>, <&sl LAYER_AutoPairs>;\n        };\n\n        hyper_dance: hyper_dance {\n            compatible = \"zmk,behavior-tap-dance\";\n            label = \"HYPER_DANCE\";\n            #binding-cells = <0>;\n            tapping-term-ms = <250>;\n            bindings = <&sk LA(LC(LGUI))>, <&sk LS(LA(LC(LGUI)))>;\n        };\n\n        hyper_shift_dance: hyper_shift_dance {\n            compatible = \"zmk,behavior-tap-dance\";\n            label = \"HYPER_SHIFT_DANCE\";\n            #binding-cells = <0>;\n            tapping-term-ms = <250>;\n            bindings = <&sk LS(LA(LC(LGUI)))>, <&sk LS(LA(LC(LGUI)))>;\n        };\n\n        colons_dance: colons_dance {\n            compatible = \"zmk,behavior-mod-morph\";\n            label = \"COLONS_DANCE\";\n            #binding-cells = <0>;\n            bindings = <&kp COLON>, <&kp SEMI>;\n            mods = <(MOD_LSFT|MOD_RSFT)>;\n    };\n\n        hrm: hrm {\n            compatible = \"zmk,behavior-hold-tap\";\n            label = \"HOME_ROW_MODS\";\n            #binding-cells = <2>;\n            tapping-term-ms = <280>;\n            quick-tap-ms = <175>;\n            require-prior-idle-ms = <150>;\n            flavor = \"balanced\";\n            bindings = <&kp>, <&kp>;\n        };\n\n    // Macro for Ctrl + Shift + C\n    rsi_copy: rsi_copy {\n        compatible = \"zmk,behavior-macro\";\n        #binding-cells = <0>;\n        bindings = <&macro_press &kp LCTRL &kp LSHFT>, \n                   <&macro_tap &kp C>, \n                   <&macro_release &kp LCTRL &kp LSHFT>;\n    };\n\n    // Macro for Ctrl + Shift + V\n    rsi_paste: rsi_paste {\n        compatible = \"zmk,behavior-macro\";\n        #binding-cells = <0>;\n        bindings = <&macro_press &kp LCTRL &kp LSHFT>, \n                   <&macro_tap &kp V>, \n                   <&macro_release &kp LCTRL &kp LSHFT>;\n    };\n\n };\n\n",
   "custom_devicetree": "",
   "config_parameters": [],
   "layout_parameters": {},
@@ -21,7 +21,8 @@
     "Magic",
     "Factory",
     "Hyper_1",
-    "RSI"
+    "Symbols",
+    "AutoPairs"
   ],
   "layers": [
     [
@@ -381,7 +382,7 @@
         "value": "Custom",
         "params": [
           {
-            "value": "&kp COLON"
+            "value": "&colons_dance"
           }
         ]
       },
@@ -442,32 +443,10 @@
         ]
       },
       {
-        "value": "&kp",
+        "value": "&sk",
         "params": [
           {
-            "value": "ESC"
-          }
-        ]
-      },
-      {
-        "value": "&kp",
-        "params": [
-          {
-            "value": "LCTRL"
-          }
-        ]
-      },
-      {
-        "value": "&lower"
-      },
-      {
-        "value": "&lower"
-      },
-      {
-        "value": "&kp",
-        "params": [
-          {
-            "value": "LGUI"
+            "value": "LSHFT"
           }
         ]
       },
@@ -480,8 +459,42 @@
         ],
         "decoration": {
           "label": "Hyper1",
+          "color": "#2c9239ff"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hyper_shift_dance"
+          }
+        ],
+        "decoration": {
+          "color": "#8d2121ff"
+        }
+      },
+      {
+        "value": "&lower"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hyper_dance"
+          }
+        ],
+        "decoration": {
+          "label": "Hyper1",
           "color": "#189142ff"
         }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&td_symbols"
+          }
+        ]
       },
       {
         "value": "&kp",
@@ -575,16 +588,7 @@
         ]
       },
       {
-        "value": "Custom",
-        "params": [
-          {
-            "value": "&hyper_dance"
-          }
-        ],
-        "decoration": {
-          "label": "Hyper1",
-          "color": "#2c9239ff"
-        }
+        "value": "&lower"
       },
       {
         "value": "&kp",
@@ -595,10 +599,10 @@
         ]
       },
       {
-        "value": "&sl",
+        "value": "&kp",
         "params": [
           {
-            "value": 5
+            "value": "DEL"
           }
         ]
       },
@@ -2438,77 +2442,349 @@
         "value": "&none"
       },
       {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "&none"
-      },
-      {
-        "value": "Custom",
+        "value": "&kp",
         "params": [
           {
-            "value": "&kp LC(C)"
+            "value": "LS",
+            "params": [
+              {
+                "value": "N1"
+              }
+            ]
           }
         ]
       },
       {
-        "value": "Custom",
+        "value": "&kp",
         "params": [
           {
-            "value": "&kp LC(V)"
+            "value": "LS",
+            "params": [
+              {
+                "value": "N2"
+              }
+            ]
           }
         ]
       },
       {
-        "value": "Custom",
+        "value": "&kp",
         "params": [
           {
-            "value": "&kp LC(X)"
+            "value": "LS",
+            "params": [
+              {
+                "value": "N9"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "N0"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "EQUAL"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "MINUS"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "FSLH"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "BSLH"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "BSLH"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "N3"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "LBKT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "RBKT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "COMMA"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "DOT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "SQT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "SQT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "GRAVE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "GRAVE"
+          }
+        ]
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "N8"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LBKT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "RBKT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "MINUS"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "EQUAL"
+          }
+        ]
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&to",
+        "params": [
+          {
+            "value": 0
+          }
+        ]
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "MINUS"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "N4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "N5"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "N6"
+              }
+            ]
           }
         ]
       },
@@ -2558,20 +2834,200 @@
         "value": "&none"
       },
       {
-        "value": "Custom",
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      }
+    ],
+    [
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&Parentheses"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&CurlyBraces"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&AngleBrackets"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&DoubleQuotes"
+      },
+      {
+        "value": "&SingleQuotes"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&Backticks"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&SquareBrackets"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&to",
         "params": [
           {
-            "value": "&rsi_copy"
+            "value": 0
           }
         ]
       },
       {
-        "value": "Custom",
-        "params": [
-          {
-            "value": "&rsi_paste"
-          }
-        ]
+        "value": "&none"
+      },
+      {
+        "value": "&none"
+      },
+      {
+        "value": "&none"
       },
       {
         "value": "&none"
@@ -2635,7 +3091,265 @@
       }
     ]
   ],
-  "macros": [],
+  "macros": [
+    {
+      "name": "&Parentheses",
+      "description": "",
+      "bindings": [
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LS",
+              "params": [
+                {
+                  "value": "N9"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LS",
+              "params": [
+                {
+                  "value": "N0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LEFT"
+            }
+          ]
+        }
+      ],
+      "params": []
+    },
+    {
+      "name": "&AngleBrackets",
+      "description": "",
+      "bindings": [
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LS",
+              "params": [
+                {
+                  "value": "COMMA"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LS",
+              "params": [
+                {
+                  "value": "DOT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LEFT"
+            }
+          ]
+        }
+      ],
+      "params": []
+    },
+    {
+      "name": "&SquareBrackets",
+      "description": "",
+      "bindings": [
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LBKT"
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "RBKT"
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LEFT"
+            }
+          ]
+        }
+      ],
+      "params": []
+    },
+    {
+      "name": "&CurlyBraces",
+      "description": "",
+      "bindings": [
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LS",
+              "params": [
+                {
+                  "value": "LBKT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LS",
+              "params": [
+                {
+                  "value": "RBKT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LEFT"
+            }
+          ]
+        }
+      ],
+      "params": []
+    },
+    {
+      "name": "&DoubleQuotes",
+      "description": "",
+      "bindings": [
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LS",
+              "params": [
+                {
+                  "value": "SQT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LS",
+              "params": [
+                {
+                  "value": "SQT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LEFT"
+            }
+          ]
+        }
+      ],
+      "params": []
+    },
+    {
+      "name": "&SingleQuotes",
+      "description": "",
+      "bindings": [
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "SQT"
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "SQT"
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LEFT"
+            }
+          ]
+        }
+      ],
+      "params": []
+    },
+    {
+      "name": "&Backticks",
+      "description": "",
+      "bindings": [
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "GRAVE"
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "GRAVE"
+            }
+          ]
+        },
+        {
+          "value": "&kp",
+          "params": [
+            {
+              "value": "LEFT"
+            }
+          ]
+        }
+      ],
+      "params": []
+    }
+  ],
   "inputListeners": [],
   "holdTaps": [],
   "combos": []
