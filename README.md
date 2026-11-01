@@ -4,8 +4,13 @@ A Wayland-only **Fedora Sway** workstation, described entirely in files: composi
 
 The machine is used mostly as a **headless thin-client desktop**. Sway renders to a virtual output that `wayvnc` streams to a TigerVNC client on a Mac, so the setup is designed to feel right over a remote link: no Xwayland, keyboard-first window management, and a handful of small scripts that make tiling workflows one keypress.
 
-<!-- Screenshot / demo placeholder: add docs/demo.gif (sway desktop, dark and light toggle) -->
-> **Screenshots:** _coming soon_ (dark and light Bubblegum, the pair-split workflow, and the wallpaper picker).
+| Dark | Light |
+|---|---|
+| ![Bubblegum dark](docs/screenshots/dark-theme.png) | ![Bubblegum light](docs/screenshots/light-theme.png) |
+
+Both screenshots are the same workspace (Neovim, Thunar and a terminal) before and after pressing `Mod1+Shift+d`. Below is the rofi wallpaper picker:
+
+![Wallpaper picker](docs/screenshots/wallpaper-picker.png)
 
 ---
 
@@ -99,6 +104,7 @@ Dotfiles/
 ├── themes/                 # GTK 3/4 themes: "Bubblegum" and "Bubblegum Light"
 ├── icons/                  # icons used by notifications and launchers
 ├── wallpapers/             # bundled wallpaper(s), copied to ~/Pictures/Wallpaper
+├── docs/screenshots/       # README images
 ├── nvim/                   # Neovim: init.lua + neovim-bubblegum colourscheme
 ├── vim/                    # Vim: vimrc + Bubblegum colourscheme
 ├── zsh/                    # zshrc and shell functions (vault helpers, ssh agent)
