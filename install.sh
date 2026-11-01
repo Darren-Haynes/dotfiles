@@ -239,20 +239,13 @@ setup_links() {
     link "$DOTFILES/ipython/profile_darren"       "$HOME/.ipython/profile_darren"
     link "$DOTFILES/SpeedCrunch/color-schemes"    "$HOME/.local/share/SpeedCrunch/color-schemes"
 
-    # SpeedCrunch rewrites its ini constantly (window geometry etc.), so seed a
-    # minimal one instead of symlinking it.
+    # SpeedCrunch rewrites its ini constantly (window geometry etc.), so copy the
+    # tracked one as a starting point instead of symlinking it.
     local sc="$HOME/.config/SpeedCrunch/SpeedCrunch.ini"
     if [ ! -e "$sc" ]; then
-        info "seeding SpeedCrunch.ini (Bubblegum dark)"
-        if (( ! DRY_RUN )); then
-            mkdir -p "$(dirname "$sc")"
-            cat > "$sc" <<'EOF'
-[General]
-ConfigVersion=1200
-Display\ColorSchemeName=bubblegum-dark
-Display\DisplayFont="Fira Code,16,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0"
-EOF
-        fi
+        info "seeding SpeedCrunch.ini from the repo (Bubblegum dark)"
+        run mkdir -p "$(dirname "$sc")"
+        run cp "$DOTFILES/SpeedCrunch/SpeedCrunch.ini" "$sc"
     fi
 
     log "Linking helper scripts into ~/.local/bin"
