@@ -184,7 +184,7 @@ bindsym Ctrl+Mod1+Mod4+9 focus left, resize set width 90 ppt
 # ==============================================================================
 
 # Core System Lifecycles
-bindsym $mod+Return   exec $term
+bindsym $mod+Return   exec ~/Dotfiles/sway/open-terminal.sh
 bindsym $mod+Shift+q  kill
 bindsym $mod+d        exec $menu
 bindsym $mod+Shift+c  reload

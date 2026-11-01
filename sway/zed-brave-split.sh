@@ -11,6 +11,8 @@ WS2="2: "
 WS3="3: "
 WS9="9: " # FIX: Synced to use your Font Awesome split window icon!
 
+ENSURE_MAIN="$(dirname "$(readlink -f "$0")")/ensure-foot-main.sh"
+
 # Helper function to check if a specific application window exists in the Sway tree
 is_app_running() {
     swaymsg -t get_tree | grep -q "\"app_id\": \"$1\""
@@ -29,6 +31,7 @@ if swaymsg -t get_outputs | grep -q "\"current_workspace\": \"$WS9\"" || swaymsg
     # Take you straight back to your main high-efficiency development cockpit
     # FIX: Pointed directly to foot-main's home row workspace
     swaymsg "workspace $WS1"
+    "$ENSURE_MAIN"   # recreate foot-main if it was closed meanwhile
     swaymsg "[app_id=\"foot-main\"] focus"
     exit 0
 fi
