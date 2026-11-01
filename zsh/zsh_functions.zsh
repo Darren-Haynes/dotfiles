@@ -50,6 +50,16 @@ gnome-keybinds() {
 function sync_ssh_agent() {
     local SSH_ENV="$HOME/.ssh/agent-environment"
 
+    # Prefer the login-session agent (lightdm/sway starts it and sway's
+    # ssh-add-login.sh loads the key). Exit status 0/1 = agent reachable.
+    if [ -n "$SSH_AUTH_SOCK" ]; then
+        /usr/bin/ssh-add -l > /dev/null 2>&1
+        case $? in
+            0) return 0 ;;
+            1) /usr/bin/ssh-add "$HOME/.ssh/id_ed25519"; return $? ;;
+        esac
+    fi
+
     # Internal helper script loop to kick off a fresh authentication channel
     function _start_agent_worker() {
         echo "Initializing background SSH authentication agent..."

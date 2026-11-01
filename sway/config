@@ -52,6 +52,9 @@ exec wl-paste --type image --watch cliphist store
 # Secure Local Headless Connection Core
 exec wayvnc --output=HEADLESS-1 127.0.0.1 5900
 
+# Load the SSH key into the session agent once per login (rofi passphrase prompt)
+exec ~/Dotfiles/sway/ssh-add-login.sh
+
 # ==============================================================================
 # Bubblegum Theme Palette 
 # ==============================================================================
