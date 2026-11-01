@@ -84,9 +84,23 @@ function sync_ssh_agent() {
 # ==============================================================================
 # CLOSE VAULT
 # ==============================================================================
+# Drop any stale alias of the same name: an alias would expand in the function
+# definition below and turn it into an anonymous function that runs on every shell start.
+unalias close-vault 2>/dev/null
 close-vault() {
-  local was_in_vault=false
-  [[ "$(pwd)" == /home/darren/Vault* ]] && was_in_vault=true && cd ~
-  fusermount3 -u /home/darren/Vault 2>/dev/null || fusermount3 -uz /home/darren/Vault
-  [[ "$was_in_vault" == true ]] && echo "Vault locked."
+  local vault="${VAULT_DIR:-$HOME/Vault}"
+  if ! mountpoint -q "$vault"; then
+    echo "Vault is not mounted."
+    return 0
+  fi
+  # Step out first: a shell sitting inside the mount keeps it busy.
+  [[ "$PWD" == "$vault"* ]] && cd ~
+  if fusermount3 -u "$vault" 2>/dev/null; then
+    echo "Vault locked."
+  elif fusermount3 -uz "$vault"; then
+    echo "Vault locked (some process still had it open; it was detached lazily)."
+  else
+    echo "Could not lock the vault." >&2
+    return 1
+  fi
 }
