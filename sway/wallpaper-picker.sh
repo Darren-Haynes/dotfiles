@@ -7,7 +7,7 @@
 WALL_DIR="$HOME/Pictures/Wallpaper"
 THUMB_DIR="$HOME/.cache/wallpaper-thumbs"
 CURRENT="$HOME/.local/state/current-wallpaper"   # symlink to the chosen image
-DEFAULT="$WALL_DIR/pink-clouds.jpg"
+DEFAULT="$WALL_DIR/green-tree-mist.jpg"
 
 apply() {
     pkill -x swaybg

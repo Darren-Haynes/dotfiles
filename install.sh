@@ -205,6 +205,16 @@ setup_links() {
     run mkdir -p "$HOME/.config" "$HOME/.local/bin" \
         "$HOME/Pictures/Wallpaper" "$HOME/Pictures/Screenshots" "$HOME/Videos"
 
+    # Bundled wallpapers are copied (never overwritten) so you can add your own.
+    local w
+    for w in "$DOTFILES"/wallpapers/*; do
+        [ -f "$w" ] || continue
+        if [ ! -e "$HOME/Pictures/Wallpaper/$(basename "$w")" ]; then
+            info "copying wallpaper $(basename "$w")"
+            run cp "$w" "$HOME/Pictures/Wallpaper/"
+        fi
+    done
+
     log "Linking config into ~/.config"
     local d
     for d in sway waybar foot rofi btop yazi swappy; do
@@ -306,8 +316,8 @@ post_notes() {
          - private repo:   PRIVATE_DOTFILES_REPO=<ssh url> ./install.sh --links-only
     3. Brave: load the Bubblegum theme from ~/Dotfiles/brave/brave-theme-bubblegum
          (brave://extensions -> Developer mode -> Load unpacked).
-    4. Wallpaper: put your images in ~/Pictures/Wallpaper (sway/config uses
-         pink-clouds.jpg); wallpapers are not tracked in the repo.
+    4. Wallpaper: green-tree-mist.jpg is copied to ~/Pictures/Wallpaper; add more
+         there and pick with Mod+Shift+w.
     5. Remote desktop: wayvnc listens on 127.0.0.1:5900. To reach it over an SSH
          tunnel, enable sshd yourself:  sudo systemctl enable --now sshd
 EOF
