@@ -220,7 +220,7 @@ bindsym $mod+minus          scratchpad show
 bindsym $mod+Shift+minus    move scratchpad
 
 # Main Scratchpad Invocation Triggers
-bindsym $mod+Shift+Return   exec swaymsg '[app_id="foot-scratchpad"] scratchpad show' || (foot -a foot-scratchpad btop & sleep 0.15 && swaymsg '[app_id="foot-scratchpad"] scratchpad show, fullscreen enable')
+bindsym $mod+Shift+Return   exec swaymsg '[app_id="foot-scratchpad"] scratchpad show, fullscreen enable' || (foot -a foot-scratchpad btop & sleep 0.15 && swaymsg '[app_id="foot-scratchpad"] scratchpad show, fullscreen enable')
 bindsym $mod+f              exec swaymsg '[app_id="foot-yazi"] scratchpad show, fullscreen enable' || (foot -a foot-yazi yazi & sleep 0.15 && swaymsg '[app_id="foot-yazi"] scratchpad show, fullscreen enable')
 bindsym $mod+t              exec swaymsg '[app_id="foot-demand"] scratchpad show, fullscreen enable' || (foot -a foot-demand & sleep 0.15 && swaymsg '[app_id="foot-demand"] scratchpad show, fullscreen enable')   
 
