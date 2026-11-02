@@ -6,9 +6,9 @@
 @define-color view_fg_color         #d7d7d7;
 @define-color headerbar_bg_color    #3a3a3a;
 @define-color headerbar_fg_color    #d7d7d7;
-@define-color selected_bg_color     #87d7ff;
+@define-color selected_bg_color     #d7afd7;
 @define-color selected_fg_color     #2a2a2a;
-@define-color accent_bg_color       #87d7ff;
+@define-color accent_bg_color       #d7afd7;
 @define-color accent_fg_color       #2a2a2a;
 @define-color base_color            #303030;
 @define-color base_fg_color         #d7d7d7;
@@ -40,7 +40,7 @@ windowtitlebar button:hover, headerbar button:hover {
 }
 
 windowtitlebar button:active {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -62,7 +62,7 @@ scale trough highlight {
 
 scale trough slider {
     background-color: #d7d7d7;
-    border: 2px solid #87d7ff;
+    border: 2px solid #d7afd7;
     border-radius: 50%;
     min-width: 14px;
     min-height: 14px;
@@ -85,7 +85,7 @@ switch {
 }
 
 switch:checked {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
 }
 
 switch slider {
@@ -111,7 +111,7 @@ button:hover {
 }
 
 button:active, button:checked {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -124,12 +124,12 @@ entry {
 }
 
 entry:focus {
-    border-color: #87d7ff;
-    box-shadow: 0 0 0 1px #87d7ff;
+    border-color: #d7afd7;
+    box-shadow: 0 0 0 1px #d7afd7;
 }
 
 entry selection {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -147,7 +147,7 @@ popover menuitem, popover button.flat {
 }
 
 popover menuitem:hover, popover button.flat:hover {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -161,8 +161,8 @@ checkbutton check, radiobutton radio {
 }
 
 checkbutton check:checked, radiobutton radio:checked {
-    background-color: #87d7ff;
-    border-color: #87d7ff;
+    background-color: #d7afd7;
+    border-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -178,7 +178,7 @@ scrollbar slider {
 }
 
 scrollbar slider:hover {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
 }
 
 /* Labels */
@@ -192,7 +192,7 @@ label {
 
 /* Selection */
 :selected {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }   
 
@@ -246,7 +246,7 @@ menubar > item:hover {
 }
 
 menubar > item:active {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -270,7 +270,7 @@ headerbar button:hover {
 }
 
 headerbar button:active {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -290,7 +290,7 @@ list row:hover {
 }
 
 list row:selected {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -329,7 +329,7 @@ progressbar trough {
 }
 
 progressbar progress {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     border-radius: 4px;
 }
 
@@ -441,7 +441,7 @@ placessidebar row.sidebar-row label.sidebar-label {
 /* --- Hover / selected --- */
 placessidebar row.sidebar-row:hover {
     background-color: #3a3a3a;
-    border-left-color: #87d7ff;
+    border-left-color: #d7afd7;
 }
 
 placessidebar row.sidebar-row:hover label.sidebar-label {
@@ -450,7 +450,7 @@ placessidebar row.sidebar-row:hover label.sidebar-label {
 
 placessidebar row.sidebar-row:selected {
     background-color: #d7afd7;
-    border-left-color: #87d7ff;
+    border-left-color: #d7afd7;
 }
 
 placessidebar row.sidebar-row:selected image.sidebar-icon,
@@ -488,12 +488,12 @@ placessidebar row.sidebar-row:selected button.sidebar-button {
 placessidebar row.sidebar-placeholder-row {
     padding: 0 8px;
     min-height: 2px;
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     background-clip: content-box;
 }
 
 placessidebar row.sidebar-new-bookmark-row label.sidebar-label {
-    color: #87d7ff;
+    color: #d7afd7;
 }
 
 /* --- Section separators --- */
@@ -518,7 +518,7 @@ placesview row:hover {
 
 placesview row:selected,
 placesview row:selected label {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -539,7 +539,7 @@ filechooser pathbar button:checked,
 filechooser pathbar button:active,
 filechooser pathbar button:checked label,
 filechooser pathbar button:active label {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -550,7 +550,7 @@ filechooser listview.view row:hover {
 
 filechooser listview.view row:selected,
 filechooser listview.view row:selected:hover {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -561,7 +561,7 @@ filechooser listview.view row:selected image {
 
 /* --- Confirm button in the dialog's header bar --- */
 window.filechooser headerbar button.suggested-action {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
     border: none;
 }

@@ -7,8 +7,8 @@
 @define-color theme_fg_color          #d7d7d7;
 @define-color theme_base_color        #303030;
 @define-color theme_text_color        #d7d7d7;
-@define-color theme_selected_bg_color #87d7ff;
-@define-color theme_selected_fg_color #ffffff;
+@define-color theme_selected_bg_color #d7afd7;
+@define-color theme_selected_fg_color #2a2a2a;
 @define-color theme_unfocused_bg_color #2a2a2a;
 @define-color theme_unfocused_fg_color #a7a7a7;
 @define-color theme_unfocused_base_color #303030;
@@ -49,7 +49,7 @@ headerbar button:hover, .titlebar button:hover {
 }
 
 headerbar button:active, .titlebar button:active {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -74,7 +74,7 @@ headerbar button:active, .titlebar button:active {
 }
 
 .thunar toolbar button:active {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -117,7 +117,7 @@ headerbar button:active, .titlebar button:active {
 }
 
 .thunar .sidebar .view:active {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -139,13 +139,13 @@ headerbar button:active, .titlebar button:active {
 
 .thunar .standard-view .view:selected,
 .thunar notebook treeview.view:selected {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
 .thunar .standard-view iconview:selected,
 .thunar .standard-view iconview .view:selected {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -219,7 +219,7 @@ scrollbar slider {
 }
 
 scrollbar slider:hover {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
 }
 
 scrollbar trough {
@@ -238,12 +238,12 @@ entry {
 }
 
 entry:focus {
-    border-color: #87d7ff;
-    box-shadow: 0 0 0 1px #87d7ff;
+    border-color: #d7afd7;
+    box-shadow: 0 0 0 1px #d7afd7;
 }
 
 entry selection {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -263,7 +263,7 @@ menu menuitem, .popover .menuitem {
 }
 
 menu menuitem:hover, .popover .menuitem:hover {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -284,7 +284,7 @@ button:hover {
 }
 
 button:active, button:checked {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -304,12 +304,12 @@ tooltip {
    ============================================ */
 
 :selected {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
 text selection, entry selection, spinbutton selection {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }
 
@@ -323,7 +323,7 @@ switch {
 }
 
 switch:checked {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
 }
 
 checkbutton check, radiobutton radio {
@@ -332,8 +332,8 @@ checkbutton check, radiobutton radio {
 }
 
 checkbutton check:checked, radiobutton radio:checked {
-    background-color: #87d7ff;
-    border-color: #87d7ff;
+    background-color: #d7afd7;
+    border-color: #d7afd7;
 }   
 
 /* ============================================
@@ -406,14 +406,14 @@ placessidebar row label.sidebar-label {
 placessidebar row:hover {
     background-color: #3a3a3a;
     color: #ffffff;
-    border-left-color: #87d7ff;
+    border-left-color: #d7afd7;
 }
 
 placessidebar row:selected,
 placessidebar row:selected:focus {
     background-color: #d7afd7;
     color: #2a2a2a;
-    border-left-color: #87d7ff;
+    border-left-color: #d7afd7;
 }
 
 placessidebar row:selected image.sidebar-icon,
@@ -451,17 +451,17 @@ placessidebar row:selected button.sidebar-button {
 placessidebar row.sidebar-placeholder-row {
     padding: 0 8px;
     min-height: 2px;
-    background-image: image(#87d7ff);
+    background-image: image(#d7afd7);
     background-clip: content-box;
 }
 
 placessidebar row.sidebar-new-bookmark-row {
-    color: #87d7ff;
+    color: #d7afd7;
 }
 
 placessidebar row:drop(active):not(:disabled) {
-    color: #87d7ff;
-    box-shadow: inset 0 1px #87d7ff, inset 0 -1px #87d7ff;
+    color: #d7afd7;
+    box-shadow: inset 0 1px #d7afd7, inset 0 -1px #d7afd7;
 }
 
 /* --- Section separators --- */
@@ -481,13 +481,13 @@ placesview row.activatable:hover {
     background-color: #3a3a3a;
 }
 
-/* --- File list selection contrast (dark text on cyan) --- */
+/* --- File list selection contrast (dark text on pink) --- */
 treeview.view:selected,
 treeview.view:selected:focus,
 treeview.view:selected:backdrop,
 iconview:selected,
 iconview:selected:backdrop,
 iconview .view:selected {
-    background-color: #87d7ff;
+    background-color: #d7afd7;
     color: #2a2a2a;
 }

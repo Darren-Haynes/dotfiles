@@ -4,9 +4,9 @@
 @define-color view_fg_color         #2a2a2a;
 @define-color headerbar_bg_color    #e0e0e0;
 @define-color headerbar_fg_color    #2a2a2a;
-@define-color selected_bg_color     #0088cc;
+@define-color selected_bg_color     #b060a0;
 @define-color selected_fg_color     #ffffff;
-@define-color accent_bg_color       #0088cc;
+@define-color accent_bg_color       #b060a0;
 @define-color accent_fg_color       #ffffff;
 @define-color base_color            #ececec;
 @define-color base_fg_color         #2a2a2a;
@@ -36,12 +36,12 @@ windowtitlebar button:hover, headerbar button:hover {
 }
 
 windowtitlebar button:active {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
 }
 
 scale {
-    color: #0088cc;
+    color: #b060a0;
 }
 
 scale trough {
@@ -51,13 +51,13 @@ scale trough {
 }
 
 scale trough highlight {
-    background-color: #0088cc;
+    background-color: #b060a0;
     border-radius: 3px;
 }
 
 scale trough slider {
     background-color: #ffffff;
-    border: 2px solid #0088cc;
+    border: 2px solid #b060a0;
     border-radius: 50%;
     min-width: 14px;
     min-height: 14px;
@@ -75,7 +75,7 @@ switch {
 }
 
 switch:checked {
-    background-color: #0088cc;
+    background-color: #b060a0;
 }
 
 switch slider {
@@ -96,7 +96,7 @@ button:hover {
 }
 
 button:active, button:checked {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
 }
 
@@ -108,12 +108,12 @@ entry {
 }
 
 entry:focus {
-    border-color: #0088cc;
-    box-shadow: 0 0 0 1px #0088cc;
+    border-color: #b060a0;
+    box-shadow: 0 0 0 1px #b060a0;
 }
 
 entry selection {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
 }
 
@@ -130,7 +130,7 @@ popover menuitem, popover button.flat {
 }
 
 popover menuitem:hover, popover button.flat:hover {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
 }
 
@@ -143,8 +143,8 @@ checkbutton check, radiobutton radio {
 }
 
 checkbutton check:checked, radiobutton radio:checked {
-    background-color: #0088cc;
-    border-color: #0088cc;
+    background-color: #b060a0;
+    border-color: #b060a0;
     color: #ffffff;
 }
 
@@ -159,7 +159,7 @@ scrollbar slider {
 }
 
 scrollbar slider:hover {
-    background-color: #0088cc;
+    background-color: #b060a0;
 }
 
 label {
@@ -171,7 +171,7 @@ label {
 }
 
 :selected {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
 }
 
@@ -223,7 +223,7 @@ menubar > menuitem:hover {
 }
 
 menubar > item.active {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
 }
 
@@ -276,7 +276,7 @@ placessidebar row.sidebar-row label.sidebar-label {
 /* --- Hover / selected --- */
 placessidebar row.sidebar-row:hover {
     background-color: #d5d5d5;
-    border-left-color: #0088cc;
+    border-left-color: #b060a0;
 }
 
 placessidebar row.sidebar-row:hover label.sidebar-label {
@@ -285,7 +285,7 @@ placessidebar row.sidebar-row:hover label.sidebar-label {
 
 placessidebar row.sidebar-row:selected {
     background-color: #b060a0;
-    border-left-color: #0088cc;
+    border-left-color: #b060a0;
 }
 
 placessidebar row.sidebar-row:selected image.sidebar-icon,
@@ -323,12 +323,12 @@ placessidebar row.sidebar-row:selected button.sidebar-button {
 placessidebar row.sidebar-placeholder-row {
     padding: 0 8px;
     min-height: 2px;
-    background-color: #0088cc;
+    background-color: #b060a0;
     background-clip: content-box;
 }
 
 placessidebar row.sidebar-new-bookmark-row label.sidebar-label {
-    color: #0088cc;
+    color: #b060a0;
 }
 
 /* --- Section separators --- */
@@ -353,7 +353,7 @@ placesview row:hover {
 
 placesview row:selected,
 placesview row:selected label {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
 }
 
@@ -374,7 +374,7 @@ filechooser pathbar button:checked,
 filechooser pathbar button:active,
 filechooser pathbar button:checked label,
 filechooser pathbar button:active label {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
 }
 
@@ -385,7 +385,7 @@ filechooser listview.view row:hover {
 
 filechooser listview.view row:selected,
 filechooser listview.view row:selected:hover {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
 }
 
@@ -396,7 +396,7 @@ filechooser listview.view row:selected image {
 
 /* --- Confirm button in the dialog's header bar --- */
 window.filechooser headerbar button.suggested-action {
-    background-color: #0088cc;
+    background-color: #b060a0;
     color: #ffffff;
     border: none;
 }
