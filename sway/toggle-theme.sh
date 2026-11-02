@@ -1,7 +1,7 @@
 #!/bin/bash
 # Toggle Bubblegum dark/light: GTK theme, icon theme, color-scheme, dunst
-# notification colors, foot terminals, and the GTK_THEME override used by
-# xdg-desktop-portal-gtk (the file picker).
+# notification colors, foot terminals, running vim/nvim sessions, and the
+# GTK_THEME override used by xdg-desktop-portal-gtk (the file picker).
 
 SCHEMA="org.gnome.desktop.interface"
 current=$(gsettings get "$SCHEMA" gtk-theme | tr -d "'")
@@ -42,6 +42,13 @@ FOOT_STATE="${XDG_STATE_HOME:-$HOME/.local/state}/foot"
 mkdir -p "$FOOT_STATE"
 printf '[main]\ninitial-color-theme=%s\n' "$foot_theme" > "$FOOT_STATE/theme.ini"
 pkill "-$foot_signal" -x foot 2>/dev/null
+
+# nvim re-reads the color-scheme on SIGUSR1 (neovim-bubblegum plugin); it
+# ignores the signal harmlessly if the plugin isn't loaded. vim polls the state
+# file below once a second (see vim/vimrc).
+pkill -USR1 -x nvim 2>/dev/null
+mkdir -p "$HOME/.local/state/bubblegum"
+printf '%s\n' "$foot_theme" > "$HOME/.local/state/bubblegum/scheme"
 
 # GTK_THEME env overrides gsettings for anything systemd/dbus launches,
 # so update it and restart the portal so the file picker follows the toggle.

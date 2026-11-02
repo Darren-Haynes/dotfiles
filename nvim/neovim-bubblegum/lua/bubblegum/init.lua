@@ -238,8 +238,8 @@ end
 
 --- Follow the desktop light/dark setting (GNOME color-scheme, which is what
 --- sway/toggle-theme.sh flips) and re-apply the colorscheme. Call once from
---- your init.lua; it also re-checks on FocusGained so a running nvim follows
---- the toggle.
+--- your init.lua; it also re-checks on FocusGained and on SIGUSR1 so a running
+--- nvim follows the toggle.
 function M.sync_with_system()
   local function apply()
     vim.system(
@@ -258,10 +258,10 @@ function M.sync_with_system()
     )
   end
   apply()
-  vim.api.nvim_create_autocmd("FocusGained", {
-    group = vim.api.nvim_create_augroup("BubblegumSync", { clear = true }),
-    callback = apply,
-  })
+  local group = vim.api.nvim_create_augroup("BubblegumSync", { clear = true })
+  vim.api.nvim_create_autocmd("FocusGained", { group = group, callback = apply })
+  -- sway/toggle-theme.sh sends SIGUSR1 so open sessions switch immediately.
+  vim.api.nvim_create_autocmd("Signal", { group = group, pattern = "SIGUSR1", callback = apply })
 end
 
 return M

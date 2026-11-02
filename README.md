@@ -53,7 +53,8 @@ flowchart LR
     T --> D["dunst colors<br/>symlink swap + reload"]
     T --> E["GTK_THEME env<br/>systemd + dbus"]
     E --> P["restart xdg-desktop-portal-gtk<br/>(file picker follows)"]
-    G --> V["Vim / Neovim<br/>re-sync on FocusGained"]
+    T --> V["Vim / Neovim<br/>live switch (SIGUSR1 / state-file poll)"]
+    T --> F["foot terminals<br/>SIGUSR1 / SIGUSR2"]
     T --> N["themed notification"]
 ```
 

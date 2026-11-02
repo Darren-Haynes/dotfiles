@@ -9,7 +9,9 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Follow the desktop light/dark setting (sway/toggle-theme.sh flips the GNOME
-" color-scheme). Checked at startup and whenever the terminal regains focus.
+" color-scheme). Checked at startup, whenever the terminal regains focus, and by
+" a 1s timer that watches the state file the toggle script writes, so open
+" sessions switch within a second.
 function! s:SyncTheme() abort
   let l:scheme = system('gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null')
   if v:shell_error == 0
@@ -17,6 +19,7 @@ function! s:SyncTheme() abort
     if &background !=# l:bg || get(g:, 'colors_name', '') !=# 'bubblegum'
       let &background = l:bg
       colorscheme bubblegum
+      redraw!
     endif
   endif
 endfunction
@@ -28,3 +31,19 @@ augroup BubblegumSync
   autocmd!
   autocmd FocusGained * call s:SyncTheme()
 augroup END
+
+let s:state_file = expand('~/.local/state/bubblegum/scheme')
+function! s:PollTheme(timer) abort
+  if !filereadable(s:state_file)
+    return
+  endif
+  let l:bg = get(readfile(s:state_file, '', 1), 0, '')
+  if (l:bg ==# 'light' || l:bg ==# 'dark') && &background !=# l:bg
+    let &background = l:bg
+    colorscheme bubblegum
+    redraw!
+  endif
+endfunction
+if has('timers')
+  call timer_start(1000, function('s:PollTheme'), {'repeat': -1})
+endif
