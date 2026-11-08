@@ -61,8 +61,7 @@ exec ~/Dotfiles/sway/ssh-add-login.sh
 # Class                  border    backgr.   text      indicator child_border
 client.focused          "#3A3A3A" "#3A3A3A" "#ffffff" "#488F6D"   "#3A3A3A"
 client.focused_inactive "#454545" "#2A2A2a" "#A7A7A7" "#303030"   "#222222"
-client.unfocused        "#303030" "#222222" "#808080" "#222222"   "#222222"
-client.unfocused        "#303030" "#B5B3AD" "#808080" "#222222"   "#222222"
+client.unfocused        "#303030" "#2A2A2A" "#A7A7A7" "#222222"   "#222222"
 client.urgent           "#D78787" "#402020" "#ffffff" "#D78787"   "#D78787"
 client.background       "#303030"
 
