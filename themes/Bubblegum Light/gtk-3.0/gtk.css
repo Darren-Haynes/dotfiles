@@ -121,23 +121,25 @@ headerbar button:active, .titlebar button:active {
     color: #2a2a2a;
 }
 
-.thunar notebook header {
+notebook header {
     background-color: #e0e0e0;
     border-bottom: 1px solid #c8c8c8;
 }
 
-.thunar notebook header tab {
+notebook header tab {
+    padding: 6px 18px;
+    margin: 0 2px;
     background-color: transparent;
     color: #666666;
     border: none;
 }
 
-.thunar notebook header tab:hover {
+notebook header tab:hover {
     color: #2a2a2a;
     background-color: #d5d5d5;
 }
 
-.thunar notebook header tab:checked {
+notebook header tab:checked {
     color: #b060a0;
     background-color: #f5f5f5;
     border-bottom: 2px solid #b060a0;
