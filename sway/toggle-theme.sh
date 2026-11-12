@@ -1,5 +1,5 @@
 #!/bin/bash
-# Bubblegum theme switcher: dark/light variant + accent colour (pink/blue/green).
+# Bubblegum theme switcher: dark/light variant + accent colour (pink/blue/green/mono).
 #   toggle-theme.sh                 flip dark <-> light, keeping the current accent
 #   toggle-theme.sh --accent NAME   keep the current variant, switch accent
 #   toggle-theme.sh --apply         re-apply the saved variant + accent (e.g. at login)

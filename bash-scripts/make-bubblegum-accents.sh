@@ -5,7 +5,7 @@
 # They are copies of themes/Bubblegum and themes/"Bubblegum Light" with the
 # pink accent swapped, so edit those source themes and re-run this script.
 #
-# Usage: make-bubblegum-accents.sh [accent ...]   (default: blue green)
+# Usage: make-bubblegum-accents.sh [accent ...]   (default: every accent except pink)
 
 set -euo pipefail
 
@@ -16,7 +16,7 @@ SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
 SRC_DIR="$(cd "$SCRIPT_DIR/../themes" && pwd)"
 DST_DIR="$HOME/.local/share/themes"
 
-accents="${*:-blue green}"
+accents="${*:-${BUBBLEGUM_ACCENTS/pink/}}"
 mkdir -p "$DST_DIR"
 
 for accent in $accents; do

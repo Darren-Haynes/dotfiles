@@ -144,7 +144,7 @@ Dotfiles/
 | `Mod+Shift+Return`, `Mod+f`, `Mod+t` | Fullscreen scratchpads: btop, yazi, terminal |
 | `Hyper+t`, `Hyper+a`, `Hyper+z`, `Mod+Shift+z` | Foot+Zed, Foot+Brave and Zed+Brave splits, dynamic pair menu |
 | `Mod1+Shift+d` | Toggle dark / light Bubblegum |
-| `Mod1+Shift+a` | Pick the accent colour (pink / blue / green) from a rofi menu |
+| `Mod1+Shift+a` | Pick the accent colour (pink / blue / green / mono) from a rofi menu |
 | `Mod+Shift+w` | Wallpaper picker |
 | `Mod+c` | Clipboard history (cliphist + rofi) |
 | `Mod+Shift+o` | OCR a screen region to the clipboard |

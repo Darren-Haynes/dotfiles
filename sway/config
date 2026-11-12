@@ -71,7 +71,7 @@ include ~/.local/state/bubblegum/sway-colors.conf
 
 # GTK + icon bubblegum light/dark theme toggle
 bindsym Mod1+Shift+d exec ~/Dotfiles/sway/toggle-theme.sh
-# Accent colour picker (pink / blue / green) for the GTK theme, icons and dunst
+# Accent colour picker (pink / blue / green / mono) for the GTK theme, icons and dunst
 bindsym Mod1+Shift+a exec ~/Dotfiles/sway/accent-picker.sh
 
 # ==============================================================================

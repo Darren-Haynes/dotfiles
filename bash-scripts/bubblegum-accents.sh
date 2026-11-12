@@ -4,8 +4,10 @@
 # Pink is the original Bubblegum accent and lives in the source themes
 # (themes/Bubblegum, themes/Bubblegum Light). Other accents are generated
 # copies of those themes with the accent colour swapped.
+# "mono" is the neutral accent: near-white on the dark theme, charcoal on the
+# light theme.
 
-BUBBLEGUM_ACCENTS="pink blue green"
+BUBBLEGUM_ACCENTS="pink blue green mono"
 
 # accent_color <dark|light> <pink|blue|green>  ->  hex colour
 accent_color() {
@@ -16,6 +18,8 @@ accent_color() {
         light:pink)  echo "#b060a0" ;;
         light:blue)  echo "#0088cc" ;;
         light:green) echo "#357f55" ;;
+        dark:mono)   echo "#e8e8e8" ;;
+        light:mono)  echo "#3a3a3a" ;;
         *) return 1 ;;
     esac
 }

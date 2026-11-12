@@ -1,5 +1,5 @@
 #!/bin/bash
-# Pick the Bubblegum accent colour (pink / blue / green) from a rofi menu.
+# Pick the Bubblegum accent colour (pink / blue / green / mono) from a rofi menu.
 # The choice is applied live by toggle-theme.sh --accent (GTK, icons, dunst).
 
 DOTFILES="$HOME/Dotfiles"
@@ -28,7 +28,7 @@ choice=$(printf '%b' "$entries" | rofi -dmenu -i -markup-rows -p "Accent" \
     -theme bubblegum \
     -theme-str "* { accent-blue: $(accent_color dark "$current")ff; }
                 window { width: 420px; }
-                listview { lines: 3; }" \
+                listview { lines: 4; }" \
     -selected-row "$selected" -format 'i')
 
 [ -z "$choice" ] && exit 0
