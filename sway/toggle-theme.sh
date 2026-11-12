@@ -4,7 +4,8 @@
 #   toggle-theme.sh --accent NAME   keep the current variant, switch accent
 #   toggle-theme.sh --apply         re-apply the saved variant + accent (e.g. at login)
 #
-# Updates: GTK theme, icon theme, color-scheme, dunst notification colors, foot
+# Updates: GTK theme, icon theme, color-scheme, sway window borders, dunst
+# notification colors, foot
 # terminals, running vim/nvim sessions, and the GTK_THEME override used by
 # xdg-desktop-portal-gtk (the file picker / print dialog).
 # Non-pink accents are generated copies of the themes; see
@@ -70,6 +71,9 @@ fi
 gsettings set "$SCHEMA" gtk-theme "$gtk_theme"
 gsettings set "$SCHEMA" icon-theme "$icon_theme"
 gsettings set "$SCHEMA" color-scheme "$scheme"
+
+# sway window borders: accent on the focused window, neutral on the rest.
+"$DOTFILES/sway/apply-sway-colors.sh" "$variant" "$accent"
 
 # dunst: ~/.config/dunst/dunstrc.d/10-colors.conf is generated from
 # Dotfiles/dunst/colors-*.conf with the pink accent and icon theme swapped.

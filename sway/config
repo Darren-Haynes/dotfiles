@@ -64,6 +64,10 @@ client.focused_inactive "#454545" "#2A2A2a" "#A7A7A7" "#303030"   "#222222"
 client.unfocused        "#303030" "#2A2A2A" "#A7A7A7" "#222222"   "#222222"
 client.urgent           "#D78787" "#402020" "#ffffff" "#D78787"   "#D78787"
 client.background       "#303030"
+# Window border colours follow the accent and dark/light variant: written by
+# sway/apply-sway-colors.sh (called from toggle-theme.sh), overriding the
+# defaults above. A missing file is ignored.
+include ~/.local/state/bubblegum/sway-colors.conf
 
 # GTK + icon bubblegum light/dark theme toggle
 bindsym Mod1+Shift+d exec ~/Dotfiles/sway/toggle-theme.sh
