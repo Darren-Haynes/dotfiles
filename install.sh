@@ -153,6 +153,12 @@ install_packages() {
         info "removing mako (replaced by dunst)"
         run sudo dnf remove -y mako
     fi
+    # Thunar pulls in xfce4-notifyd, which D-Bus-activates and steals the
+    # notification name from dunst whenever dunst isn't running. Keep it masked.
+    if rpm -q xfce4-notifyd >/dev/null 2>&1; then
+        info "masking xfce4-notifyd (dunst is the notification daemon)"
+        run systemctl --user mask xfce4-notifyd.service
+    fi
 }
 
 install_extras() {
