@@ -4,8 +4,8 @@
 #   toggle-theme.sh --accent NAME   keep the current variant, switch accent
 #   toggle-theme.sh --apply         re-apply the saved variant + accent (e.g. at login)
 #
-# Updates: GTK theme, icon theme, color-scheme, sway window borders, dunst
-# notification colors, foot
+# Updates: GTK theme, icon theme, color-scheme, sway window borders, waybar,
+# dunst notification colors, foot
 # terminals, running vim/nvim sessions, and the GTK_THEME override used by
 # xdg-desktop-portal-gtk (the file picker / print dialog).
 # Non-pink accents are generated copies of the themes; see
@@ -74,6 +74,11 @@ gsettings set "$SCHEMA" color-scheme "$scheme"
 
 # sway window borders: accent on the focused window, neutral on the rest.
 "$DOTFILES/sway/apply-sway-colors.sh" "$variant" "$accent"
+
+# waybar: the bar is always dark, so it takes the dark shade of the accent from
+# waybar/accent.css (imported by style.css); SIGUSR2 reloads its style.
+"$DOTFILES/sway/waybar-accent.sh" "$accent"
+pkill -SIGUSR2 -x waybar 2>/dev/null
 
 # dunst: ~/.config/dunst/dunstrc.d/10-colors.conf is generated from
 # Dotfiles/dunst/colors-*.conf with the pink accent and icon theme swapped.

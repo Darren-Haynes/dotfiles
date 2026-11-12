@@ -43,7 +43,7 @@ exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
 # UI Daemons & Clipboard Sync Matrix
-exec_always "pkill waybar; waybar"
+exec_always "pkill waybar; ~/Dotfiles/sway/waybar-accent.sh; waybar"
 exec_always ~/Dotfiles/sway/wallpaper-picker.sh --restore
 bindsym Ctrl+Mod1+Mod4+Return exec killall -q -SIGUSR1 waybar
 exec wl-paste --type text  --watch cliphist store

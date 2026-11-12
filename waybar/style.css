@@ -3,7 +3,12 @@
  * Optimized for koalefant's dark monochrome + ice-blue theme palette
  * ============================================================================== */
 
-/* 1. Global Text Baseline Rule */
+/* Accent colour: the default below is Bubblegum pink. accent.css is generated
+ * by sway/toggle-theme.sh (gitignored) and overrides it to follow the accent
+ * picker. The bar is always dark, so it uses the dark-theme shade. */
+@define-color bubblegum_accent #D7AFD7;
+@import url("accent.css");
+
 /* 1. Global Text Baseline Rule */
 * {
     border: none;
@@ -38,14 +43,14 @@ window#waybar.hidden {
 #workspaces button:hover {
     background: #3A3A3A;
     color: #D7D7D7;
-    border-bottom: 3px solid #87D7FF; /* Ice-blue underline flash */
+    border-bottom: 3px solid @bubblegum_accent; /* Accent underline flash */
 }
 
 /* The Workspace you are currently looking at */
 #workspaces button.focused {
     background-color: #3A3A3A;
-    color: #87D7FF; /* Ice-Blue highlight text */
-    border-bottom: 3px solid #87D7FF; /* Sharp accent baseline link */
+    color: @bubblegum_accent; /* Accent highlight text */
+    border-bottom: 3px solid @bubblegum_accent; /* Sharp accent baseline link */
     font-weight: bold;
 }
 
@@ -81,12 +86,12 @@ window#waybar.hidden {
 
 /* Core Functional Module Accents */
 #clock {
-    color: #87D7FF; /* Accent Ice-Blue focal points for the time clock */
+    color: @bubblegum_accent; /* Accent focal point for the time clock */
     font-weight: bold;
 }
 
 #battery.charging, #battery.plugged {
-    color: #87D7FF;
+    color: @bubblegum_accent;
 }
 
 #battery.critical:not(.charging) {
@@ -112,7 +117,7 @@ window#waybar.hidden {
 /* Tooltips */
 tooltip {
     background: #2A2A2A;
-    border: 1px solid #87D7FF;
+    border: 1px solid @bubblegum_accent;
     border-radius: 4px;
 }
 
