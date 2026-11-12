@@ -67,6 +67,8 @@ client.background       "#303030"
 
 # GTK + icon bubblegum light/dark theme toggle
 bindsym Mod1+Shift+d exec ~/Dotfiles/sway/toggle-theme.sh
+# Accent colour picker (pink / blue / green) for the GTK theme, icons and dunst
+bindsym Mod1+Shift+a exec ~/Dotfiles/sway/accent-picker.sh
 
 # ==============================================================================
 # Precision Wayland Screenshot Engine Matrix (grimshot + cliphist sync)
@@ -295,7 +297,7 @@ bindsym $mod+r              mode "resize"
 bindsym $mod+Page_Up        resize grow width 10px, resize grow height 10px
 
 # Ensure systemd user services know where to look for themes and icons
-exec systemctl --user set-environment GTK_THEME=Bubblegum
+exec ~/Dotfiles/sway/gtk-theme-env.sh
 exec systemctl --user set-environment XDG_DATA_DIRS="$HOME/.local/share:$HOME/.themes:/usr/local/share:/usr/share"
 
 # Import environment variables into dbus/systemd

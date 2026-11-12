@@ -193,9 +193,11 @@ install_extras() {
         info "Colloid-Pink already present"
     fi
     if (( DRY_RUN )); then
-        info "[dry-run] $DOTFILES/bash-scripts/make-bubblegum-icons.sh"
+        info "[dry-run] $DOTFILES/bash-scripts/make-bubblegum-icons.sh pink"
+        info "[dry-run] $DOTFILES/bash-scripts/make-bubblegum-accents.sh  (blue/green GTK + icon themes)"
     else
-        "$DOTFILES/bash-scripts/make-bubblegum-icons.sh"
+        "$DOTFILES/bash-scripts/make-bubblegum-icons.sh" pink
+        "$DOTFILES/bash-scripts/make-bubblegum-accents.sh"
     fi
 }
 

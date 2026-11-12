@@ -1,22 +1,65 @@
 #!/bin/bash
-# Toggle Bubblegum dark/light: GTK theme, icon theme, color-scheme, dunst
-# notification colors, foot terminals, running vim/nvim sessions, and the
-# GTK_THEME override used by xdg-desktop-portal-gtk (the file picker).
+# Bubblegum theme switcher: dark/light variant + accent colour (pink/blue/green).
+#   toggle-theme.sh                 flip dark <-> light, keeping the current accent
+#   toggle-theme.sh --accent NAME   keep the current variant, switch accent
+#   toggle-theme.sh --apply         re-apply the saved variant + accent (e.g. at login)
+#
+# Updates: GTK theme, icon theme, color-scheme, dunst notification colors, foot
+# terminals, running vim/nvim sessions, and the GTK_THEME override used by
+# xdg-desktop-portal-gtk (the file picker / print dialog).
+# Non-pink accents are generated copies of the themes; see
+# bash-scripts/make-bubblegum-accents.sh (built automatically when missing).
+
+DOTFILES="$HOME/Dotfiles"
+# shellcheck source=../bash-scripts/bubblegum-accents.sh
+. "$DOTFILES/bash-scripts/bubblegum-accents.sh"
 
 SCHEMA="org.gnome.desktop.interface"
-current=$(gsettings get "$SCHEMA" gtk-theme | tr -d "'")
+STATE_DIR="$HOME/.local/state/bubblegum"
+mkdir -p "$STATE_DIR"
 
-if [ "$current" = "Bubblegum Light" ]; then
-    gtk_theme="Bubblegum"
-    icon_theme="Colloid-Bubblegum-Dark"
+current=$(gsettings get "$SCHEMA" gtk-theme | tr -d "'")
+case "$current" in
+    "Bubblegum Light"*) cur_variant=light ;;
+    *)                  cur_variant=dark ;;
+esac
+accent=$(cat "$STATE_DIR/accent" 2>/dev/null)
+case " $BUBBLEGUM_ACCENTS " in *" $accent "*) ;; *) accent=pink ;; esac
+
+case "$1" in
+    --accent)
+        case " $BUBBLEGUM_ACCENTS " in
+            *" $2 "*) accent="$2" ;;
+            *) echo "Unknown accent '$2' (choose: $BUBBLEGUM_ACCENTS)" >&2; exit 1 ;;
+        esac
+        variant="$cur_variant"
+        ;;
+    --apply)
+        variant="$cur_variant"
+        ;;
+    *)
+        if [ "$cur_variant" = light ]; then variant=dark; else variant=light; fi
+        ;;
+esac
+printf '%s\n' "$accent" > "$STATE_DIR/accent"
+
+gtk_theme="$(gtk_theme_name "$variant" "$accent")"
+icon_theme="$(icon_theme_name "$variant" "$accent")"
+
+# Build the generated accent themes the first time they are needed.
+if [ ! -d "$HOME/.local/share/themes/$gtk_theme" ] && [ ! -d "$DOTFILES/themes/$gtk_theme" ] \
+   || [ ! -d "$HOME/.local/share/icons/$icon_theme" ]; then
+    notify-send -t 4000 "Theme" "Building the $accent accent, one moment..." 2>/dev/null
+    "$DOTFILES/bash-scripts/make-bubblegum-accents.sh" "$accent" >/dev/null 2>&1
+fi
+
+if [ "$variant" = dark ]; then
     scheme="prefer-dark"
     dunst_colors="colors-dark.conf"
     notify_icon="weather-clear-night"
     foot_theme="dark"
     foot_signal="USR1"
 else
-    gtk_theme="Bubblegum Light"
-    icon_theme="Colloid-Bubblegum-Light"
     scheme="prefer-light"
     dunst_colors="colors-light.conf"
     notify_icon="weather-clear"
@@ -28,12 +71,16 @@ gsettings set "$SCHEMA" gtk-theme "$gtk_theme"
 gsettings set "$SCHEMA" icon-theme "$icon_theme"
 gsettings set "$SCHEMA" color-scheme "$scheme"
 
-# dunst: ~/.config/dunst/dunstrc.d/10-colors.conf -> Dotfiles/dunst/colors-*.conf
-DUNST_SRC="$HOME/Dotfiles/dunst"
+# dunst: ~/.config/dunst/dunstrc.d/10-colors.conf is generated from
+# Dotfiles/dunst/colors-*.conf with the pink accent and icon theme swapped.
+DUNST_SRC="$DOTFILES/dunst"
 DUNST_CFG="$HOME/.config/dunst"
 mkdir -p "$DUNST_CFG/dunstrc.d"
 ln -sfn "$DUNST_SRC/dunstrc" "$DUNST_CFG/dunstrc"
-ln -sfn "$DUNST_SRC/$dunst_colors" "$DUNST_CFG/dunstrc.d/10-colors.conf"
+src_icon="$(icon_theme_name "$variant" pink)"
+rm -f "$DUNST_CFG/dunstrc.d/10-colors.conf"
+sed "s/$(accent_color "$variant" pink)/$(accent_color "$variant" "$accent")/Ig; s/${src_icon}/${icon_theme}/g" \
+    "$DUNST_SRC/$dunst_colors" > "$DUNST_CFG/dunstrc.d/10-colors.conf"
 dunstctl reload 2>/dev/null
 
 # foot: new windows read the state file via an include in foot.ini; running
@@ -47,8 +94,7 @@ pkill "-$foot_signal" -x foot 2>/dev/null
 # ignores the signal harmlessly if the plugin isn't loaded. vim polls the state
 # file below once a second (see vim/vimrc).
 pkill -USR1 -x nvim 2>/dev/null
-mkdir -p "$HOME/.local/state/bubblegum"
-printf '%s\n' "$foot_theme" > "$HOME/.local/state/bubblegum/scheme"
+printf '%s\n' "$foot_theme" > "$STATE_DIR/scheme"
 
 # GTK_THEME env overrides gsettings for anything systemd/dbus launches,
 # so update it and restart the portal so the file picker follows the toggle.

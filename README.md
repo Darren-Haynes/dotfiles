@@ -128,6 +128,7 @@ Dotfiles/
 |---|---|
 | `clip` | Copy stdin to the clipboard with `wl-copy` on Wayland or `xsel`/`xclip` on X11. The `copy` alias and Bitwarden helpers use it. |
 | `make-bubblegum-icons.sh` | Builds Bubblegum-coloured copies of the Colloid icon themes. |
+| `make-bubblegum-accents.sh` | Generates the blue and green accent variants of the GTK and icon themes (`bubblegum-accents.sh` holds the palette). |
 | `bw-get`, `cb-clear` | Bitwarden CLI helper and clipboard clearing. |
 | `toggle_gaps_sway.sh` | Toggle inner/outer gaps. |
 
@@ -143,6 +144,7 @@ Dotfiles/
 | `Mod+Shift+Return`, `Mod+f`, `Mod+t` | Fullscreen scratchpads: btop, yazi, terminal |
 | `Hyper+t`, `Hyper+a`, `Hyper+z`, `Mod+Shift+z` | Foot+Zed, Foot+Brave and Zed+Brave splits, dynamic pair menu |
 | `Mod1+Shift+d` | Toggle dark / light Bubblegum |
+| `Mod1+Shift+a` | Pick the accent colour (pink / blue / green) from a rofi menu |
 | `Mod+Shift+w` | Wallpaper picker |
 | `Mod+c` | Clipboard history (cliphist + rofi) |
 | `Mod+Shift+o` | OCR a screen region to the clipboard |
