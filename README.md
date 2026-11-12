@@ -191,7 +191,7 @@ After it finishes, log out and back in. The script prints the remaining manual s
 
 - **Git identity and SSH key** (keep these private; generate with `ssh-keygen -t ed25519` and add the public key to GitHub).
 - **Optional private dotfiles:** set `PRIVATE_DOTFILES_REPO=<ssh url>` and re-run with `--links-only` to clone a separate private repo (private aliases, etc.).
-- **Brave theme:** load `brave/brave-theme-bubblegum` via `brave://extensions` (Developer mode, Load unpacked).
+- **Brave theme:** load `~/.local/share/bubblegum/brave-theme` via `brave://extensions` (Developer mode, Load unpacked). The directory is generated from `brave/brave-theme-bubblegum` (dark and light manifests) and follows the theme toggle; a running Brave picks up the change on its next start, or when you press Reload on its card in `brave://extensions`.
 - **Remote desktop:** `wayvnc` listens on `127.0.0.1:5900`; enable `sshd` yourself if you want to reach it through an SSH tunnel.
 
 ### Using the pieces on their own

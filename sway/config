@@ -134,7 +134,8 @@ assign [app_id="dev.zed.Zed"]    $ws3
 
 # Boot-Time Sequencer Loop
 exec foot --app-id="foot-main"
-exec brave-browser
+# apply-brave-theme.sh picks the dark/light manifest before Brave reads it.
+exec sh -c '~/Dotfiles/sway/apply-brave-theme.sh; exec brave-browser'
 exec sleep 5 && /home/darren/.local/bin/zed --foreground
 
 # ==============================================================================

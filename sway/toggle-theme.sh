@@ -5,7 +5,7 @@
 #   toggle-theme.sh --apply         re-apply the saved variant + accent (e.g. at login)
 #
 # Updates: GTK theme, icon theme, color-scheme, sway window borders, waybar,
-# dunst notification colors, foot
+# dunst notification colors, the Brave theme directory, foot
 # terminals, running vim/nvim sessions, and the GTK_THEME override used by
 # xdg-desktop-portal-gtk (the file picker / print dialog).
 # Non-pink accents are generated copies of the themes; see
@@ -74,6 +74,10 @@ gsettings set "$SCHEMA" color-scheme "$scheme"
 
 # sway window borders: accent on the focused window, neutral on the rest.
 "$DOTFILES/sway/apply-sway-colors.sh" "$variant" "$accent"
+
+# Brave: refresh the generated theme directory. A running Brave picks the new
+# variant up on its next start (or Reload on brave://extensions).
+"$DOTFILES/sway/apply-brave-theme.sh" "$variant"
 
 # waybar: the bar is always dark, so it takes the dark shade of the accent from
 # waybar/accent.css (imported by style.css); SIGUSR2 reloads its style.

@@ -327,8 +327,9 @@ post_notes() {
                            git config --global user.email "..."
          - SSH key:        ssh-keygen -t ed25519, add the .pub to GitHub
          - private repo:   PRIVATE_DOTFILES_REPO=<ssh url> ./install.sh --links-only
-    3. Brave: load the Bubblegum theme from ~/Dotfiles/brave/brave-theme-bubblegum
-         (brave://extensions -> Developer mode -> Load unpacked).
+    3. Brave: load the Bubblegum theme from ~/.local/share/bubblegum/brave-theme
+         (brave://extensions -> Developer mode -> Load unpacked). That directory is
+         created by sway/toggle-theme.sh --apply (run at login) and follows dark/light.
     4. Wallpaper: green-tree-mist.jpg is copied to ~/Pictures/Wallpaper; add more
          there and pick with Mod+Shift+w.
     5. Remote desktop: wayvnc listens on 127.0.0.1:5900. To reach it over an SSH
