@@ -9,18 +9,31 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Follow the desktop light/dark setting (sway/toggle-theme.sh flips the GNOME
-" color-scheme). Checked at startup, whenever the terminal regains focus, and by
-" a 1s timer that watches the state file the toggle script writes, so open
-" sessions switch within a second.
+" color-scheme) and the theme family (~/.local/state/bubblegum/family). Checked
+" at startup, whenever the terminal regains focus, and by a 1s timer that watches
+" the state files the toggle script writes, so open sessions switch within a second.
+let s:family_file = expand('~/.local/state/bubblegum/family')
+function! s:ReadFamily() abort
+  let l:v = filereadable(s:family_file) ? get(readfile(s:family_file, '', 1), 0, '') : ''
+  return trim(l:v) ==# 'shhhed' ? 'shhhed' : 'bubblegum'
+endfunction
+
+function! s:Apply(bg) abort
+  let l:family = s:ReadFamily()
+  if &background !=# a:bg || get(g:, 'colors_name', '') !=# 'bubblegum'
+        \ || get(g:, 'bubblegum_family', '') !=# l:family
+    let &background = a:bg
+    colorscheme bubblegum
+    redraw!
+  endif
+endfunction
+
 function! s:SyncTheme() abort
   let l:scheme = system('gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null')
   if v:shell_error == 0
-    let l:bg = l:scheme =~# 'prefer-light' ? 'light' : 'dark'
-    if &background !=# l:bg || get(g:, 'colors_name', '') !=# 'bubblegum'
-      let &background = l:bg
-      colorscheme bubblegum
-      redraw!
-    endif
+    call s:Apply(l:scheme =~# 'prefer-light' ? 'light' : 'dark')
+  else
+    call s:Apply(&background)
   endif
 endfunction
 
@@ -34,15 +47,14 @@ augroup END
 
 let s:state_file = expand('~/.local/state/bubblegum/scheme')
 function! s:PollTheme(timer) abort
-  if !filereadable(s:state_file)
-    return
+  let l:bg = &background
+  if filereadable(s:state_file)
+    let l:s = get(readfile(s:state_file, '', 1), 0, '')
+    if l:s ==# 'light' || l:s ==# 'dark'
+      let l:bg = l:s
+    endif
   endif
-  let l:bg = get(readfile(s:state_file, '', 1), 0, '')
-  if (l:bg ==# 'light' || l:bg ==# 'dark') && &background !=# l:bg
-    let &background = l:bg
-    colorscheme bubblegum
-    redraw!
-  endif
+  call s:Apply(l:bg)
 endfunction
 if has('timers')
   call timer_start(1000, function('s:PollTheme'), {'repeat': -1})

@@ -4,9 +4,36 @@ local function hl(group, spec)
   vim.api.nvim_set_hl(0, group, spec)
 end
 
+local terminal = {
+  dark = { "#303030", "#d78787", "#afd787", "#d7d787", "#87afd7", "#d7afd7", "#87d7ff", "#d7d7d7",
+    "#808080", "#ff5555", "#55ff55", "#ffff55", "#5555ff", "#ff55ff", "#55ffff", "#ffffff" },
+  light = { "#2a2a2a", "#c0504d", "#4f7f2f", "#75702a", "#006ca8", "#b060a0", "#0088cc", "#d5d5d5",
+    "#666666", "#cc3333", "#5f8f3f", "#8a8230", "#0088cc", "#c070b0", "#2a8a8a", "#f5f5f5" },
+  shhhed_dark = { "#27272c", "#c97279", "#7db277", "#c8a050", "#729bcf", "#a088ac", "#60b1b1", "#c8c8cc",
+    "#49494e", "#e08088", "#88c880", "#d8b068", "#90bce0", "#b898d8", "#80d0cc", "#dadadf" },
+  shhhed_light = { "#1e1a14", "#b84e60", "#2a7848", "#9c7c00", "#0050d8", "#604f73", "#006c83", "#6e685f",
+    "#797983", "#c06068", "#3a8a55", "#b69000", "#2868e0", "#855290", "#007783", "#645c50" },
+}
+
+--- Active theme family: "bubblegum" (default) or "shhhed", read from the state
+--- file written by the theme toggle.
+function M.read_family()
+  local f = io.open(vim.fn.expand("~/.local/state/bubblegum/family"), "r")
+  if not f then
+    return "bubblegum"
+  end
+  local line = f:read("*l")
+  f:close()
+  line = vim.trim(line or "")
+  return line == "shhhed" and "shhhed" or "bubblegum"
+end
+
 function M.load()
-  local p = vim.o.background == "light" and require("bubblegum.palette").light
-    or require("bubblegum.palette").dark
+  local variant = vim.o.background == "light" and "light" or "dark"
+  local family = M.read_family()
+  local key = family == "shhhed" and ("shhhed_" .. variant) or variant
+  local p = require("bubblegum.palette")[key]
+  vim.g.bubblegum_family = family
 
   vim.cmd("highlight clear")
   if vim.fn.exists("syntax_on") == 1 then
@@ -16,12 +43,7 @@ function M.load()
   vim.o.termguicolors = true
 
   -- Terminal palette
-  local term = vim.o.background == "light"
-      and { "#2a2a2a", "#c0504d", "#4f7f2f", "#75702a", "#006ca8", "#b060a0", "#0088cc", "#d5d5d5",
-        "#666666", "#cc3333", "#5f8f3f", "#8a8230", "#0088cc", "#c070b0", "#2a8a8a", "#f5f5f5" }
-    or { "#303030", "#d78787", "#afd787", "#d7d787", "#87afd7", "#d7afd7", "#87d7ff", "#d7d7d7",
-      "#808080", "#ff5555", "#55ff55", "#ffff55", "#5555ff", "#ff55ff", "#55ffff", "#ffffff" }
-  for i, c in ipairs(term) do
+  for i, c in ipairs(terminal[key]) do
     vim.g["terminal_color_" .. (i - 1)] = c
   end
 
@@ -111,7 +133,7 @@ function M.load()
     Float = { fg = p.number },
     Boolean = { fg = p.constant },
     Identifier = { fg = p.fg_variable },
-    Function = { fg = p.pink },
+    Function = { fg = p.func },
     Statement = { fg = p.blue },
     Conditional = { fg = p.blue },
     Repeat = { fg = p.blue },
@@ -161,7 +183,7 @@ function M.load()
     LspReferenceWrite = { bg = p.bg_visual, underline = true },
     LspInlayHint = { fg = p.comment, bg = p.bg_alt },
     LspCodeLens = { fg = p.comment },
-    LspSignatureActiveParameter = { fg = p.pink, bold = true },
+    LspSignatureActiveParameter = { fg = p.func, bold = true },
 
     -- Treesitter
     ["@variable"] = { fg = p.fg_variable },
@@ -183,11 +205,11 @@ function M.load()
     ["@type.builtin"] = { fg = p.purple },
     ["@attribute"] = { fg = p.green },
     ["@property"] = { fg = p.fg_variable },
-    ["@function"] = { fg = p.pink },
-    ["@function.builtin"] = { fg = p.pink },
-    ["@function.call"] = { fg = p.pink },
-    ["@function.method"] = { fg = p.pink },
-    ["@function.method.call"] = { fg = p.pink },
+    ["@function"] = { fg = p.func },
+    ["@function.builtin"] = { fg = p.func },
+    ["@function.call"] = { fg = p.func },
+    ["@function.method"] = { fg = p.func },
+    ["@function.method.call"] = { fg = p.func },
     ["@constructor"] = { fg = p.purple },
     ["@operator"] = { fg = p.blue },
     ["@keyword"] = { fg = p.blue },
@@ -237,20 +259,25 @@ function M.load()
 end
 
 --- Follow the desktop light/dark setting (GNOME color-scheme, which is what
---- sway/toggle-theme.sh flips) and re-apply the colorscheme. Call once from
---- your init.lua; it also re-checks on FocusGained and on SIGUSR1 so a running
---- nvim follows the toggle.
+--- sway/toggle-theme.sh flips) and the theme family state file, and re-apply
+--- the colorscheme when either changes. Call once from your init.lua; it also
+--- re-checks on FocusGained and on SIGUSR1 so a running nvim follows the toggle.
 function M.sync_with_system()
   local function apply()
     vim.system(
       { "gsettings", "get", "org.gnome.desktop.interface", "color-scheme" },
       { text = true },
       vim.schedule_wrap(function(res)
-        if res.code ~= 0 then
-          return
+        local bg = vim.o.background
+        if res.code == 0 then
+          bg = res.stdout:find("prefer%-light") and "light" or "dark"
         end
-        local bg = res.stdout:find("prefer%-light") and "light" or "dark"
-        if vim.o.background ~= bg or vim.g.colors_name ~= "bubblegum" then
+        local family = M.read_family()
+        if
+          vim.o.background ~= bg
+          or vim.g.colors_name ~= "bubblegum"
+          or vim.g.bubblegum_family ~= family
+        then
           vim.o.background = bg
           vim.cmd.colorscheme("bubblegum")
         end
