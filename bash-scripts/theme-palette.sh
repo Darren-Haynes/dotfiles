@@ -2,7 +2,7 @@
 # sway/toggle-theme.sh, sway/accent-picker.sh and the sway/apply-*.sh helpers.
 #
 # Three independent axes:
-#   family   bubblegum | shhhed
+#   family   bubblegum | shhhed | milo
 #   variant  dark | light
 #   accent   per family (see theme_accents)
 #
@@ -11,12 +11,13 @@
 # generated copy with the colours remapped by make-theme-accents.sh.
 # "mono" is the neutral accent: near-white on dark, charcoal on light.
 
-THEME_FAMILIES="bubblegum shhhed"
+THEME_FAMILIES="bubblegum shhhed milo"
 THEME_STATE_DIR="$HOME/.local/state/bubblegum"
 
 theme_accents() {
     case "$1" in
         shhhed) echo "green blue rose mono" ;;
+        milo)   echo "teal blue rose mono" ;;
         *)      echo "pink blue green mono" ;;
     esac
 }
@@ -24,6 +25,7 @@ theme_accents() {
 theme_default_accent() {
     case "$1" in
         shhhed) echo green ;;
+        milo)   echo teal ;;
         *)      echo pink ;;
     esac
 }
@@ -31,6 +33,7 @@ theme_default_accent() {
 theme_family_label() {
     case "$1" in
         shhhed) echo "shhhed" ;;
+        milo)   echo "Milo" ;;
         *)      echo "Bubblegum" ;;
     esac
 }
@@ -54,6 +57,14 @@ accent_color() {
         shhhed:light:blue)      echo "#0050d8" ;;
         shhhed:light:rose)      echo "#b84e60" ;;
         shhhed:light:mono)      echo "#2a2a30" ;;
+        milo:dark:teal)         echo "#79c6c0" ;;
+        milo:dark:blue)         echo "#89bde9" ;;
+        milo:dark:rose)         echo "#d992ae" ;;
+        milo:dark:mono)         echo "#e4e6ea" ;;
+        milo:light:teal)        echo "#24726c" ;;
+        milo:light:blue)        echo "#2d6ba0" ;;
+        milo:light:rose)        echo "#bb4c78" ;;
+        milo:light:mono)        echo "#2e2f31" ;;
         *) return 1 ;;
     esac
 }
@@ -117,6 +128,30 @@ theme_color() {
         shhhed:light:inactive)   echo "#c6d2de" ;;
         shhhed:dark:critical_bg)  echo "#3b2f32" ;;
         shhhed:light:critical_bg) echo "#f2e4e9" ;;
+        milo:dark:bg)            echo "#242424" ;;
+        milo:dark:base)          echo "#2a2a2a" ;;
+        milo:dark:raised)        echo "#333333" ;;
+        milo:dark:border)        echo "#404040" ;;
+        milo:dark:hover)         echo "#404040" ;;
+        milo:dark:fg)            echo "#d6dae0" ;;
+        milo:dark:muted)         echo "#9ea5ae" ;;
+        milo:dark:dim)           echo "#636870" ;;
+        milo:dark:strong)        echo "#f7f8fa" ;;
+        milo:dark:error)         echo "#d88989" ;;
+        milo:dark:inactive)      echo "#303030" ;;
+        milo:dark:critical_bg)   echo "#3d3030" ;;
+        milo:light:bg)           echo "#f6f6f6" ;;
+        milo:light:base)         echo "#ececec" ;;
+        milo:light:raised)       echo "#e4e4e4" ;;
+        milo:light:border)       echo "#cdcdcd" ;;
+        milo:light:hover)        echo "#dadada" ;;
+        milo:light:fg)           echo "#3c3d3f" ;;
+        milo:light:muted)        echo "#5d6267" ;;
+        milo:light:dim)          echo "#949ba7" ;;
+        milo:light:strong)       echo "#1f2022" ;;
+        milo:light:error)        echo "#c84646" ;;
+        milo:light:inactive)     echo "#cdcdcd" ;;
+        milo:light:critical_bg)  echo "#f3dede" ;;
         *) return 1 ;;
     esac
 }

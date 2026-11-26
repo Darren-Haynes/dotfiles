@@ -1,6 +1,7 @@
 #!/bin/bash
 # Pick the accent colour for the current theme family from a rofi menu
-# (Bubblegum: pink / blue / green / mono, shhhed: green / blue / rose / mono).
+# (Bubblegum: pink / blue / green / mono, shhhed: green / blue / rose / mono,
+# Milo: teal / blue / rose / mono).
 # The choice is applied live by toggle-theme.sh --accent.
 
 DOTFILES="$HOME/Dotfiles"

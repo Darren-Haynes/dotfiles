@@ -1,7 +1,7 @@
 #!/bin/bash
-# Desktop theme switcher: family (Bubblegum / shhhed) x variant (dark / light) x accent.
+# Desktop theme switcher: family (Bubblegum / shhhed / Milo) x variant (dark / light) x accent.
 #   toggle-theme.sh                  flip dark <-> light, keeping family and accent
-#   toggle-theme.sh --family NAME    switch family (bubblegum | shhhed); each family
+#   toggle-theme.sh --family NAME    switch family (bubblegum | shhhed | milo); each family
 #                                    remembers its own accent
 #   toggle-theme.sh --accent NAME    switch accent within the current family
 #   toggle-theme.sh --apply          re-apply the saved selection (e.g. at login)

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Pick the theme family (Bubblegum / shhhed) from a rofi menu. The choice is
+# Pick the theme family (Bubblegum / shhhed / Milo) from a rofi menu. The choice is
 # applied live by toggle-theme.sh --family; dark/light and each family's own
 # accent are kept.
 
@@ -20,10 +20,11 @@ for family in $THEME_FAMILIES; do
     i=$((i + 1))
 done
 
+count=$(set -- $THEME_FAMILIES; echo $#)
 choice=$(printf '%b' "$entries" | rofi -dmenu -i -markup-rows -p "Theme" \
     -theme bubblegum \
     -theme-str "window { width: 420px; }
-                listview { lines: 2; }" \
+                listview { lines: ${count}; }" \
     -selected-row "$selected" -format 'i')
 
 [ -z "$choice" ] && exit 0
