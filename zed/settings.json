@@ -74,8 +74,8 @@
   "buffer_font_size": 16.0,
   "theme": {
     "mode": "system",
-    "light": "Bubblegum Light",
-    "dark": "Bubblegum" // THEME_SWITCHER_DARK
+    "light": "Desktop Light",
+    "dark": "Desktop Dark" // THEME_SWITCHER_DARK
   },
   "which_key": { "enabled": true },
   "project_panel": {

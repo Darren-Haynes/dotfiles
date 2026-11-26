@@ -1,113 +1,120 @@
 #!/bin/bash
-# Bubblegum theme switcher: dark/light variant + accent colour (pink/blue/green/mono).
-#   toggle-theme.sh                 flip dark <-> light, keeping the current accent
-#   toggle-theme.sh --accent NAME   keep the current variant, switch accent
-#   toggle-theme.sh --apply         re-apply the saved variant + accent (e.g. at login)
+# Desktop theme switcher: family (Bubblegum / shhhed) x variant (dark / light) x accent.
+#   toggle-theme.sh                  flip dark <-> light, keeping family and accent
+#   toggle-theme.sh --family NAME    switch family (bubblegum | shhhed); each family
+#                                    remembers its own accent
+#   toggle-theme.sh --accent NAME    switch accent within the current family
+#   toggle-theme.sh --apply          re-apply the saved selection (e.g. at login)
 #
 # Updates: GTK theme, icon theme, color-scheme, sway window borders, waybar,
-# dunst notification colors, the Brave theme directory, foot
-# terminals, running vim/nvim sessions, and the GTK_THEME override used by
-# xdg-desktop-portal-gtk (the file picker / print dialog).
-# Non-pink accents are generated copies of the themes; see
-# bash-scripts/make-bubblegum-accents.sh (built automatically when missing).
+# rofi, dunst notification colors, foot (new and running terminals), btop, the
+# Zed theme, the Brave theme directory, running vim/nvim sessions, and the
+# GTK_THEME override used by xdg-desktop-portal-gtk (the file picker / print dialog).
+# Generated GTK/icon themes (everything except Bubblegum pink) are built on first
+# use by bash-scripts/make-theme-accents.sh.
+# Colours live in bash-scripts/theme-palette.sh.
 
 DOTFILES="$HOME/Dotfiles"
-# shellcheck source=../bash-scripts/bubblegum-accents.sh
-. "$DOTFILES/bash-scripts/bubblegum-accents.sh"
+# shellcheck source=../bash-scripts/theme-palette.sh
+. "$DOTFILES/bash-scripts/theme-palette.sh"
 
 SCHEMA="org.gnome.desktop.interface"
-STATE_DIR="$HOME/.local/state/bubblegum"
+STATE_DIR="$THEME_STATE_DIR"
 mkdir -p "$STATE_DIR"
 
-current=$(gsettings get "$SCHEMA" gtk-theme | tr -d "'")
-case "$current" in
-    "Bubblegum Light"*) cur_variant=light ;;
-    *)                  cur_variant=dark ;;
-esac
-accent=$(cat "$STATE_DIR/accent" 2>/dev/null)
-case " $BUBBLEGUM_ACCENTS " in *" $accent "*) ;; *) accent=pink ;; esac
+family=$(theme_current_family)
+cur_variant=$(theme_current_variant)
+variant="$cur_variant"
 
 case "$1" in
-    --accent)
-        case " $BUBBLEGUM_ACCENTS " in
-            *" $2 "*) accent="$2" ;;
-            *) echo "Unknown accent '$2' (choose: $BUBBLEGUM_ACCENTS)" >&2; exit 1 ;;
+    --family)
+        case " $THEME_FAMILIES " in
+            *" $2 "*) family="$2" ;;
+            *) echo "Unknown family '$2' (choose: $THEME_FAMILIES)" >&2; exit 1 ;;
         esac
-        variant="$cur_variant"
         ;;
-    --apply)
-        variant="$cur_variant"
+    --accent)
+        case " $(theme_accents "$family") " in
+            *" $2 "*) printf '%s\n' "$2" > "$STATE_DIR/accent.$family" ;;
+            *) echo "Unknown accent '$2' for $family (choose: $(theme_accents "$family"))" >&2; exit 1 ;;
+        esac
         ;;
+    --apply) ;;
     *)
         if [ "$cur_variant" = light ]; then variant=dark; else variant=light; fi
         ;;
 esac
-printf '%s\n' "$accent" > "$STATE_DIR/accent"
 
-gtk_theme="$(gtk_theme_name "$variant" "$accent")"
-icon_theme="$(icon_theme_name "$variant" "$accent")"
+accent=$(theme_current_accent "$family")
+printf '%s\n' "$family" > "$STATE_DIR/family"
+printf '%s\n' "$accent" > "$STATE_DIR/accent.$family"
 
-# Build the generated accent themes the first time they are needed.
+gtk_theme="$(gtk_theme_name "$family" "$variant" "$accent")"
+icon_theme="$(icon_theme_name "$family" "$variant" "$accent")"
+label="$(theme_family_label "$family")"
+
+# Build the generated themes the first time they are needed.
 if [ ! -d "$HOME/.local/share/themes/$gtk_theme" ] && [ ! -d "$DOTFILES/themes/$gtk_theme" ] \
    || [ ! -d "$HOME/.local/share/icons/$icon_theme" ]; then
-    notify-send -t 4000 "Theme" "Building the $accent accent, one moment..." 2>/dev/null
-    "$DOTFILES/bash-scripts/make-bubblegum-accents.sh" "$accent" >/dev/null 2>&1
+    notify-send -t 4000 "Theme" "Building $label ($accent), one moment..." 2>/dev/null
+    "$DOTFILES/bash-scripts/make-theme-accents.sh" "$family" "$accent" >/dev/null 2>&1
 fi
 
 if [ "$variant" = dark ]; then
     scheme="prefer-dark"
-    dunst_colors="colors-dark.conf"
     notify_icon="weather-clear-night"
-    foot_theme="dark"
-    foot_signal="USR1"
 else
     scheme="prefer-light"
-    dunst_colors="colors-light.conf"
     notify_icon="weather-clear"
-    foot_theme="light"
-    foot_signal="USR2"
 fi
 
 gsettings set "$SCHEMA" gtk-theme "$gtk_theme"
 gsettings set "$SCHEMA" icon-theme "$icon_theme"
 gsettings set "$SCHEMA" color-scheme "$scheme"
 
-# sway window borders: accent on the focused window, neutral on the rest.
-"$DOTFILES/sway/apply-sway-colors.sh" "$variant" "$accent"
+# State files read by vim (polls `scheme` once a second) and nvim (on SIGUSR1).
+printf '%s\n' "$variant" > "$STATE_DIR/scheme"
 
-# Brave: refresh the generated theme directory. A running Brave picks the new
-# variant up on its next start (or Reload on brave://extensions).
-"$DOTFILES/sway/apply-brave-theme.sh" "$variant"
+# sway window borders: accent on the focused window, neutral on the rest.
+"$DOTFILES/sway/apply-sway-colors.sh" "$family" "$variant" "$accent"
 
 # waybar: the bar is always dark, so it takes the dark shade of the accent from
 # waybar/accent.css (imported by style.css); SIGUSR2 reloads its style.
 "$DOTFILES/sway/waybar-accent.sh" "$accent"
 pkill -SIGUSR2 -x waybar 2>/dev/null
 
-# dunst: ~/.config/dunst/dunstrc.d/10-colors.conf is generated from
-# Dotfiles/dunst/colors-*.conf with the pink accent and icon theme swapped.
-DUNST_SRC="$DOTFILES/dunst"
-DUNST_CFG="$HOME/.config/dunst"
-mkdir -p "$DUNST_CFG/dunstrc.d"
-ln -sfn "$DUNST_SRC/dunstrc" "$DUNST_CFG/dunstrc"
-src_icon="$(icon_theme_name "$variant" pink)"
-rm -f "$DUNST_CFG/dunstrc.d/10-colors.conf"
-sed "s/$(accent_color "$variant" pink)/$(accent_color "$variant" "$accent")/Ig; s/${src_icon}/${icon_theme}/g" \
-    "$DUNST_SRC/$dunst_colors" > "$DUNST_CFG/dunstrc.d/10-colors.conf"
-dunstctl reload 2>/dev/null
+# rofi (always dark): colours are imported from a generated file on each launch.
+"$DOTFILES/sway/apply-rofi-colors.sh" "$family" "$accent"
 
-# foot: new windows read the state file via an include in foot.ini; running
-# ones switch live on SIGUSR1 (dark) / SIGUSR2 (light).
-FOOT_STATE="${XDG_STATE_HOME:-$HOME/.local/state}/foot"
-mkdir -p "$FOOT_STATE"
-printf '[main]\ninitial-color-theme=%s\n' "$foot_theme" > "$FOOT_STATE/theme.ini"
-pkill "-$foot_signal" -x foot 2>/dev/null
+# dunst notification colours + icon theme.
+"$DOTFILES/sway/apply-dunst-colors.sh" "$family" "$variant" "$accent"
 
-# nvim re-reads the color-scheme on SIGUSR1 (neovim-bubblegum plugin); it
-# ignores the signal harmlessly if the plugin isn't loaded. vim polls the state
-# file below once a second (see vim/vimrc).
+# foot: new windows read ~/.local/state/foot/theme.ini; running ones are
+# recoloured live with OSC escape sequences.
+"$DOTFILES/sway/apply-foot-colors.sh" "$family" "$variant" "$accent"
+
+# btop reloads its theme on SIGUSR2.
+"$DOTFILES/sway/apply-btop-theme.sh" "$family"
+
+# Zed: ~/.config/zed/themes/desktop.json holds "Desktop Dark" / "Desktop Light"
+# built from the family + accent; Zed hot-reloads it and picks the variant from
+# the system colour-scheme set above.
+"$DOTFILES/bash-scripts/make-zed-theme.py" "$family" "$accent"
+
+# Brave: refresh the generated theme directory. A running Brave picks the new
+# variant up on its next start (or Reload on brave://extensions).
+"$DOTFILES/sway/apply-brave-theme.sh" "$family" "$variant"
+
+# SpeedCrunch rewrites its ini on exit, so only touch it while it is closed.
+if ! pgrep -x speedcrunch >/dev/null 2>&1; then
+    sc_ini="$HOME/.config/SpeedCrunch/SpeedCrunch.ini"
+    [ -f "$sc_ini" ] && sed -i "s/^Display\\\\ColorSchemeName=.*/Display\\\\ColorSchemeName=${family}-${variant}/" "$sc_ini"
+fi
+
+# nvim re-reads the colour-scheme and family on SIGUSR1 (neovim-bubblegum plugin);
+# it ignores the signal harmlessly if the plugin isn't loaded. vim polls the
+# state files above once a second (see vim/vimrc).
 pkill -USR1 -x nvim 2>/dev/null
-printf '%s\n' "$foot_theme" > "$STATE_DIR/scheme"
 
 # GTK_THEME env overrides gsettings for anything systemd/dbus launches,
 # so update it and restart the portal so the file picker follows the toggle.
@@ -115,4 +122,4 @@ systemctl --user set-environment GTK_THEME="$gtk_theme"
 dbus-update-activation-environment --systemd GTK_THEME="$gtk_theme"
 systemctl --user restart xdg-desktop-portal-gtk >/dev/null 2>&1
 
-notify-send -t 2500 -i "$notify_icon" "Theme" "$gtk_theme / $icon_theme" 2>/dev/null
+[ "$1" = --apply ] || notify-send -t 2500 -i "$notify_icon" "$label theme" "$variant / $accent  ($gtk_theme)" 2>/dev/null

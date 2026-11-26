@@ -1,16 +1,19 @@
 #!/bin/bash
-# Build Bubblegum-coloured copies of the Colloid-Pink icon themes, one per accent.
+# Build recoloured copies of the Colloid-Pink icon themes, one per family+accent.
 # Colloid draws folder icons using the CSS var ".ColorScheme-Highlight { color:#F06292 }"
 # (only in places/), so recolouring = swapping that one hex value.
 #
-# Usage: make-bubblegum-icons.sh [accent ...]   (default: all accents in bubblegum-accents.sh)
+# Usage: make-theme-icons.sh [family [accent ...]]
+#   no arguments        every family, every accent
+#   family              every accent of that family
+#   family accent ...   just those accents
 # Safe to re-run; rebuilds from the Colloid-Pink sources.
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
-# shellcheck source=bubblegum-accents.sh
-. "$SCRIPT_DIR/bubblegum-accents.sh"
+# shellcheck source=theme-palette.sh
+. "$SCRIPT_DIR/theme-palette.sh"
 
 ICON_DIR="$HOME/.local/share/icons"
 ORIG_PINK="#F06292"
@@ -35,8 +38,13 @@ build() {
     echo "Built $dst ($color)"
 }
 
-accents="${*:-$BUBBLEGUM_ACCENTS}"
-for accent in $accents; do
-    build Colloid-Pink-Dark  "$(icon_theme_name dark  "$accent")" "$(accent_color dark  "$accent")"
-    build Colloid-Pink-Light "$(icon_theme_name light "$accent")" "$(accent_color light "$accent")"
+families="${1:-$THEME_FAMILIES}"
+[ $# -gt 0 ] && shift
+
+for family in $families; do
+    accents="${*:-$(theme_accents "$family")}"
+    for accent in $accents; do
+        build Colloid-Pink-Dark  "$(icon_theme_name "$family" dark  "$accent")" "$(accent_color "$family" dark  "$accent")"
+        build Colloid-Pink-Light "$(icon_theme_name "$family" light "$accent")" "$(accent_color "$family" light "$accent")"
+    done
 done

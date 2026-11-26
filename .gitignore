@@ -9,3 +9,4 @@ nvim/project.lua
 .DS_Store
 /--version
 waybar/accent.css
+btop/themes/active.theme
