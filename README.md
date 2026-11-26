@@ -1,6 +1,6 @@
 # Dotfiles
 
-A Wayland-only **Fedora Sway** workstation, described entirely in files: compositor, bar, launcher, terminal, editors, prompts, notifications, GTK/icon themes, and a keyboard layout, all wearing one of two custom palettes, **Bubblegum** or **shhhed**, each in dark and light with switchable accents. One idempotent script rebuilds it on a fresh machine.
+A Wayland-only **Fedora Sway** workstation, described entirely in files: compositor, bar, launcher, terminal, editors, prompts, notifications, GTK/icon themes, and a keyboard layout, all wearing one of three palettes, **Bubblegum**, **shhhed** or **Milo**, each in dark and light with switchable accents. One idempotent script rebuilds it on a fresh machine.
 
 The machine is used mostly as a **headless thin-client desktop**. Sway renders to a virtual output that `wayvnc` streams to a TigerVNC client on a Mac, so the setup is designed to feel right over a remote link: no Xwayland, keyboard-first window management, and a handful of small scripts that make tiling workflows one keypress.
 
@@ -16,7 +16,7 @@ Both screenshots are the same workspace (Neovim, Thunar and a terminal) before a
 
 ## Highlights
 
-- **One palette, everywhere.** Two theme families, Bubblegum and shhhed, each in dark and light with four accents, are implemented for GTK 3/4, the XDG file-chooser portal, Colloid-derived icon folders, sway borders, dunst, rofi, waybar, foot, btop, Zed, SpeedCrunch, Brave, Vim and Neovim. Family, dark/light and accent switch independently and live.
+- **One palette, everywhere.** Three theme families, Bubblegum, shhhed and Milo, each in dark and light with four accents, are implemented for GTK 3/4, the XDG file-chooser portal, Colloid-derived icon folders, sway borders, dunst, rofi, waybar, foot, btop, Zed, SpeedCrunch, Brave, Vim and Neovim. Family, dark/light and accent switch independently and live.
 - **One keypress flips the whole desktop** between dark and light, including icons, notifications, the file picker, and running Vim/Neovim sessions.
 - **Remote-friendly and locked down.** `wayvnc` binds to `127.0.0.1` only and is reached through an SSH tunnel, and the SSH key is unlocked once per login session.
 - **Wayland-only by design.** The install script avoids X11 packages and tools (`xsel`, `xclip`, X11 screenshot tools). `Xwayland` is present only because Fedora's sway config package hard-requires it.
@@ -68,11 +68,11 @@ flowchart LR
 
 | Axis | Values | Switch |
 |---|---|---|
-| Family | Bubblegum, shhhed | `Mod1+Shift+t` (or `toggle-theme.sh --family NAME`) |
+| Family | Bubblegum, shhhed, Milo | `Mod1+Shift+t` (or `toggle-theme.sh --family NAME`) |
 | Variant | dark, light | `Mod1+Shift+d` |
-| Accent | Bubblegum: pink, blue, green, mono. shhhed: green, blue, rose, mono | `Mod1+Shift+a` (or `--accent NAME`) |
+| Accent | Bubblegum: pink, blue, green, mono. shhhed: green, blue, rose, mono. Milo: teal, blue, rose, mono | `Mod1+Shift+a` (or `--accent NAME`) |
 
-Each family keeps its own last accent, so flipping between them restores both. The GTK themes in `themes/` are hand-written for Bubblegum only; every other combination is generated from them by recolouring each palette role (`make-theme-accents.sh`), and the folder icons by swapping Colloid's one highlight colour (`make-theme-icons.sh`). The shhhed colours come from the Zed theme in `zed/themes/shhhed/`.
+Each family keeps its own last accent, so flipping between them restores both. The GTK themes in `themes/` are hand-written for Bubblegum only; every other combination is generated from them by recolouring each palette role (`make-theme-accents.sh`), and the folder icons by swapping Colloid's one highlight colour (`make-theme-icons.sh`). The shhhed and Milo colours come from the Zed themes in `zed/themes/shhhed/` and `zed/themes/milo/`. Milo is by [hazicy](https://github.com/hazicy/milo-theme-zed) (MIT, see `zed/themes/milo/LICENSE`); it only ships a dark variant, so its light variant is derived from it by `zed/themes/milo/derive-light.py`.
 
 ### Window workflow
 
@@ -128,7 +128,7 @@ Dotfiles/
 ├── aliases                 # shell aliases
 ├── bash-scripts/           # utilities linked into ~/.local/bin (clip, bw-get, icon builder, ...)
 ├── btop/  yazi/  zellij/   # TUI tool configs (btop has a theme per family)
-├── zed/                    # Zed settings, keymap, Bubblegum and shhhed themes
+├── zed/                    # Zed settings, keymap, Bubblegum, shhhed and Milo themes
 ├── brave/                  # Brave browser themes per family (load unpacked)
 ├── swappy/                 # screenshot annotation config
 ├── SpeedCrunch/            # calculator colour schemes and seed settings
@@ -145,7 +145,7 @@ Dotfiles/
 | `clip` | Copy stdin to the clipboard with `wl-copy` on Wayland or `xsel`/`xclip` on X11. The `copy` alias and Bitwarden helpers use it. |
 | `theme-palette.sh` | The palette library every theme script sources: families, accents, colour roles, theme names. |
 | `make-theme-icons.sh` | Builds recoloured copies of the Colloid icon themes for each family and accent. |
-| `make-theme-accents.sh` | Generates the GTK and icon themes for every accent and for the shhhed family. |
+| `make-theme-accents.sh` | Generates the GTK and icon themes for every accent and for the shhhed and Milo families. |
 | `make-zed-theme.py` | Builds the "Desktop Dark" / "Desktop Light" Zed themes for the active family and accent. |
 | `bw-get`, `cb-clear` | Bitwarden CLI helper and clipboard clearing. |
 | `toggle_gaps_sway.sh` | Toggle inner/outer gaps. |
@@ -162,7 +162,7 @@ Dotfiles/
 | `Mod+Shift+Return`, `Mod+f`, `Mod+t` | Fullscreen scratchpads: btop, yazi, terminal |
 | `Hyper+t`, `Hyper+a`, `Hyper+z`, `Mod+Shift+z` | Foot+Zed, Foot+Brave and Zed+Brave splits, dynamic pair menu |
 | `Mod1+Shift+d` | Toggle dark / light |
-| `Mod1+Shift+t` | Pick the theme family (Bubblegum / shhhed) from a rofi menu |
+| `Mod1+Shift+t` | Pick the theme family (Bubblegum / shhhed / Milo) from a rofi menu |
 | `Mod1+Shift+a` | Pick the accent colour for the current family from a rofi menu |
 | `Mod+Shift+w` | Wallpaper picker |
 | `Mod+c` | Clipboard history (cliphist + rofi) |
@@ -231,4 +231,4 @@ Everything is plain files, so you can take just what you want:
 
 ## License
 
-Personal configuration, shared for reference and inspiration. Third-party themes and icons (for example Colloid) remain under their own licences.
+Personal configuration, shared for reference and inspiration. Third-party themes and icons (for example Colloid, and the Milo Zed theme in `zed/themes/milo/`) remain under their own licences.

@@ -8,6 +8,7 @@ Writes ~/.config/zed/themes/desktop.json (default) containing two themes,
 
     bubblegum -> zed/themes/bubblegum/bubblegum+.json   ("Bubblegum", "Bubblegum Light")
     shhhed    -> zed/themes/shhhed/shhhed.json          ("shhhed", "shhhed light")
+    milo      -> zed/themes/milo/milo.json + milo-light.json   ("Milo", "Milo Light")
 
 with the family's default accent swapped for <accent>. Zed settings point at
 the two stable names, and Zed hot-reloads the file when it changes, so the
@@ -24,10 +25,11 @@ import sys
 DOTFILES = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 PALETTE = os.path.join(DOTFILES, "bash-scripts", "theme-palette.sh")
 
-# family -> source file, {variant: theme name inside the file}
+# family -> source file(s), {variant: theme name inside the files}
 FAMILIES = {
-    "bubblegum": ("zed/themes/bubblegum/bubblegum+.json", {"dark": "Bubblegum", "light": "Bubblegum Light"}),
-    "shhhed": ("zed/themes/shhhed/shhhed.json", {"dark": "shhhed", "light": "shhhed light"}),
+    "bubblegum": (["zed/themes/bubblegum/bubblegum+.json"], {"dark": "Bubblegum", "light": "Bubblegum Light"}),
+    "shhhed": (["zed/themes/shhhed/shhhed.json"], {"dark": "shhhed", "light": "shhhed light"}),
+    "milo": (["zed/themes/milo/milo.json", "zed/themes/milo/milo-light.json"], {"dark": "Milo", "light": "Milo Light"}),
 }
 
 # Key paths (regex, matched against the dotted path) that hold the accent colour.
@@ -45,9 +47,15 @@ ACCENT_PATHS = {
         r"players\.\d+\.(cursor|background|selection)",
         r"syntax\.(link_text|link_uri|punctuation\.list_marker)\.color",
     ],
+    "milo": [
+        r"text\.accent", r"icon\.accent", r"accent(\.background|\.hover|\.selected)?",
+        r"border\.focused", r"(panel|pane)\.focused_border", r"tab\.active_border",
+        r"editor\.document_highlight\.bracket_background", r"players\.0\.background",
+    ],
 }
-# shhhed only: the accent appears at index 5 of `players` and 6 of `accents`.
-ONLY_INDEX = {"players": 5, "accents": 6}
+# Only one entry of these lists holds the accent: shhhed has it at index 5 of
+# `players` and 6 of `accents`.
+ONLY_INDEX = {"shhhed": {"players": 5, "accents": 6}}
 
 
 def sh(expr):
@@ -90,9 +98,12 @@ def main():
     if accent not in sh(f"theme_accents {family}").split():
         sys.exit(f"unknown accent {accent!r} for {family}")
 
-    src, names = FAMILIES[family]
-    source = load_jsonc(os.path.join(DOTFILES, src))
-    by_name = {t["name"]: t for t in source["themes"]}
+    srcs, names = FAMILIES[family]
+    by_name = {}
+    for src in srcs:
+        for t in load_jsonc(os.path.join(DOTFILES, src))["themes"]:
+            by_name[t["name"]] = t
+    source = load_jsonc(os.path.join(DOTFILES, srcs[0]))
 
     themes = []
     for variant, label in (("dark", "Desktop Dark"), ("light", "Desktop Light")):
@@ -108,7 +119,8 @@ def main():
                 if not isinstance(value, str) or not any(p.match("style." + path) for p in patterns):
                     return value
                 parts = path.split(".")
-                if parts[0] in ONLY_INDEX and int(parts[1]) != ONLY_INDEX[parts[0]]:
+                only = ONLY_INDEX.get(family, {})
+                if parts[0] in only and int(parts[1]) != only[parts[0]]:
                     return value
                 if path == "link_text.hover":
                     return hover

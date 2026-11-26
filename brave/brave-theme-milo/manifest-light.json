@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Milo Light",
+  "version": "1.0",
+  "description": "Milo light theme for Brave, derived from the Milo Zed theme by hazicy (MIT)",
+  "theme": {
+    "colors": {
+      "frame": [246, 246, 246],
+      "frame_inactive": [246, 246, 246],
+      "frame_incognito": [246, 246, 246],
+      "frame_incognito_inactive": [246, 246, 246],
+      "toolbar": [255, 255, 255],
+      "toolbar_button_icon": [73, 75, 77],
+      "button_background": [255, 255, 255],
+      "tab_text": [60, 61, 63],
+      "tab_background_text": [93, 98, 103],
+      "tab_background_text_inactive": [93, 98, 103],
+      "tab_background_text_incognito": [93, 98, 103],
+      "tab_background_text_incognito_inactive": [93, 98, 103],
+      "bookmark_text": [93, 98, 103],
+      "omnibox_background": [232, 232, 232],
+      "omnibox_text": [60, 61, 63],
+      "ntp_background": [246, 246, 246],
+      "ntp_text": [60, 61, 63],
+      "ntp_link": [36, 114, 108],
+      "ntp_link_underline": [36, 114, 108],
+      "ntp_header": [236, 236, 236],
+      "ntp_section": [236, 236, 236],
+      "ntp_section_text": [60, 61, 63],
+      "ntp_section_link": [36, 114, 108],
+      "ntp_section_link_underline": [36, 114, 108]
+    },
+    "tints": {
+      "buttons": [-1, -1, -1],
+      "frame": [-1, -1, -1],
+      "frame_inactive": [-1, -1, -1],
+      "frame_incognito": [-1, -1, -1],
+      "frame_incognito_inactive": [-1, -1, -1],
+      "background_tab": [-1, -1, -1]
+    },
+    "properties": {
+      "ntp_background_alignment": "center",
+      "ntp_background_repeat": "no-repeat"
+    }
+  }
+}

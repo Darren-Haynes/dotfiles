@@ -162,4 +162,86 @@ M.shhhed_light = {
   warn_bg = "#ece8d6",
 }
 
+-- "milo" family, derived from zed/themes/milo/milo{,-light}.json. `pink` holds the
+-- teal UI accent, `blue` the keyword rose, `cyan` the gold cursor, `purple` the
+-- teal-green type colour and `green` the git-added green. Selection, search and
+-- diff backgrounds are the theme's translucent colours pre-blended onto `bg`.
+M.milo_dark = {
+  bg = "#242424", -- editor.background
+  bg_dark = "#2a2a2a",
+  bg_alt = "#292929",
+  bg_float = "#2d2d2d",
+  bg_visual = "#3a3c3f",
+  bg_search = "#4c4535",
+  border = "#363636",
+  guide = "#323232",
+  fg = "#d6dae0",
+  text = "#c5cad2",
+  fg_dim = "#9ea5ae",
+  fg_variable = "#c5cad2",
+  comment = "#828b95",
+  line_nr = "#676c74",
+  line_nr_active = "#aab0b8",
+  punct = "#9aa2ab",
+
+  pink = "#79c6c0",
+  func = "#89bde9",
+  blue = "#d992ae",
+  cyan = "#e2be78",
+  purple = "#76c9c1",
+  green = "#8fd39f",
+  string = "#95d0a1",
+  constant = "#e0a368",
+  number = "#e0a368",
+  red = "#d88989",
+  orange = "#d9ba73",
+  teal = "#8ebbe4",
+
+  diff_add = "#333c35",
+  diff_delete = "#3e3131",
+  diff_change = "#30363c",
+  diff_text = "#3d4c57",
+  error_bg = "#413434",
+  warn_bg = "#3d392f",
+}
+
+M.milo_light = {
+  bg = "#f6f6f6", -- editor.background
+  bg_dark = "#efefef",
+  bg_alt = "#f0f0f0",
+  bg_float = "#ececec",
+  bg_visual = "#d8d9db",
+  bg_search = "#dbd5c5",
+  border = "#e1e1e1",
+  guide = "#e6e6e6",
+  fg = "#3c3d3f",
+  text = "#45474a",
+  fg_dim = "#5d6267",
+  fg_variable = "#45474a",
+  comment = "#707881",
+  line_nr = "#8f96a2",
+  line_nr_active = "#56595d",
+  punct = "#5f646a",
+
+  pink = "#24726c",
+  func = "#2d6ba0",
+  blue = "#bb4c78",
+  cyan = "#7c5a18",
+  purple = "#207169",
+  green = "#2d6c3c",
+  string = "#336c3f",
+  constant = "#9f5d1d",
+  number = "#9f5d1d",
+  red = "#c84646",
+  orange = "#7d5f18",
+  teal = "#356c9e",
+
+  diff_add = "#dae3dc",
+  diff_delete = "#f1dcdc",
+  diff_change = "#dee5ec",
+  diff_text = "#c1d2e0",
+  error_bg = "#efdada",
+  warn_bg = "#e5e1d7",
+}
+
 return M

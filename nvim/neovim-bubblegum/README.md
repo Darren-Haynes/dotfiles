@@ -18,8 +18,9 @@ The variant follows `:set background=dark|light`.
 
 ### Theme families
 
-Two families share the colorscheme name `bubblegum`: `bubblegum` (default) and
-`shhhed` (sage-green, derived from `zed/themes/shhhed/shhhed.json`). The family is
+Three families share the colorscheme name `bubblegum`: `bubblegum` (default),
+`shhhed` (sage-green, derived from `zed/themes/shhhed/shhhed.json`) and `milo`
+(neutral charcoal with a teal accent, from `zed/themes/milo/`). The family is
 read at load time from the one-line file `~/.local/state/bubblegum/family`; a
 missing, empty or unknown file means `bubblegum`. `sync_with_system()` re-applies
 the colorscheme when either the background or the family changes.
@@ -33,4 +34,4 @@ the colorscheme when either the background or the family changes.
 require("bubblegum").sync_with_system()
 ```
 
-Palettes (`dark`, `light`, `shhhed_dark`, `shhhed_light`): `lua/bubblegum/palette.lua`.
+Palettes (`dark`, `light`, `shhhed_dark`, `shhhed_light`, `milo_dark`, `milo_light`): `lua/bubblegum/palette.lua`.
