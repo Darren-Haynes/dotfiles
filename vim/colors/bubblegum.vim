@@ -1,5 +1,5 @@
-" Bubblegum for Vim (dark + light, follows 'background'; "bubblegum" or "shhhed"
-" family from ~/.local/state/bubblegum/family).
+" Bubblegum for Vim (dark + light, follows 'background'; "bubblegum", "shhhed" or
+" "milo" family from ~/.local/state/bubblegum/family).
 " Palettes mirror nvim/neovim-bubblegum/lua/bubblegum/palette.lua.
 
 highlight clear
@@ -12,7 +12,7 @@ set termguicolors
 function! s:ReadFamily() abort
   let l:f = expand('~/.local/state/bubblegum/family')
   let l:v = filereadable(l:f) ? get(readfile(l:f, '', 1), 0, '') : ''
-  return trim(l:v) ==# 'shhhed' ? 'shhhed' : 'bubblegum'
+  return index(['shhhed', 'milo'], trim(l:v)) >= 0 ? trim(l:v) : 'bubblegum'
 endfunction
 let s:family = s:ReadFamily()
 let g:bubblegum_family = s:family
@@ -28,6 +28,28 @@ if s:family ==# 'shhhed' && &background ==# 'light'
     \ 'red': '#b84e60', 'orange': '#9c7c00', 'teal': '#236292',
     \ 'diff_add': '#deeae5', 'diff_delete': '#ece3e6', 'diff_change': '#eeebdb',
     \ 'diff_text': '#e2dbbd', 'error_bg': '#f2e4e9', 'warn_bg': '#ece8d6'}
+elseif s:family ==# 'milo' && &background ==# 'light'
+  let s:p = {
+    \ 'bg': '#f6f6f6', 'bg_dark': '#efefef', 'bg_alt': '#f0f0f0', 'bg_float': '#ececec',
+    \ 'bg_visual': '#d8d9db', 'bg_search': '#dbd5c5', 'border': '#e1e1e1', 'guide': '#e6e6e6',
+    \ 'fg': '#3c3d3f', 'text': '#45474a', 'variable': '#45474a', 'comment': '#707881',
+    \ 'line_nr': '#8f96a2', 'line_nr_active': '#56595d', 'punct': '#5f646a',
+    \ 'pink': '#24726c', 'func': '#2d6ba0', 'blue': '#bb4c78', 'cyan': '#7c5a18', 'purple': '#207169',
+    \ 'green': '#2d6c3c', 'string': '#336c3f', 'constant': '#9f5d1d', 'number': '#9f5d1d',
+    \ 'red': '#c84646', 'orange': '#7d5f18', 'teal': '#356c9e',
+    \ 'diff_add': '#dae3dc', 'diff_delete': '#f1dcdc', 'diff_change': '#dee5ec',
+    \ 'diff_text': '#c1d2e0', 'error_bg': '#efdada', 'warn_bg': '#e5e1d7'}
+elseif s:family ==# 'milo'
+  let s:p = {
+    \ 'bg': '#242424', 'bg_dark': '#2a2a2a', 'bg_alt': '#292929', 'bg_float': '#2d2d2d',
+    \ 'bg_visual': '#3a3c3f', 'bg_search': '#4c4535', 'border': '#363636', 'guide': '#323232',
+    \ 'fg': '#d6dae0', 'text': '#c5cad2', 'variable': '#c5cad2', 'comment': '#828b95',
+    \ 'line_nr': '#676c74', 'line_nr_active': '#aab0b8', 'punct': '#9aa2ab',
+    \ 'pink': '#79c6c0', 'func': '#89bde9', 'blue': '#d992ae', 'cyan': '#e2be78', 'purple': '#76c9c1',
+    \ 'green': '#8fd39f', 'string': '#95d0a1', 'constant': '#e0a368', 'number': '#e0a368',
+    \ 'red': '#d88989', 'orange': '#d9ba73', 'teal': '#8ebbe4',
+    \ 'diff_add': '#333c35', 'diff_delete': '#3e3131', 'diff_change': '#30363c',
+    \ 'diff_text': '#3d4c57', 'error_bg': '#413434', 'warn_bg': '#3d392f'}
 elseif s:family ==# 'shhhed'
   let s:p = {
     \ 'bg': '#1e1e22', 'bg_dark': '#17171a', 'bg_alt': '#232328', 'bg_float': '#26262b',
@@ -176,6 +198,12 @@ highlight link pythonDecoratorName PreProc
 if s:family ==# 'shhhed' && &background ==# 'light'
   let g:terminal_ansi_colors = ['#1e1a14', '#b84e60', '#2a7848', '#9c7c00', '#0050d8', '#604f73', '#006c83', '#6e685f',
         \ '#797983', '#c06068', '#3a8a55', '#b69000', '#2868e0', '#855290', '#007783', '#645c50']
+elseif s:family ==# 'milo' && &background ==# 'light'
+  let g:terminal_ansi_colors = ['#3c3d3f', '#c84646', '#396c44', '#7d5f18', '#356c9e', '#7f5ea3', '#24726c', '#666a72',
+        \ '#6a7079', '#b54d4d', '#386241', '#6d5720', '#366388', '#705689', '#296761', '#474c53']
+elseif s:family ==# 'milo'
+  let g:terminal_ansi_colors = ['#151515', '#d88989', '#9acda5', '#d9ba73', '#8ebbe4', '#bda7d5', '#79c6c0', '#d6dae0',
+        \ '#686e76', '#e39b9b', '#aad9b4', '#e5ca88', '#9dc9ed', '#ceb9e2', '#8dd4ce', '#ffffff']
 elseif s:family ==# 'shhhed'
   let g:terminal_ansi_colors = ['#27272c', '#c97279', '#7db277', '#c8a050', '#729bcf', '#a088ac', '#60b1b1', '#c8c8cc',
         \ '#49494e', '#e08088', '#88c880', '#d8b068', '#90bce0', '#b898d8', '#80d0cc', '#dadadf']

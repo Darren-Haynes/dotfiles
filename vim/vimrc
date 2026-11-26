@@ -15,7 +15,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 let s:family_file = expand('~/.local/state/bubblegum/family')
 function! s:ReadFamily() abort
   let l:v = filereadable(s:family_file) ? get(readfile(s:family_file, '', 1), 0, '') : ''
-  return trim(l:v) ==# 'shhhed' ? 'shhhed' : 'bubblegum'
+  return index(['shhhed', 'milo'], trim(l:v)) >= 0 ? trim(l:v) : 'bubblegum'
 endfunction
 
 function! s:Apply(bg) abort

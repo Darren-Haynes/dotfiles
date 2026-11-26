@@ -1,0 +1,55 @@
+# ==============================================================================
+# Btop milo Theme Profile
+# Derived from the milo Zed theme (by hazicy): calm neutral charcoal + teal accent
+# (btop stays dark in both desktop variants)
+# ==============================================================================
+
+# Main background color (Bypass terminal fallback to force absolute match)
+theme[main_bg]="#242424"
+
+# Main text color (Soft cool off-white)
+theme[main_fg]="#d6dae0"
+
+# Title text color (Teal focus accent bars)
+theme[title]="#79c6c0"
+
+# Highlighted text color
+theme[hi_fg]="#eef1f4"
+
+# Inactive/Muted text and box outline frame lines (Dim neutral charcoal)
+theme[div]="#363636"
+
+# Context graph outline borders
+theme[box_fg]="#858c95"
+
+# Selected item background highlights
+theme[selected_bg]="#303030"
+theme[selected_fg]="#79c6c0"
+
+# Interactive text box input panels
+theme[text_bg]="#2d2d2d"
+
+# CPU Graph color lines (Teal warming through amber into the theme's soft red)
+theme[cpu_start]="#79c6c0"
+theme[cpu_mid]="#d9ba73" # Amber, mid-load
+theme[cpu_end]="#d88989" # Soft red, same family as the terminal red
+
+# Memory/Disk Graph lines
+theme[mem_start]="#79c6c0"
+theme[mem_mid]="#89bde9"
+theme[mem_end]="#d6dae0"
+
+# Network Graph streams (Download/Upload indicator blocks)
+theme[net_start]="#79c6c0"
+theme[net_mid]="#89bde9"
+theme[net_end]="#9acda5"
+
+# Process monitor tree meters
+theme[proc_start]="#858c95"
+theme[proc_mid]="#79c6c0"
+theme[proc_end]="#9acda5"
+
+# Hard temperature warning indicators
+theme[temp_start]="#79c6c0"
+theme[temp_mid]="#d9ba73" # Amber caution tint
+theme[temp_end]="#d88989" # Soft red warning tint

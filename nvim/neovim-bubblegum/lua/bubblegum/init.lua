@@ -13,10 +13,16 @@ local terminal = {
     "#49494e", "#e08088", "#88c880", "#d8b068", "#90bce0", "#b898d8", "#80d0cc", "#dadadf" },
   shhhed_light = { "#1e1a14", "#b84e60", "#2a7848", "#9c7c00", "#0050d8", "#604f73", "#006c83", "#6e685f",
     "#797983", "#c06068", "#3a8a55", "#b69000", "#2868e0", "#855290", "#007783", "#645c50" },
+  milo_dark = { "#151515", "#d88989", "#9acda5", "#d9ba73", "#8ebbe4", "#bda7d5", "#79c6c0", "#d6dae0",
+    "#686e76", "#e39b9b", "#aad9b4", "#e5ca88", "#9dc9ed", "#ceb9e2", "#8dd4ce", "#ffffff" },
+  milo_light = { "#3c3d3f", "#c84646", "#396c44", "#7d5f18", "#356c9e", "#7f5ea3", "#24726c", "#666a72",
+    "#6a7079", "#b54d4d", "#386241", "#6d5720", "#366388", "#705689", "#296761", "#474c53" },
 }
 
---- Active theme family: "bubblegum" (default) or "shhhed", read from the state
---- file written by the theme toggle.
+local families = { bubblegum = true, shhhed = true, milo = true }
+
+--- Active theme family: "bubblegum" (default), "shhhed" or "milo", read from the
+--- state file written by the theme toggle.
 function M.read_family()
   local f = io.open(vim.fn.expand("~/.local/state/bubblegum/family"), "r")
   if not f then
@@ -25,13 +31,13 @@ function M.read_family()
   local line = f:read("*l")
   f:close()
   line = vim.trim(line or "")
-  return line == "shhhed" and "shhhed" or "bubblegum"
+  return families[line] and line or "bubblegum"
 end
 
 function M.load()
   local variant = vim.o.background == "light" and "light" or "dark"
   local family = M.read_family()
-  local key = family == "shhhed" and ("shhhed_" .. variant) or variant
+  local key = family == "bubblegum" and variant or (family .. "_" .. variant)
   local p = require("bubblegum.palette")[key]
   vim.g.bubblegum_family = family
 
