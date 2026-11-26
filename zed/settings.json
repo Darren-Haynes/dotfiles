@@ -73,9 +73,9 @@
   "ui_font_size": 15.0,
   "buffer_font_size": 16.0,
   "theme": {
-    "mode": "dark",
-    "light": "Oceanic Next Light",
-    "dark": "Bubblegum" // THEME_SWITCHER_DARK
+    "mode": "system",
+    "light": "Desktop Light",
+    "dark": "Desktop Dark" // THEME_SWITCHER_DARK
   },
   "which_key": { "enabled": true },
   "project_panel": {

@@ -8,3 +8,6 @@ nvim/lazy-lock.json
 nvim/project.lua
 .DS_Store
 /--version
+waybar/accent.css
+btop/themes/active.theme
+brave/brave-theme-*/Cached Theme.pak

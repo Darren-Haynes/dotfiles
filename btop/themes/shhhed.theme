@@ -1,0 +1,55 @@
+# ==============================================================================
+# Btop shhhed Theme Profile
+# Derived from the shhhed Zed theme: quiet charcoal surfaces + sage green accent
+# (btop stays dark in both desktop variants)
+# ==============================================================================
+
+# Main background color (Bypass terminal fallback to force absolute match)
+theme[main_bg]="#1c1c20"
+
+# Main text color (Soft cool off-white)
+theme[main_fg]="#cbcbcf"
+
+# Title text color (Sage green focus accent bars)
+theme[title]="#6ca880"
+
+# Highlighted text color
+theme[hi_fg]="#dadadf"
+
+# Inactive/Muted text and box outline frame lines (Dim charcoal gray)
+theme[div]="#38383d"
+
+# Context graph outline borders
+theme[box_fg]="#85858b"
+
+# Selected item background highlights
+theme[selected_bg]="#2a2a2f"
+theme[selected_fg]="#6ca880"
+
+# Interactive text box input panels
+theme[text_bg]="#27272c"
+
+# CPU Graph color lines (Sage green fading into the theme's rose)
+theme[cpu_start]="#6ca880"
+theme[cpu_mid]="#60b1b1"
+theme[cpu_end]="#cc7078" # Rose accent, same family as the terminal red
+
+# Memory/Disk Graph lines
+theme[mem_start]="#6ca880"
+theme[mem_mid]="#729bcf"
+theme[mem_end]="#cbcbcf"
+
+# Network Graph streams (Download/Upload indicator blocks)
+theme[net_start]="#6ca880"
+theme[net_mid]="#60b1b1"
+theme[net_end]="#729bcf"
+
+# Process monitor tree meters
+theme[proc_start]="#85858b"
+theme[proc_mid]="#6ca880"
+theme[proc_end]="#60b1b1"
+
+# Hard temperature warning indicators
+theme[temp_start]="#6ca880"
+theme[temp_mid]="#c8a050" # Amber caution tint
+theme[temp_end]="#cc7078" # Rose warning tint

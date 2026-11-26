@@ -19,6 +19,11 @@
     font:               "monospace 12";
 }
 
+/* Overrides for the active theme family + accent, written by
+ * sway/apply-rofi-colors.sh. Rofi ignores a missing file, so the Bubblegum
+ * values above stay as the fallback. */
+@import "~/.local/state/bubblegum/rofi-colors.rasi"
+
 window {
     background-color:   @bg-frame;
     border:            10px;            /* Thicker border frame */

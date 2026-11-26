@@ -16,6 +16,14 @@ or without a plugin manager: `vim.opt.rtp:prepend(vim.fn.expand("~/Dotfiles/nvim
 
 The variant follows `:set background=dark|light`.
 
+### Theme families
+
+Two families share the colorscheme name `bubblegum`: `bubblegum` (default) and
+`shhhed` (sage-green, derived from `zed/themes/shhhed/shhhed.json`). The family is
+read at load time from the one-line file `~/.local/state/bubblegum/family`; a
+missing, empty or unknown file means `bubblegum`. `sync_with_system()` re-applies
+the colorscheme when either the background or the family changes.
+
 ### Follow the desktop theme
 
 `sway/toggle-theme.sh` flips the GNOME `color-scheme`. To make Neovim follow it
@@ -25,4 +33,4 @@ The variant follows `:set background=dark|light`.
 require("bubblegum").sync_with_system()
 ```
 
-Palette: `lua/bubblegum/palette.lua`.
+Palettes (`dark`, `light`, `shhhed_dark`, `shhhed_light`): `lua/bubblegum/palette.lua`.
